@@ -13,9 +13,6 @@
 #include <assert.h>
 #include "coordinates.h"
 
-/**
- * @def
- */
 #define CELL_VOID 0
 #define CELL_PLAYER_1 1
 #define CELL_PLAYER_2 2
