@@ -1,3 +1,10 @@
+/**
+ * @file deck.c
+ * @author PATAT Gwendal
+ * @date 26 avril 2017
+ * @brief Code gestion du tablier.
+ */
+
 #include "cell.h"
 #include "deck.h"
 
