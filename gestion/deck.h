@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 #include "cell.h"
 
@@ -20,8 +21,26 @@ typedef struct s_deck* Deck;
 
 /**
  * @brief Crée un tablier vide.
+ * @return Retourne un nouveau tablier
  */
-Deck deck_create();
+Deck deck_create(unsigned int size);
+
+/**
+ * @brief Initialise un tablier (toutes les cases sont initialiser)
+ * @fn Deck deck_initialize_cells(Deck deck)
+ * @param deck Tablier de jeu à initialiser
+ * @return Retourne un tablier
+ */
+Deck deck_initialize_cells(Deck deck);
+
+/**
+ * @brief Modifie la taille du tablier
+ * @fn Deck deck_modify_size(Deck deck, unsigned int size)
+ * @param deck Tablier à modifier
+ * @param size Taille du nouveau tablier
+ * @return Retourne le nouveau tablier
+ */
+Deck deck_modify_size(Deck deck, unsigned int size);
 
 /**
  * @brief Modifie une case du tablier.
@@ -29,12 +48,14 @@ Deck deck_create();
 
 /**
  * @brief Supprimer un tablier.
+ * @fn void deck_delete(Deck deck)
  * @param Deck deck
  */
 void deck_delete(Deck deck);
 
 /**
  * @brief Libérer un tablier.
+ * @fn void deck_free(Deck deck)
  * @param Deck deck
  */
 void deck_free(Deck deck);
@@ -50,25 +71,5 @@ void deck_free(Deck deck);
 /**
  * @brief Déterminer un vainqueur.
  */
-
-/**
- * @brief Sauvegarder une partie en cours.
- * @param Deck deck
- * @param char *name_file
- * @return Retourne si la partie à bien été sauvegardé.
- * @returns 1 : Partie bien sauvegardé
- * @returns 0 : Erreur
- */
-int deck_save_file(Deck deck, char *name_file);
-
-/**
- * @brief Restaurer une partie en cours.
- * @param Deck deck
- * @param char *name_file
- * @return Retourne si la partie à bien été chargé.
- * @returns 1 : Partie bien chargé
- * @returns 0 : Erreur
- */
-int deck_restore_file(Deck deck, char *name_file);
 
 #endif
