@@ -25,17 +25,25 @@ Cell cell_create(void);
 
 /**
  * @brief Crée une nouvelle case avec des coordonnées.
- * @param Coordinates coordinates
+ * @param coordinates cellules initialiser avec ces coordonnées
  * @return Une case avec des coordonées.
  */
 Cell cell_create(Coordinates coordinates);
 
 /**
- * @brief Modifier une case.
- * @param Cell cell
+ * @brief Modifier les coordonnées d'une case
+ * @param cell Cellule à modifier
+ * @param coordinates coordonées à remplacer
+ * @return Retourne la nouvelle cellule modifier
+ */
+Cell cell_modify_coordinates(Cell cell, Coordinates coordinates);
+
+/**
+ * @brief Modifier une case par une autre.
+ * @param cell Remplacé par la nouvelle cellule
  * @return Nouvelle cellules modifié.
  */
-Cell cell_modify(Cell cell);
+Cell cell_modify_cell(Cell cell);
 
 /**
  * @brief Supprimer une case.
