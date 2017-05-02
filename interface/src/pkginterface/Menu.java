@@ -23,10 +23,9 @@ public class Menu {
         Scanner keyboard = new Scanner(System.in);
         int choice = Integer.parseInt(keyboard.next());
         switch (choice) {
-            case 1: 
-                return 1;
-            default: 
-                return 0;
+            case 1  : return 1;
+            case 3  : return 3;
+            default : return 0;
         }
     }
 }
