@@ -9,6 +9,6 @@
 
 typedef struct s_deck
 {
-  t_cell	**cells;
+  Cell	**cells;
   unsigned int	numberOfCells;
 } t_deck;
