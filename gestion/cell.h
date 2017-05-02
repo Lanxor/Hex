@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "coordinates.h"
 
 /**
  * @brief Structure d'une case d'un tablier.
@@ -24,11 +25,10 @@ Cell cell_create(void);
 
 /**
  * @brief Crée une nouvelle case avec des coordonnées.
- * @param int x
- * @param int y
+ * @param Coordinates coordinates
  * @return Une case avec des coordonées.
  */
-Cell cell_create(int x, int y);
+Cell cell_create(Coordinates coordinates);
 
 /**
  * @brief Modifier une case.
