@@ -27,7 +27,24 @@ void test3_print()
     
     vertice = vertice_create(TRANSPARENT, 0, 0);
     vertice_print_coordinates(vertice);
+    printf("\n");
     vertice_print_color(vertice);
+    printf("\n");
+}
+
+void test4_modify_color()
+{
+    printf("\ttest_modify_color()\n");
+    Vertice vertice;
+    
+    vertice = vertice_create(TRANSPARENT, 0, 0);
+    printf("Avant : ");
+    vertice_print_color(vertice);
+    printf("\n");
+    vertice_modify_color(vertice, BLACK);
+    printf("Après : ");
+    vertice_print_color(vertice);
+    printf("\n");
 }
 
 int main() {
@@ -35,6 +52,7 @@ int main() {
     test1_create();
     test2_delete();
     test3_print();
+    test4_modify_color();
     
     printf("\n");
     return (EXIT_SUCCESS);
