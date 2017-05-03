@@ -9,7 +9,7 @@
 
 typedef struct s_edge *Edge;
 
-Edge edge_create(Vertice *first, Vertice *second);
+Edge edge_create(Vertice first, Vertice second);
 
 void edge_print(Edge edge);
 
