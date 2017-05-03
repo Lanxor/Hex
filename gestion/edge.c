@@ -3,11 +3,11 @@
 
 typedef struct s_edge
 {
-    Vertice *vertice_1;
-    Vertice *vertice_2;
+    Vertice vertice_1;
+    Vertice vertice_2;
 } t_edge;
 
-Edge edge_create(Vertice *first, Vertice *second)
+Edge edge_create(Vertice first, Vertice second)
 {
     Edge edge;
     
@@ -20,9 +20,9 @@ Edge edge_create(Vertice *first, Vertice *second)
 
 void edge_print(Edge edge)
 {
-    vertice_print_coordinates(*edge->vertice_1);
+    vertice_print_coordinates(edge->vertice_1);
     printf("--");
-    vertice_print_coordinates(*edge->vertice_2);
+    vertice_print_coordinates(edge->vertice_2);
 }
 
 Vertice edge_get_vertice_first(Edge edge)
