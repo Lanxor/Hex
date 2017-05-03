@@ -41,7 +41,7 @@ Deck deck_create(unsigned int size)
 void deck_print(Deck deck)
 {
     deck_print_coordinates(deck);
-    printf("\n\n");
+    printf("\n");
     deck_print_color(deck);
 }
 
