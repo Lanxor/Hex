@@ -23,10 +23,10 @@ Deck deck_create(unsigned int size)
     assert( deck != NULL );
     
     deck->size = size;
-    deck->white_1 = vertice_create(TRANSPARENT, -1, -1);
-    deck->white_2 = vertice_create(TRANSPARENT, -1, -1);
-    deck->black_1 = vertice_create(TRANSPARENT, -1, -1);
-    deck->black_2 = vertice_create(TRANSPARENT, -1, -1);
+    deck->white_1 = vertice_create(WHITE, 0, 0);
+    deck->white_2 = vertice_create(WHITE, 0, 0);
+    deck->black_1 = vertice_create(BLACK, 0, 0);
+    deck->black_2 = vertice_create(BLACK, 0, 0);
     
     deck->set_vertices = malloc(size*size*sizeof(Vertice));
     // (4*size)+((3*size)*(size-2))+(size*2+1) est le nombre d'arête (sans compter les doublons)
@@ -39,22 +39,6 @@ Deck deck_create(unsigned int size)
         {
             new_vertice = vertice_create(TRANSPARENT, abscisse, ordonnee);
             deck->set_vertices[(deck->size*abscisse)+ordonnee] = new_vertice;
-            if ( abscisse == 0 )
-            {
-                new_edge = edge_create(&deck->black_1, &new_vertice);
-            }
-            else if ( abscisse == deck->size )
-            {
-                new_edge = edge_create(&deck->black_2, &new_vertice);
-            }
-            if ( ordonnee == 0 )
-            {
-                new_edge = edge_create(&deck->white_1, &new_vertice);
-            }
-            else if ( ordonnee == deck->size )
-            {
-                new_edge = edge_create(&deck->white_2, &new_vertice);
-            }
         }
     }
     
@@ -64,18 +48,24 @@ Deck deck_create(unsigned int size)
     {
         for(ordonnee = 0; ordonnee < size; ordonnee++)
         {
-            vertice_current;
-            vertice_target;
+            vertice_current = NULL;
+            vertice_current = deck_get_vertice(deck, abscisse, ordonnee);
+            
+            vertice_target = NULL;
             // b1 jamais
+            
+            vertice_target = NULL;
             // b2 jamais
                 // sauf si abscisse == 0 -> on le met à black
             if ( abscisse == 0 )
             {
                 vertice_target = deck->black_1;
-                new_edge = edge_create(&vertice_current, &vertice_target);
+                
+                new_edge = edge_create(vertice_current, vertice_target);
                 deck->set_edges[counter_edges++] = new_edge;
             }
             
+            vertice_target = NULL;
             // b3 tout le temps 
                 // si ordonnee+1 == deck->size -> on le met à white
             if ( ordonnee+1 == deck->size )
@@ -86,9 +76,11 @@ Deck deck_create(unsigned int size)
             {
                 vertice_target = deck_get_vertice(deck, abscisse, ordonnee+1);
             }
-            new_edge = edge_create(&vertice_current, &vertice_target);
+                
+            new_edge = edge_create(vertice_current, vertice_target);
             deck->set_edges[counter_edges++] = new_edge;
             
+            vertice_target = NULL;
             // b4 tout le temps
                 // si abscisse+1 == deck->size -> on le met à black
             if ( abscisse+1 == deck->size )
@@ -99,18 +91,22 @@ Deck deck_create(unsigned int size)
             {
                 vertice_target = deck_get_vertice(deck, abscisse+1, ordonnee);
             }
-            new_edge = edge_create(&vertice_current, &vertice_target);
+                
+            new_edge = edge_create(vertice_current, vertice_target);
             deck->set_edges[counter_edges++] = new_edge;
             
+            vertice_target = NULL;
             // b5 tout le temps
                 // sauf sur la dernière ligne mais pas la première de la dernière ligne
                 // sauf abscisse != 0 && ordonnee == deck->size-1
             if ( !(abscisse != 0 && ordonnee == deck->size-1) )
             {
                 vertice_target = deck_get_vertice(deck, abscisse+1, ordonnee-1);
-                new_edge = edge_create(&vertice_current, &vertice_target);
+                
+                new_edge = edge_create(vertice_current, vertice_target);
                 deck->set_edges[counter_edges++] = new_edge;
             }
+            
             // b6 jamais
         }
     }
@@ -128,8 +124,8 @@ Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
     
     number_vertice = deck->size * deck->size;
     counter_vertice = 0;
-    while (vertice_get_abscisse(vertice_current) != abscisse &&
-           vertice_get_ordonnee(vertice_current) != ordonnee &&
+    while ( (vertice_get_abscisse(vertice_current) != abscisse ||
+           vertice_get_ordonnee(vertice_current) != ordonnee) &&
            counter_vertice < number_vertice)
     {
         vertice_current = deck->set_vertices[counter_vertice++];
@@ -182,8 +178,47 @@ void deck_print_edge(Deck deck)
     number_edge = deck_get_number_edge(deck->size);
     for(counter_edge = 0; counter_edge < number_edge; counter_edge++)
     {
+        printf("%u : ", counter_edge);
         edge_print(deck->set_edges[counter_edge]);
         printf("\n");
+    }
+}
+
+Vertice deck_get_border(Deck deck, char color, int number)
+{
+    if ( color == BLACK )
+    {
+        if ( number == 1 )
+        {
+            return deck->white_1;
+        }
+        else if ( number == 2 )
+        {
+            return deck->white_2;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    else if ( color == WHITE )
+    {
+        if ( number == 1 )
+        {
+            return deck->black_1;
+        }
+        else if ( number == 2 )
+        {
+            return deck->black_2;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    else
+    {
+        return NULL;
     }
 }
 
