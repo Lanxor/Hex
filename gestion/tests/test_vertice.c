@@ -50,12 +50,25 @@ void test4_modify_color()
     printf("\n");
 }
 
+void test5_getters()
+{
+    printf("\ttest_getters()\n");
+    Vertice vertice;
+    
+    vertice = vertice_create(TRANSPARENT, 3, 5);
+    printf("Voici les coordonnées du sommet %d, %d",
+            vertice_get_abscisse(vertice),
+            vertice_get_ordonnee(vertice));
+    printf("\n");
+}
+
 int main() {
     printf("\nTest Simple - TEST VERTICE\n");
     test1_create();
     test2_delete();
     test3_print();
     test4_modify_color();
+    test5_getters();
     
     printf("\n");
     return (EXIT_SUCCESS);
