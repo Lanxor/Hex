@@ -47,7 +47,7 @@ void deck_print(Deck deck)
 
 void deck_print_coordinates(Deck deck)
 {
-    printf("Deck size : %d\n", deck->size);
+    printf("Deck size : %u\n", deck->size);
     for(int abscisse = 0; abscisse < deck->size; abscisse++)
     {
         for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
@@ -61,7 +61,7 @@ void deck_print_coordinates(Deck deck)
 
 void deck_print_color(Deck deck)
 {
-    printf("Deck size : %d\n", deck->size);
+    printf("Deck size : %u\n", deck->size);
     for(int abscisse = 0; abscisse < deck->size; abscisse++)
     {
         for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
