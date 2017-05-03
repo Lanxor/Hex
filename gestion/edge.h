@@ -13,7 +13,7 @@ Edge edge_create(Vertice *first, Vertice *second);
 
 void edge_print(Edge edge);
 
-Verticeedge_get_vertice_first(Edge edge);
+Vertice edge_get_vertice_first(Edge edge);
 
 Vertice edge_get_vertice_second(Edge edge);
 
