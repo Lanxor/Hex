@@ -18,6 +18,13 @@ Edge edge_create(Vertice *first, Vertice *second)
     edge->vertice_2 = second;
 }
 
+void edge_print(Edge edge)
+{
+    vertice_print_coordinates(*edge->vertice_1);
+    printf("--");
+    vertice_print_coordinates(*edge->vertice_2);
+}
+
 edge_delete(Edge edge)
 {
     edge_free(edge);
