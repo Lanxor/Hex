@@ -25,6 +25,15 @@ void edge_print(Edge edge)
     vertice_print_coordinates(*edge->vertice_2);
 }
 
+Vertice edge_get_vertice_first(Edge edge)
+{
+    return edge->vertice_1;
+}
+Vertice edge_get_vertice_second(Edge edge)
+{
+    return edge->vertice_2;
+}
+
 void edge_delete(Edge edge)
 {
     edge_free(edge);
