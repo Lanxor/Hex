@@ -26,7 +26,8 @@ void test3_print()
     Vertice vertice;
     
     vertice = vertice_create(TRANSPARENT, 0, 0);
-    vertice_print(vertice);
+    vertice_print_coordinates(vertice);
+    vertice_print_color(vertice);
 }
 
 int main() {
