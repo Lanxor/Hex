@@ -20,3 +20,18 @@ Vertice vertice_create(char color, unsigned int abscisse,
     vertice->abscisse = abscisse;
     vertice->ordonnee = ordonnee;
 }
+
+void vertice_print(Vertice vertice)
+{
+    printf("%d,%d", vertice->abscisse, vertice->ordonnee);
+}
+
+void vertice_delete(Vertice vertice)
+{
+    vertice_free(vertice);
+}
+
+void vertice_free(Vertice vertice)
+{
+    free(vertice);
+}
