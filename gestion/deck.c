@@ -41,19 +41,19 @@ Deck deck_create(unsigned int size)
             deck->set_vertices[(deck->size*abscisse)+ordonnee] = new_vertice;
             if ( abscisse == 0 )
             {
-                new_edge = edge_create(deck->black_1, new_vertice);
+                new_edge = edge_create(&deck->black_1, &new_vertice);
             }
             else if ( abscisse == deck->size )
             {
-                new_edge = edge_create(deck->black_2, new_vertice);
+                new_edge = edge_create(&deck->black_2, &new_vertice);
             }
             if ( ordonnee == 0 )
             {
-                new_edge = edge_create(deck->white_1, new_vertice);
+                new_edge = edge_create(&deck->white_1, &new_vertice);
             }
             else if ( ordonnee == deck->size )
             {
-                new_edge = edge_create(deck->white_2, new_vertice);
+                new_edge = edge_create(&deck->white_2, &new_vertice);
             }
         }
     }
@@ -72,7 +72,7 @@ Deck deck_create(unsigned int size)
             if ( abscisse == 0 )
             {
                 vertice_target = deck->black_1;
-                new_edge = edge_create(vertice_current, vertice_target);
+                new_edge = edge_create(&vertice_current, &vertice_target);
                 deck->set_edges[counter_edges++] = new_edge;
             }
             
@@ -86,7 +86,7 @@ Deck deck_create(unsigned int size)
             {
                 vertice_target = deck_get_vertice(deck, abscisse, ordonnee+1);
             }
-            new_edge = edge_create(vertice_current, vertice_target);
+            new_edge = edge_create(&vertice_current, &vertice_target);
             deck->set_edges[counter_edges++] = new_edge;
             
             // b4 tout le temps
@@ -99,7 +99,7 @@ Deck deck_create(unsigned int size)
             {
                 vertice_target = deck_get_vertice(deck, abscisse+1, ordonnee);
             }
-            new_edge = edge_create(vertice_current, vertice_target);
+            new_edge = edge_create(&vertice_current, &vertice_target);
             deck->set_edges[counter_edges++] = new_edge;
             
             // b5 tout le temps
@@ -108,7 +108,7 @@ Deck deck_create(unsigned int size)
             if ( !(abscisse != 0 && ordonnee == deck->size-1) )
             {
                 vertice_target = deck_get_vertice(deck, abscisse+1, ordonnee-1);
-                new_edge = edge_create(vertice_current, vertice_target);
+                new_edge = edge_create(&vertice_current, &vertice_target);
                 deck->set_edges[counter_edges++] = new_edge;
             }
             // b6 jamais
