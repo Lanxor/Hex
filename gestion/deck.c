@@ -84,7 +84,7 @@ Deck deck_create(unsigned int size)
             }
             else
             {
-                vertice_target = vertice_get_coordinates(deck, abscisse, ordonnee+1);
+                vertice_target = deck_get_vertice(deck, abscisse, ordonnee+1);
             }
             new_edge = edge_create(vertice_current, vertice_target);
             deck->set_edges[counter_edges++] = new_edge;
@@ -97,7 +97,7 @@ Deck deck_create(unsigned int size)
             }
             else
             {
-                vertice_target = vertice_get_coordinates(deck, abscisse+1, ordonnee);
+                vertice_target = deck_get_vertice(deck, abscisse+1, ordonnee);
             }
             new_edge = edge_create(vertice_current, vertice_target);
             deck->set_edges[counter_edges++] = new_edge;
@@ -107,7 +107,7 @@ Deck deck_create(unsigned int size)
                 // sauf abscisse != 0 && ordonnee == deck->size-1
             if ( !(abscisse != 0 && ordonnee == deck->size-1) )
             {
-                vertice_target = vertice_get_coordinates(deck, abscisse+1, ordonnee-1);
+                vertice_target = deck_get_vertice(deck, abscisse+1, ordonnee-1);
                 new_edge = edge_create(vertice_current, vertice_target);
                 deck->set_edges[counter_edges++] = new_edge;
             }
@@ -119,6 +119,25 @@ Deck deck_create(unsigned int size)
     
     return deck;
 }
+
+Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
+                                    unsigned int ordonnee)
+{
+    int counter_vertice, number_vertice;
+    Vertice vertice_current;
+    
+    number_vertice = deck->size * deck->size;
+    counter_vertice = 0;
+    while (vertice_get_abscisse(vertice_current) != abscisse &&
+           vertice_get_ordonnee(vertice_current) != ordonnee &&
+           counter_vertice < number_vertice)
+    {
+        vertice_current = deck->set_vertices[counter_vertice++];
+    }
+    
+    return vertice_current;
+}
+
 void deck_print(Deck deck)
 {
     deck_print_coordinates(deck);
