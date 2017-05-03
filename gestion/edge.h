@@ -1,5 +1,5 @@
-#ifndef EDGE_H
-#define EDGE_H
+#ifndef __EDGE_H__
+#define __EDGE_H__
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,6 +10,10 @@
 typedef struct s_edge *Edge;
 
 Edge edge_create(Vertice *first, Vertice *second);
+
+void edge_delete(Edge edge);
+
+void edge_free(Edge edge);
 
 #endif /* EDGE_H */
 

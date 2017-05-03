@@ -17,3 +17,13 @@ Edge edge_create(Vertice *first, Vertice *second)
     edge->vertice_1 = first;
     edge->vertice_2 = second;
 }
+
+edge_delete(Edge edge)
+{
+    edge_free(edge);
+}
+
+edge_free(Edge edge)
+{
+    free(edge);
+}
