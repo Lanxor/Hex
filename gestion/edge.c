@@ -25,12 +25,12 @@ void edge_print(Edge edge)
     vertice_print_coordinates(*edge->vertice_2);
 }
 
-edge_delete(Edge edge)
+void edge_delete(Edge edge)
 {
     edge_free(edge);
 }
 
-edge_free(Edge edge)
+void edge_free(Edge edge)
 {
     free(edge);
 }
