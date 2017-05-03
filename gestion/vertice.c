@@ -23,7 +23,14 @@ Vertice vertice_create(char color, unsigned int abscisse,
 
 void vertice_modify_color(Vertice vertice, char color)
 {
-    vertice->color = color;
+    if (color == TRANSPARENT || color == BLACK || color == WHITE )
+    {
+        vertice->color = color;
+    }
+    else
+    {
+        vertice->color = TRANSPARENT;
+    }
 }
 
 void vertice_print_coordinates(Vertice vertice)
