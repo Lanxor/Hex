@@ -143,6 +143,8 @@ void deck_print(Deck deck)
     deck_print_coordinates(deck);
     printf("\n");
     deck_print_color(deck);
+    printf("\n");
+    deck_print_edge(deck);
 }
 
 void deck_print_coordinates(Deck deck)
