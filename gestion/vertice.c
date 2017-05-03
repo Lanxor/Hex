@@ -28,7 +28,8 @@ void vertice_modify_color(Vertice vertice, char color)
 
 void vertice_print_coordinates(Vertice vertice)
 {
-    printf("%d,%d", vertice->abscisse, vertice->ordonnee);
+    // printf - %u unsigned int
+    printf("%u,%u", vertice->abscisse, vertice->ordonnee);
 }
 
 void vertice_print_color(Vertice vertice)
