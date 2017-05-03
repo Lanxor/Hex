@@ -14,6 +14,10 @@ Deck deck_create(unsigned int size);
 
 void deck_print(Deck deck);
 
+void deck_print_coordinates(Deck deck);
+
+void deck_print_color(Deck deck);
+
 void deck_delete(Deck deck);
 
 void deck_free(Deck deck);

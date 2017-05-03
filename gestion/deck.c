@@ -38,15 +38,35 @@ Deck deck_create(unsigned int size)
     }
     return deck;
 }
-
 void deck_print(Deck deck)
+{
+    deck_print_coordinates(deck);
+    printf("\n\n");
+    deck_print_color(deck);
+}
+
+void deck_print_coordinates(Deck deck)
 {
     printf("Deck size : %d\n", deck->size);
     for(int abscisse = 0; abscisse < deck->size; abscisse++)
     {
         for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
         {
-            vertice_print(deck->set_vertices[(deck->size*abscisse)+ordonnee]);
+            vertice_print_coordinates(deck->set_vertices[(deck->size*abscisse)+ordonnee]);
+            printf(" ");
+        }
+        printf("\n");
+    }
+}
+
+void deck_print_color(Deck deck)
+{
+    printf("Deck size : %d\n", deck->size);
+    for(int abscisse = 0; abscisse < deck->size; abscisse++)
+    {
+        for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
+        {
+            vertice_print_color(deck->set_vertices[(deck->size*abscisse)+ordonnee]);
             printf(" ");
         }
         printf("\n");
