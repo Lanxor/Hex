@@ -1,5 +1,6 @@
 
 #include "group.h"
+
 typedef struct s_group
 {
     Vertice *list_vertice;

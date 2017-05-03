@@ -1,6 +1,5 @@
-
-#ifndef GROUP_H
-#define GROUP_H
+#ifndef __GROUP_H__
+#define __GROUP_H__
 
 #include <stdlib.h>
 #include <stdio.h>
