@@ -14,7 +14,9 @@ typedef struct s_vertice *Vertice;
 Vertice vertice_create(char color, unsigned int abscisse,
                                    unsigned int ordonnee);
 
-void vertice_print(Vertice vertice);
+void vertice_print_coordinates(Vertice vertice);
+
+void vertice_print_color(Vertice vertice);
 
 void vertice_delete(Vertice vertice);
 

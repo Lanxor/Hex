@@ -21,9 +21,14 @@ Vertice vertice_create(char color, unsigned int abscisse,
     vertice->ordonnee = ordonnee;
 }
 
-void vertice_print(Vertice vertice)
+void vertice_print_coordinates(Vertice vertice)
 {
     printf("%d,%d", vertice->abscisse, vertice->ordonnee);
+}
+
+void vertice_print_color(Vertice vertice)
+{
+    printf("%c", vertice->color);
 }
 
 void vertice_delete(Vertice vertice)
