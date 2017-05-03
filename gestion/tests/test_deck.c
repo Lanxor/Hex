@@ -8,6 +8,7 @@ void test1_create() {
     Deck deck;
     
     deck = deck_create(3);
+    printf("\n");
 }
 
 void test2_delete() {
@@ -16,6 +17,7 @@ void test2_delete() {
     
     deck = deck_create(3);
     deck_delete(deck);
+    printf("\n");
 }
 
 void test3_print() {
@@ -24,6 +26,7 @@ void test3_print() {
     
     deck = deck_create(3);
     deck_print(deck);
+    printf("\n");
 }
 
 int main() {

@@ -9,6 +9,7 @@ void test1_create()
     Vertice vertice;
     
     vertice = vertice_create(TRANSPARENT, 0, 0);
+    printf("\n");
 }
 
 void test2_delete()
@@ -18,6 +19,7 @@ void test2_delete()
     
     vertice = vertice_create(TRANSPARENT, 0, 0);
     vertice_delete(vertice);
+    printf("\n");
 }
 
 void test3_print()
@@ -26,8 +28,9 @@ void test3_print()
     Vertice vertice;
     
     vertice = vertice_create(TRANSPARENT, 0, 0);
+    printf("Coordinates : ");
     vertice_print_coordinates(vertice);
-    printf("\n");
+    printf("\nColor : ");
     vertice_print_color(vertice);
     printf("\n");
 }
