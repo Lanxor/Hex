@@ -21,6 +21,30 @@ Vertice vertice_create(char color, unsigned int abscisse,
     vertice->ordonnee = ordonnee;
 }
 
+int vertice_is_border(Vertice vertice, Deck deck)
+{
+    if ( vertice == deck_get_border(deck, WHITE, 1) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, WHITE, 2) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, BLACK, 1) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, BLACK, 2) )
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 void vertice_modify_color(Vertice vertice, char color)
 {
     if (color == TRANSPARENT || color == BLACK || color == WHITE )
