@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+#include "vertice.h"
+
 typedef struct s_edge *Edge;
 
 Edge edge_create(Vertice *first, Vertice *second);

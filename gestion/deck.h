@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <assert.h>
 
+#include "edge.h"
 #include "vertice.h"
 
 typedef struct s_deck* Deck;

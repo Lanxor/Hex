@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+#include "vertice.h"
+
 typedef struct s_group *Group;
 
 #endif /* GROUP_H */
