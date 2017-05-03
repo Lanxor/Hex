@@ -1,48 +1,40 @@
-/**
- * @file deck.c
- * @author PATAT Gwendal
- * @date 26 avril 2017
- * @brief Code gestion du tablier.
- */
 
 #include "deck.h"
 
 typedef struct s_deck
 {
-  Cell	**cells;
-  unsigned int	size;
+    unsigned int size;
+    Vertice *white_1;
+    Vertice *white_2;
+    Vertice *black_1;
+    Vertice *black_2;
+    Vertice **set_vertices;
+    Edge **set_edges;
 } t_deck;
 
 Deck deck_create(unsigned int size)
 {
     Deck deck;
+    Vertice new_vertice;
     
     deck = malloc(sizeof(t_deck));
     assert( deck != NULL );
+    
     deck->size = size;
-    deck = deck_initialize_cells(Deck deck);
-
-    return deck;
-}
-
-Deck deck_initialize_cells(Deck deck)
-{
-    //TODO Il faut crée les size*size cellules
-}
-
-Deck deck_modify_size(Deck deck, unsigned int size)
-{
-    deck->size = size;
-    return deck;
-}
-
-void deck_delete(Deck deck)
-{
-    //TODO Il faut supprimer les cellules avec cell_delete()
-    deck_free(deck);
-}
-
-void deck_delete(Deck deck)
-{
-    free(deck);
+    deck->white_1 = vertice_create(TRANSPARENT, -1, -1);
+    deck->white_2 = vertice_create(TRANSPARENT, -1, -1);
+    deck->black_1 = vertice_create(TRANSPARENT, -1, -1);
+    deck->black_2 = vertice_create(TRANSPARENT, -1, -1);
+    
+    deck->set_vertices = malloc(size*size*sizeof(*t_vertice));
+    
+    for(int abscisse = 0; abscisse < size; abscisse++)
+    {
+        for(int ordonnee = 0; ordonnee < size; ordonnee++)
+        {
+            new_vertice = vertice_create(TRANSPARENT, abscisse, ordonnee);
+            (deck->set_vertices+(size*abscisse)+ordonnee) = new_vertice;
+        }
+    }
+    
 }
