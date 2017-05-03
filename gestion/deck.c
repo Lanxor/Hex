@@ -30,7 +30,7 @@ Deck deck_create(unsigned int size)
     
     deck->set_vertices = malloc(size*size*sizeof(Vertice));
     // (4*size)+((3*size)*(size-2))+(size*2+1) est le nombre d'arête (sans compter les doublons)
-    number_edges = (4*size)+((3*size)*(size-2))+(size*2+1);
+    number_edges = deck_get_number_edge(size);
     deck->set_edges = malloc( (number_edges)*sizeof(Edge) );
     
     for(abscisse = 0; abscisse < size; abscisse++)
@@ -171,6 +171,23 @@ void deck_print_color(Deck deck)
         }
         printf("\n");
     }
+}
+
+void deck_print_edge(Deck deck)
+{
+    unsigned int number_edge, counter_edge;
+    
+    number_edge = deck_get_number_edge(deck->size);
+    for(counter_edge = 0; counter_edge < number_edge; counter_edge++)
+    {
+        edge_print(deck->set_edges[counter_edge]);
+        printf("\n");
+    }
+}
+
+unsigned int deck_get_number_edge(unsigned int size)
+{
+    return (4*size)+((3*size)*(size-2))+(size*2+1);
 }
 
 void deck_delete(Deck deck)
