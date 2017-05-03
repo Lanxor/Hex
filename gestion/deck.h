@@ -12,4 +12,10 @@ typedef struct s_deck* Deck;
 
 Deck deck_create(unsigned int size);
 
+void deck_print(Deck deck);
+
+void deck_delete(Deck deck);
+
+void deck_free(Deck deck);
+
 #endif

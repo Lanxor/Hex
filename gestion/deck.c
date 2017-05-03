@@ -33,8 +33,45 @@ Deck deck_create(unsigned int size)
         for(int ordonnee = 0; ordonnee < size; ordonnee++)
         {
             new_vertice = vertice_create(TRANSPARENT, abscisse, ordonnee);
-            deck->set_vertices[(size*abscisse)+ordonnee] = new_vertice;
+            deck->set_vertices[(deck->size*abscisse)+ordonnee] = new_vertice;
         }
     }
-    
+    return deck;
+}
+
+void deck_print(Deck deck)
+{
+    printf("Deck size : %d\n", deck->size);
+    for(int abscisse = 0; abscisse < deck->size; abscisse++)
+    {
+        for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
+        {
+            vertice_print(deck->set_vertices[(deck->size*abscisse)+ordonnee]);
+            printf(" ");
+        }
+        printf("\n");
+    }
+}
+
+void deck_delete(Deck deck)
+{
+    vertice_delete(deck->white_1);
+    vertice_delete(deck->white_2);
+    vertice_delete(deck->black_1);
+    vertice_delete(deck->black_2);
+    for(int abscisse = 0; abscisse < deck->size; abscisse++)
+    {
+        for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
+        {
+            vertice_delete(deck->set_vertices[(deck->size*abscisse)+ordonnee]);
+        }
+    }
+    deck_free(deck);
+}
+
+void deck_free(Deck deck)
+{
+    free(deck->set_vertices);
+    free(deck->set_edges);
+    free(deck);
 }
