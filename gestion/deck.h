@@ -12,6 +12,9 @@ typedef struct s_deck* Deck;
 
 Deck deck_create(unsigned int size);
 
+Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
+                                    unsigned int ordonnee);
+
 void deck_print(Deck deck);
 
 void deck_print_coordinates(Deck deck);
