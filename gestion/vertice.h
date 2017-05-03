@@ -16,6 +16,10 @@ Vertice vertice_create(char color, unsigned int abscisse,
 
 void vertice_modify_color(Vertice vertice, char color);
 
+unsigned int vertice_get_abscisse(Vertice vertice);
+
+unsigned int vertice_get_ordonnee(Vertice vertice);
+
 void vertice_print_coordinates(Vertice vertice);
 
 void vertice_print_color(Vertice vertice);
