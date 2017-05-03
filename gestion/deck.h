@@ -23,6 +23,8 @@ void deck_print_color(Deck deck);
 
 void deck_print_edge(Deck deck);
 
+Vertice deck_get_border(Deck deck, char color, int number);
+
 unsigned int deck_get_number_edge(unsigned int size);
 
 void deck_delete(Deck deck);
