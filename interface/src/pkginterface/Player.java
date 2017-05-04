@@ -14,11 +14,13 @@ public class Player {
     private String color;
     private String mail;
     private int yearOfBirth;
-    private Deck deck;
     
-    public Player(Deck deck)
+    public Player(String pseudo, String color, String mail, int yearOfBirth)
     {
-        this.deck = deck;
+        this.pseudo = pseudo;
+        this.color = color;
+        this.mail = mail;
+        this.yearOfBirth = yearOfBirth;
     }
     public String getPseudo()
     {
@@ -30,23 +32,8 @@ public class Player {
         return this.color;
     }
     
-    public void init()
-    {
-        Scanner keyboard = new Scanner(System.in);
-        System.out.print("pseudo : ");
-        this.pseudo = keyboard.next();
-        System.out.print("couleur : ");
-        this.color = keyboard.next();
-    }
-    
-    public void placeStone()
-    {
-        System.out.println(this.pseudo + " à toi !");
-        Coordinates coordinates = new Coordinates(this.deck);
-        coordinates.setCoord();
-        this.deck
-                .cell[coordinates.getAbscisse()][coordinates.getOrdonnee()]
-                .placeStone(this.color);
+    public void save(){
+        /* sauvegarde dans le fichier */
     }
     
 }
