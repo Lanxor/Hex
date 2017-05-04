@@ -11,15 +11,27 @@ public class Hex {
     private static Menu menu;
     private static Deck tablier;
     private int nbJoueurs = 2;
+    private static Player[] Joueurs;
     private static Player Joueur1;
     private static Player Joueur2;
+    
+    public static void init()
+    {
+        if (Joueurs.length != 0)
+        {
+            System.out.println("Choisir des joueurs : ");
+            for (int cpt = 0; cpt < Joueurs.length; ++cpt){
+                System.out.println();
+            }
+        }
+    }
     
     public static void main(String[] args)
     {      
         menu = new Menu();
-        menu.displayHome();
-        int resp = menu.choiceHome();
+        int resp = menu.Home();
         if (resp == 1){
+            
             tablier = new Deck();
             tablier.init();
             System.out.println("Joueur 1");
