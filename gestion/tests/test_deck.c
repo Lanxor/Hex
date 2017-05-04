@@ -29,12 +29,25 @@ void test3_print() {
     printf("\n");
 }
 
+void test4_modify()
+{
+  printf("\ttest4_modify()\n");
+  Deck deck;
+  
+  deck = deck_create(3);
+  deck_print_color(deck);
+  printf("\n");
+  deck_vertice_modify(deck, BLACK, 1, 1);
+  deck_print_color(deck);
+}
+
 int main() {
     printf("\nTest Simple : TEST DECK\n");
     
     test1_create();
     test2_delete();
     test3_print();
+    test4_modify();
     
     printf("\n");
     return (EXIT_SUCCESS);
