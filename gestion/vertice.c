@@ -3,9 +3,9 @@
 
 typedef struct s_vertice
 {
-    char color;
-    unsigned int abscisse;
-    unsigned int ordonnee;
+    char          color;
+    unsigned int  abscisse;
+    unsigned int  ordonnee;
 } t_vertice;
 
 Vertice vertice_create(char color, unsigned int abscisse,
@@ -41,6 +41,16 @@ unsigned int vertice_get_abscisse(Vertice vertice)
 unsigned int vertice_get_ordonnee(Vertice vertice)
 {
     return vertice->ordonnee;
+}
+
+char vertice_get_color(Vertice vertice)
+{
+  return (vertice->color);
+}
+
+void vertice_set_color(Vertice vertice , char color)
+{
+  vertice->color = color;
 }
 
 void vertice_print_coordinates(Vertice vertice)
