@@ -20,4 +20,13 @@ public class Vertice {
         return this.color;
     }
     
+    public String displayVertice()
+    {
+        if (this.color.equals("black"))
+            return "| • ";
+        if (this.color.equals("white"))
+            return "| ○ ";
+        return "|   ";
+    }
+    
 }
