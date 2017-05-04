@@ -13,7 +13,7 @@ void test1_create()
     vertice1 = vertice_create(TRANSPARENT, 0, 0);
     vertice2 = vertice_create(TRANSPARENT, 0, 0);
     
-    edge = edge_create(&vertice1, &vertice2);
+    edge = edge_create(vertice1, vertice2);
     printf("\n");
 }
 
@@ -26,7 +26,7 @@ void test2_delete()
     vertice1 = vertice_create(TRANSPARENT, 0, 0);
     vertice2 = vertice_create(TRANSPARENT, 0, 0);
     
-    edge = edge_create(&vertice1, &vertice2);
+    edge = edge_create(vertice1, vertice2);
     edge_delete(edge);
     printf("\n");
 }
@@ -40,7 +40,7 @@ void test3_print()
     vertice1 = vertice_create(TRANSPARENT, 1, 2);
     vertice2 = vertice_create(TRANSPARENT, 1, 3);
     
-    edge = edge_create(&vertice1, &vertice2);
+    edge = edge_create(vertice1, vertice2);
     edge_print(edge);
     printf("\n");
 }
