@@ -35,8 +35,8 @@ Deck deck_create(unsigned int size)
   {
     for (ordonnee = 0; ordonnee < size; ++ordonnee)
     {
-        new_vertice = vertice_create(TRANSPARENT, abscisse, ordonnee);
-        deck->set_vertices[(deck->size * abscisse) + ordonnee] = new_vertice;
+      new_vertice = vertice_create(TRANSPARENT, abscisse, ordonnee);
+      deck->set_vertices[(deck->size * abscisse) + ordonnee] = new_vertice;
     }
   }
   counter_edges = 0;
@@ -55,7 +55,7 @@ Deck deck_create(unsigned int size)
         deck->set_edges[counter_edges++] = new_edge;
       }
 
-      if ( ordonnee+1 == deck->size )
+      if ( ordonnee + 1 == deck->size )
         vertice_target = deck->white_2;
       else
         vertice_target = deck_get_vertice(deck, abscisse, ordonnee + 1);  
@@ -70,18 +70,17 @@ Deck deck_create(unsigned int size)
       new_edge = edge_create(vertice_current, vertice_target);
       deck->set_edges[counter_edges++] = new_edge;
       
-      // b5(1) tout le temps
-        // sauf si abscisse == 0 || ordonnee = deck->size - 1
-      if ( abscisse != 0 && ordonnee == deck->size - 1 )
+      if ( abscisse != deck->size - 1 )
       {
-        vertice_target = deck_get_vertice(deck, abscisse + 1, ordonnee - 1);
+        if ( ordonnee == 0 )
+          vertice_target = deck->white_1;
+        else
+           vertice_target = deck_get_vertice(deck, abscisse + 1, ordonnee - 1);
         new_edge = edge_create(vertice_current, vertice_target);
         deck->set_edges[counter_edges++] = new_edge;
       }
-      // b5(2) seulement pour la vertice en bas à gauche
-        // abscisse == 0 et ordonnee == deck->size - 1
-        // On en crée une target = white
-      else if ( abscisse != 0 && ordonnee == deck->size -1 )
+      
+      if ( abscisse == deck->size - 1 && ordonnee == 0 )
       {
           vertice_target = deck->white_1;
           new_edge = edge_create(vertice_current, vertice_target);
