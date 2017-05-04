@@ -18,7 +18,7 @@ Deck deck_create(unsigned int size)
   Vertice new_vertice, vertice_current, vertice_target;
   Edge    new_edge;
 
-  deck = malloc(sizeof(t_deck));
+  deck = (Deck) malloc(sizeof(t_deck));
   assert( deck != NULL );
 
   deck->size = size;
@@ -27,9 +27,9 @@ Deck deck_create(unsigned int size)
   deck->black_1 = vertice_create(BLACK, 0, 0);
   deck->black_2 = vertice_create(BLACK, 0, 0);
 
-  deck->set_vertices = malloc(size * size * sizeof(Vertice));
+  deck->set_vertices = (Vertice*) malloc(size * size * sizeof(Vertice));
   number_edges = deck_get_number_edge(size);
-  deck->set_edges = malloc( (number_edges) * sizeof(Edge) );
+  deck->set_edges = (Edge*) malloc( (number_edges) * sizeof(Edge) );
 
   for (abscisse = 0; abscisse < size; ++abscisse)
   {
@@ -85,6 +85,7 @@ Deck deck_create(unsigned int size)
 Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
                                     unsigned int ordonnee)
 {
+  //printf("%d %d\n", abscisse, ordonnee);
   return (deck->set_vertices[(deck->size * abscisse) + ordonnee]);
 }
 
@@ -199,4 +200,9 @@ void deck_free(Deck deck)
   free(deck->set_vertices);
   free(deck->set_edges);
   free(deck);
+}
+
+int deck_vertice_modify(Deck deck, int abscisse, int ordonnee, char color)
+{
+  
 }
