@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "deck.h"
-
 #define TRANSPARENT 't'
 #define BLACK 'b'
 #define WHITE 'w'
