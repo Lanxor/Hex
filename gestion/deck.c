@@ -122,6 +122,30 @@ Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
     return deck->set_vertices[(deck->size * abscisse) + ordonnee];
 }
 
+int vertice_is_border(Vertice vertice, Deck deck)
+{
+    if ( vertice == deck_get_border(deck, WHITE, 1) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, WHITE, 2) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, BLACK, 1) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, BLACK, 2) )
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 void deck_print(Deck deck)
 {
     deck_print_coordinates(deck);
@@ -236,28 +260,4 @@ void deck_free(Deck deck)
     free(deck->set_vertices);
     free(deck->set_edges);
     free(deck);
-}
-
-int deck_vertice_is_border(Vertice vertice, Deck deck)
-{
-    if ( vertice == deck_get_border(deck, WHITE, 1) )
-    {
-        return 1;
-    }
-    else if ( vertice == deck_get_border(deck, WHITE, 2) )
-    {
-        return 1;
-    }
-    else if ( vertice == deck_get_border(deck, BLACK, 1) )
-    {
-        return 1;
-    }
-    else if ( vertice == deck_get_border(deck, BLACK, 2) )
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
 }
