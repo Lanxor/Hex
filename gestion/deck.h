@@ -33,4 +33,8 @@ void deck_delete(Deck deck);
 
 void deck_free(Deck deck);
 
+int deck_vertice_modify_is_possible(Deck deck, char color, int abscisse, int ordonnee);
+
+void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee);
+
 #endif
