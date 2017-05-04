@@ -46,9 +46,9 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
-	${TESTDIR}/TestFiles/f2 \
-	${TESTDIR}/TestFiles/f3 \
-	${TESTDIR}/TestFiles/f1
+	${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion \
+	${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion \
+	${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion
 
 # Test Object Files
 TESTOBJECTFILES= \
@@ -112,17 +112,17 @@ ${OBJECTDIR}/vertice.o: vertice.c
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
-${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/test_deck.o ${OBJECTFILES:%.o=%_nomain.o}
-	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.c} -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS}   
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion: ${TESTDIR}/tests/test_deck.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion $^ ${LDLIBSOPTIONS}   
 
-${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/test_edge.o ${OBJECTFILES:%.o=%_nomain.o}
-	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.c} -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS}   
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion: ${TESTDIR}/tests/test_edge.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion $^ ${LDLIBSOPTIONS}   
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/test_vertice.o ${OBJECTFILES:%.o=%_nomain.o}
-	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.c} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion: ${TESTDIR}/tests/test_vertice.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion $^ ${LDLIBSOPTIONS}   
 
 
 ${TESTDIR}/tests/test_deck.o: tests/test_deck.c 
@@ -212,9 +212,9 @@ ${OBJECTDIR}/vertice_nomain.o: ${OBJECTDIR}/vertice.o vertice.c
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
-	    ${TESTDIR}/TestFiles/f2 || true; \
-	    ${TESTDIR}/TestFiles/f3 || true; \
-	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion || true; \
+	    ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion || true; \
+	    ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion || true; \
 	else  \
 	    ./${TEST} || true; \
 	fi
