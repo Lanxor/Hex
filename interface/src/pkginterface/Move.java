@@ -11,8 +11,8 @@ package pkginterface;
  */
 public class Move {
     
-    Player player;
-    Coordinates coord;
+    private Player player;
+    private Coordinates coord;
     
     public Move(Player p, Coordinates c)
     {
