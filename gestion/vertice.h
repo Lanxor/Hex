@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+#include "deck.h"
+
 #define TRANSPARENT 't'
 #define BLACK 'b'
 #define WHITE 'w'
@@ -13,8 +15,6 @@ typedef struct s_vertice *Vertice;
 
 Vertice vertice_create(char color, unsigned int abscisse,
                                    unsigned int ordonnee);
-
-int vertice_is_border(Vertice vertice, Deck deck);
 
 void vertice_modify_color(Vertice vertice, char color);
 

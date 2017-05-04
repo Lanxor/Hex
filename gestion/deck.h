@@ -15,6 +15,8 @@ Deck deck_create(unsigned int size);
 Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
                                     unsigned int ordonnee);
 
+int deck_vertice_is_border(Deck deck, Vertice vertice);
+
 void deck_print(Deck deck);
 
 void deck_print_coordinates(Deck deck);
