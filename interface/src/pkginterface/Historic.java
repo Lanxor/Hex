@@ -13,6 +13,11 @@ public class Historic {
     
     private Move[] move;
     
+    public Move getLastMove()
+    {
+        return this.move[this.move.length-1];
+    }
+    
     public void addMove(Move m)
     {
         this.move[this.move.length] = m;
