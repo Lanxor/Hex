@@ -32,7 +32,8 @@ public class Player {
         return this.color;
     }
     
-    public void save(){
+    public void save()
+    {
         /* sauvegarde dans le fichier */
     }
     
