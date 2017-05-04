@@ -38,7 +38,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/deck.o \
 	${OBJECTDIR}/edge.o \
 	${OBJECTDIR}/group.o \
-	${OBJECTDIR}/historical.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/vertice.o
 
@@ -95,11 +94,6 @@ ${OBJECTDIR}/group.o: group.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -std=c99 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/group.o group.c
-
-${OBJECTDIR}/historical.o: historical.c
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -std=c99 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/historical.o historical.c
 
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
@@ -186,19 +180,6 @@ ${OBJECTDIR}/group_nomain.o: ${OBJECTDIR}/group.o group.c
 	    $(COMPILE.c) -O2 -std=c99 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/group_nomain.o group.c;\
 	else  \
 	    ${CP} ${OBJECTDIR}/group.o ${OBJECTDIR}/group_nomain.o;\
-	fi
-
-${OBJECTDIR}/historical_nomain.o: ${OBJECTDIR}/historical.o historical.c 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/historical.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.c) -O2 -std=c99 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/historical_nomain.o historical.c;\
-	else  \
-	    ${CP} ${OBJECTDIR}/historical.o ${OBJECTDIR}/historical_nomain.o;\
 	fi
 
 ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.c 
