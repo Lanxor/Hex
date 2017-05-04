@@ -10,11 +10,17 @@ import java.util.Scanner;
 
 public class Deck {
     private int size;
-    protected Cell[][] cell;
+    protected Vertice[][] vertice;
     
-    public Cell getCell(int ord, int abs)
+    public Deck(int size)
     {
-        return this.cell[ord][abs];
+        this.size = size;
+        this.vertice = new Vertice[size][size];
+    }
+    
+    public Vertice getCell(int ord, int abs)
+    {
+        return this.vertice[ord][abs];
     }
     
     public int getSize(){
@@ -26,32 +32,22 @@ public class Deck {
         Scanner keyboard = new Scanner(System.in);
         System.out.print("Taille du tablier : ");
         this.size = Integer.parseInt(keyboard.next());
-        this.cell = new Cell[size][size];
         for (int ord = 0; ord < this.size; ++ord)
         {
             for (int abs = 0; abs < this.size; ++abs)
             {
-                this.cell[ord][abs] = new Cell();
+                this.vertice[ord][abs] = new Vertice();
             }
         }
         System.out.println("");
     }
     
-    public String displayCell(int ord, int abs)
-    {
-        if (this.cell[ord][abs].getColor().equals("black"))
-            return "| â€¢ ";
-        if (this.cell[ord][abs].getColor().equals("white"))
-            return "| â—‹ ";
-        return "|   ";
-    }
-    
-    public void displayBoard()
+    public void displayDeck()
     {
         for (int ord = 0; ord < this.size; ++ord){
             for (int abs = 0; abs < this.size; ++abs)
             {
-                System.out.print(displayCell(ord, abs));
+                System.out.print(this.vertice[ord][abs].displayVertice());
             }
             System.out.println("|");
             for (int cpt = 0; cpt < ord + 1; ++cpt)
