@@ -213,7 +213,16 @@ void deck_free(Deck deck)
   free(deck);
 }
 
-int deck_vertice_modify(Deck deck, int abscisse, int ordonnee, char color)
+int deck_vertice_modify_is_possible(Deck deck, char color, int abscisse, int ordonnee)
 {
-  NULL;
+  if ( (color == TRANSPARENT) 
+       || vertice_get_color((deck_get_vertice(deck, abscisse, ordonnee)) == TRANSPARENT) )
+    return (1);
+  else
+    return (0);
+}
+
+void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
+{
+  vertice_set_color(deck_get_vertice(deck, abscisse, ordonnee), color);
 }
