@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Menu {
     
-        private boolean isInteger(String coord) {
+       private boolean isInteger(String coord) {
        boolean isValid = true;
        try
        { 
@@ -43,14 +43,15 @@ public class Menu {
     public int Choice()
     {
         System.out.println("1 : Jouer\n"
-                + "2 : Sauvegarder\n"
-                + "3 : Sauvegarder et Quitter"
-                + "4 : Quitter sans sauvegarder");
+                + "2 : Revenir au coup précédent"
+                + "3 : Sauvegarder\n"
+                + "4 : Sauvegarder et Quitter"
+                + "5 : Quitter sans sauvegarder");
         Scanner keyboard = new Scanner(System.in);
         String choice = keyboard.next();
         while (!isInteger(choice) 
                 || Integer.parseInt(choice) < 0 
-                || Integer.parseInt(choice) > 4){
+                || Integer.parseInt(choice) > 5){
             System.out.print("erreur ");
             choice = keyboard.next();
         }
