@@ -7,7 +7,6 @@
       <itemPath>deck.h</itemPath>
       <itemPath>edge.h</itemPath>
       <itemPath>group.h</itemPath>
-      <itemPath>historical.h</itemPath>
       <itemPath>vertice.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -150,8 +149,6 @@
       </item>
       <item path="group.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="historical.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/test_deck.c" ex="false" tool="0" flavor2="0">
@@ -242,8 +239,6 @@
       <item path="group.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="group.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="historical.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
