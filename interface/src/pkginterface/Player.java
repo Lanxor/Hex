@@ -14,11 +14,11 @@ public class Player {
     private String color;
     private String mail;
     private int yearOfBirth;
-    private Deck board;
+    private Deck deck;
     
-    public Player(Deck board)
+    public Player(Deck deck)
     {
-        this.board = board;
+        this.deck = deck;
     }
     public String getPseudo()
     {
@@ -42,9 +42,9 @@ public class Player {
     public void placeStone()
     {
         System.out.println(this.pseudo + " à toi !");
-        Coordinates coordinates = new Coordinates();
+        Coordinates coordinates = new Coordinates(this.deck);
         coordinates.setCoord();
-        this.board
+        this.deck
                 .cell[coordinates.getAbscisse()][coordinates.getOrdonnee()]
                 .placeStone(this.color);
     }

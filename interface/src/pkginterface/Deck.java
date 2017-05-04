@@ -17,6 +17,10 @@ public class Deck {
         return this.cell[ord][abs];
     }
     
+    public int getSize(){
+        return this.size;
+    }
+    
     public void init()
     {
         Scanner keyboard = new Scanner(System.in);
@@ -36,9 +40,9 @@ public class Deck {
     public String displayCell(int ord, int abs)
     {
         if (this.cell[ord][abs].getColor().equals("black"))
-            return "| • ";
+            return "| â€¢ ";
         if (this.cell[ord][abs].getColor().equals("white"))
-            return "| ○ ";
+            return "| â—‹ ";
         return "|   ";
     }
     
