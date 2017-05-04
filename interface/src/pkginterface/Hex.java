@@ -10,9 +10,10 @@ import java.util.Scanner;
 
 public class Hex {
     
+    /* C'EST DEGUEULASSE NE REGARDEZ PAS */
+    
     private Menu menu;
     private Deck tablier;
-    private Player[] Players;
     private Player Player1;
     private Player Player2;
     
@@ -27,6 +28,30 @@ public class Hex {
            isValid = false;
        }
        return isValid;
+    }
+    
+    public int getInt(int valMax)
+    {
+        Scanner keyboard = new Scanner(System.in);
+        String input = keyboard.next();
+        while (!isInteger(input) 
+                || Integer.parseInt(input) < 0 
+                || Integer.parseInt(input) >= valMax){
+            System.out.print("Vous devez entrer un entier entre 0 et " 
+                    + Integer.toString(valMax)
+                    + ", veuillez recommencer : ");
+            input = keyboard.next();
+        }
+        return Integer.parseInt(input);
+    }
+    
+    public void playMove()
+    {
+        System.out.print("abs : ");
+        this.abscisse = getInt(this.tablier.getSize());
+        System.out.print("ord : ");
+        this.ordonnee = getInt(this.tablier.getSize());
+        
     }
     
     public void init(int numJoueur)
@@ -100,3 +125,64 @@ public class Hex {
     }
     
 }
+
+
+
+
+public void init()
+    {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("pseudo : ");
+        this.pseudo = keyboard.next();
+        System.out.print("couleur : ");
+        this.color = keyboard.next();
+    }
+    
+    public void placeStone()
+    {
+        System.out.println(this.pseudo + " à toi !");
+        Coordinates coordinates = new Coordinates(this.deck);
+        coordinates.setCoord();
+        this.deck
+                .vertice[coordinates.getAbscisse()][coordinates.getOrdonnee()]
+                .placeStone(this.color);
+    }
+
+
+
+
+    public void Home()
+    {
+        System.out.println("1 : Créer une nouvelle partie\n"
+                + "2 : Charger une partie\n"
+                + "3 : Quitter"
+                + "4 : Scores");
+        Scanner keyboard = new Scanner(System.in);
+        String choice = keyboard.next();
+        while (!isInteger(choice) 
+                || Integer.parseInt(choice) < 0 
+                || Integer.parseInt(choice) > 4){
+            System.out.print("erreur ");
+            choice = keyboard.next();
+        }
+        return Integer.parseInt(choice);
+    }
+    
+
+public int Choice()
+    {
+        System.out.println("1 : Jouer\n"
+                + "2 : Revenir au coup précédent"
+                + "3 : Sauvegarder\n"
+                + "4 : Sauvegarder et Quitter"
+                + "5 : Quitter sans sauvegarder");
+        Scanner keyboard = new Scanner(System.in);
+        String choice = keyboard.next();
+        while (!isInteger(choice) 
+                || Integer.parseInt(choice) < 0 
+                || Integer.parseInt(choice) > 5){
+            System.out.print("erreur ");
+            choice = keyboard.next();
+        }
+        return Integer.parseInt(choice);
+    }
