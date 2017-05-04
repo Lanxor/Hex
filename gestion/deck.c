@@ -69,12 +69,23 @@ Deck deck_create(unsigned int size)
 
       new_edge = edge_create(vertice_current, vertice_target);
       deck->set_edges[counter_edges++] = new_edge;
-
-      if ( !(abscisse != 0 && ordonnee == deck->size - 1) )
+      
+      // b5(1) tout le temps
+        // sauf si abscisse == 0 || ordonnee = deck->size - 1
+      if ( abscisse == 0 || ordonnee == deck->size - 1 )
       {
         vertice_target = deck_get_vertice(deck, abscisse + 1, ordonnee - 1);
         new_edge = edge_create(vertice_current, vertice_target);
         deck->set_edges[counter_edges++] = new_edge;
+      }
+      // b5(2) seulement pour la vertice en bas à gauche
+        // abscisse == 0 et ordonnee == deck->size - 1
+        // On en crée une target = white
+      else if ( abscisse == 0 && ordonnee == deck->size -1 )
+      {
+          vertice_target = deck->white_1;
+          new_edge = edge_create(vertice_current, vertice_target);
+          deck->set_edges[counter_edges++] = new_edge;
       }
     }
   }
