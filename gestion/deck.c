@@ -72,7 +72,7 @@ Deck deck_create(unsigned int size)
       
       // b5(1) tout le temps
         // sauf si abscisse == 0 || ordonnee = deck->size - 1
-      if ( abscisse == 0 || ordonnee == deck->size - 1 )
+      if ( abscisse != 0 && ordonnee == deck->size - 1 )
       {
         vertice_target = deck_get_vertice(deck, abscisse + 1, ordonnee - 1);
         new_edge = edge_create(vertice_current, vertice_target);
@@ -81,7 +81,7 @@ Deck deck_create(unsigned int size)
       // b5(2) seulement pour la vertice en bas à gauche
         // abscisse == 0 et ordonnee == deck->size - 1
         // On en crée une target = white
-      else if ( abscisse == 0 && ordonnee == deck->size -1 )
+      else if ( abscisse != 0 && ordonnee == deck->size -1 )
       {
           vertice_target = deck->white_1;
           new_edge = edge_create(vertice_current, vertice_target);
@@ -215,5 +215,5 @@ void deck_free(Deck deck)
 
 int deck_vertice_modify(Deck deck, int abscisse, int ordonnee, char color)
 {
-  
+  NULL;
 }
