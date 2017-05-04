@@ -16,6 +16,8 @@ Edge edge_create(Vertice first, Vertice second)
     
     edge->vertice_1 = first;
     edge->vertice_2 = second;
+    
+    return edge;
 }
 
 void edge_print(Edge edge)
@@ -29,6 +31,7 @@ Vertice edge_get_vertice_first(Edge edge)
 {
     return edge->vertice_1;
 }
+
 Vertice edge_get_vertice_second(Edge edge)
 {
     return edge->vertice_2;

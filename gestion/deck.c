@@ -1,4 +1,3 @@
-
 #include "deck.h"
 
 typedef struct s_deck
@@ -28,10 +27,10 @@ Deck deck_create(unsigned int size)
     deck->black_1 = vertice_create(BLACK, 0, 0);
     deck->black_2 = vertice_create(BLACK, 0, 0);
     
-    deck->set_vertices = malloc(size*size*sizeof(Vertice));
+    deck->set_vertices = malloc(size * size * sizeof(Vertice));
     // (4*size)+((3*size)*(size-2))+(size*2+1) est le nombre d'arête (sans compter les doublons)
     number_edges = deck_get_number_edge(size);
-    deck->set_edges = malloc( (number_edges)*sizeof(Edge) );
+    deck->set_edges = malloc( (number_edges) * sizeof(Edge) );
     
     for(abscisse = 0; abscisse < size; abscisse++)
     {
@@ -49,6 +48,7 @@ Deck deck_create(unsigned int size)
         for(ordonnee = 0; ordonnee < size; ordonnee++)
         {
             vertice_current = NULL;
+            // change deck_get_vertice avec deck->set_vertices[(deck->size*abscisse)+ordonnee]
             vertice_current = deck_get_vertice(deck, abscisse, ordonnee);
             
             vertice_target = NULL;
@@ -119,19 +119,7 @@ Deck deck_create(unsigned int size)
 Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
                                     unsigned int ordonnee)
 {
-    int counter_vertice, number_vertice;
-    Vertice vertice_current;
-    
-    number_vertice = deck->size * deck->size;
-    counter_vertice = 0;
-    while ( (vertice_get_abscisse(vertice_current) != abscisse ||
-           vertice_get_ordonnee(vertice_current) != ordonnee) &&
-           counter_vertice < number_vertice)
-    {
-        vertice_current = deck->set_vertices[counter_vertice++];
-    }
-    
-    return vertice_current;
+    return deck->set_vertices[(deck->size * abscisse) + ordonnee];
 }
 
 void deck_print(Deck deck)
@@ -150,7 +138,7 @@ void deck_print_coordinates(Deck deck)
     {
         for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
         {
-            vertice_print_coordinates(deck->set_vertices[(deck->size*abscisse)+ordonnee]);
+            vertice_print_coordinates(deck_get_vertice(deck, abscisse, ordonnee));
             printf(" ");
         }
         printf("\n");
@@ -164,7 +152,7 @@ void deck_print_color(Deck deck)
     {
         for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
         {
-            vertice_print_color(deck->set_vertices[(deck->size*abscisse)+ordonnee]);
+            vertice_print_color(deck_get_vertice(deck, abscisse, ordonnee));
             printf(" ");
         }
         printf("\n");
@@ -224,7 +212,7 @@ Vertice deck_get_border(Deck deck, char color, int number)
 
 unsigned int deck_get_number_edge(unsigned int size)
 {
-    return (4*size)+((3*size)*(size-2))+(size*2+1);
+    return (4 * size) + ((3 * size) * (size - 2)) + (size * 2 + 1);
 }
 
 void deck_delete(Deck deck)
@@ -237,7 +225,7 @@ void deck_delete(Deck deck)
     {
         for(int ordonnee = 0; ordonnee < deck->size; ordonnee++)
         {
-            vertice_delete(deck->set_vertices[(deck->size*abscisse)+ordonnee]);
+            vertice_delete(deck_get_vertice(deck, abscisse, ordonnee));
         }
     }
     deck_free(deck);
@@ -248,4 +236,28 @@ void deck_free(Deck deck)
     free(deck->set_vertices);
     free(deck->set_edges);
     free(deck);
+}
+
+int deck_vertice_is_border(Vertice vertice, Deck deck)
+{
+    if ( vertice == deck_get_border(deck, WHITE, 1) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, WHITE, 2) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, BLACK, 1) )
+    {
+        return 1;
+    }
+    else if ( vertice == deck_get_border(deck, BLACK, 2) )
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
