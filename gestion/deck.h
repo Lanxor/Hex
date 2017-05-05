@@ -1,7 +1,7 @@
 /**
  * @file deck.h
- * @autho OLIVIER Thomas
- * @date 5 Mai 2017
+ * @autho PATA Gwendal - OLIVIER Thomas
+ * @date Avril 2017
  * @brief Fichier de prototype du tablier de jeu.
  */
 
@@ -15,6 +15,10 @@
 #include "edge.h"
 #include "vertice.h"
 
+/**
+ * @brief Structure du tablier de jeu.
+ * @typedef Structure du tablier de jeu
+ */
 typedef struct s_deck* Deck;
 
 /**
@@ -38,12 +42,14 @@ Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
  * @brief Vérifie si un sommet est une bordure.
  * @param deck : Plateau de jeu dans lequel on vérifie.
  * @param vertice : Sommet à vérifier.
- * @return
+ * @return Retourne si le sommet est bien un sommet bordure ou non.
+ * @returns 0 : Non ce n'est pas un sommet bordure.
+ * @returns 1 : Oui c'est un sommet bordure.
  */
 int deck_vertice_is_border(Deck deck, Vertice vertice);
 
 /**
- * @brief Affiche le tablier de jeu trois fois, coordonnée, couleur et toutes les arrêtes.
+ * @brief Affiche le tablier de jeu trois fois, coordonnée, couleur et toutes les arêtes.
  * @param deck : Tablier à afficher.
  */
 void deck_print(Deck deck);
@@ -61,7 +67,7 @@ void deck_print_coordinates(Deck deck);
 void deck_print_color(Deck deck);
 
 /**
- * @brief Affiche toutes les arrêtes d'un tablier de jeu.
+ * @brief Affiche toutes les arêtes d'un tablier de jeu.
  * @param deck : Tablier à afficher
  */
 void deck_print_edge(Deck deck);
@@ -71,14 +77,14 @@ void deck_print_edge(Deck deck);
  * @param deck : Le tablier de jeu où il faut chercher.
  * @param color : La couleur de la bordure. (BLACK/WHITE)
  * @param number : Le numéro de la bordure. (1/2)
- * @return 
+ * @return Retourne le sommet bordure voulu.
  */
 Vertice deck_get_border(Deck deck, char color, int number);
 
 /**
- * @brief Fonction qui calcule le nombre d'arrêtes il y a dans un tablier sans compter les doublons.
+ * @brief Fonction qui calcule le nombre d'arêtes il y a dans un tablier sans compter les doublons.
  * @param size : Taille d'un tablier.
- * @return 
+ * @return Retourne le nombre d'arêtes possible dans une tablier de 'size' sommet.
  */
 unsigned int deck_get_number_edge(unsigned int size);
 
@@ -100,7 +106,9 @@ void deck_free(Deck deck);
  * @param color : Couleur vers laquel le sommet sera modifié.
  * @param abscisse : Abscisse du sommet à modifier.
  * @param ordonnee : Ordonnée du sommet à modifier.
- * @return 
+ * @return Retourne si l'opération de modification est possible ou non.
+ * @returns 0 : Non elle n'est pas possible.
+ * @returns 1 : Oui elle est possible.
  */
 int deck_vertice_modify_is_possible(Deck deck, char color, int abscisse, int ordonnee);
 
