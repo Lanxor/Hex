@@ -1,8 +1,8 @@
 /**
- * @file Cell.java
+ * @file Vertice.java
  * @author PACE Eleana
  * @date 26 avril 2017
- * @brief Classe de gestion de la cellule
+ * @brief Classe de gestion des sommets
  */
 
 package pkginterface;

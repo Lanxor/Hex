@@ -4,6 +4,7 @@
  * @date 26 avril 2017
  * @brief Interface principale
  */
+
 package pkginterface;
 
 import java.util.Scanner;
