@@ -34,5 +34,5 @@ Group group_create();
  */
 Group group_insert(Group initialGroup, Vertice verticeToInsert);
 
-#endif /* GROUP_H */
+#endif
 
