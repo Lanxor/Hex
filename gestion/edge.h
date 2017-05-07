@@ -34,30 +34,30 @@ Edge edge_create(Vertice first, Vertice second);
 void edge_print(Edge edge);
 
 /**
- * @brief Fonction qui récupère 
+ * @brief Fonction qui récupère le premier sommet de l'arête.
  * @param edge : Arête où il faut récupéré l'élément.
  * @return 
  */
 Vertice edge_get_vertice_first(Edge edge);
 
 /**
- * 
+ * @brief Fonction qui récupère le second sommet de l'arête.
  * @param edge : Arête où il faut récupéré l'élément.
  * @return 
  */
 Vertice edge_get_vertice_second(Edge edge);
 
 /**
- * 
+ * @brief Supprime l'arête.
  * @param edge
  */
 void edge_delete(Edge edge);
 
 /**
- * 
+ * @brief Libérer les zonnes mémoires de l'arête.
  * @param edge
  */
 void edge_free(Edge edge);
 
-#endif /* EDGE_H */
+#endif
 
