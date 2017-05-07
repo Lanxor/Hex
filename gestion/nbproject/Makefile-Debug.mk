@@ -128,19 +128,19 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestion: ${TESTDIR}/tests/test_vertic
 ${TESTDIR}/tests/test_deck.o: tests/test_deck.c 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I. -std=c99 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test_deck.o tests/test_deck.c
+	$(COMPILE.c) -g -std=c99 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test_deck.o tests/test_deck.c
 
 
 ${TESTDIR}/tests/test_edge.o: tests/test_edge.c 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I. -std=c99 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test_edge.o tests/test_edge.c
+	$(COMPILE.c) -g -std=c99 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test_edge.o tests/test_edge.c
 
 
 ${TESTDIR}/tests/test_vertice.o: tests/test_vertice.c 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I. -std=c99 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test_vertice.o tests/test_vertice.c
+	$(COMPILE.c) -g -std=c99 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/test_vertice.o tests/test_vertice.c
 
 
 ${OBJECTDIR}/deck_nomain.o: ${OBJECTDIR}/deck.o deck.c 
