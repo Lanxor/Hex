@@ -1,5 +1,5 @@
 /**
- * @file deck.h
+ * @file group.h
  * @autho PATA Gwendal - OLIVIER Thomas
  * @date Mai 2017
  * @brief Fichier de prototype des groupes du Jeu.
