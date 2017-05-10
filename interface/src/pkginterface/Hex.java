@@ -11,12 +11,11 @@ import java.util.Scanner;
 
 public class Hex {
     
-    /* C'EST DEGUEULASSE NE REGARDEZ PAS */
-    
     private Menu menu;
     private Deck tablier;
     private Player Player1;
     private Player Player2;
+    private Player[] Players;
     
     private boolean isInteger(String coord) {
        boolean isValid = true;
@@ -46,6 +45,36 @@ public class Hex {
         return Integer.parseInt(input);
     }
     
+    public void initPlayer(int numPlayer)
+    {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("Joueur " + Integer.toString(numPlayer));
+        System.out.println("1 : Nouveau Joueur");
+        for (int cpt = 0; cpt < Players.length; ++cpt){
+            System.out.println(Integer.toString(cpt+2) 
+                    + " : " + Players[cpt].getPseudo());
+        }
+        int choice = getInt(Players.length);
+        if (choice == 1)
+        {
+            System.out.print("pseudo : ");
+            String pseudo = keyboard.next();
+            System.out.print("mail : ");
+            String mail = keyboard.next();
+            if (numPlayer == 1)
+                Player1 = new Player(pseudo, '*', mail);
+            else
+                Player2 = new Player(pseudo, 'o', mail);
+        }
+        else
+        {
+            if (numPlayer == 1)
+                Player1 = Players[choice-2];
+            else
+                Player2 = Players[choice-2];
+        }
+    }
+    
     public void playMove()
     {
         System.out.print("abs : ");
@@ -55,56 +84,6 @@ public class Hex {
         
     }
     
-    public void init(int numJoueur)
-    {
-        if (Players.length != 0)
-        {
-            System.out.println("Choisir des joueurs : ");
-            System.out.println("Joueur " + Integer.toString(numJoueur));
-            System.out.println("1 : Nouveau Joueur");
-            for (int cpt = 0; cpt < Players.length; ++cpt){
-                System.out.println(Integer.toString(cpt+2) 
-                        + " : " + Players[cpt].getPseudo());
-            }
-            Scanner keyboard = new Scanner(System.in);
-            String choice = keyboard.next();
-            while (!isInteger(choice) 
-                || Integer.parseInt(choice) < 0 
-                || Integer.parseInt(choice) > 5){
-            System.out.print("erreur ");
-            choice = keyboard.next();
-            }
-            if (Integer.parseInt(choice) == 1)
-            {
-                if (numJoueur == 1)
-                {
-                    Player1 = new Player(tablier);
-                    Player1.init();
-                }
-                else
-                {
-                    Player2 = new Player(tablier);
-                    Player2.init();
-                }
-            }
-            else
-            {
-                if (numJoueur == 1)
-                    Player1 = Players[Integer.parseInt(choice)-2];
-                else
-                    Player2 = Players[Integer.parseInt(choice)-2];
-            }
-        }
-        else
-        {
-            System.out.println("Joueur 1");
-            Player1 = new Player(tablier);
-            Player1.init();
-            System.out.println("Joueur 2");
-            Player2 = new Player(tablier);
-            Player2.init();
-        }
-    }
     
     public void play()
     {      
