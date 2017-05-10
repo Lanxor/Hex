@@ -1,6 +1,6 @@
 /**
  * @file InterfaceJavaC.java
- * @author PACE Eleana
+ * @author OLIVIER Thomas
  * @date 26 avril 2017
  * @brief Interface des fonctions du c 
  */
@@ -8,10 +8,10 @@
 package pkginterface;
 
 public class InterfaceJavaC {
-    public native void sayHello();
-    
     static 
     {
-        System.load("librairieC.so");
+        System.load("/home/lanx/Documents/Projet_S4/Hex/interface/src/librairiC.so");
     }
+    
+    public native void sayHello();
 }
