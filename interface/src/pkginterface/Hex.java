@@ -17,7 +17,7 @@ public class Hex {
     
     private Menu menu;
     private Historic historic;
-    private Deck tablier;
+    private Deck deck;
     private Player Player1;
     private Player Player2;
     private Player[] Players;
@@ -35,14 +35,16 @@ public class Hex {
        return isValid;
     }
     
-    public int getInt(int valMax)
+    public int getInt(int valMin, int valMax)
     {
         Scanner keyboard = new Scanner(System.in);
         String input = keyboard.next();
         while (!isInteger(input) 
-                || Integer.parseInt(input) < 0 
-                || Integer.parseInt(input) >= valMax){
-            System.out.print("Vous devez entrer un entier entre 0 et " 
+                || Integer.parseInt(input) < valMin 
+                || Integer.parseInt(input) > valMax){
+            System.out.print("Vous devez entrer un entier entre "
+                    + Integer.toString(valMin)
+                    + " et "
                     + Integer.toString(valMax)
                     + ", veuillez recommencer : ");
             input = keyboard.next();
@@ -54,12 +56,16 @@ public class Hex {
     {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Joueur " + Integer.toString(numPlayer));
+        int choice;
         System.out.println("1 : Nouveau Joueur");
-        for (int cpt = 0; cpt < Players.length; ++cpt){
-            System.out.println(Integer.toString(cpt+2) 
-                    + " : " + Players[cpt].getPseudo());
+        if (this.Players != null){
+            for (int cpt = 0; cpt < this.Players.length; ++cpt){
+                System.out.println(Integer.toString(cpt + 2) 
+                        + " : " + this.Players[cpt].getPseudo());
+            }
+            choice = getInt(1, this.Players.length + 2);
         }
-        int choice = getInt(Players.length);
+        choice = getInt(1, 1);
         if (choice == 1)
         {
             System.out.print("pseudo : ");
@@ -67,9 +73,9 @@ public class Hex {
             System.out.print("mail : ");
             String mail = keyboard.next();
             if (numPlayer == 1)
-                Player1 = new Player(pseudo, '*', mail);
+                this.Player1 = new Player(pseudo, '*', mail);
             else
-                Player2 = new Player(pseudo, 'o', mail);
+                this.Player2 = new Player(pseudo, 'o', mail);
         }
         else
         {
@@ -80,89 +86,39 @@ public class Hex {
         }
     }
     
+    public void initDeck(){
+        System.out.println("De quelle taille voulez-vous votre tablier ? ");
+        int t = getInt(5, 30);
+        this.deck = new Deck(t);
+    }
+    
     public Coordinates getCoordinates()
     {
         System.out.println("Veuillez entrer des coordonnées.");
         System.out.print("abs : ");
-        int abs = getInt(this.deck.getSize());
+        int abs = getInt(0, this.deck.getSize() - 1);
         System.out.print("ord : ");
-        int ord = getInt(this.deck.getSize());
+        int ord = getInt(0, this.deck.getSize() - 1);
         Coordinates c = new Coordinates(abs, ord);
         return c;
     }
     
+    public void placeStone(Coordinates coord)
+    {
+        /* envois les coordonnée a c */
+    }
     
     public void play()
     {      
         menu = new Menu();
-        int resp = menu.Home();
+        menu.Home();
+        int resp = getInt(1, 4);
         if (resp == 1){
-            
-            tablier = new Deck();
-            tablier.init();
-            init(1);
-            init(2);
-            tablier.displayBoard();
+            this.initDeck();
+            initPlayer(1);
+            initPlayer(2);
         }
-        
-        Player1.placeStone();
-        tablier.displayBoard();
-        Player2.placeStone();
-        tablier.displayBoard();
-    }
-
-    public void init()
-    {
-        Scanner keyboard = new Scanner(System.in);
-        System.out.print("pseudo : ");
-        this.pseudo = keyboard.next();
-        System.out.print("couleur : ");
-        this.color = keyboard.next();
-    }
-    
-    public void placeStone()
-    {
-        System.out.println(this.pseudo + " à toi !");
-        Coordinates coordinates = new Coordinates(this.deck);
-        coordinates.setCoord();
-        this.deck
-                .vertice[coordinates.getAbscisse()][coordinates.getOrdonnee()]
-                .placeStone(this.color);
-    }
-    
-    public void Home()
-    {
-        System.out.println("1 : Créer une nouvelle partie\n"
-                + "2 : Charger une partie\n"
-                + "3 : Quitter"
-                + "4 : Scores");
-        Scanner keyboard = new Scanner(System.in);
-        String choice = keyboard.next();
-        while (!isInteger(choice) 
-                || Integer.parseInt(choice) < 0 
-                || Integer.parseInt(choice) > 4){
-            System.out.print("erreur ");
-            choice = keyboard.next();
-        }
-        return Integer.parseInt(choice);
-    }
-    
-    public int Choice()
-    {
-        System.out.println("1 : Jouer\n"
-                + "2 : Revenir au coup précédent"
-                + "3 : Sauvegarder\n"
-                + "4 : Sauvegarder et Quitter"
-                + "5 : Quitter sans sauvegarder");
-        Scanner keyboard = new Scanner(System.in);
-        String choice = keyboard.next();
-        while (!isInteger(choice) 
-                || Integer.parseInt(choice) < 0 
-                || Integer.parseInt(choice) > 5){
-            System.out.print("erreur ");
-            choice = keyboard.next();
-        }
-        return Integer.parseInt(choice);
+        this.placeStone(this.getCoordinates());
     }
     
     public void saveFile(String nameFile)
@@ -173,7 +129,7 @@ public class Hex {
         try {
             fw = new FileWriter(f);
             str = "\\hex\n";
-            str += "\\dim" + this.size + "\n";
+            str += "\\dim" + this.deck.getSize() + "\n";
             str += this.toString();
             fw.write(str);
             fw.close();
