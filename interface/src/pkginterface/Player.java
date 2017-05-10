@@ -10,11 +10,11 @@ package pkginterface;
 public class Player {
     
     private String pseudo;
-    private String color;
+    private char color;
     private String mail;
     private int yearOfBirth;
     
-    public Player(String pseudo, String color, String mail, int yearOfBirth)
+    public Player(String pseudo, char color, String mail, int yearOfBirth)
     {
         this.pseudo = pseudo;
         this.color = color;
@@ -26,14 +26,8 @@ public class Player {
         return this.pseudo;
     }
     
-    public String getColor()
+    public char getColor()
     {
         return this.color;
     }
-    
-    public void save()
-    {
-        /* sauvegarde dans le fichier */
-    }
-    
 }
