@@ -13,7 +13,7 @@ public class Player {
     private char color;
     private String mail;
     
-    public Player(String pseudo, char color, String mail)
+    public Player(String pseudo, char color, String mail, int yearOfBirth)
     {
         this.pseudo = pseudo;
         this.color = color;
@@ -28,10 +28,4 @@ public class Player {
     {
         return this.color;
     }
-    
-    public void save()
-    {
-        /* sauvegarde dans le fichier */
-    }
-    
 }
