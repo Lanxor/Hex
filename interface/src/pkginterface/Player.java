@@ -13,12 +13,20 @@ public class Player {
     private char color;
     private String mail;
     
+    public Player(String pseudo, char color, String mail)
+    {
+        this.pseudo = pseudo;
+        this.color = color;
+        this.mail = mail;
+    }
+    
     public Player(String pseudo, char color, String mail, int yearOfBirth)
     {
         this.pseudo = pseudo;
         this.color = color;
         this.mail = mail;
     }
+    
     public String getPseudo()
     {
         return this.pseudo;
