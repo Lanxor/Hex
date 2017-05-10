@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Hex {
     
     private Menu menu;
+    private Historic historic;
     private Deck tablier;
     private Player Player1;
     private Player Player2;
@@ -103,13 +104,8 @@ public class Hex {
         Player2.placeStone();
         tablier.displayBoard();
     }
-    
-}
 
-
-
-
-public void init()
+    public void init()
     {
         Scanner keyboard = new Scanner(System.in);
         System.out.print("pseudo : ");
@@ -149,7 +145,7 @@ public void init()
     }
     
 
-public int Choice()
+    public int Choice()
     {
         System.out.println("1 : Jouer\n"
                 + "2 : Revenir au coup précédent"
@@ -166,3 +162,4 @@ public int Choice()
         }
         return Integer.parseInt(choice);
     }
+}
