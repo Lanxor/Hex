@@ -19,11 +19,6 @@ public class Coordinates {
         this.ordonnee = ord;
     }
     
-    public String getCoordonnee()
-    {
-        return this.getAbscisse() + " " + this.getOrdonnee();
-    }
-    
     public int getAbscisse()
     {
         return this.abscisse;
@@ -34,4 +29,8 @@ public class Coordinates {
         return this.ordonnee;
     }
     
+    public String toString()
+    {
+        return this.getAbscisse() + " " + this.getOrdonnee();
+    }
 }
