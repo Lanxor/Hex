@@ -8,25 +8,29 @@
 package pkginterface;
 
 public class Vertice {
-    private String color;
+    private char color;
+    private Coordinates coordinates;
     
-    public Vertice()
+    public Vertice(Coordinates coordinates)
     {
-        this.color = "transparant";
+        this.color = 't';
+        this.coordinates = coordinates;
     }
     
-    public String getColor()
+    public Vertice(char color, Coordinates coordinates)
+    {
+        this.color = color;
+        this.coordinates = coordinates;
+    }
+    
+    public char getColor()
     {
         return this.color;
     }
     
-    public String displayVertice()
+    public Coordinates getCoordinates()
     {
-        if (this.color.equals("black"))
-            return "| • ";
-        if (this.color.equals("white"))
-            return "| ○ ";
-        return "|   ";
+        return this.coordinates;
     }
     
 }
