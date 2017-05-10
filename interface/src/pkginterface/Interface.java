@@ -11,8 +11,8 @@ public class Interface {
     
     public static void main(String[] args)
     {
-        Hex hex = new Hex();
-        hex.play();
+        InterfaceJavaC InterfaceJavaC = new InterfaceJavaC();
+        InterfaceJavaC.sayHello();
     }
     
 }
