@@ -80,13 +80,15 @@ public class Hex {
         }
     }
     
-    public void playMove()
+    public Coordinates getCoordinates()
     {
+        System.out.println("Veuillez entrer des coordonnées.");
         System.out.print("abs : ");
-        this.abscisse = getInt(this.tablier.getSize());
+        int abs = getInt(this.deck.getSize());
         System.out.print("ord : ");
-        this.ordonnee = getInt(this.tablier.getSize());
-        
+        int ord = getInt(this.deck.getSize());
+        Coordinates c = new Coordinates(abs, ord);
+        return c;
     }
     
     
