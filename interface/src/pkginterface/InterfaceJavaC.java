@@ -8,5 +8,10 @@
 package pkginterface;
 
 public class InterfaceJavaC {
+    public native void sayHello();
     
+    static 
+    {
+        System.load("librairieC.so");
+    }
 }
