@@ -7,6 +7,12 @@
 
 package pkginterface;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Move {
     
     private Player player;
@@ -28,9 +34,9 @@ public class Move {
         /* recupere info du C */
     }
     
-    public void save()
+    public String toString()
     {
-        /* sauvegarde dans le fichier */
+        return "\\play " + this.player.getColor() + " " + this.coord.getCoordonnee();
     }
     
 }
