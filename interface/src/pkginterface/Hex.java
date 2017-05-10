@@ -7,6 +7,10 @@
 
 package pkginterface;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Hex {
@@ -124,13 +128,8 @@ public class Hex {
         Player2.placeStone();
         tablier.displayBoard();
     }
-    
-}
 
-
-
-
-public void init()
+    public void init()
     {
         Scanner keyboard = new Scanner(System.in);
         System.out.print("pseudo : ");
@@ -148,10 +147,7 @@ public void init()
                 .vertice[coordinates.getAbscisse()][coordinates.getOrdonnee()]
                 .placeStone(this.color);
     }
-
-
-
-
+    
     public void Home()
     {
         System.out.println("1 : Créer une nouvelle partie\n"
@@ -169,8 +165,7 @@ public void init()
         return Integer.parseInt(choice);
     }
     
-
-public int Choice()
+    public int Choice()
     {
         System.out.println("1 : Jouer\n"
                 + "2 : Revenir au coup précédent"
@@ -187,3 +182,23 @@ public int Choice()
         }
         return Integer.parseInt(choice);
     }
+
+    public void saveFile(String nameFile)
+    {
+        String str = "";
+        File f = new File("testFile.txt");
+        FileWriter fw;
+        try {
+            fw = new FileWriter(f);
+            str = "\\hex\n";
+            str += "\\dim" + this.size + "\n";
+            str += this.toString();
+            fw.write(str);
+            fw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
