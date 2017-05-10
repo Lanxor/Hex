@@ -7,8 +7,6 @@
 
 package pkginterface;
 
-import java.util.Scanner;
-
 public class Deck {
     private int size;
     
