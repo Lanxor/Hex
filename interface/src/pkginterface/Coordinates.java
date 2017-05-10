@@ -19,9 +19,19 @@ public class Coordinates {
         this.ordonnee = ord;
     }
     
+    public void setAbscisse(int abscisse)
+    {
+        this.abscisse = abscisse;
+    }
+    
     public int getAbscisse()
     {
         return this.abscisse;
+    }
+    
+    public void setOrdonnee(int ordonnee)
+    {
+        this.ordonnee = ordonnee;
     }
     
     public int getOrdonnee()
