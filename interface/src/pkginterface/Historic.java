@@ -21,4 +21,14 @@ public class Historic {
         this.move[this.move.length] = m;
     }
     
+    public String toString()
+    {
+        String str = "";
+        for ( Move move : this.move )
+        {
+            str += "\\play " + move.toString();
+        }
+        return str;
+    }
+    
 }
