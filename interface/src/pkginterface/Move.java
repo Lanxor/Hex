@@ -32,11 +32,12 @@ public class Move {
     public boolean isValid()
     {
         /* recupere info du C */
+        return true;
     }
     
     public String toString()
     {
-        return "\\play " + this.player.getColor() + " " + this.coord.getCoordonnee();
+        return "\\play " + this.player.getColor() + " " + this.coord.toString();
     }
     
 }
