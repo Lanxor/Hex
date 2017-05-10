@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Hex {
-    
+    /*
     private Menu menu;
     private Historic historic;
     private Deck deck;
@@ -139,5 +139,5 @@ public class Hex {
             e.printStackTrace();
         }
     }
-    
+    */
 }
