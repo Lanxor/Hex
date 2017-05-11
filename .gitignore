@@ -1,6 +1,11 @@
+config_script.conf
+/test
 /html
 /latex
 /gestion/html/
 /gestion/latex/
 /gestion/build/
 /gestion/dist/
+
+/interface/build/
+/interface/makefile
