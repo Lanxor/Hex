@@ -50,6 +50,13 @@ unsigned int vertice_get_abscisse(Vertice vertice);
 unsigned int vertice_get_ordonnee(Vertice vertice);
 
 /**
+ * @brief Fonction qui retourne la couleur du sommet.
+ * @param vertice : Le sommet où il faut chercher.
+ * @return Retourne la couleur du sommet.
+ */
+char vertice_get_color(Vertice vertice);
+
+/**
  * @brief Fonction qui affiche les coordonées d'un sommet.
  * @param vertice : Le sommet à afficher.
  */
