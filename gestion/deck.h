@@ -12,8 +12,8 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "edge.h"
 #include "vertice.h"
+#include "edge.h"
 
 /**
  * @brief Structure du tablier de jeu.
