@@ -215,7 +215,7 @@ void deck_free(Deck deck)
 int deck_vertice_modify_is_possible(Deck deck, char color, int abscisse, int ordonnee)
 {
   if ( (color == TRANSPARENT) 
-       || vertice_get_color((deck_get_vertice(deck, abscisse, ordonnee)) == TRANSPARENT) )
+       || (vertice_get_color(deck_get_vertice(deck, abscisse, ordonnee)) == TRANSPARENT) )
     return (1);
   else
     return (0);
