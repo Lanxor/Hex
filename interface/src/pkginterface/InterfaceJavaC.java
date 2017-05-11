@@ -14,4 +14,6 @@ public class InterfaceJavaC {
     }
     
     public native void sayHello();
+    public native int createDeck(int size);
+    public native void deleteDeck(int deck);
 }
