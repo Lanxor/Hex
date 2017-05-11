@@ -2,7 +2,7 @@
 
 typedef struct s_deck
 {
-  unsigned int  size;
+  int  size;
   Vertice       white_1;
   Vertice       white_2;
   Vertice       black_1;
@@ -11,7 +11,7 @@ typedef struct s_deck
   Edge          *set_edges;
 } t_deck;
 
-Deck deck_create(unsigned int size)
+Deck deck_create(int size)
 {
   int     abscisse, ordonnee, number_edges, counter_edges;
   Deck    deck;
@@ -92,8 +92,8 @@ Deck deck_create(unsigned int size)
   return (deck);
 }
 
-Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
-                                    unsigned int ordonnee)
+Vertice deck_get_vertice(Deck deck, int abscisse,
+                                    int ordonnee)
 {
   //printf("%d %d\n", abscisse, ordonnee);
   return (deck->set_vertices[(deck->size * abscisse) + ordonnee]);
@@ -152,7 +152,7 @@ void deck_print_color(Deck deck)
 
 void deck_print_edge(Deck deck)
 {
-  unsigned int  number_edge, counter_edge;
+  int  number_edge, counter_edge;
 
   number_edge = deck_get_number_edge(deck->size);
   for(counter_edge = 0; counter_edge < number_edge; ++counter_edge)
@@ -187,7 +187,7 @@ Vertice deck_get_border(Deck deck, char color, int number)
     return (NULL);
 }
 
-unsigned int deck_get_number_edge(unsigned int size)
+int deck_get_number_edge( int size)
 {
   // (4*size)+((3*size)*(size-2))+(size*2+1) est le nombre d'arête (sans compter les doublons)
   return ((4 * size) + ((3 * size) * (size - 2)) + (size * 2 + 1));

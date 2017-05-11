@@ -7,28 +7,44 @@
 
 package pkginterface;
 
+import java.util.ArrayList;
+
 public class Historic {
     
-    private Move[] move;
+    private ArrayList moves;
+    private int numberOfMove;
+    
+    public Historic()
+    {
+        this.moves = new ArrayList();
+        this.numberOfMove = 0;
+    }
+    
+    public void deleteLastMove()
+    {
+        this.moves.remove(this.numberOfMove--);
+    }
     
     public Move getLastMove()
     {
-        return this.move[this.move.length-1];
+        return (Move)this.moves.get(this.numberOfMove);
     }
     
-    public void addMove(Move m)
+    public void addMove(Move move)
     {
-        this.move[this.move.length] = m;
+        this.moves.add(this.numberOfMove++, move);
     }
     
     public String toString()
     {
         String str = "";
-        for ( Move move : this.move )
+        int count = 0;
+                
+        while ( count < this.numberOfMove )
         {
-            str += "\\play " + move.toString();
+            str += ((Move)this.moves.get(count++)).toString();
+            str += "\n";
         }
         return str;
     }
-    
 }

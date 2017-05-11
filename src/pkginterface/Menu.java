@@ -9,7 +9,7 @@ package pkginterface;
 
 public class Menu {
     
-    public void Home()
+    public static void home()
     {
         System.out.println("1 : Créer une nouvelle partie\n"
                 + "2 : Charger une partie\n"
@@ -17,7 +17,7 @@ public class Menu {
                 + "4 : Quitter");
     }
     
-    public void Choice(int round)
+    public static void choice(int round)
     {
         if (round == 1)
             System.out.println("1 : Jouer\n"
@@ -39,8 +39,4 @@ public class Menu {
                         + "5 : Quitter sans sauvegarder");
     }
     
-    public void Statistics()
-    {
-        /* récupère les joueurs dans le fichier et affiche leurs stats */
-    }
 }

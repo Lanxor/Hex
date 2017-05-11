@@ -111,7 +111,7 @@ public class Hex {
     public void play()
     {      
         menu = new Menu();
-        menu.Home();
+        menu.home();
         int resp = getInt(1, 4);
         if (resp == 1){
             this.initDeck();

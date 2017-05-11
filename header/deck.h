@@ -29,7 +29,7 @@ extern Deck global_deck;
  * @param size : Taille du tablier de jeu.
  * @return Retourne un plateau de jeu initialiser.
  */
-Deck deck_create(unsigned int size);
+Deck deck_create(int size);
 
 /**
  * @brief Cherche un sommet dans un plateau de jeu en fonction de ces coordonnées.
@@ -38,8 +38,8 @@ Deck deck_create(unsigned int size);
  * @param ordonnee : Coordonnée à chercher.
  * @return Retourne le sommet chercher.
  */
-Vertice deck_get_vertice(Deck deck, unsigned int abscisse,
-                                    unsigned int ordonnee);
+Vertice deck_get_vertice(Deck deck, int abscisse,
+                                    int ordonnee);
 
 /**
  * @brief Vérifie si un sommet est une bordure.
@@ -89,7 +89,7 @@ Vertice deck_get_border(Deck deck, char color, int number);
  * @param size : Taille d'un tablier.
  * @return Retourne le nombre d'arêtes possible dans une tablier de 'size' sommet.
  */
-unsigned int deck_get_number_edge(unsigned int size);
+int deck_get_number_edge(int size);
 
 /**
  * @brief Supprime un tablier de jeu.

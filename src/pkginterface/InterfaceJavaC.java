@@ -13,13 +13,14 @@ public class InterfaceJavaC {
         System.load("/home/lanx/Documents/Projet_S4/new_Hex/lib/libInterfaceC.so");
     }
 
-    public native void sayHello();
+    public native static void sayHello();
 
-    public native void createDeck(int size);
-    public native void deleteDeck();
+    public native static void createDeck(int size);
+    public native static void deleteDeck();
 
-    public native void printDeckColor();
+    public native static void printDeckColor();
 
-    public native void modifyVertice(char color, int abscisse, int ordonnee);
-    public native int isModifyVertice(char color, int abscisse, int ordonnee);
+    public native static char getVerticeColor(int abscisse, int ordonnee);
+    public native static void modifyVertice(char color, int abscisse, int ordonnee);
+    public native static int isModifyVertice(char color, int abscisse, int ordonnee);
 }

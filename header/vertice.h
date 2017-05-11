@@ -25,8 +25,8 @@ typedef struct s_vertice *Vertice;
  * @param ordonnee : L'ordonnée du sommet.
  * @return 
  */
-Vertice vertice_create(char color, unsigned int abscisse,
-                                   unsigned int ordonnee);
+Vertice vertice_create(char color, int abscisse,
+                                   int ordonnee);
 
 /**
  * @brief Fonction qui modifie la couleur d'un sommet.
@@ -40,14 +40,14 @@ void vertice_modify_color(Vertice vertice, char color);
  * @param vertice : Le sommet où il faut chercher.
  * @return Retourne l'abscisse du sommet.
  */
-unsigned int vertice_get_abscisse(Vertice vertice);
+int vertice_get_abscisse(Vertice vertice);
 
 /**
  * @brief Fonction qui récupère l'ordonnée d'un sommet.
  * @param vertice : Le sommet où il faut chercher.
  * @return Retourne l'ordonnée du sommet.
  */
-unsigned int vertice_get_ordonnee(Vertice vertice);
+int vertice_get_ordonnee(Vertice vertice);
 
 /**
  * @brief Fonction qui retourne la couleur du sommet.

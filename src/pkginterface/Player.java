@@ -13,6 +13,11 @@ public class Player {
     private char color;
     private String mail;
     
+    public Player(char color)
+    {
+        this.color = color;
+    }
+    
     public Player(String pseudo, char color, String mail)
     {
         this.pseudo = pseudo;

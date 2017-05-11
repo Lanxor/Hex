@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_sayHello
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     pkginterface_InterfaceJavaC
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_sayHello
  * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_createDeck
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jclass, jint);
 
 /*
  * Class:     pkginterface_InterfaceJavaC
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_createDeck
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_deleteDeck
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     pkginterface_InterfaceJavaC
@@ -37,7 +37,15 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_deleteDeck
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_printDeckColor
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pkginterface_InterfaceJavaC
+ * Method:    getVerticeColor
+ * Signature: (II)C
+ */
+JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getVerticeColor
+  (JNIEnv *, jclass, jint, jint);
 
 /*
  * Class:     pkginterface_InterfaceJavaC
@@ -45,7 +53,7 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_printDeckColor
  * Signature: (CII)V
  */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_modifyVertice
-  (JNIEnv *, jobject, jchar, jint, jint);
+  (JNIEnv *, jclass, jchar, jint, jint);
 
 /*
  * Class:     pkginterface_InterfaceJavaC
@@ -53,7 +61,7 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_modifyVertice
  * Signature: (CII)I
  */
 JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_isModifyVertice
-  (JNIEnv *, jobject, jchar, jint, jint);
+  (JNIEnv *, jclass, jchar, jint, jint);
 
 #ifdef __cplusplus
 }

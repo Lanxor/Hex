@@ -17,6 +17,12 @@ public class Deck {
         this.vertice = new Vertice[size][size];
     }
     
+    public int askSizeDeck()
+    {
+        System.out.println("De quelle taille voulez-vous votre tablier ? ");
+        return Interface.getInt(5, 30);
+    }
+    
     public void setSize(int size)
     {
         this.size = size;
@@ -29,15 +35,21 @@ public class Deck {
     public String toString()
     {
         String str = "";
+        char color, symbol;
         str += "\\board";
         for ( int abscisse = 0; abscisse < this.size; ++abscisse )
         {
             for (int ordonnee = 0; ordonnee < this.size; ++ordonnee )
-            {
-                // Appelle de la fonction getVertice du C
-                // et un getColor suffit
-                // pour avoir le format du PDF
-                System.out.print(" ");
+            {   
+                color = InterfaceJavaC.getVerticeColor(abscisse, ordonnee);
+                if ( color == 'b' )
+                    symbol = '*';
+                else if ( color == 'w' )
+                    symbol = 'o';
+                else
+                    symbol = '.';
+                
+                System.out.print(symbol + " ");
             }
             System.out.print("\n");
         }

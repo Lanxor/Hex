@@ -45,6 +45,21 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_printDeckColor
 
 /*
  * Class:     pkginterface_InterfaceJavaC
+ * Method:    getVerticeColor
+ * Signature: (II)V
+ */
+JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getVerticeColor
+  (JNIEnv *env, jobject obj, jint abscisse, jint ordonnee)
+{
+    extern Deck global_deck;
+    Vertice vertice;
+    
+    vertice = deck_get_vertice(global_deck, abscisse, ordonnee);
+    return vertice_get_color(vertice);
+}
+
+/*
+ * Class:     pkginterface_InterfaceJavaC
  * Method:    modifyVertice
  * Signature: (CII)V
  */
