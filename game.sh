@@ -1,13 +1,6 @@
 #! /bin/bash
 
-if [ -d "/usr/lib/jvm/java-8-openjdk-amd64"]; then
-  pathJni="/usr/lib/jvm/java-8-openjdk-amd64"
-fi
-
-if [ -d "C:\jdk1.4" ]; then
-  pathJni="C:\jdk1.4"
-fi
-
+pathJni="/usr/lib/jvm/java-8-openjdk-amd64"
 optionC="-fPIC"
 namePakage="pkginterface"
 nameFileLib="libInterfaceC.so"
