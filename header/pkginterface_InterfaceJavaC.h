@@ -9,14 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     pkginterface_InterfaceJavaC
- * Method:    sayHello
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_sayHello
-  (JNIEnv *, jclass);
-
-/*
- * Class:     pkginterface_InterfaceJavaC
  * Method:    createDeck
  * Signature: (I)V
  */
@@ -29,14 +21,6 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_createDeck
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_deleteDeck
-  (JNIEnv *, jclass);
-
-/*
- * Class:     pkginterface_InterfaceJavaC
- * Method:    printDeckColor
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_printDeckColor
   (JNIEnv *, jclass);
 
 /*

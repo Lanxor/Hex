@@ -32,11 +32,15 @@ public class Deck {
         return this.size;
     }
     
+    public void show()
+    {
+        System.out.println(this.toString());
+    }
+    
     public String toString()
     {
         String str = "";
         char color, symbol;
-        str += "\\board";
         for ( int abscisse = 0; abscisse < this.size; ++abscisse )
         {
             for (int ordonnee = 0; ordonnee < this.size; ++ordonnee )
@@ -49,11 +53,10 @@ public class Deck {
                 else
                     symbol = '.';
                 
-                System.out.print(symbol + " ");
+                str += symbol + " ";
             }
-            System.out.print("\n");
+            str += "\n";
         }
-        str += "\\endboard";
         
         return str;
     }

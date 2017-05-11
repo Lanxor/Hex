@@ -90,7 +90,7 @@ public class Interface {
                                 break;
                             case 3: // Sauvegarder
                                 System.out.println(game.toStringFileSave());
-                                //game.saveInFile();
+                                game.saveInFile();
                                 break;
                             case 4: // Sauvegarder et Quitter
                                 leaveGame = true;

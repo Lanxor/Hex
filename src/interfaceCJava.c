@@ -7,23 +7,26 @@
 
 Deck global_deck;
 
-JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_sayHello
-  (JNIEnv *env, jobject obj)
-{
-    printf("Hello world !\n");
-    return;
-}
-
+/*
+ * Class:     pkginterface_InterfaceJavaC
+ * Method:    createDeck
+ * Signature: (I)V
+ */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_createDeck
-  (JNIEnv *env, jobject obj, jint size)
+  (JNIEnv *env, jclass class, jint size)
 {
     extern Deck global_deck;
     global_deck = deck_create(size);
     return;
 }
 
+/*
+ * Class:     pkginterface_InterfaceJavaC
+ * Method:    deleteDeck
+ * Signature: ()V
+ */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_deleteDeck
-  (JNIEnv *env, jobject obj)
+  (JNIEnv *env, jclass class)
 {
     extern Deck global_deck;
     deck_delete(global_deck);
@@ -32,24 +35,11 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_deleteDeck
 
 /*
  * Class:     pkginterface_InterfaceJavaC
- * Method:    printDeckColor
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_printDeckColor
-  (JNIEnv *env, jobject obj)
-{
-    extern Deck global_deck;
-    deck_print_color(global_deck);
-    return;
-}
-
-/*
- * Class:     pkginterface_InterfaceJavaC
  * Method:    getVerticeColor
- * Signature: (II)V
+ * Signature: (II)C
  */
 JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getVerticeColor
-  (JNIEnv *env, jobject obj, jint abscisse, jint ordonnee)
+  (JNIEnv *env, jclass class, jint abscisse, jint ordonnee)
 {
     extern Deck global_deck;
     Vertice vertice;
@@ -64,7 +54,7 @@ JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getVerticeColor
  * Signature: (CII)V
  */
 JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_modifyVertice
-  (JNIEnv *env, jobject obj, jchar color, jint abscisse, jint ordonnee)
+  (JNIEnv *env, jclass class, jchar color, jint abscisse, jint ordonnee)
 {
     extern Deck global_deck;
     deck_vertice_modify(global_deck, color, abscisse, ordonnee);
@@ -77,7 +67,7 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_modifyVertice
  * Signature: (CII)I
  */
 JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_isModifyVertice
-  (JNIEnv *env, jobject obj, jchar color, jint abscisse, jint ordonnee)
+  (JNIEnv *env, jclass class, jchar color, jint abscisse, jint ordonnee)
 {
     extern Deck global_deck;
     return deck_vertice_modify_is_possible(global_deck, color, abscisse, ordonnee);

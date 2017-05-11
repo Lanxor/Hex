@@ -121,7 +121,7 @@ public class Game {
     public void showDeck()
     {
         System.out.println("Affichage du tablier : ");
-        InterfaceJavaC.printDeckColor();
+        this.deck.show();
     }
     
     public String toStringFileSave()
@@ -130,7 +130,7 @@ public class Game {
         
         str = "\\hex\n\\dim " + this.deck.getSize() + "\n";
         str += "\\board\n" + this.deck.toString() + "\n\\endboard\n";
-        str += "\\game\n" + this.historic.toString() + "\n\\endgame\n";
+        str += "\\game\n" + this.historic.toString() + "\\endgame\n";
         str += "\\endhex";
         return str;
     }
