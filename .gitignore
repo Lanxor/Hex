@@ -6,6 +6,8 @@ config_script.conf
 /gestion/latex/
 /gestion/build/
 /gestion/dist/
+/gestion/obj/
 
 /interface/build/
 /interface/makefile
+/interface/src/*.so
