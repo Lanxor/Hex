@@ -57,6 +57,13 @@ unsigned int vertice_get_ordonnee(Vertice vertice);
 char vertice_get_color(Vertice vertice);
 
 /**
+ * @brief Fonction qui modifie la couleur d'un sommet.
+ * @param vertice : Le sommet à modifier.
+ * @param color : La couleur à modifier.
+ */
+void vertice_set_color(Vertice vertice , char color);
+
+/**
  * @brief Fonction qui affiche les coordonées d'un sommet.
  * @param vertice : Le sommet à afficher.
  */
