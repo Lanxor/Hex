@@ -17,6 +17,16 @@ public class Deck {
         this.vertice = new Vertice[size][size];
     }
     
+    public void createDeckC()
+    {
+        InterfaceJavaC.createDeck(this.getSize());
+    }
+    
+    public void deleteDeckC()
+    {
+        InterfaceJavaC.deleteDeck();
+    }
+    
     public int askSizeDeck()
     {
         System.out.println("De quelle taille voulez-vous votre tablier ? ");

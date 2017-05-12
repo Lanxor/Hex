@@ -31,6 +31,16 @@ public class Player {
         this.mail = mail;
     }
     
+    public void addPlayer(Player player)
+    {
+        
+    }
+    
+    public void deletePlayer(Player player)
+    {
+        
+    }
+    
     public String getPseudo()
     {
         return this.pseudo;
@@ -39,5 +49,22 @@ public class Player {
     public char getColor()
     {
         return this.color;
+    }
+    
+    public void setPseudo(String pseudo)
+    {
+        this.pseudo = pseudo;
+    }
+    
+    public void setColor(char color)
+    {
+        this.color = color;
+    }
+    
+    public String toString()
+    {
+        String str;
+        str = this.color + " " + this.pseudo;
+        return str;
     }
 }

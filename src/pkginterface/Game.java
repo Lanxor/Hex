@@ -1,12 +1,6 @@
 
 package pkginterface;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import static pkginterface.Interface.getCoordinates;
-
 public class Game {
     
     private Historic historic;
@@ -26,7 +20,7 @@ public class Game {
         this.player2 = player2;
         this.round = true;
         
-        this.createDeck();
+        this.deck.createDeckC();
     }
     
     public Game(int size, Player player1, Player player2)
@@ -37,7 +31,54 @@ public class Game {
         this.player2 = player2;
         this.round = true;
         
-        this.createDeck();
+        this.deck.createDeckC();
+    }
+    
+    public void gamePlay()
+    {
+        int round, choice;
+        boolean leaveGame;
+        
+        round = 0;
+        leaveGame = false;
+        do
+        {
+            this.showDeck();
+            Menu.choice(round);
+            System.out.print("Choix : ");
+            choice = Interface.getInt(1, 5);
+            switch ( choice )
+            {
+                case 1: // On joue
+                    while ( !this.playMove() )
+                    {
+                        System.out.println("Recommencez...");
+                    }
+                    System.out.println("Au joueur suivant de jouer...");
+                    this.switchPlayer();
+                    break;
+                    
+                case 3: // Sauvegarder
+                    this.saveGame();
+                    System.out.println("Fichier enregistrer.");
+                    break;
+                    
+                case 4: // Sauvegarder et Quitter
+                    this.saveGame();
+                    System.out.println("Fichier enregistrer.");
+                    System.out.println("Vous quitter votre partie.");
+                    leaveGame = true;
+                    break;
+                    
+                case 5: // Quitter sans sauvegarder
+                    System.out.println("Vous Quitter votre partie sans enregistrer.");
+                    leaveGame = true;
+                    break;
+                    
+            }
+            System.out.println();
+        } while ( !leaveGame );
+        this.deck.deleteDeckC();
     }
     
     public void switchPlayer()
@@ -45,57 +86,24 @@ public class Game {
         this.round = !this.round;
     }
     
-    public void playMove()
+    public boolean playMove()
     {
         Player playerCurrent;
         Coordinates coordinates;
         Move move;
-        int coordinatesValid;
         
         if ( this.round )
             playerCurrent = this.player1;
         else
             playerCurrent = this.player2;
         
-        do
-        {
-            coordinates = getCoordinates(this.deck);
-            move = new Move(playerCurrent, coordinates);
-            coordinatesValid = InterfaceJavaC.isModifyVertice(
-                                    playerCurrent.getColor(),
-                                    coordinates.getAbscisse(),
-                                    coordinates.getOrdonnee());
-            if ( coordinatesValid != 1 )
-                System.out.println("Coordonnée impossible à ciblé.");
-        } while ( coordinatesValid != 1 );
+        coordinates = Coordinates.askCoordinates(1, this.deck.getSize());
+        move = new Move(playerCurrent, coordinates);
         
-        this.historic.addMove(move);
-        InterfaceJavaC.modifyVertice(playerCurrent.getColor(),
-                                    coordinates.getAbscisse(),
-                                    coordinates.getOrdonnee());
-    }
-    
-    public void createDeck()
-    {
-        InterfaceJavaC.createDeck(this.deck.getSize());
-    }
-    
-    public void saveInFile()
-    {
-        String str;
-        String nameFile = "file_save";
-        File f = new File(nameFile);
-        FileWriter fw;
-        try {
-            fw = new FileWriter(f);
-            str = this.toStringFileSave();
-            fw.write(str);
-            fw.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if ( move.playMove() )
+            this.historic.addMove(move);
+        
+        return false;
     }
     
     public Player getPlayer1()
@@ -124,14 +132,25 @@ public class Game {
         this.deck.show();
     }
     
-    public String toStringFileSave()
+    public void saveGame()
     {
-        String str;
+        Saveguard.addSaveguard(this);
+    }
+    
+    public static Game loadGame()
+    {
+        int numberMaxSaveguards, choice;
+        Game game;
         
-        str = "\\hex\n\\dim " + this.deck.getSize() + "\n";
-        str += "\\board\n" + this.deck.toString() + "\n\\endboard\n";
-        str += "\\game\n" + this.historic.toString() + "\\endgame\n";
-        str += "\\endhex";
-        return str;
+        System.out.println("Voici la liste des sauvegarde.");
+        numberMaxSaveguards = Saveguard.listSaveguard();
+        System.out.print("Choix : ");
+        choice = Interface.getInt(1, numberMaxSaveguards);
+        System.out.println("Nous allons charger la partie "
+                + choice + ".");
+        game = Saveguard.loadSaveguard(
+                        Saveguard.getFileSaveguard(choice));
+        
+        return game;
     }
 }

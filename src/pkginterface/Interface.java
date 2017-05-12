@@ -40,26 +40,12 @@ public class Interface {
         }
         return Integer.parseInt(input);
     }
-    
-    public static Coordinates getCoordinates(Deck deck)
-    {
-        System.out.println("Veuillez entrer des coordonnées.");
-        System.out.print("abs : ");
-        int abs = Interface.getInt(0, deck.getSize() - 1);
-        System.out.print("ord : ");
-        int ord = Interface.getInt(0, deck.getSize() - 1);
-        Coordinates c = new Coordinates(abs, ord);
-        return c;
-    }
-
 
     public static void main(String[] args)
     {
-        int response, round, choice;
-        boolean leaveGame;
+        int response;
         Menu menu;
         Game game;
-        Coordinates coordinates;
         
         do
         {
@@ -68,44 +54,16 @@ public class Interface {
             switch (response = Interface.getInt(1, 4))
             {
                 case 1:
-                    System.out.println("Vous jouer !!");
                     System.out.println("Nous crée le jeu.");
                     System.out.print("Taille du jeu : ");
                     game = new Game(getInt(2, 50), new Player('b'), new Player('w'));
-                    round = 0;
-                    leaveGame = false;
-                    do
-                    {
-                        game.showDeck();
-                        Menu.choice(round);
-                        System.out.print("Choix : ");
-                        choice = getInt(1, 5);
-                        switch ( choice )
-                        {
-                            case 1: // On joue
-                                
-                                game.playMove();
-                                System.out.println("Au joueur suivant de jouer...");
-                                game.switchPlayer();
-                                break;
-                            case 3: // Sauvegarder
-                                System.out.println(game.toStringFileSave());
-                                game.saveInFile();
-                                break;
-                            case 4: // Sauvegarder et Quitter
-                                leaveGame = true;
-                                break;
-                            case 5: // Quitter sans sauvegarder
-                                leaveGame = true;
-                                break;
-                        }
-                        System.out.println();
-                    } while ( !leaveGame );
+                    game.gamePlay();
                     break;
                     
                     
                 case 2: // Charger une partie
                     System.out.println("Charger une partie.");
+                    game = Game.loadGame();
                     break;
                     
                     

@@ -1,43 +1,64 @@
-/**
- * @file Move.java
- * @author PACE Eleana
- * @date 26 avril 2017
- * @brief Classe de gestion du coup
- */
-
 package pkginterface;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class Move {
     
     private Player player;
-    private Coordinates coord;
+    private Coordinates coordinates;
     
-    public Move(Player p, Coordinates c)
+    public Move(Player player, Coordinates ccoordinates)
     {
-        this.player = p;
-        this.coord = c;
+        this.player = player;
+        this.coordinates = coordinates;
     }
     
-    public void play ()
+    public Player getPlayer()
     {
-        /* envoie info au C */
+        return this.player;
+    }
+    
+    public Coordinates getCoordinates()
+    {
+        return this.coordinates;
+    }
+    
+    public void setPlayer(Player player)
+    {
+        this.player = player;
+    }
+    
+    public void setCoordinates(Coordinates coordinates)
+    {
+        this.coordinates = coordinates;
+    }
+    
+    public boolean playMove()
+    {
+        if ( this.isValid() )
+        {
+            InterfaceJavaC.modifyVertice(this.player.getColor(),
+                                    this.coordinates.getAbscisse(),
+                                    this.coordinates.getOrdonnee());
+            return true;
+        }
+        return false;
     }
     
     public boolean isValid()
     {
-        /* recupere info du C */
-        return true;
+        int coordinatesValid;
+        
+        coordinatesValid = InterfaceJavaC.isModifyVertice(
+                                    this.player.getColor(),
+                                    this.coordinates.getAbscisse(),
+                                    this.coordinates.getOrdonnee());
+        return coordinatesValid == 1;
     }
     
     public String toString()
     {
-        return "\\play " + this.player.getColor() + " " + this.coord.toString();
+        return "\\play " + this.player.getColor() 
+                + " " 
+                + this.coordinates.toString();
     }
     
 }
