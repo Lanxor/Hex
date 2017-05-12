@@ -2,7 +2,7 @@
 
 pathJni="/usr/lib/jvm/java-8-openjdk-amd64"
 optionC="-fPIC"
-namePakage="pkginterface"
+namePakage="version2"
 nameFileLib="libInterfaceC.so"
 
 delete_file()
@@ -38,6 +38,9 @@ compile_java()
   for file in "src/${namePakage}/"*".java"; do
     echo -e "\tFile $file"
   done
+  if [ ! -d "class/${namePakage}" ]; then
+    mkdir "class/${namePakage}"
+  fi
   mv "src/${namePakage}/"*".class" "class/${namePakage}/"
 }
 
@@ -90,9 +93,9 @@ if [ $# -ne 1 ]; then
   exit -1
 fi
 
-if [ "$1" != "compile" -a "$1" != "compilelib" -a "$1" != "clean" -a "$1" != "play" ]; then
+if [ "$1" != "compile" -a "$1" != "compilelib" -a "$1" != "clean" -a "$1" != "play" -a "$1" != "remove" ]; then
   echo -e "\nErreur : argument incorrect."
-  echo "Veuillez utiliser les mots : compile, clean, play"
+  echo "Veuillez utiliser les mots : compile, clean, play, remove"
   usage
   exit -2
 fi
@@ -133,6 +136,11 @@ if [ "$1" == "play" ]; then
 
   cd class
   java "${namePakage}.Interface"
+fi
+
+if [ "$1" == "remove" ]; then
+  rm save/*
+  rm player/*
 fi
 
 exit 0

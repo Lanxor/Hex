@@ -1,5 +1,5 @@
 #include <jni.h>
-#include "../header/pkginterface_InterfaceJavaC.h"
+#include "../header/version2_InterfaceJavaC.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -8,11 +8,11 @@
 Deck global_deck;
 
 /*
- * Class:     pkginterface_InterfaceJavaC
+ * Class:     version2_InterfaceJavaC
  * Method:    createDeck
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_createDeck
+JNIEXPORT void JNICALL Java_version2_InterfaceJavaC_createDeck
   (JNIEnv *env, jclass class, jint size)
 {
     extern Deck global_deck;
@@ -21,11 +21,11 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_createDeck
 }
 
 /*
- * Class:     pkginterface_InterfaceJavaC
+ * Class:     version2_InterfaceJavaC
  * Method:    deleteDeck
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_deleteDeck
+JNIEXPORT void JNICALL Java_version2_InterfaceJavaC_deleteDeck
   (JNIEnv *env, jclass class)
 {
     extern Deck global_deck;
@@ -34,11 +34,11 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_deleteDeck
 }
 
 /*
- * Class:     pkginterface_InterfaceJavaC
+ * Class:     version2_InterfaceJavaC
  * Method:    getVerticeColor
  * Signature: (II)C
  */
-JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getVerticeColor
+JNIEXPORT jchar JNICALL Java_version2_InterfaceJavaC_getVerticeColor
   (JNIEnv *env, jclass class, jint abscisse, jint ordonnee)
 {
     extern Deck global_deck;
@@ -49,11 +49,11 @@ JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getVerticeColor
 }
 
 /*
- * Class:     pkginterface_InterfaceJavaC
+ * Class:     version2_InterfaceJavaC
  * Method:    modifyVertice
  * Signature: (CII)V
  */
-JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_modifyVertice
+JNIEXPORT void JNICALL Java_version2_InterfaceJavaC_modifyVertice
   (JNIEnv *env, jclass class, jchar color, jint abscisse, jint ordonnee)
 {
     extern Deck global_deck;
@@ -62,11 +62,11 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_modifyVertice
 }
 
 /*
- * Class:     pkginterface_InterfaceJavaC
+ * Class:     version2_InterfaceJavaC
  * Method:    isModifyVertice
  * Signature: (CII)I
  */
-JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_isModifyVertice
+JNIEXPORT jint JNICALL Java_version2_InterfaceJavaC_isModifyVertice
   (JNIEnv *env, jclass class, jchar color, jint abscisse, jint ordonnee)
 {
     extern Deck global_deck;
