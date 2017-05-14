@@ -6,20 +6,17 @@ public class Interface {
     
     public static void main(String[] args)
     {
-        int response, deckSize;
-        Menu menu;
+        boolean leave;
         Game game;
         
         game = new Game();
-        // Chargement des deux joueurs par défaut ! ou demande de création de ces derniers
-        game = Player.loadPlayer(game);
+        game = Player.loadStartPlayer(game);
         
-        // Menu principale
-        do
+        leave = false;
+        while ( !leave )
         {
-            Menu.home();
-            System.out.print("Choix : ");
-            switch (response = Interface.getInt(1, 5))
+            
+            switch ( Interface.menu() )
             {
                 case 1: // On crée une nouvelle partie
                     System.out.println("Nous crée le jeu.");
@@ -29,31 +26,60 @@ public class Interface {
                     break;
                     
                 case 2: // Charger une partie
-                    //game.load();
+                    Game.load(game);
                     game.play();
                     game.deleteDeckC();
-                    System.out.println("Charger une partie.");
+                    System.out.println("On charger une partie.");
                     break;
                     
                 case 3: // Montrer les statistique de jeu
                     System.out.println("Voici les statistiques du jeu.");
                     break;
                     
-                case 4:
-                    System.out.println("On change de joueur.");
-                    game = Player.loadPlayer(game);
+                case 4: // Personnage
+                    Player.index(game);
                     break;
                     
                 case 5: // Quitter
                     System.out.println("Au revoir...");
+                    leave = true;
                     break;
                     
             }
-            System.out.println();
-        } while ( response != 5 );
+        }
         
         // On quitte le programme...
         // On détruit tout
+    }
+    
+    public static void printMenu(String[] menu)
+    {
+        int count;
+        
+        count = 1;
+        System.out.println();
+        for( String str : menu)
+        {
+            System.out.println(count++ + " : " + str);
+        }
+    }
+    
+    public static int menu()
+    {
+        String[] menu;
+        int choice;
+        
+        menu = new String[5];
+        menu[0] = "Créer une nouvelle partie";
+        menu[1] = "Charger une partie";
+        menu[2] = "Statistiques";
+        menu[3] = "Joueur";
+        menu[4] = "Quitter";
+        Interface.printMenu(menu);
+        System.out.print("Choix : ");
+        choice = Interface.getInt(1, menu.length);
+        
+        return choice;
     }
     
     public static boolean isInteger(String coord) {
@@ -96,5 +122,15 @@ public class Interface {
         keybord = new Scanner(System.in);
         str = keybord.nextLine();
         return str.charAt(0);
+    }
+    
+    public static String getString()
+    {
+        String str;
+        Scanner keybord;
+        
+        keybord = new Scanner(System.in);
+        str = keybord.nextLine();
+        return str;
     }
 }

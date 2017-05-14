@@ -38,6 +38,11 @@ public class Historic {
         this.moves.remove(this.numberOfMove--);
     }
     
+    public void clean()
+    {
+        this.moves.clear();
+    }
+    
     public String toString()
     {
         String str = "";

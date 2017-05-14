@@ -1,10 +1,13 @@
 package version2;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import static java.util.Calendar.DAY_OF_YEAR;
 import static java.util.Calendar.HOUR_OF_DAY;
 import static java.util.Calendar.MINUTE;
@@ -18,7 +21,7 @@ public class Saveguard {
         File f;
         
         numberOfSaveguards = 1;
-        f = new File("save/");
+        f = new File("../save/");
         for ( File file : f.listFiles())
         {
             try {
@@ -35,7 +38,7 @@ public class Saveguard {
         String str;
         
         str = "\\hex\n\\dim " + game.getDeck().getSize() + "\n";
-        str += "\\player1 " + game.getPlayer1().toString()+ "\n";
+        str += "\\player1 " + game.getPlayerCurrent().toString()+ "\n";
         str += "\\player2 " + game.getPlayer2().toString()+ "\n";
         str += "\\board\n" + game.getDeck().toString() + "\n\\endboard\n";
         str += "\\game\n" + game.getHistoric().toString() + "\\endgame\n";
@@ -92,18 +95,97 @@ public class Saveguard {
      * Partie qui permet de restaurer une partie
      */
 
-    public static Game loadSaveguard(File fileSaveguard)
+    public static boolean loadSaveguard(Game game, int number)
     {
-        Game game;
+        File folder, file;
+        int count, size;
+        Player player1, player2;
         
-        game = Saveguard.initializeLoadSaveguard(fileSaveguard);
-        Saveguard.loadMove(fileSaveguard, game);
+        size = 0;
+        file = null;
+        
+        // on initialise la partie
+        game.getPlayerCurrent().setColor('b');
+        game.getPlayer2().setColor('w');
+        game.getHistoric().clean();
+        game.getDeck().setSize(size);
+        
+        /** Est une fonction **/
+        count = 1;
+        folder = new File("../save/");
+        for ( File fileCurrent : folder.listFiles())
+        {
+            try {
+                if ( count == number )
+                {
+                    file = fileCurrent;
+                }
+                ++count;
+            } catch (NullPointerException e) {}
+        }
+        
+        // On détermine la taille du plateau
+        size = Saveguard.loadSizeFile(file);
+        System.out.println("Taille : " + game.getDeck().getSize());
+        if ( size == -1 )
+            return false;
+        game.getDeck().setSize(size);
+        // On détermine les deux joueurs pour les cloner
+        //player1 = Saveguard.loadPlayer1(file);
+        //player2 = Saveguard.loadPlayer2(file);
+        //game.getPlayer1().clone(player1);
+        //game.getPlayer2().clone(player2);
+        // On joue la game pour chaque move
         
         System.out.println("Dimmension : " + game.getDeck().getSize());
-        System.out.println("Player1 : " + game.getPlayer1().toString());
+        System.out.println("Player1 : " + game.getPlayerCurrent().toString());
         System.out.println("Player2 : " + game.getPlayer2().toString());
         
-        return null;
+        return true;
+    }
+    
+    private static int loadSizeFile(File file)
+    {
+        int size;
+        int caracter;
+        String str;
+        FileReader fr;
+        
+        size = 0;
+        str = null;
+        fr = null;
+        try {
+            fr = new FileReader(file);
+            str = "";
+            caracter = 0;
+            while ( (caracter = fr.read()) != -1 && !"\\dim ".equals(str) )
+            {
+                str += (char)caracter;
+                if ( (char)caracter == '\n' )
+                {
+                    str = "";
+                }
+            }
+            System.out.println((char)caracter);
+            str = "";
+            while ( (caracter = fr.read()) != -1 )
+            {
+                str += (char)caracter;
+            }
+            System.out.println("Chaine : " + str);
+            
+        } catch ( FileNotFoundException e ) {}
+        catch ( IOException e ) {}
+        finally {
+            try {
+                if ( fr != null )
+                    fr.close();
+            } catch ( IOException e ) {}
+        }
+        
+        if (Deck.sizeValid(size))
+            return size;
+        return -1;
     }
     
     private static Game initializeLoadSaveguard(File fileSaveguard)
@@ -228,26 +310,5 @@ public class Saveguard {
                 e.printStackTrace();
             }
         }
-    }
-    
-    public static File getFileSaveguard(int number)
-    {
-        int numberOfSaveguards;
-        File f;
-        
-        numberOfSaveguards = 1;
-        f = new File("save/");
-        for ( File file : f.listFiles())
-        {
-            try {
-                if ( numberOfSaveguards++ == number)
-                {
-                    return file;
-                }
-            } catch (NullPointerException e) {
-                System.out.println("NULL");
-            }
-        }
-        return null;
     }
 }

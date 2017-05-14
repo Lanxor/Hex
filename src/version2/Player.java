@@ -46,108 +46,150 @@ public class Player implements Serializable {
         this.yearOfBirth = yearOfBirth;
     }
     
-    public static Player askNewPlayer()
+    /**
+     * @brief Affiche le menu
+     * @return 
+     */
+    public static int menuPlayer()
+    {
+        String[] menu;
+        int choice;
+        
+        menu = new String[6];
+        menu[0] = "Profile";
+        menu[1] = "Changer de couleur du personnage";
+        menu[2] = "Changer de personnage";
+        menu[3] = "Ajouter un personnage";
+        menu[4] = "Supprimer un personnage";
+        menu[5] = "Retour";
+        Interface.printMenu(menu);
+        System.out.print("Choix : ");
+        choice = Interface.getInt(1, menu.length);
+        
+        return choice;
+    }
+    
+    public static void index(Game game)
+    {
+        boolean leave;
+        
+        leave = false;
+        while ( !leave )
+        {
+            switch ( Player.menuPlayer() )
+            {
+                case 1: // Profile
+                    System.out.println("\nVoici votre profil : ");
+                    Player.showProfilPlayer(game);
+                    break;
+                case 2: // Changer de couleur de joueur
+                    Player.changeColorPlayer(game);
+                    System.out.println("\nVous venez de changer de couleur.");
+                    break;
+                case 3: // Changer de joueur
+                    Player.changePlayer(game);
+                    System.out.println("\nVous venez de changer de joueur.");
+                    break;
+                case 4: // Ajouter un joueur
+                    Player.addPlayer();
+                    System.out.println("\nVous venez d'ajouter un joueur.");
+                    break;
+                case 5: // Supprimer un joueur
+                    Player.deletePlayer();
+                    System.out.println("\nVous venez de supprimer un joueur.");
+                    break;
+                case 6: // Retour
+                    leave = true;
+                    break;
+            }
+        }
+        
+    }
+    
+    public static void showProfilPlayer(Game game)
+    {
+        String str;
+        String color;
+        Player player;
+        
+        player = game.getPlayerCurrent();
+        color = null;
+        str = "";
+        if ( player.getColor() == 'w' )
+            color = "Blanc";
+        else if ( player.getColor() == 'b' )
+            color = "Noir";
+        str += "-----------------------------\n";
+        str += "-----------------------------\n";
+        str += "Profile de " + player.getPseudo() + "\n"
+                + "Couleur : " + color + "\n"
+                + "Adresse mail : " + player.getMail() + "\n"
+                + "Année de naissance : " + player.getYearOfBirth() + "\n";
+        str += "-----------------------------\n";
+        str += "-----------------------------";
+        
+        System.out.println(str);
+    }
+    
+    public static void changeColorPlayer(Game game)
     {
         char color;
-        String pseudo;
-        String mail;
-        int yearOfBirth;
-        Scanner sc;
         
-        sc = new Scanner(System.in);
-        System.out.println("Nouveau joueur.");
-        System.out.print("Saississez un pseudonyme : ");
-        pseudo = sc.nextLine();
-        System.out.print("Saississez votre email : ");
-        mail = sc.nextLine();
-        System.out.print("Saississez votre année de naissance : ");
-        yearOfBirth = Interface.getInt(1950, 2017);
+        color = game.getPlayerCurrent().getColor();
         
-        return new Player('w', pseudo, mail, yearOfBirth);
+        if ( color == 'b' )
+            color = 'w';
+        else if ( color == 'w' )
+            color = 'b';
+        
+        game.getPlayerCurrent().setColor(color);
     }
     
-    public static Game loadPlayer(Game game)
+    /**
+     * @brief Change de joueur parmis la liste proposé
+     * @param game 
+     */
+    public static void changePlayer(Game game)
     {
-        Player player1, player2;
-        boolean isPossible;
+        Player player;
+        int numberPlayer, choice;
         
-        if ( Player.emptyPlayer() )
-        {
-            player1 = Player.askNewPlayer();
-            player2 = Player.askNewPlayer();
-            game.setPlayer1(player1);
-            game.getPlayer1().setColor('b');
-            game.setPlayer2(player2);
-            game.getPlayer2().setColor('w');
-            Player.addPlayer(player1);
-            Player.addPlayer(player2);
-        }
-        else
-        {
-            do
-            {
-                System.out.println(Player.listPlayer());
-                System.out.print("Choississez le premier joueur : ");
-                game.setPlayer1(
-                    Player.loadPlayer(
-                        Interface.getInt(1, Player.getNumberOfPlayers())));
-                System.out.println(Player.listPlayer());
-                System.out.print("Choississez le second joueur : ");
-                game.setPlayer2(
-                    Player.loadPlayer(
-                        Interface.getInt(1, Player.getNumberOfPlayers())));
-                
-                isPossible = game.getPlayer1().getColor() != game.getPlayer2().getColor();
-                
-                if ( !isPossible )
-                {
-                    System.out.println("Vous ne pouvez pas selectionner "
-                            + "deux même joueur.");
-                }
-            } while ( !isPossible );
-        }
-        return game;
+        System.out.println(Player.listPlayer());
+        System.out.print("Choississez un joueur : ");
+        numberPlayer = Player.getNumberOfPlayers();
+        choice = Interface.getInt(1, numberPlayer);
+        player = Player.load(choice);
+        game.setPlayerCurrent(player);
     }
     
-    public static boolean addPlayer(Player player)
+    public static Player addPlayer()
     {
-        ObjectOutputStream oos;
-        File file;
-        String nameFilePlayer;
+        Player player;
         
-        nameFilePlayer = "../player/" + player.getPseudo() + ".player";
-        file = new File(nameFilePlayer);
-        if ( !file.exists() )
-        {
-            try {
-                oos = new ObjectOutputStream(
-                            new BufferedOutputStream(
-                                new FileOutputStream(file)));
+        player = Player.askNew();
+        Player.add(player);
+        return player;
+    }
+    
+    /**
+     * Fonction qui demande à l'utilisateur qu'elle joueur supprimer
+     */
+    public static void deletePlayer()
+    {
+        int numberPlayer, choice;
+        
+        System.out.println(Player.listPlayer());
+        System.out.print("Choississez un joueur : ");
+        numberPlayer = Player.getNumberOfPlayers();
+        choice = Interface.getInt(1, numberPlayer);
+        Player.delete(choice);
+    }
 
-                oos.writeObject(player);
-                oos.close();
-            } catch (FileNotFoundException e) {}
-            catch (IOException e) {}
-            return true;
-        }
-        return false;
-    }
     
-    public boolean deletePlayer(Player player)
-    {
-        File file;
-        String nameFilePlayer;
-        
-        nameFilePlayer = "../player/" + player.getPseudo() + ".player";
-        file = new File(nameFilePlayer);
-        if ( file.exists() )
-        {
-            file.delete();
-            return true;
-        }
-        return false;
-    }
-    
+    /**
+     * @brief Affiche la liste des joueurs enregistrer.
+     * @return 
+     */
     public static String listPlayer()
     {
         String str;
@@ -179,79 +221,67 @@ public class Player implements Serializable {
         return str;
     }
     
-    public static Player loadPlayer(int number)
+    /**
+     * @brief Demande à l'utilisateur les données d'un joueur.
+     * @return 
+     */
+    public static Player askNew()
+    {
+        String colorStr;
+        char color;
+        String pseudo;
+        String mail;
+        int yearOfBirth;
+        Scanner sc;
+        
+        sc = new Scanner(System.in);
+        System.out.println("Nouveau joueur.");
+        System.out.print("Saississez un pseudonyme : ");
+        pseudo = sc.nextLine();
+        System.out.print("Saississez votre email : ");
+        mail = sc.nextLine();
+        System.out.print("Saississez votre année de naissance : ");
+        yearOfBirth = Interface.getInt(1950, 2017);
+        color = 'w';
+        do {
+            System.out.println("Quel couleur souhaitez vous ? (Blanc/Noir) [Blanc] : ");
+        } while ( !"Blanc".equals(colorStr = Interface.getString()) && !"Noir".equals(colorStr) );
+        
+        switch(colorStr)
+        {
+            case "blanc":
+                color = 'w';
+                break;
+            case "noir":
+                color = 'b';
+                break;
+        }
+        
+        return new Player(color, pseudo, mail, yearOfBirth);
+    }
+    
+    /**
+     * @brief Charge un joueur au lancement du jeu.
+     * @param game
+     * @return 
+     */
+    public static Game loadStartPlayer(Game game)
     {
         Player player;
-        ObjectInputStream ois;
-        int count;
-        File folder;
         
-        player = null;
-        count = 1;
-        folder = new File("../player/");
-        for ( File file : folder.listFiles())
-        {
-            try {
-                try {
-                    ois = new ObjectInputStream(
-                                new BufferedInputStream(
-                                    new FileInputStream(file)));
-                    try {
-                        if ( count == number )
-                        {
-                          player = (Player)ois.readObject();  
-                        }
-                        ++count;
-                        ois.close();
-                    } catch (ClassNotFoundException e) {}
-                } catch (FileNotFoundException e) {}
-                catch (IOException e) {}
-            } catch (NullPointerException e) {}
-        }
-        return player;
+        if ( Player.emptyPlayer() ) {
+            player = Player.addPlayer();
+            game.setPlayerCurrent(player);
+        } else
+            Player.changePlayer(game);
+        
+        return game;
     }
     
-    public Player[] getAllPlayers()
-    {
-        Player[] players;
-        int count;
-        ObjectInputStream ois;
-        File f;
-        
-       
-        players = new Player[this.getNumberOfPlayers()];
-        count = 0;
-        f = new File("player/");
-        for ( File file : f.listFiles())
-        {
-            if ( !"default.player".equals(file.getName()) )
-            {
-                try {
-                    try {
-                        ois = new ObjectInputStream(
-                                    new BufferedInputStream(
-                                        new FileInputStream(file)));
-                        try {
-                            players[count++] = (Player)ois.readObject();
-                        } catch (ClassNotFoundException e) {}
-                    } catch (FileNotFoundException e) {}
-                    catch (IOException e) {}
-                } catch (NullPointerException e) {}
-            }
-        }
-        return players;
-    }
-    
-    public Player getPlayer(int number)
-    {
-        Player[] players;
-        
-        players = this.getAllPlayers();
-        if ( number < players.length )
-            return players[number];
-        return null;
-    }
-    
+    /**
+     * @brief Compte le nombre de joueurs enregistrer.
+     * @return 
+     */
     public static int getNumberOfPlayers()
     {
         File folder;
@@ -260,9 +290,13 @@ public class Player implements Serializable {
         return folder.listFiles().length;
     }
     
+    /**
+     * @brief Indique si la liste des joueurs enregistrer est vide.
+     * @return 
+     */
     public static boolean emptyPlayer()
     {
-        return Player.getNumberOfPlayers() < 2;
+        return Player.getNumberOfPlayers() < 1;
     }
     
     public char getColor()
@@ -303,6 +337,107 @@ public class Player implements Serializable {
     public void setYearOfBirth(int yearOfBirth)
     {
         this.yearOfBirth = yearOfBirth;
+    }
+    
+    public void clone(Player player)
+    {
+        this.color = player.getColor();
+        this.pseudo = player.getPseudo();
+        this.mail = player.getMail();
+        this.yearOfBirth = player.getYearOfBirth();
+    }
+    
+    /**
+     * @brief Crée un fichier binaire de joueur
+     * @param player
+     * @return 
+     */
+    public static boolean add(Player player)
+    {
+        ObjectOutputStream oos;
+        File file;
+        String nameFilePlayer;
+        
+        nameFilePlayer = "../player/" + player.getPseudo() + ".player";
+        file = new File(nameFilePlayer);
+        if ( !file.exists() )
+        {
+            try {
+                oos = new ObjectOutputStream(
+                            new BufferedOutputStream(
+                                new FileOutputStream(file)));
+
+                oos.writeObject(player);
+                oos.close();
+            } catch (FileNotFoundException e) {}
+            catch (IOException e) {}
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * @brief Supprime un fichier bianire de joueur.
+     * @param number
+     * @return 
+     */
+    public static boolean delete(int number)
+    {
+        File folder;
+        int count;
+
+        count = 1;
+        folder = new File("../player/");
+        for ( File file : folder.listFiles())
+        {
+            try {
+                if (count == number)
+                {
+                    file.delete();
+                    return true;
+                }
+                ++count;
+            } catch (NullPointerException e) {}
+        }
+        return false;
+    }
+    
+    /**
+     * @brief Charge le n ieme joueurs de la liste.
+     * @param number
+     * @return 
+     */
+    public static Player load(int number)
+    {
+        Player player;
+        ObjectInputStream ois;
+        int count;
+        File folder;
+        
+        player = null;
+        count = 1;
+        folder = new File("../player/");
+        for ( File file : folder.listFiles())
+        {
+            try {
+                try {
+                    ois = new ObjectInputStream(
+                                new BufferedInputStream(
+                                    new FileInputStream(file)));
+                    try {
+                          if (count == number)
+                          {
+                              player = (Player)ois.readObject();
+                          }
+                        ++count;
+                        ois.close();
+                    } catch (ClassNotFoundException e) {}
+                } catch (FileNotFoundException e) {}
+                catch (IOException e) {}
+            } catch (NullPointerException e) {}
+        }
+        
+        return player;
     }
     
     public String toString()

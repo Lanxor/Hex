@@ -1,11 +1,18 @@
 package version2;
 
 public class Deck {
+    private static final int MIN_SIZE = 2;
+    private static final int MAX_SIZE = 20;
     private int size;
     
     public Deck(int size)
     {
         this.size = size;
+    }
+    
+    public static boolean sizeValid(int size)
+    {
+        return  MIN_SIZE <= size && size <= MAX_SIZE;
     }
     
     public int getSize(){

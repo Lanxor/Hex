@@ -4,7 +4,7 @@ public class Game {
     
     private Historic historic;
     private Deck deck;
-    private Player player1;
+    private Player playerCurrent;
     private Player player2;
     /**
      * @brief Définit si c'est au tour du joueur 1 de jouer ou non
@@ -15,27 +15,27 @@ public class Game {
     {
         this.historic = new Historic();
         this.deck = new Deck(11);
-        this.player1 = new Player('b');
+        this.playerCurrent = new Player('b');
         this.player2 = new Player('w');
         this.round = true;
     }
     
-    public Game(Player player1, Player player2)
+    public Game(Player playerCurrent, Player player2)
     {
         this.historic = new Historic();
         this.deck = new Deck(11);
-        this.player1 = player1;
+        this.playerCurrent = playerCurrent;
         this.player2 = player2;
         this.round = true;
         
         this.deck.createDeckC();
     }
     
-    public Game(int size, Player player1, Player player2)
+    public Game(int size, Player playerCurrent, Player player2)
     {
         this.historic = new Historic();
         this.deck = new Deck(size);
-        this.player1 = player1;
+        this.playerCurrent = playerCurrent;
         this.player2 = player2;
         this.round = true;
         
@@ -46,7 +46,7 @@ public class Game {
     {
         System.out.print("Saississez la taille du plateau : ");
         this.deck.setSize(Interface.getInt(1, 20));
-        this.player1.setColor('b');
+        this.playerCurrent.setColor('b');
         this.player2.setColor('w');
         this.deck.createDeckC();
     }
@@ -61,9 +61,9 @@ public class Game {
         return this.deck;
     }
     
-    public Player getPlayer1()
+    public Player getPlayerCurrent()
     {
-        return this.player1;
+        return this.playerCurrent;
     }
     
     public Player getPlayer2()
@@ -86,9 +86,9 @@ public class Game {
         this.deck = deck;
     }
     
-    public void setPlayer1(Player player)
+    public void setPlayerCurrent(Player player)
     {
-        this.player1 = player;
+        this.playerCurrent = player;
     }
     
     public void setPlayer2(Player player)
@@ -104,14 +104,14 @@ public class Game {
     public void play()
     {
         int round, choice;
-        boolean leaveGame;
+        boolean leave;
         
-        round = 0;
-        leaveGame = false;
+        round = 1;
+        leave = false;
         do
         {
             this.showDeck();
-            Menu.choice(round);
+            Game.menu(round);
             System.out.print("Choix : ");
             choice = Interface.getInt(1, 5);
             switch ( choice )
@@ -126,25 +126,25 @@ public class Game {
                     break;
                     
                 case 3: // Sauvegarder
-                    this.saveGame();
+                    this.save();
                     System.out.println("Fichier enregistré.");
                     break;
                     
                 case 4: // Sauvegarder et Quitter
-                    this.saveGame();
+                    this.save();
                     System.out.println("Fichier enregistrer.");
                     System.out.println("Vous quitter votre partie.");
-                    leaveGame = true;
+                    leave = true;
                     break;
                     
                 case 5: // Quitter sans sauvegarder
                     System.out.println("Vous Quitter votre partie sans enregistrer.");
-                    leaveGame = true;
+                    leave = true;
                     break;
                     
             }
             System.out.println();
-        } while ( !leaveGame );
+        } while ( !leave );
     }
     
     public void switchPlayer()
@@ -159,7 +159,7 @@ public class Game {
         Move move;
         
         if ( this.round )
-            playerCurrent = this.player1;
+            playerCurrent = this.playerCurrent;
         else
             playerCurrent = this.player2;
         
@@ -181,15 +181,14 @@ public class Game {
         this.deck.print();
     }
     
-    public void saveGame()
+    public void save()
     {
         Saveguard.addSaveguard(this);
     }
     
-    public static Game loadGame()
+    public static Game load(Game game)
     {
         int numberMaxSaveguards, choice;
-        Game game;
         
         System.out.println("Voici la liste des sauvegarde.");
         numberMaxSaveguards = Saveguard.listSaveguard();
@@ -197,8 +196,8 @@ public class Game {
         choice = Interface.getInt(1, numberMaxSaveguards);
         System.out.println("Nous allons charger la partie "
                 + choice + ".");
-        game = Saveguard.loadSaveguard(
-                        Saveguard.getFileSaveguard(choice));
+        Saveguard.loadSaveguard(game, choice);
+        System.out.println("Size : " + game.getDeck().getSize());
         
         return game;
     }
@@ -206,5 +205,37 @@ public class Game {
     public void deleteDeckC()
     {
         this.deck.deleteDeckC();
+    }
+    
+    public static void menu(int numberOfRound)
+    {
+        String[] menu;
+        
+        switch (numberOfRound) {
+            case 1:
+                menu = new String[4];
+                menu[0] = "Jouer un coups";
+                menu[1] = "Sauvegarder la partie";
+                menu[2] = "Sauvegarder et quitter";
+                menu[3] = "Sauvegarder sans quitter";
+                break;
+            case 2:
+                menu = new String[5];
+                menu[0] = "Jouer un coups";
+                menu[1] = "Echanger les couleur";
+                menu[2] = "Sauvegarder la partie";
+                menu[3] = "Sauvegarder et quitter";
+                menu[4] = "Sauvegarder sans quitter";
+                break;
+            default:
+                menu = new String[5];
+                menu[0] = "Jouer un coups";
+                menu[1] = "Revenir au coup précédent";
+                menu[2] = "Sauvegarder la partie";
+                menu[3] = "Sauvegarder et quitter";
+                menu[4] = "Sauvegarder sans quitter";
+                break;
+        }
+        Interface.printMenu(menu);
     }
 }
