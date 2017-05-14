@@ -19,17 +19,11 @@ public class Interface {
             switch ( Interface.menu() )
             {
                 case 1: // On crée une nouvelle partie
-                    System.out.println("Nous crée le jeu.");
-                    game.initialize();
-                    game.play();
-                    game.deleteDeckC();
+                    game.index();
                     break;
                     
                 case 2: // Charger une partie
-                    Game.load(game);
-                    game.play();
-                    game.deleteDeckC();
-                    System.out.println("On charger une partie.");
+                    game.indexLoad();
                     break;
                     
                 case 3: // Montrer les statistique de jeu

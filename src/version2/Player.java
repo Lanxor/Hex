@@ -95,7 +95,7 @@ public class Player implements Serializable {
                     System.out.println("\nVous venez d'ajouter un joueur.");
                     break;
                 case 5: // Supprimer un joueur
-                    Player.deletePlayer();
+                    Player.deletePlayer(game);
                     System.out.println("\nVous venez de supprimer un joueur.");
                     break;
                 case 6: // Retour
@@ -174,15 +174,23 @@ public class Player implements Serializable {
     /**
      * Fonction qui demande à l'utilisateur qu'elle joueur supprimer
      */
-    public static void deletePlayer()
+    public static void deletePlayer(Game game)
     {
+        Player player;
         int numberPlayer, choice;
         
-        System.out.println(Player.listPlayer());
-        System.out.print("Choississez un joueur : ");
-        numberPlayer = Player.getNumberOfPlayers();
-        choice = Interface.getInt(1, numberPlayer);
+        do {
+            System.out.println(Player.listPlayer());
+            System.out.println("Tapez 0 pour quitter.");
+            System.out.print("Choississez un joueur : ");
+            numberPlayer = Player.getNumberOfPlayers();
+            choice = Interface.getInt(1, numberPlayer);
+            player = Player.load(choice);
+            if ( game.getPlayerCurrent().equals(player) )
+                System.out.println("Vous ne pouvez vous selectionner.");
+        } while ( game.getPlayerCurrent().equals(player) );
         Player.delete(choice);
+        System.out.println("Joueur supprimé.");
     }
 
     
@@ -244,7 +252,7 @@ public class Player implements Serializable {
         yearOfBirth = Interface.getInt(1950, 2017);
         color = 'w';
         do {
-            System.out.println("Quel couleur souhaitez vous ? (Blanc/Noir) [Blanc] : ");
+            System.out.print("Quel couleur souhaitez vous ? (Blanc/Noir) : ");
         } while ( !"Blanc".equals(colorStr = Interface.getString()) && !"Noir".equals(colorStr) );
         
         switch(colorStr)
@@ -440,10 +448,20 @@ public class Player implements Serializable {
         return player;
     }
     
+    /**
+     *
+     * @return
+     */
+    @Override
     public String toString()
     {
         String str;
         str = this.color + " " + this.pseudo;
         return str;
+    }
+    
+    public boolean equals(Player player)
+    {
+        return (this.pseudo == null ? player.getPseudo() == null : this.pseudo.equals(player.getPseudo()));
     }
 }

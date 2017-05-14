@@ -15,15 +15,6 @@ public class Deck {
         return  MIN_SIZE <= size && size <= MAX_SIZE;
     }
     
-    public int getSize(){
-        return this.size;
-    }
-    
-    public void setSize(int size)
-    {
-        this.size = size;
-    }
-    
     public void createDeckC()
     {
         InterfaceJavaC.createDeck(this.getSize());
@@ -34,10 +25,10 @@ public class Deck {
         InterfaceJavaC.deleteDeck();
     }
     
-    public int askSize()
+    public static int askSize()
     {
-        System.out.println("De quelle taille voulez-vous votre tablier ? ");
-        return Interface.getInt(5, 30);
+        System.out.print("De quelle taille voulez-vous votre tablier ? ");
+        return Interface.getInt(MIN_SIZE, MAX_SIZE);
     }
     
     public void print()
@@ -45,9 +36,28 @@ public class Deck {
         System.out.println(this.toString());
     }
     
+    public static int getMinSize()
+    {
+        return MIN_SIZE;
+    }
+    
+    public static int getMaxSize()
+    {
+        return MAX_SIZE;
+    }
+    
+    public int getSize(){
+        return this.size;
+    }
+    
+    public void setSize(int size)
+    {
+        this.size = size;
+    }
+    
     public String toString()
     {
-        String str = "";
+        String str = "\n";
         char color, symbol;
         for ( int abscisse = 0; abscisse < this.size; ++abscisse )
         {

@@ -56,7 +56,7 @@ public class Saveguard {
      */
     
     
-    public static void addSaveguard(Game game)
+    public static boolean addSaveguard(Game game)
     {
         GregorianCalendar date;
         String str, nameFile;
@@ -76,19 +76,19 @@ public class Saveguard {
             fw = new FileWriter(f);
             str = Saveguard.getFormatSaveguard(game);
             fw.write(str);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+        }
+        catch (FileNotFoundException e) { return false; }
+        catch (IOException e) { return false; }
+        finally {
             try {
                 if ( fw != null ) {
                     fw.close();
+                    return true;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+            catch (IOException e) { return false; }
         }
+        return false;
     }
     
     /**
@@ -121,7 +121,8 @@ public class Saveguard {
                     file = fileCurrent;
                 }
                 ++count;
-            } catch (NullPointerException e) {}
+            }
+            catch (NullPointerException e) { return false; }
         }
         
         // On détermine la taille du plateau
