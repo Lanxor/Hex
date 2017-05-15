@@ -49,6 +49,14 @@ char group_color(Group initialGroup)
     return (TRANSPARENT);
 }
 
+Group group_fusion(Group firstGroup, Group secondGroup)
+{
+  for (int cpt = 0; cpt < secondGroup->number_vertice; ++cpt)
+    firstGroup = group_insert(firstGroup, secondGroup->list_vertice[cpt]);
+  group_delete(secondGroup);
+  return (firstGroup);
+}
+
 /*
  * A faire :
  * Créer une fonction fusion

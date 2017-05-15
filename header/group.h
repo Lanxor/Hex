@@ -52,5 +52,7 @@ void group_print(Group initialGroup);
  */
 char group_color(Group initialGroup);
 
+Group group_fusion(Group firstGroup, Group secondGroup);
+
 #endif
 
