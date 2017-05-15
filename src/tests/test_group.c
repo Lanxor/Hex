@@ -30,12 +30,33 @@ void test3_insert()
     group_print(initialGroup);
     initialGroup = group_insert(initialGroup, vertice);
     group_print(initialGroup);
+    
+    vertice_delete(vertice);
+    group_delete(initialGroup);
 }
 
-int main() {
+void test4_color()
+{
+    Group initialGroup;
+    Vertice vertice;
+    
+    vertice = vertice_create(BLACK, 0, 0);
+    initialGroup = group_create();
+    printf("%c, ", group_color(initialGroup));
+    initialGroup = group_insert(initialGroup, vertice);
+    printf("%c\n", group_color(initialGroup));
+    
+    vertice_delete(vertice);
+    group_delete(initialGroup);
+}
+
+int main() 
+{
+    printf("\nTest Simple - TEST Group\n");
     test1_create();
     test2_delete();
     test3_insert();
+    test4_color();
 
     return (EXIT_SUCCESS);
 }

@@ -40,7 +40,17 @@ Group group_insert(Group initialGroup, Vertice verticeToInsert);
  */
 void group_delete(Group initialGroup);
 
+/**
+ * @brief Affiche les différentes Vertices du groupe
+ * @param initialGroup : groupe à inspecter
+ */
 void group_print(Group initialGroup);
+
+/**
+ * @brief Affiche la couleur du groupe
+ * @param initialGroup : groupe à inspecter
+ */
+char group_color(Group initialGroup);
 
 #endif
 

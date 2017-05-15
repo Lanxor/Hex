@@ -41,6 +41,14 @@ void group_print(Group initialGroup)
   printf("|\n");
 }
 
+char group_color(Group initialGroup)
+{
+  if (initialGroup != NULL && initialGroup->number_vertice > 0)
+    return (vertice_get_color(initialGroup->list_vertice[0]));
+  else
+    return (TRANSPARENT);
+}
+
 /*
  * A faire :
  * Créer une fonction fusion

@@ -62,7 +62,8 @@ void test5_getters()
     printf("\n");
 }
 
-int main() {
+int main() 
+{
     printf("\nTest Simple - TEST VERTICE\n");
     test1_create();
     test2_delete();
