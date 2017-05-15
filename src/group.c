@@ -59,6 +59,5 @@ Group group_fusion(Group firstGroup, Group secondGroup)
 
 /*
  * A faire :
- * Créer une fonction fusion
  * Créer une fonction de recherche/vérification de gagnant
  */

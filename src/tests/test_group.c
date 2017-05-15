@@ -77,10 +77,11 @@ void test5_fusion()
   printf("After Fusion :\n");
   group_print(initialGroup);
 
+  group_delete(initialGroup);
   vertice_delete(first);
   vertice_delete(second);
   vertice_delete(third);
-  group_delete(initialGroup);
+  
 }
 
 int main() 
