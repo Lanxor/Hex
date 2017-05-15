@@ -52,7 +52,7 @@ void test4_color()
 
 int main() 
 {
-    printf("\nTest Simple - TEST Group\n");
+    printf("\nTest Simple - TEST GROUP\n");
     test1_create();
     test2_delete();
     test3_insert();
