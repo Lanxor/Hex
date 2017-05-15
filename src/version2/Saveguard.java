@@ -15,22 +15,24 @@ import java.util.GregorianCalendar;
 
 public class Saveguard {
     
-    public static int listSaveguard()
+    public static String listSaveguard()
     {
+        File folder;
+        String str;
         int numberOfSaveguards;
-        File f;
         
+        str = "";
         numberOfSaveguards = 1;
-        f = new File("../save/");
-        for ( File file : f.listFiles())
+        folder = new File("../save/");
+        for ( File file : folder.listFiles())
         {
             try {
-            System.out.println(numberOfSaveguards++ + " : " + file.getName());
+                str +=  numberOfSaveguards++ + " : " + file.getName() + "\n";
             } catch (NullPointerException e) {
                 System.out.println("NULL");
             }
         }
-        return numberOfSaveguards;
+        return str;
     }
     
     public static String getFormatSaveguard(Game game)
@@ -109,6 +111,7 @@ public class Saveguard {
         game.getPlayer2().setColor('w');
         game.getHistoric().clean();
         game.getDeck().setSize(size);
+        game.setNumberOfRound(1);
         
         /** Est une fonction **/
         count = 1;
@@ -126,17 +129,17 @@ public class Saveguard {
         }
         
         // On détermine la taille du plateau
-        size = Saveguard.loadSizeFile(file);
-        System.out.println("Taille : " + game.getDeck().getSize());
-        if ( size == -1 )
+        
+        if ( !Saveguard.loadSizeFile(file, game) )
             return false;
-        game.getDeck().setSize(size);
-        // On détermine les deux joueurs pour les cloner
-        //player1 = Saveguard.loadPlayer1(file);
-        //player2 = Saveguard.loadPlayer2(file);
-        //game.getPlayer1().clone(player1);
-        //game.getPlayer2().clone(player2);
-        // On joue la game pour chaque move
+        Interface.showMessage("SizeGood\n");
+        game.getDeck().createDeckC();
+        if ( !Saveguard.loadPlayersSaveguard(file, game) )
+            return false;
+        Interface.showMessage("PlayerGood\n");
+        if ( !Saveguard.loadMovesSaveguard(file, game) )
+            return false;
+        Interface.showMessage("MovesGood\n");
         
         System.out.println("Dimmension : " + game.getDeck().getSize());
         System.out.println("Player1 : " + game.getPlayerCurrent().toString());
@@ -145,7 +148,7 @@ public class Saveguard {
         return true;
     }
     
-    private static int loadSizeFile(File file)
+    private static boolean loadSizeFile(File file, Game game)
     {
         int size;
         int caracter;
@@ -169,11 +172,11 @@ public class Saveguard {
             }
             System.out.println((char)caracter);
             str = "";
-            while ( (caracter = fr.read()) != -1 )
+            str += (char)caracter;
+            while ( (caracter = fr.read()) != '\n' )
             {
                 str += (char)caracter;
             }
-            System.out.println("Chaine : " + str);
             
         } catch ( FileNotFoundException e ) {}
         catch ( IOException e ) {}
@@ -184,102 +187,118 @@ public class Saveguard {
             } catch ( IOException e ) {}
         }
         
-        if (Deck.sizeValid(size))
-            return size;
-        return -1;
-    }
-    
-    private static Game initializeLoadSaveguard(File fileSaveguard)
-    {
-        Player player1, player2;
-        int dim, caracter;
-        FileReader fr;
-        String str;
-        
-        fr = null;
-        dim = 0;
-        player1 = null;
-        player2 = null;
-        
-        try {
-            fr = new FileReader(fileSaveguard);
-            str = "";
-            caracter = 0;
-            while ((caracter = fr.read()) != -1)
-            {
-                str += (char)caracter;
-                switch (str)
-                {
-                    case "\\hex\n":
-                        str = "";
-                        break;
-                    case "\\player1 ":
-                        str = "";
-                        player1 = new Player((char)fr.read());
-                        fr.read();
-                        while ( (char)caracter != '\n' )
-                        {
-                            caracter = fr.read();
-                            System.out.println((int)caracter);
-                            str += (char)caracter;
-                        }
-                        player1.setPseudo(str);
-                        str = "";
-                        break;
-                    case "\\player2 ":
-                        str = "";
-                        player2 = new Player((char)fr.read());
-                        fr.read();
-                        while ( (char)caracter != '\n' )
-                        {
-                            caracter = fr.read();
-                            System.out.println((int)caracter);
-                            str += (char)caracter;
-                        }
-                        player2.setPseudo(str);
-                        str = "";
-                        break;
-                    case "\\dim ":
-                        str = "";
-                        while ( (char)caracter != '\n' )
-                        {
-                            caracter = fr.read();
-                            System.out.println((int)caracter);
-                            if ( (int)caracter >= 48 && (int)caracter <= 57 )
-                                dim += dim*10 + ((int)caracter-48);
-                        }
-                        str = "";
-                        break;
-                    case "\\game":
-                        break;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if ( fr != null ) {
-                    fr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if ( Deck.sizeValid(size = Integer.parseInt(str)) )
+        {
+            game.getDeck().setSize(size);
+            return true;
         }
-        return new Game(dim, player1, player2);
+        return false;
     }
     
-    private static void loadMove(File fileSaveguard, Game game)
+    private static boolean loadPlayersSaveguard(File fileSaveguard, Game game)
     {
         int caracter;
+        char colorPlayer1, colorPlayer2;
+        Player player1, player2;
+        String str, namePlayer1, namePlayer2;
+        FileReader fr;
+        
+        str = null;
+        fr = null;
+        namePlayer1 = "";
+        namePlayer2 = "";
+        player1 = null;
+        player2 = null;
+        colorPlayer1 = 'w';
+        colorPlayer2 = 'w';
+        try {
+            fr = new FileReader(fileSaveguard);
+            str = "";
+            caracter = 0;
+            while ( (caracter = fr.read()) != -1 && !"\\board".equals(str))
+            {
+                str += (char)caracter;
+                if ( (char)caracter == '\n' )
+                    str = "";
+                
+                if ( "\\player1 ".equals(str) )
+                {
+                    str = "";
+                    colorPlayer1 = (char)fr.read();
+                    fr.read();
+                    while ( (caracter = fr.read()) != '\n' )
+                    {
+                        str += (char)caracter;
+                    }
+                    namePlayer1 = str;
+                    str = "";
+                }
+                
+                if ( "\\player2 ".equals(str) )
+                {
+                    str = "";
+                    colorPlayer2 = (char)fr.read();
+                    fr.read();
+                    while ( (caracter = fr.read()) != '\n' )
+                    {
+                        str += (char)caracter;
+                    }
+                    namePlayer2 = str;
+                    str = "";
+                }
+            }
+            
+        } catch ( FileNotFoundException e ) {}
+        catch ( IOException e ) {}
+        finally {
+            try {
+                if ( fr != null )
+                    fr.close();
+            } catch ( IOException e ) {}
+        }
+        
+        player1 = Player.load(namePlayer1);
+        
+        if ( "Ordinateur".equals(namePlayer2) )
+        {
+            player2 = Player.getPlayerComputer();
+        }
+        else
+        {
+            player2 = Player.load(namePlayer2);
+        }
+        
+        if ( player1.getColor() == player2.getColor() )
+        {
+            player2.setColor(Player.oppositeColor(player1.getColor()));
+        }
+        
+        game.getPlayerCurrent().clone(player1);
+        game.getPlayer2().clone(player2);
+        
+        
+        Interface.showMessage(player1.toString() + "\n");
+        Interface.showMessage(player2.toString() + "\n");
+        
+        return true;
+    }
+    
+    private static boolean loadMovesSaveguard(File fileSaveguard, Game game)
+    {
+        Coordinates coordinates;
+        Move move;
+        Player player;
+        int caracter, abscisse, ordonnee;
+        char color;
+        boolean isValid;
         FileReader fr;
         String str;
-        Move move;
         
         fr = null;
-        move = null;
-        
+        str = "";
+        abscisse = 0;
+        ordonnee = 0;
+        isValid = true;
         try {
             fr = new FileReader(fileSaveguard);
             str = "";
@@ -287,29 +306,83 @@ public class Saveguard {
             while ((caracter = fr.read()) != -1)
             {
                 str += (char)caracter;
-                switch (str)
+                if ( (char)caracter == '\n' )
+                    str = "";
+                
+                if ( "\\play ".equals(str) )
                 {
-                    case "\\play ":
+                    color = (char)fr.read(); fr.read();
+                    
+                    str = "";
+                    while ( (caracter = fr.read()) != ' ' )
+                    {
+                        str += (char)caracter;
+                    }
+                    abscisse = Integer.parseInt(str);
+                    Interface.showMessage("Abscisse : " + str + "\n");
+                    
+                    str = "";
+                    while ( (caracter = fr.read()) != '\n' )
+                    {
+                        str += (char)caracter;
+                    }
+                    ordonnee = Integer.parseInt(str);
+                    Interface.showMessage("Ordonnee : " + str + "\n");
+                    coordinates = new Coordinates(abscisse, ordonnee);
+                    
+                    if ( game.getPlayerCurrent().getColor() == color )
+                    {
+                        move = new Move(game.getPlayerCurrent(), coordinates);
+                    }
+                    else
+                    {
+                        move = new Move(game.getPlayer2(), coordinates);
+                    }
+                    Interface.showMessage(move.toString() + "\n");
+                    if ( isValid && !game.playMove(move) )
+                        isValid = false;
+                    else
+                    {
+                        game.setNumberOfRound(game.getNumberOfRound() + 1);
+                        System.out.println("Nombre : " + game.getNumberOfRound());
+                        game.switchPlayer();
                         str = "";
-                        while ( (char)caracter != '\n' )
-                        {
-                        }
-                        str = "";
-                        break;
+                    }
                 }
+                
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+        } catch (FileNotFoundException e) {}
+        catch (IOException e) {}
+        finally {
             try {
-                if ( fr != null ) {
+                if ( fr != null )
                     fr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            } catch (IOException e) {}
         }
+        
+        
+        return isValid;
     }
+
+    /**
+     * @brief Compte le nombre de sauvegarde enregistrer.
+     * @return 
+     */
+    public static int getNumberOfSaveguard()
+    {
+        File folder;
+        
+        folder = new File("../save/");
+        return folder.listFiles().length;
+    }
+    
+    /**
+     * @brief Indique si la liste des sauvegardes enregistrer est vide.
+     * @return 
+     */
+    public static boolean emptySaveguard()
+    {
+        return Saveguard.getNumberOfSaveguard() < 1;
+    }
+    
 }

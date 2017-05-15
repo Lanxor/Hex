@@ -9,7 +9,8 @@ public class Game {
     /**
      * @brief Définit si c'est au tour du joueur 1 de jouer ou non
      */
-    private boolean round;
+    private boolean whoPlay;
+    private int numberOfRound;
     
     public Game()
     {
@@ -17,7 +18,8 @@ public class Game {
         this.deck = new Deck(11);
         this.playerCurrent = new Player('b');
         this.player2 = new Player('w');
-        this.round = true;
+        this.whoPlay = true;
+        this.numberOfRound = 0;
     }
     
     public Game(Player playerCurrent, Player player2)
@@ -26,7 +28,8 @@ public class Game {
         this.deck = new Deck(11);
         this.playerCurrent = playerCurrent;
         this.player2 = player2;
-        this.round = true;
+        this.whoPlay = true;
+        this.numberOfRound = 0;
         
         this.deck.createDeckC();
     }
@@ -37,7 +40,8 @@ public class Game {
         this.deck = new Deck(size);
         this.playerCurrent = playerCurrent;
         this.player2 = player2;
-        this.round = true;
+        this.whoPlay = true;
+        this.numberOfRound = 0;
         
         this.deck.createDeckC();
     }
@@ -124,7 +128,6 @@ public class Game {
     {
         Player player;
         int numberPlayers, choice;
-        char color;
         
         choice = Game.menuOpponent();
         
@@ -152,9 +155,7 @@ public class Game {
                     break;
             // Jouer contre l'ordinateur
                 case 3:
-                    this.player2.setPseudo("Ordinateur");
-                    this.player2.setMail("Thomas.olivier3@yahoo.fr");
-                    this.player2.setYearOfBirth(2017);
+                    this.player2.clone(Player.getPlayerComputer());
                     break;
             }
             if ( this.playerCurrent.getColor() == 'w' )
@@ -162,46 +163,65 @@ public class Game {
             else
                 this.player2.setColor('w');
             
+            this.numberOfRound = 1;
             this.deck.setSize(Deck.askSize());
+            this.deck.createDeckC();
             this.play();
+            this.deck.deleteDeckC();
         }
     }
     
     public void indexLoad()
     {
+        Player oldPlayer;
         int numberMaxSaveguards, choice;
         
+        oldPlayer = this.playerCurrent;
         Interface.showMessage("Voici la liste des sauvegarde.\n");
-        numberMaxSaveguards = Saveguard.listSaveguard();
+        Interface.showMessage(Saveguard.listSaveguard());
+        numberMaxSaveguards = Saveguard.getNumberOfSaveguard();
+        Interface.showMessage("0 : Retour\n");
         Interface.showMessage("Choix : ");
-        choice = Interface.getInt(1, numberMaxSaveguards);
-        Interface.showMessage("Nous allons charger la partie "
+        choice = Interface.getInt(0, numberMaxSaveguards);
+        if ( choice != 0 )
+        {
+            Interface.showMessage("Nous allons charger la partie "
                 + choice + ".\n");
-        Saveguard.loadSaveguard(this, choice);
-        System.out.println("Size : " + this.getDeck().getSize());
+            if ( Saveguard.loadSaveguard(this, choice) )
+            {
+                this.play();
+                this.deck.deleteDeckC();
+            }
+            else
+            {
+                Interface.showMessage("Fichier incorrect.\n");
+            }
+        }
+        this.playerCurrent = oldPlayer;
     }
     
     public void play()
     {
-        int round;
-        boolean leave;
-        
-        this.deck.createDeckC();
-        round = 1;
+        Move move;
+        boolean leave, moveValid;
+
         leave = false;
         while ( !leave ) {
             this.showWhoPlay();
             this.showDeck();
-            switch ( Game.menu(round) )
+            switch ( Game.menu(this.numberOfRound) )
             {
                 case 1: // On joue
-                    while ( !this.playMove() )
+                    do
                     {
-                        Interface.showMessage("Recommencez...\n");
-                    }
+                        move = Move.askMove(this);
+                        moveValid = this.playMove(move);
+                        if ( !moveValid )
+                            Interface.showMessage("Recommencez...\n");
+                    } while ( !moveValid );
                     Interface.showMessage("Au joueur suivant de jouer...\n");
                     this.switchPlayer();
-                    ++round;
+                    ++this.numberOfRound;
                     break;
                     
                 case 3: // Sauvegarder
@@ -228,7 +248,6 @@ public class Game {
                     
             }
         }
-        this.deck.deleteDeckC();
     }
     
     public void changeColor()
@@ -264,9 +283,14 @@ public class Game {
         return this.player2;
     }
     
-    public boolean getRound()
+    public boolean getwhoPlay()
     {
-        return this.round;
+        return this.whoPlay;
+    }
+    
+    public int getNumberOfRound()
+    {
+        return this.numberOfRound;
     }
     
     public void setHistoric(Historic historic)
@@ -289,37 +313,19 @@ public class Game {
         this.player2 = player;
     }
     
-    public void setRound(boolean round)
+    public void setwhoPlay(boolean whoPlay)
     {
-        this.round = round;
+        this.whoPlay = whoPlay;
+    }
+    
+    public void setNumberOfRound(int numberOfRound)
+    {
+        this.numberOfRound = numberOfRound;
     }
     
     public void switchPlayer()
     {
-        this.round = !this.round;
-    }
-    
-    public boolean playMove()
-    {
-        Player playerCurrent;
-        Coordinates coordinates;
-        Move move;
-        
-        if ( this.round )
-            playerCurrent = this.playerCurrent;
-        else
-            playerCurrent = this.player2;
-        
-        
-        coordinates = Coordinates.askCoordinates(1, this.deck.getSize());
-        move = new Move(playerCurrent, coordinates);
-        
-        if ( move.playMove() )
-        {
-            this.historic.addMove(move);
-            return true;
-        }
-        return false;
+        this.whoPlay = !this.whoPlay;
     }
     
     public void showDeck()
@@ -328,11 +334,21 @@ public class Game {
         this.deck.print();
     }
     
+    public boolean playMove(Move move)
+    {
+        if ( move.play() )
+        {
+            this.historic.addMove(move);
+            return true;
+        }
+        return false;
+    }
+    
     public void showWhoPlay()
     {
         String str, name;
         
-        if ( this.round )
+        if ( this.whoPlay )
             name = this.playerCurrent.getPseudo();
         else
             name = this.player2.getPseudo();

@@ -11,6 +11,22 @@ public class Move {
         this.coordinates = coordinates;
     }
     
+    public static Move askMove(Game game)
+    {
+        Player playerCurrent;
+        Coordinates coordinates;
+        Move move;
+        
+        if ( game.getwhoPlay() )
+            playerCurrent = game.getPlayerCurrent();
+        else
+            playerCurrent = game.getPlayer2();
+        coordinates = Coordinates.askCoordinates(1, game.getDeck().getSize());
+        move = new Move(playerCurrent, coordinates);
+        
+        return move;
+    }
+    
     public Player getPlayer()
     {
         return this.player;
@@ -31,7 +47,7 @@ public class Move {
         this.coordinates = coordinates;
     }
     
-    public boolean playMove()
+    public boolean play()
     {
         if ( this.isValid() )
         {

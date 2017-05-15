@@ -46,6 +46,11 @@ public class Player implements Serializable {
         this.yearOfBirth = yearOfBirth;
     }
     
+    public static Player getPlayerComputer()
+    {
+        return new Player('w', "Ordinateur", "Thomas.olivier3@yahoo.fr", 2017);
+    }
+    
     /**
      * @brief Affiche le menu
      * @return 
@@ -353,6 +358,14 @@ public class Player implements Serializable {
         this.yearOfBirth = player.getYearOfBirth();
     }
     
+    public static char oppositeColor(char color)
+    {
+        if ( color == 'w' )
+            return 'b';
+        else
+            return 'w';
+    }
+    
     /**
      * @brief Crée un fichier binaire de joueur
      * @param player
@@ -406,6 +419,36 @@ public class Player implements Serializable {
             } catch (NullPointerException e) {}
         }
         return false;
+    }
+    
+    /**
+     * @brief Charge le n ieme joueurs de la liste.
+     * @param namePlayer
+     * @return 
+     */
+    public static Player load(String namePlayer)
+    {
+        Player player;
+        File file;
+        ObjectInputStream ois;
+        
+        player = null;
+        namePlayer = "../player/" + namePlayer + ".player";
+        Interface.showMessage(namePlayer + "\n");
+        file = new File(namePlayer);
+        try {
+            ois = new ObjectInputStream(
+                        new BufferedInputStream(
+                            new FileInputStream(file)));
+            try {
+                player = (Player)ois.readObject();
+            } catch (ClassNotFoundException e) {}
+            ois.close();
+        } catch (FileNotFoundException e) {}
+        catch (IOException e) {}
+        
+        
+        return player;
     }
     
     /**

@@ -2,7 +2,7 @@ package version2;
 
 public class Deck {
     private static final int MIN_SIZE = 2;
-    private static final int MAX_SIZE = 20;
+    private static final int MAX_SIZE = 19;
     private int size;
     
     public Deck(int size)
