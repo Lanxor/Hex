@@ -1,6 +1,6 @@
 /**
  * @file edge.h
- * @autho PATA Gwendal - OLIVIER Thomas
+ * @autho PATAT Gwendal - OLIVIER Thomas
  * @date Avril 2017
  * @brief Fichier de prototype des arêtes.
  */

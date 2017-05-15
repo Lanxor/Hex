@@ -1,11 +1,10 @@
-
 #include "../header/vertice.h"
 
-typedef struct s_vertice
+typedef struct    s_vertice
 {
     char          color;
-    int  abscisse;
-    int  ordonnee;
+    int           abscisse;
+    int           ordonnee;
 } t_vertice;
 
 Vertice vertice_create(char color, int abscisse,

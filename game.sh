@@ -1,6 +1,6 @@
 #! /bin/bash
 
-pathJni="/usr/lib/jvm/java-8-openjdk-amd64"
+pathJni="/usr/lib/jvm/java-8-openjdk"
 optionC="-fPIC"
 namePakage="version2"
 nameFileLib="libInterfaceC.so"
@@ -28,6 +28,9 @@ compile_c()
   echo -e "\tFile deck.c"
   compile_c_file "src/deck.c"
 
+  echo -e "\tFile group.c"
+  compile_c_file "src/group.c"
+  
   echo -e "\tMove it to obj/"
   mv *.o obj/
 }

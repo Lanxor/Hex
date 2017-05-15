@@ -1,4 +1,3 @@
-
 #include "../header/edge.h"
 
 typedef struct s_edge

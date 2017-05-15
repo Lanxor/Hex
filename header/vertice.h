@@ -1,6 +1,6 @@
 /**
  * @file vertice.h
- * @autho PATA Gwendal - OLIVIER Thomas
+ * @autho PATAT Gwendal - OLIVIER Thomas
  * @date Mai 2017
  * @brief Fichier de prototype de la gestion des sommets.
  */
