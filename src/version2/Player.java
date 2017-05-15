@@ -56,14 +56,14 @@ public class Player implements Serializable {
         int choice;
         
         menu = new String[6];
-        menu[0] = "Profile";
-        menu[1] = "Changer de couleur du personnage";
-        menu[2] = "Changer de personnage";
-        menu[3] = "Ajouter un personnage";
-        menu[4] = "Supprimer un personnage";
-        menu[5] = "Retour";
+        menu[0] = "Profile\n";
+        menu[1] = "Changer de couleur du personnage\n";
+        menu[2] = "Changer de personnage\n";
+        menu[3] = "Ajouter un personnage\n";
+        menu[4] = "Supprimer un personnage\n";
+        menu[5] = "Retour\n";
         Interface.printMenu(menu);
-        System.out.print("Choix : ");
+        Interface.showMessage("Choix : ");
         choice = Interface.getInt(1, menu.length);
         
         return choice;
@@ -79,24 +79,24 @@ public class Player implements Serializable {
             switch ( Player.menuPlayer() )
             {
                 case 1: // Profile
-                    System.out.println("\nVoici votre profil : ");
+                    Interface.showMessage("\nVoici votre profil : \n");
                     Player.showProfilPlayer(game);
                     break;
                 case 2: // Changer de couleur de joueur
                     Player.changeColorPlayer(game);
-                    System.out.println("\nVous venez de changer de couleur.");
+                    Interface.showMessage("\nVous venez de changer de couleur.\n");
                     break;
                 case 3: // Changer de joueur
                     Player.changePlayer(game);
-                    System.out.println("\nVous venez de changer de joueur.");
+                    Interface.showMessage("\nVous venez de changer de joueur.\n");
                     break;
                 case 4: // Ajouter un joueur
                     Player.addPlayer();
-                    System.out.println("\nVous venez d'ajouter un joueur.");
+                    Interface.showMessage("\nVous venez d'ajouter un joueur.\n");
                     break;
                 case 5: // Supprimer un joueur
                     Player.deletePlayer(game);
-                    System.out.println("\nVous venez de supprimer un joueur.");
+                    Interface.showMessage("\nVous venez de supprimer un joueur.\n");
                     break;
                 case 6: // Retour
                     leave = true;
@@ -126,9 +126,9 @@ public class Player implements Serializable {
                 + "Adresse mail : " + player.getMail() + "\n"
                 + "Année de naissance : " + player.getYearOfBirth() + "\n";
         str += "-----------------------------\n";
-        str += "-----------------------------";
+        str += "-----------------------------\n";
         
-        System.out.println(str);
+        Interface.showMessage(str);
     }
     
     public static void changeColorPlayer(Game game)
@@ -141,7 +141,6 @@ public class Player implements Serializable {
             color = 'w';
         else if ( color == 'w' )
             color = 'b';
-        
         game.getPlayerCurrent().setColor(color);
     }
     
@@ -154,8 +153,8 @@ public class Player implements Serializable {
         Player player;
         int numberPlayer, choice;
         
-        System.out.println(Player.listPlayer());
-        System.out.print("Choississez un joueur : ");
+        Interface.showMessage(Player.listPlayer());
+        Interface.showMessage("Choississez un joueur : ");
         numberPlayer = Player.getNumberOfPlayers();
         choice = Interface.getInt(1, numberPlayer);
         player = Player.load(choice);
@@ -180,17 +179,17 @@ public class Player implements Serializable {
         int numberPlayer, choice;
         
         do {
-            System.out.println(Player.listPlayer());
-            System.out.println("Tapez 0 pour quitter.");
-            System.out.print("Choississez un joueur : ");
+            Interface.showMessage(Player.listPlayer());
+            Interface.showMessage("Tapez 0 pour quitter.\n");
+            Interface.showMessage("Choississez un joueur : ");
             numberPlayer = Player.getNumberOfPlayers();
             choice = Interface.getInt(1, numberPlayer);
             player = Player.load(choice);
             if ( game.getPlayerCurrent().equals(player) )
-                System.out.println("Vous ne pouvez vous selectionner.");
+                Interface.showMessage("Vous ne pouvez vous selectionner.\n");
         } while ( game.getPlayerCurrent().equals(player) );
         Player.delete(choice);
-        System.out.println("Joueur supprimé.");
+        Interface.showMessage("Joueur supprimé.\n");
     }
 
     
@@ -240,27 +239,26 @@ public class Player implements Serializable {
         String pseudo;
         String mail;
         int yearOfBirth;
-        Scanner sc;
         
-        sc = new Scanner(System.in);
-        System.out.println("Nouveau joueur.");
-        System.out.print("Saississez un pseudonyme : ");
-        pseudo = sc.nextLine();
-        System.out.print("Saississez votre email : ");
-        mail = sc.nextLine();
-        System.out.print("Saississez votre année de naissance : ");
+        Interface.showMessage("Nouveau joueur.\n");
+        Interface.showMessage("Saississez un pseudonyme : ");
+        pseudo = Interface.getString();
+        Interface.showMessage("Saississez votre email : ");
+        mail = Interface.getString();
+        Interface.showMessage("Saississez votre année de naissance : ");
         yearOfBirth = Interface.getInt(1950, 2017);
         color = 'w';
         do {
-            System.out.print("Quel couleur souhaitez vous ? (Blanc/Noir) : ");
-        } while ( !"Blanc".equals(colorStr = Interface.getString()) && !"Noir".equals(colorStr) );
+            Interface.showMessage("Quel couleur souhaitez vous ? (Blanc/Noir) : ");
+            colorStr = Interface.getString();
+        } while ( !"Blanc".equals(colorStr) && !"Noir".equals(colorStr) );
         
-        switch(colorStr)
+        switch ( colorStr )
         {
-            case "blanc":
+            case "Blanc":
                 color = 'w';
                 break;
-            case "noir":
+            case "Noir":
                 color = 'b';
                 break;
         }

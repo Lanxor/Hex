@@ -1,9 +1,32 @@
 #! /bin/bash
 
-pathJni="/usr/lib/jvm/java-8-openjdk-amd64"
 optionC="-fPIC"
 namePakage="version2"
 nameFileLib="libInterfaceC.so"
+nameFileConfig="config.conf"
+nameFolderClass="class"
+nameFolderObject="obj"
+nameFolderLib="lib"
+
+
+if [ -d "/usr/lib/jvm/java-8-openjdk-amd64" ]; then
+  pathJni="/usr/lib/jvm/java-8-openjdk-amd64"
+fi
+
+if [ -z "$pathJni" -a -d "/usr/lib/jvm/java-8-openjdk" ];then
+  pathJni="/usr/lib/jvm/java-8-openjdk"
+fi
+
+if [ -z "$pathJni" -a -d "$nameFileConfig" ]; then
+  pathJni=`grep "jni" "$nameFileConfig" | cut -f 2 -d ':'`
+fi
+
+if [ -z "$pathJni" ]; then
+  echo "Erreur : La librairie jvm n'est pas installer ou est inexistant"
+  echo "Usage : veuillez bien configurer le fichier config.conf"
+  echo "Ajouter la ligne jni:/chemin/vers/le/dossier/java-8-openjdk"
+  exit -1
+fi
 
 delete_file()
 {
@@ -28,8 +51,11 @@ compile_c()
   echo -e "\tFile deck.c"
   compile_c_file "src/deck.c"
 
-  echo -e "\tMove it to obj/"
-  mv *.o obj/
+  echo -e "\tMove it to ${nameFolderObject}/"
+  if [ ! -d "${nameFolderObject}" ]; then
+    mkdir "${nameFolderObject}"
+  fi
+  mv *.o "${nameFolderObject}"
 }
 
 compile_java()
@@ -38,10 +64,10 @@ compile_java()
   for file in "src/${namePakage}/"*".java"; do
     echo -e "\tFile $file"
   done
-  if [ ! -d "class/${namePakage}" ]; then
-    mkdir "class/${namePakage}"
+  if [ ! -d "${nameFolderClass}/${namePakage}" ]; then
+    mkdir "${nameFolderClass}/${namePakage}"
   fi
-  mv "src/${namePakage}/"*".class" "class/${namePakage}/"
+  mv "src/${namePakage}/"*".class" "${nameFolderClass}/${namePakage}/"
 }
 
 compile_interface()
@@ -55,32 +81,34 @@ compile_interface()
 
   echo -e "\tFile interfaceCJava.c"
   compile_c_file "src/interfaceCJava.c"
-  mv *.o obj/
+  mv *.o "${nameFolderObject}"
 }
 
 compile_lib()
 {
-  gcc -shared -o "${nameFileLib}" obj/*
-  mv "${nameFileLib}" "lib/"
+  echo -e "\tFile ${nameFileLib}"
+  gcc -shared -o "${nameFileLib}" "${nameFolderObject}/"*
+  echo -e "\tMove it to ${nameFolderLib}/"
+  mv "${nameFileLib}" "${nameFolderLib}/"
 }
 
 clean_c()
 {
-  for file in "obj/"*".o"; do
+  for file in "${nameFolderObject}/"*".o"; do
     delete_file "$file"
   done
 }
 
 clean_java()
 {
-  for file in "class/${namePakage}/"*".class"; do
+  for file in "${nameFolderClass}/${namePakage}/"*".class"; do
     delete_file "$file"
   done
 }
 
 clean_lib()
 {
-  delete_file "lib/${nameFileLib}"
+  delete_file "${nameFolderLib}/${nameFileLib}"
 }
 
 

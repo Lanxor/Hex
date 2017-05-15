@@ -27,7 +27,7 @@ public class Interface {
                     break;
                     
                 case 3: // Montrer les statistique de jeu
-                    System.out.println("Voici les statistiques du jeu.");
+                    Interface.showMessage("Voici les statistiques du jeu.\n");
                     break;
                     
                 case 4: // Personnage
@@ -35,7 +35,7 @@ public class Interface {
                     break;
                     
                 case 5: // Quitter
-                    System.out.println("Au revoir...");
+                    Interface.showMessage("Au revoir...\n");
                     leave = true;
                     break;
                     
@@ -54,7 +54,7 @@ public class Interface {
         System.out.println();
         for( String str : menu)
         {
-            System.out.println(count++ + " : " + str);
+            Interface.showMessage(count++ + " : " + str);
         }
     }
     
@@ -64,11 +64,11 @@ public class Interface {
         int choice;
         
         menu = new String[5];
-        menu[0] = "Créer une nouvelle partie";
-        menu[1] = "Charger une partie";
-        menu[2] = "Statistiques";
-        menu[3] = "Joueur";
-        menu[4] = "Quitter";
+        menu[0] = "Créer une nouvelle partie\n";
+        menu[1] = "Charger une partie\n";
+        menu[2] = "Statistiques\n";
+        menu[3] = "Joueur\n";
+        menu[4] = "Quitter\n";
         Interface.printMenu(menu);
         System.out.print("Choix : ");
         choice = Interface.getInt(1, menu.length);
@@ -126,5 +126,10 @@ public class Interface {
         keybord = new Scanner(System.in);
         str = keybord.nextLine();
         return str;
+    }
+    
+    public static void showMessage(String str)
+    {
+        System.out.print(str);
     }
 }

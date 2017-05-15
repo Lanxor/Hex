@@ -50,30 +50,30 @@ public class Game {
         switch (numberOfRound) {
             case 1:
                 menu = new String[4];
-                menu[0] = "Jouer un coups";
-                menu[1] = "Sauvegarder la partie";
-                menu[2] = "Sauvegarder et quitter";
-                menu[3] = "Quitter sans sauvegarder";
+                menu[0] = "Jouer un coups\n";
+                menu[1] = "Sauvegarder la partie\n";
+                menu[2] = "Sauvegarder et quitter\n";
+                menu[3] = "Quitter sans sauvegarder\n";
                 break;
             case 2:
                 menu = new String[5];
-                menu[0] = "Jouer un coups";
-                menu[1] = "Echanger les couleur";
-                menu[2] = "Sauvegarder la partie";
-                menu[3] = "Sauvegarder et quitter";
-                menu[4] = "Quitter sans sauvegarder";
+                menu[0] = "Jouer un coups\n";
+                menu[1] = "Echanger les couleur\n";
+                menu[2] = "Sauvegarder la partie\n";
+                menu[3] = "Sauvegarder et quitter\n";
+                menu[4] = "Quitter sans sauvegarder\n";
                 break;
             default:
                 menu = new String[5];
-                menu[0] = "Jouer un coups";
-                menu[1] = "Revenir au coup précédent";
-                menu[2] = "Sauvegarder la partie";
-                menu[3] = "Sauvegarder et quitter";
-                menu[4] = "Quitter sans sauvegarder";
+                menu[0] = "Jouer un coups\n";
+                menu[1] = "Revenir au coup précédent\n";
+                menu[2] = "Sauvegarder la partie\n";
+                menu[3] = "Sauvegarder et quitter\n";
+                menu[4] = "Quitter sans sauvegarder\n";
                 break;
         }
         Interface.printMenu(menu);
-        System.out.print("Choix : ");
+        Interface.showMessage("Choix : ");
         choice = Interface.getInt(1, menu.length);
         
         switch (numberOfRound)
@@ -109,12 +109,12 @@ public class Game {
         int choice;
         
         menu = new String[4];
-        menu[0] = "Jouer contre un joueur existant";
-        menu[1] = "Jouer contre un nouveau joueur";
-        menu[2] = "Jouer contre l'ordinateur";
-        menu[3] = "Retour";
+        menu[0] = "Jouer contre un joueur existant\n";
+        menu[1] = "Jouer contre un nouveau joueur\n";
+        menu[2] = "Jouer contre l'ordinateur\n";
+        menu[3] = "Retour\n";
         Interface.printMenu(menu);
-        System.out.print("Choix : ");
+        Interface.showMessage("Choix : ");
         choice = Interface.getInt(1, menu.length);
         
         return choice;
@@ -135,18 +135,20 @@ public class Game {
                 case 1:
                     do
                     {
-                        System.out.println(Player.listPlayer());
+                        Interface.showMessage(Player.listPlayer());
                         numberPlayers = Player.getNumberOfPlayers();
+                        Interface.showMessage("Choix : ");
                         choice = Interface.getInt(1, numberPlayers);
                         player = Player.load(choice);
                         this.player2 = player;
                         if ( this.playerCurrent.equals(player) )
-                            System.out.println("Vous ne pouvez vous selectionner.");
+                            Interface.showMessage("\nVous ne pouvez vous selectionner.\n");
                     } while ( this.playerCurrent.equals(player));
                     break;
             // Jouer contre un nouveau joueur
                 case 2:
                     player = Player.addPlayer();
+                    this.player2 = player;
                     break;
             // Jouer contre l'ordinateur
                 case 3:
@@ -159,6 +161,8 @@ public class Game {
                 this.player2.setColor('b');
             else
                 this.player2.setColor('w');
+            
+            this.deck.setSize(Deck.askSize());
             this.play();
         }
     }
@@ -167,12 +171,12 @@ public class Game {
     {
         int numberMaxSaveguards, choice;
         
-        System.out.println("Voici la liste des sauvegarde.");
+        Interface.showMessage("Voici la liste des sauvegarde.\n");
         numberMaxSaveguards = Saveguard.listSaveguard();
-        System.out.print("Choix : ");
+        Interface.showMessage("Choix : ");
         choice = Interface.getInt(1, numberMaxSaveguards);
-        System.out.println("Nous allons charger la partie "
-                + choice + ".");
+        Interface.showMessage("Nous allons charger la partie "
+                + choice + ".\n");
         Saveguard.loadSaveguard(this, choice);
         System.out.println("Size : " + this.getDeck().getSize());
     }
@@ -186,33 +190,33 @@ public class Game {
         round = 1;
         leave = false;
         while ( !leave ) {
+            this.showWhoPlay();
             this.showDeck();
             switch ( Game.menu(round) )
             {
                 case 1: // On joue
-                    System.out.println("On joue");
                     while ( !this.playMove() )
                     {
-                        System.out.println("Recommencez...");
+                        Interface.showMessage("Recommencez...\n");
                     }
-                    System.out.println("Au joueur suivant de jouer...");
+                    Interface.showMessage("Au joueur suivant de jouer...\n");
                     this.switchPlayer();
                     ++round;
                     break;
                     
                 case 3: // Sauvegarder
-                    System.out.println("Je sauvegarder la partie.");
+                    Interface.showMessage("Je sauvegarder la partie.\n");
                     this.save();
                     break;
                     
                 case 4: // Sauvegarder et Quitter
                     this.save();
-                    System.out.println("Vous quitter votre partie.");
+                    Interface.showMessage("Vous quitter votre partie.\n");
                     leave = true;
                     break;
                     
                 case 5: // Quitter sans sauvegarder
-                    System.out.println("Vous Quitter votre partie sans enregistrer.");
+                    Interface.showMessage("Vous Quitter votre partie sans enregistrer.\n");
                     leave = true;
                     break;
                     
@@ -320,15 +324,27 @@ public class Game {
     
     public void showDeck()
     {
-        System.out.println("Affichage du tablier : ");
+        Interface.showMessage("Affichage du tablier : \n");
         this.deck.print();
+    }
+    
+    public void showWhoPlay()
+    {
+        String str, name;
+        
+        if ( this.round )
+            name = this.playerCurrent.getPseudo();
+        else
+            name = this.player2.getPseudo();
+        str = "C'est au tour de " + name + " de jouer."; 
+        
     }
     
     public void save()
     {
         if ( Saveguard.addSaveguard(this) )
-            System.out.println("Fichier enregistrer.");
+            Interface.showMessage("Fichier enregistrer.\n");
         else
-            System.out.println("Une erreur est survenu, la partie n'est pas sauvegarder.");
+            Interface.showMessage("Une erreur est survenu, la partie n'est pas sauvegarder.\n");
     }
 }
