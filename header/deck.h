@@ -1,6 +1,6 @@
 /**
  * @file deck.h
- * @autho PATA Gwendal - OLIVIER Thomas
+ * @autho PATAT Gwendal - OLIVIER Thomas
  * @date Avril 2017
  * @brief Fichier de prototype du tablier de jeu.
  */
@@ -22,9 +22,7 @@
  */
 typedef struct s_deck* Deck;
 
-extern Deck global_deck;
-
-/**
+/** 
  * @brief Crée un nouveau plateau de jeu.
  * @param size : Taille du tablier de jeu.
  * @return Retourne un plateau de jeu initialiser.

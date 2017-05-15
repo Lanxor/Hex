@@ -51,6 +51,9 @@ compile_c()
   echo -e "\tFile deck.c"
   compile_c_file "src/deck.c"
 
+  echo -e "\tFile group.c"
+  compile_c_file "src/group.c"
+
   echo -e "\tMove it to ${nameFolderObject}/"
   if [ ! -d "${nameFolderObject}" ]; then
     mkdir "${nameFolderObject}"
