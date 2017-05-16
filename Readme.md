@@ -6,7 +6,7 @@ Hex is a strategy board game for two players played on a hexagonal grid, theoret
 
 ## Compilation
 
-Compile before to play.
+Compile before to start to play.
 
 ```
 > ./game.sh compile
@@ -22,23 +22,23 @@ Let's go !
 
 ## Cleaning
 
-Clean objects files and class files.
+Clean objects and class files.
 
 ```
 > ./game.sh clean
 ```
 ## Removing
 
-Remove players files and saveguards files.
+Remove players and saveguards files.
 
 ```
 > ./game.sh remove
 ```
 ## Reports
 
-If you have any problem whith the library, please check where the folder "jvm" of Java-8-openjdk is. And create or edit the file "config.conf" like this :
+If you have any problems with the library, please check where the folder "jvm" of Java-8-openjdk is. And create or edit the file "config.conf" like this :
 Add or edit this line :
 ```
 jni:/path/to/jvm/java-8-openjdk
 ```
-If you don't know where search the folder. Please search in "/usr/lib/"
+If you don't know where to search the folder. Please search in "/usr/lib/"
