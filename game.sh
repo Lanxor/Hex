@@ -39,6 +39,13 @@ fi
 ## Fonctions               #####################################################
 ################################################################################
 
+exist_folder()
+{
+  if [ ! -d "$1" ]; then
+    mkdir "$1"
+  fi
+}
+
 delete_file()
 {
   if [ -f "$1" ]; then
@@ -66,28 +73,25 @@ compile_c()
   compile_c_file "src/group.c"
 
   echo -e "\tMove it to ${nameFolderObject}/"
-  if [ ! -d "${nameFolderObject}" ]; then
-    mkdir "${nameFolderObject}"
-  fi
+  exist_folder "${nameFolderObject}"
   mv *.o "${nameFolderObject}"
 }
 
 compile_java()
 {
-  javac "${optionJava}" "src/${namePakage}/"*".java"
+  javac "src/${namePakage}/"*".java"
   for file in "src/${namePakage}/"*".java"; do
     echo -e "\tFile $file"
   done
-  if [ ! -d "${nameFolderClass}/${namePakage}" ]; then
-    mkdir "${nameFolderClass}/${namePakage}"
-  fi
+  exist_folder "${nameFolderClass}"
+  exist_folder "${nameFolderClass}/${namePakage}"
   mv "src/${namePakage}/"*".class" "${nameFolderClass}/${namePakage}/"
 }
 
 compile_interface()
 {
   cd "src"
-  echo -e "\tCrate header file"
+  echo -e "\tCreate header file"
   javah "${namePakage}.InterfaceJavaC"
   cd ".."
   echo -e "\tMove it to header/"
@@ -95,6 +99,7 @@ compile_interface()
 
   echo -e "\tFile interfaceCJava.c"
   compile_c_file "src/interfaceCJava.c"
+  exist_folder "${nameFolderObject}"
   mv *.o "${nameFolderObject}"
 }
 
