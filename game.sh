@@ -7,6 +7,7 @@
 
 optionC="-fPIC"
 optionJava=""
+pathLocal=`pwd`
 namePakage="pkginterface"
 nameFileLib="libInterfaceC.so"
 nameFileConfig="config.conf"
@@ -107,6 +108,8 @@ compile_interface()
 
 compile_lib()
 {
+  sed -i -e "/^\tSystem.load/d" "src/${namePakage}/InterfaceJavaC.java"
+  sed -i "/\/\/ DO NOT EDIT THIS LINE PLEASE/a\\\tSystem.load(\"${pathLocal}/${nameFolderLib}/${nameFileLib}\");" "src/${namePakage}/InterfaceJavaC.java"
   echo -e "\tFile ${nameFileLib}"
   gcc -shared -o "${nameFileLib}" "${nameFolderObject}/"*
   echo -e "\tMove it to ${nameFolderLib}/"
