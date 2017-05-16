@@ -626,7 +626,6 @@ public class Player implements Serializable {
         
         player = null;
         namePlayer = FOLDER_PLAYER + namePlayer + ".player";
-        Interface.showMessage(namePlayer + "\n");
         file = new File(namePlayer);
         try {
             ois = new ObjectInputStream(
