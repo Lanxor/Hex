@@ -1,7 +1,13 @@
 #! /bin/bash
 
+################################################################################
+## Programme Principale    #####################################################
+## Options                 #####################################################
+################################################################################
+
 optionC="-fPIC"
-namePakage="version2"
+optionJava=""
+namePakage="pkginterface"
 nameFileLib="libInterfaceC.so"
 nameFileConfig="config.conf"
 nameFolderClass="class"
@@ -27,6 +33,11 @@ if [ -z "$pathJni" ]; then
   echo "Ajouter la ligne jni:/chemin/vers/le/dossier/java-8-openjdk"
   exit -1
 fi
+
+################################################################################
+## Programme Principale    #####################################################
+## Fonctions               #####################################################
+################################################################################
 
 delete_file()
 {
@@ -63,7 +74,7 @@ compile_c()
 
 compile_java()
 {
-  javac "src/${namePakage}/"*".java"
+  javac "${optionJava}" "src/${namePakage}/"*".java"
   for file in "src/${namePakage}/"*".java"; do
     echo -e "\tFile $file"
   done
@@ -114,8 +125,10 @@ clean_lib()
   delete_file "${nameFolderLib}/${nameFileLib}"
 }
 
-
-
+################################################################################
+## Programme Principale    #####################################################
+## Fonctionnalitées        #####################################################
+################################################################################
 
 if [ $# -ne 1 ]; then
   echo -e "\nErreur : nombre d'argument."

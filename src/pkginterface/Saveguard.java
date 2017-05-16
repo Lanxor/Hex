@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
 
 public class Saveguard {
     
-    private static final String FOLDER_SAVEGUARDS = "../save";
+    private static final String FOLDER_SAVEGUARDS = "../save/";
     
     /***************************************************************************
      *                                                                         *
