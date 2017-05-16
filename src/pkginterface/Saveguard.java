@@ -1,4 +1,3 @@
-
 package pkginterface;
 
 import java.io.File;
@@ -13,65 +12,71 @@ import java.util.GregorianCalendar;
 
 public class Saveguard {
     
-    public static int listSaveguard()
-    {
-        int numberOfSaveguards;
-        File f;
-        
-        numberOfSaveguards = 1;
-        f = new File("save/");
-        for ( File file : f.listFiles())
-        {
-            try {
-            System.out.println(numberOfSaveguards++ + " : " + file.getName());
-            } catch (NullPointerException e) {
-                System.out.println("NULL");
-            }
-        }
-        return numberOfSaveguards;
-    }
+    private static final String FOLDER_SAVEGUARDS = "../save";
     
-    public static void addSaveguard(Game game)
+    /***************************************************************************
+     *                                                                         *
+     *                                     Functions Getters, Setters advenced *
+     *                                                                         *
+     **************************************************************************/
+
+    /**
+     * 
+     * @return 
+     */
+    public static String getNameFileSaveguard()
     {
         GregorianCalendar date;
-        String str, nameFile;
-        File f;
-        FileWriter fw;
+        String str;
         
         date = new GregorianCalendar();
-        nameFile = "save/";
-        nameFile += date.get(DAY_OF_YEAR) 
+        str = FOLDER_SAVEGUARDS;
+        str += date.get(DAY_OF_YEAR) 
                 + "_" + date.get(HOUR_OF_DAY)
                 + "_" + date.get(MINUTE)
                 + ".save";
-        f = new File(nameFile);
-        fw = null;
         
-        try {
-            fw = new FileWriter(f);
-            str = Saveguard.getFormatSaveguard(game);
-            fw.write(str);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if ( fw != null ) {
-                    fw.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        return str;
     }
     
+    /**
+     * 
+     * @param number
+     * @return 
+     */
+    public static File getFileSaveguard(int number)
+    {
+        File folder, file;
+        int count;
+        
+        count = 1;
+        file = null;
+        folder = new File(FOLDER_SAVEGUARDS);
+        for ( File fileCurrent : folder.listFiles())
+        {
+            try {
+                if ( count == number )
+                {
+                    file = fileCurrent;
+                }
+                ++count;
+            }
+            catch (NullPointerException e) { return null; }
+        }
+        return file;
+    }
+    
+    /**
+     * 
+     * @param game
+     * @return 
+     */
     public static String getFormatSaveguard(Game game)
     {
         String str;
         
         str = "\\hex\n\\dim " + game.getDeck().getSize() + "\n";
-        str += "\\player1 " + game.getPlayer1().toString()+ "\n";
+        str += "\\player1 " + game.getPlayerCurrent().toString()+ "\n";
         str += "\\player2 " + game.getPlayer2().toString()+ "\n";
         str += "\\board\n" + game.getDeck().toString() + "\n\\endboard\n";
         str += "\\game\n" + game.getHistoric().toString() + "\\endgame\n";
@@ -79,166 +84,359 @@ public class Saveguard {
         return str;
     }
     
-    private static Game initializeLoadSaveguard(File fileSaveguard)
+    /**
+     * 
+     * @return 
+     */
+    public static String getListSaveguard()
     {
-        Player player1, player2;
-        int dim, caracter;
-        FileReader fr;
+        File folder;
         String str;
-        
-        fr = null;
-        dim = 0;
-        player1 = null;
-        player2 = null;
-        
-        try {
-            fr = new FileReader(fileSaveguard);
-            str = "";
-            caracter = 0;
-            while ((caracter = fr.read()) != -1)
-            {
-                str += (char)caracter;
-                switch (str)
-                {
-                    case "\\hex\n":
-                        str = "";
-                        break;
-                    case "\\player1 ":
-                        str = "";
-                        player1 = new Player((char)fr.read());
-                        fr.read();
-                        while ( (char)caracter != '\n' )
-                        {
-                            caracter = fr.read();
-                            System.out.println((int)caracter);
-                            str += (char)caracter;
-                        }
-                        player1.setPseudo(str);
-                        str = "";
-                        break;
-                    case "\\player2 ":
-                        str = "";
-                        player2 = new Player((char)fr.read());
-                        fr.read();
-                        while ( (char)caracter != '\n' )
-                        {
-                            caracter = fr.read();
-                            System.out.println((int)caracter);
-                            str += (char)caracter;
-                        }
-                        player2.setPseudo(str);
-                        str = "";
-                        break;
-                    case "\\dim ":
-                        str = "";
-                        while ( (char)caracter != '\n' )
-                        {
-                            caracter = fr.read();
-                            System.out.println((int)caracter);
-                            if ( (int)caracter >= 48 && (int)caracter <= 57 )
-                                dim += dim*10 + ((int)caracter-48);
-                        }
-                        str = "";
-                        break;
-                    case "\\game":
-                        break;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if ( fr != null ) {
-                    fr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return new Game(dim, player1, player2);
-    }
-
-    public static Game loadSaveguard(File fileSaveguard)
-    {
-        Game game;
-        game = Saveguard.initializeLoadSaveguard(fileSaveguard);
-        Saveguard.loadMove(fileSaveguard, game);
-        
-        System.out.println("Dimmension : " + game.getDeck().getSize());
-        System.out.println("Player1 : " + game.getPlayer1().toString());
-        System.out.println("Player2 : " + game.getPlayer2().toString());
-        
-        return null;
-    }
-    
-    private static void loadMove(File fileSaveguard, Game game)
-    {
-        int caracter;
-        FileReader fr;
-        String str;
-        Move move;
-        
-        fr = null;
-        move = null;
-        
-        try {
-            fr = new FileReader(fileSaveguard);
-            str = "";
-            caracter = 0;
-            while ((caracter = fr.read()) != -1)
-            {
-                str += (char)caracter;
-                switch (str)
-                {
-                    case "\\play ":
-                        str = "";
-                        while ( (char)caracter != '\n' )
-                        {
-                        }
-                        str = "";
-                        break;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if ( fr != null ) {
-                    fr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    public static File getFileSaveguard(int number)
-    {
         int numberOfSaveguards;
-        File f;
         
+        str = "";
         numberOfSaveguards = 1;
-        f = new File("save/");
-        for ( File file : f.listFiles())
+        folder = new File(FOLDER_SAVEGUARDS);
+        for ( File file : folder.listFiles())
         {
             try {
-                if ( numberOfSaveguards++ == number)
-                {
-                    return file;
-                }
-            } catch (NullPointerException e) {
-                System.out.println("NULL");
-            }
+                str +=  numberOfSaveguards++ + " : " + file.getName() + "\n";
+            } catch (NullPointerException e) { return null; }
         }
-        return null;
+        return str;
     }
     
-    public boolean isValid(File fileSaveguard)
+    /**
+     * @brief Compte le nombre de sauvegarde enregistrer.
+     * @return 
+     */
+    public static int getNumberOfSaveguard()
+    {
+        File folder;
+        
+        folder = new File(FOLDER_SAVEGUARDS);
+        return folder.listFiles().length;
+    }
+    
+    /**
+     * @brief Indique si la liste des sauvegardes enregistrer est vide.
+     * @return 
+     */
+    public static boolean emptySaveguard()
+    {
+        return Saveguard.getNumberOfSaveguard() < 1;
+    }
+    
+    /***************************************************************************
+     *                                                                         *
+     *                                     Functions Static internal-managment *
+     *                                                                         *
+     **************************************************************************/
+    
+    /**
+     * 
+     * @param game
+     * @return 
+     */
+    public static boolean addSaveguard(Game game)
+    {
+        String str, nameFile;
+        File f;
+        FileWriter fw;
+        
+        nameFile = Saveguard.getNameFileSaveguard();
+        f = new File(nameFile);
+        fw = null;
+        
+        try {
+            fw = new FileWriter(f);
+            str = Saveguard.getFormatSaveguard(game);
+            fw.write(str);
+        }
+        catch (FileNotFoundException e) { return false; }
+        catch (IOException e) { return false; }
+        finally {
+            try {
+                if ( fw != null ) {
+                    fw.close();
+                }
+            }
+            catch (IOException e) { return false; }
+        }
+        return true;
+    }
+    
+    /**
+     * 
+     * @param game
+     * @param number
+     * @return 
+     */
+    public static boolean loadSaveguard(Game game, int number)
+    {
+        File file;
+        int size;
+        
+        size = 0;
+        file = null;
+        
+        // on initialise la partie
+        game.getPlayerCurrent().setColor('b');
+        game.getPlayer2().setColor('w');
+        game.getHistoric().clean();
+        game.getDeck().setSize(size);
+        game.setNumberOfRound(1);
+        
+        file = Saveguard.getFileSaveguard(number);
+        if ( !Saveguard.loadSizeFile(file, game) )
+            return false;
+        game.getDeck().createDeckC();
+        if ( !Saveguard.loadPlayersSaveguard(file, game) )
+            return false;
+        if ( !Saveguard.loadMovesSaveguard(file, game) )
+            return false;
+        
+        return true;
+    }
+    
+    /**
+     * 
+     * @param file
+     * @param game
+     * @return 
+     */
+    private static boolean loadSizeFile(File file, Game game)
+    {
+        int size;
+        int caracter;
+        String str;
+        FileReader fr;
+        
+        size = 0;
+        str = null;
+        fr = null;
+        try {
+            fr = new FileReader(file);
+            str = "";
+            caracter = 0;
+            while ( (caracter = fr.read()) != -1 && !"\\dim ".equals(str) )
+            {
+                str += (char)caracter;
+                if ( (char)caracter == '\n' )
+                {
+                    str = "";
+                }
+            }
+            str = "";
+            str += (char)caracter;
+            while ( (caracter = fr.read()) != '\n' )
+            {
+                str += (char)caracter;
+            }
+            
+        } catch ( FileNotFoundException e ) { return false; }
+        catch ( IOException e ) { return false; }
+        finally {
+            try {
+                if ( fr != null )
+                    fr.close();
+            } catch ( IOException e ) { return false; }
+        }
+        
+        if ( Deck.sizeValid(size = Integer.parseInt(str)) )
+        {
+            game.getDeck().setSize(size);
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 
+     * @param fileSaveguard
+     * @param game
+     * @return 
+     */
+    private static boolean loadPlayersSaveguard(File fileSaveguard, Game game)
+    {
+        int caracter;
+        char colorPlayer1, colorPlayer2;
+        Player player1, player2;
+        String str, namePlayer1, namePlayer2;
+        FileReader fr;
+        
+        str = null;
+        fr = null;
+        namePlayer1 = "";
+        namePlayer2 = "";
+        player1 = null;
+        player2 = null;
+        colorPlayer1 = 'w';
+        colorPlayer2 = 'w';
+        try {
+            fr = new FileReader(fileSaveguard);
+            str = "";
+            caracter = 0;
+            while ( (caracter = fr.read()) != -1 && !"\\board".equals(str))
+            {
+                str += (char)caracter;
+                if ( (char)caracter == '\n' )
+                    str = "";
+                
+                if ( "\\player1 ".equals(str) )
+                {
+                    str = "";
+                    colorPlayer1 = (char)fr.read();
+                    fr.read();
+                    while ( (caracter = fr.read()) != '\n' )
+                    {
+                        str += (char)caracter;
+                    }
+                    namePlayer1 = str;
+                    str = "";
+                }
+                
+                if ( "\\player2 ".equals(str) )
+                {
+                    str = "";
+                    colorPlayer2 = (char)fr.read();
+                    fr.read();
+                    while ( (caracter = fr.read()) != '\n' )
+                    {
+                        str += (char)caracter;
+                    }
+                    namePlayer2 = str;
+                    str = "";
+                }
+            }
+            
+        } catch ( FileNotFoundException e ) {}
+        catch ( IOException e ) {}
+        finally {
+            try {
+                if ( fr != null )
+                    fr.close();
+            } catch ( IOException e ) {}
+        }
+        
+        player1 = Player.load(namePlayer1);
+        
+        if ( "Ordinateur".equals(namePlayer2) )
+        {
+            player2 = Player.getPlayerComputer();
+        }
+        else
+        {
+            player2 = Player.load(namePlayer2);
+        }
+        
+        if ( player1.getColor() == player2.getColor() )
+        {
+            player2.setColor(Player.getOppositeColor(player1.getColor()));
+        }
+        
+        game.getPlayerCurrent().copy(player1);
+        game.getPlayer2().copy(player2);
+        
+        return true;
+    }
+    
+    /**
+     * 
+     * @param fileSaveguard
+     * @param game
+     * @return 
+     */
+    private static boolean loadMovesSaveguard(File fileSaveguard, Game game)
+    {
+        Coordinates coordinates;
+        Move move;
+        Player player;
+        int caracter, abscisse, ordonnee;
+        char color;
+        boolean isValid;
+        FileReader fr;
+        String str;
+        
+        fr = null;
+        str = "";
+        abscisse = 0;
+        ordonnee = 0;
+        isValid = true;
+        try {
+            fr = new FileReader(fileSaveguard);
+            str = "";
+            caracter = 0;
+            while ((caracter = fr.read()) != -1)
+            {
+                str += (char)caracter;
+                if ( (char)caracter == '\n' )
+                    str = "";
+                
+                if ( "\\play ".equals(str) )
+                {
+                    color = (char)fr.read(); fr.read();
+                    
+                    str = "";
+                    while ( (caracter = fr.read()) != ' ' )
+                    {
+                        str += (char)caracter;
+                    }
+                    abscisse = Integer.parseInt(str);
+                    
+                    str = "";
+                    while ( (caracter = fr.read()) != '\n' )
+                    {
+                        str += (char)caracter;
+                    }
+                    ordonnee = Integer.parseInt(str);
+                    coordinates = new Coordinates(abscisse, ordonnee);
+                    
+                    if ( game.getPlayerCurrent().getColor() == color )
+                    {
+                        move = new Move(game.getPlayerCurrent(), coordinates);
+                    }
+                    else
+                    {
+                        move = new Move(game.getPlayer2(), coordinates);
+                    }
+                    if ( isValid && !game.playMove(move) )
+                        isValid = false;
+                    else
+                    {
+                        game.setNumberOfRound(game.getNumberOfRound() + 1);
+                        game.switchPlayer();
+                        str = "";
+                    }
+                }
+                
+            }
+        } catch (FileNotFoundException e) { return false; }
+        catch (IOException e) { return false; }
+        finally {
+            try {
+                if ( fr != null )
+                    fr.close();
+            } catch (IOException e) { return false; }
+        }
+        
+        return isValid;
+    }    
+    
+    /***************************************************************************
+     *                                                                         *
+     *                                             Functions Static validation *
+     *                                                                         *
+     **************************************************************************/
+    
+    /**
+     * 
+     * @param fileSaveguard
+     * @return 
+     */
+    public static boolean isValid(File fileSaveguard)
     {
         return true;
     }
+    
 }
