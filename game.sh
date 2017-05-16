@@ -31,6 +31,8 @@ if [ -z "$pathJni" ]; then
   echo "Erreur : La librairie jvm n'est pas installer ou est inexistant"
   echo "Usage : veuillez bien configurer le fichier config.conf"
   echo "Ajouter la ligne jni:/chemin/vers/le/dossier/java-8-openjdk"
+  echo "Lisez le Readme.md pour plus d'explication."
+  echo "Ou rendez-vous sur la page https://github.com/Lanxor/Hex"
   exit -1
 fi
 
@@ -150,6 +152,8 @@ if [ "$1" != "compile" -a "$1" != "compilelib" -a "$1" != "clean" -a "$1" != "pl
 fi
 
 if [ "$1" == "compile" ]; then
+  exist_folder "player"
+  exist_folder "save"
   echo "Compilation des fichiers C"
   compile_c
 
