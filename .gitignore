@@ -1,5 +1,8 @@
 /save/
+/player/
 /obj/
 /class/
 /lib/
 /build/
+/dist/
+/src/pkginterface/InterfaceJavaC.java
