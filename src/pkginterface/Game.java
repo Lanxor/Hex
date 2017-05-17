@@ -631,6 +631,7 @@ public class Game {
         if ( !move.isValid() )
             return false;
         move.play();
+        this.historic.addMove(move);
         this.switchPlayer();
         this.historicBack.clean();
         return true;

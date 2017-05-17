@@ -172,17 +172,6 @@ public class Score implements Serializable {
      **************************************************************************/
     
     /**
-     * @brief Fonction qui copie le score à partir d'un autre score.
-     * @param score : Score à copié.
-     */
-    public void copy(Score score)
-    {
-        this.gamePlayed = score.getGamePlayed();
-        this.gameWin = score.getGameWin();
-        this.gameLoose = score.getGameLoose();
-    }
-    
-    /**
      * @brief Fonction qui définit un score.
      * @return Retourne une chaine de caractère définissant un score.
      */
@@ -193,7 +182,7 @@ public class Score implements Serializable {
         
         str = "\tPartie jouée : " + this.gamePlayed + "\n";
         str += "\tPartie gagnée : " + this.gameWin + "\n";
-        str += "\tPartie perdu : " + this.gameLoose;
+        str += "\tPartie perdu : " + this.gameLoose + "\n";
         
         return str;
     }

@@ -570,7 +570,6 @@ public class Player implements Serializable {
         this.pseudo = player.getPseudo();
         this.mail = player.getMail();
         this.yearOfBirth = player.getYearOfBirth();
-        this.score.copy(player.getScore());
     }
     
     /**
