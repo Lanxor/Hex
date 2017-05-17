@@ -285,10 +285,12 @@ public class Game {
     public void play()
     {
         Move move;
-        boolean leave;
+        boolean leave, winner;
         
         leave = false;
-        while ( !leave ) {
+        winner = false;
+        while ( !leave && !winner )
+        {
             this.showWhoPlay();
             this.showDeck();
             switch ( Game.menu(this.numberOfRound, !this.historicBack.isEmpty()) )
@@ -348,8 +350,12 @@ public class Game {
                         Interface.showMessage("Erreur aucun changement effectuer.\n");
                     }
                     break;
-                    
             }
+        }
+        
+        if ( winner )
+        {
+            this.endGame();
         }
     }
     
@@ -421,6 +427,31 @@ public class Game {
                 return false;
         }
         return true;
+    }
+    
+    /**
+     * 
+     */
+    public void endGame()
+    {
+        char colorOfWinner;
+        
+        colorOfWinner = InterfaceJavaC.getWinner();
+        if ( this.playerCurrent.getColor() == colorOfWinner )
+        {
+            this.playerCurrent.win();
+            this.player2.loose();
+        }
+        else if ( this.player2.getColor() == colorOfWinner )
+        {
+            this.player2.win();
+            this.playerCurrent.loose();
+        }
+        else
+        {
+            this.playerCurrent.noWinner();
+            this.playerCurrent.noWinner();
+        }
     }
     
     /***************************************************************************

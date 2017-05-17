@@ -18,12 +18,18 @@ public class Player implements Serializable {
     private String pseudo;
     private String mail;
     private int yearOfBirth;
+    private Score score;
     
     /***************************************************************************
      *                                                                         *
      *                                                            Constructeur *
      *                                                                         *
      **************************************************************************/
+    
+    public Player()
+    {
+        
+    }
     
     /**
      * 
@@ -43,6 +49,7 @@ public class Player implements Serializable {
     {
         this.color = color;
         this.pseudo = pseudo;
+        this.score = new Score();
     }
     
     /**
@@ -56,6 +63,7 @@ public class Player implements Serializable {
         this.color = color;
         this.pseudo = pseudo;
         this.mail = mail;
+        this.score = new Score();
     }
     
     /**
@@ -71,6 +79,7 @@ public class Player implements Serializable {
         this.pseudo = pseudo;
         this.mail = mail;
         this.yearOfBirth = yearOfBirth;
+        this.score = new Score();
     }
     
     /***************************************************************************
@@ -177,7 +186,8 @@ public class Player implements Serializable {
         str += "Profile de " + player.getPseudo() + "\n"
                 + "Couleur : " + color + "\n"
                 + "Adresse mail : " + player.getMail() + "\n"
-                + "Année de naissance : " + player.getYearOfBirth() + "\n";
+                + "Année de naissance : " + player.getYearOfBirth() + "\n"
+                + player.getScore().toString() + "\n";
         str += "-----------------------------\n";
         str += "-----------------------------\n";
         
@@ -355,6 +365,15 @@ public class Player implements Serializable {
     
     /**
      * 
+     * @return 
+     */
+    public Score getScore()
+    {
+        return this.score;
+    }
+    
+    /**
+     * 
      * @param color 
      */
     public void setColor(char color)
@@ -387,6 +406,15 @@ public class Player implements Serializable {
     public void setYearOfBirth(int yearOfBirth)
     {
         this.yearOfBirth = yearOfBirth;
+    }
+    
+    /**
+     * 
+     * @param score 
+     */
+    public void setScore(Score score)
+    {
+        this.score = score;
     }
     
     /***************************************************************************
@@ -439,11 +467,86 @@ public class Player implements Serializable {
         return 't';
     }
     
+    /**
+     * 
+     * @return 
+     */
+    public static String[] getNameFilePlayers()
+    {
+        File folder;
+        String[] listNamePlayers;
+        int count;
+        
+        listNamePlayers = new String[Player.getNumberOfPlayers()];
+        count = 0;
+        folder = new File(FOLDER_PLAYER);
+        for (File file : folder.listFiles())
+        {
+            listNamePlayers[count++] = file.getName();
+        }
+        
+        return listNamePlayers;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public static Player[] getAllPlayers()
+    {
+        File file;
+        Player[] listPlayers;
+        int count;
+        
+        listPlayers = new Player[Player.getNumberOfPlayers()];
+        count = 0;
+        for ( String nameFile : Player.getNameFilePlayers() )
+        {
+            listPlayers[count++] = Player.load(Player.getPathFilePlayer(nameFile));
+        }
+        return listPlayers;
+    }
+    
+    /**
+     * 
+     * @param namePlayer
+     * @return 
+     */
+    public static String getPathFilePlayer(String namePlayer)
+    {
+        return FOLDER_PLAYER + namePlayer;
+    }
+    
     /***************************************************************************
      *                                                                         *
      *                                            Functions internal-managment *
      *                                                                         *
      **************************************************************************/
+    
+    /**
+     * 
+     */
+    public void noWinner()
+    {
+        this.score.addGamePlayed();
+    }
+    
+    /**
+     * 
+     */
+    public void win()
+    {
+        this.score.addGameWin();
+    }
+    
+    /**
+     * 
+     */
+    public void loose()
+    {
+        this.score.addGameLoose();
+    }
+    
     
     /**
      * 
@@ -529,10 +632,10 @@ public class Player implements Serializable {
     {
         ObjectOutputStream oos;
         File file;
-        String nameFilePlayer;
+        String nameFile;
         
-        nameFilePlayer = FOLDER_PLAYER + player.getPseudo() + ".player";
-        file = new File(nameFilePlayer);
+        nameFile = Player.getPathFilePlayer(player.pseudo + ".player");
+        file = new File(nameFile);
         if ( !file.exists() )
         {
             try {
@@ -614,19 +717,18 @@ public class Player implements Serializable {
     }
     
     /**
+     * @param pathFilePlayer
      * @brief Charge le n ieme joueurs de la liste.
-     * @param namePlayer
      * @return 
      */
-    public static Player load(String namePlayer)
+    public static Player load(String pathFilePlayer)
     {
         Player player;
         File file;
         ObjectInputStream ois;
         
-        player = null;
-        namePlayer = FOLDER_PLAYER + namePlayer + ".player";
-        file = new File(namePlayer);
+        player = new Player();
+        file = new File(pathFilePlayer);
         try {
             ois = new ObjectInputStream(
                         new BufferedInputStream(

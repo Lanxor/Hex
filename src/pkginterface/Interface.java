@@ -34,6 +34,7 @@ public class Interface {
                     
                 case 3: // Montrer les statistique de jeu
                     Interface.showMessage("Voici les statistiques du jeu.\n");
+                    Score.index();
                     break;
                     
                 case 4: // Personnage

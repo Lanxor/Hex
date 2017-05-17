@@ -319,7 +319,7 @@ public class Saveguard {
             } catch ( IOException e ) {}
         }
         
-        player1 = Player.load(namePlayer1);
+        player1 = Player.load(Player.getPathFilePlayer(namePlayer1+".player"));
         
         if ( "Ordinateur".equals(namePlayer2) )
         {
@@ -327,7 +327,7 @@ public class Saveguard {
         }
         else
         {
-            player2 = Player.load(namePlayer2);
+            player2 = Player.load(Player.getPathFilePlayer(namePlayer2+".player"));
         }
         
         if ( player1.getColor() == player2.getColor() )

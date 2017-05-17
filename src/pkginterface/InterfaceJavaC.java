@@ -1,9 +1,11 @@
 package pkginterface;
 
 public class InterfaceJavaC {
+    
     static
     {
-        System.load("/home/lanx/Documents/Projet_S4/Hex/lib/libInterfaceC.so");
+        // DO NOT EDIT THIS LINE PLEASE
+	System.load("/home/lanx/Documents/Projet_S4/Hex/lib/libInterfaceC.so");
     }
 
     public native static void createDeck(int size);
@@ -12,4 +14,6 @@ public class InterfaceJavaC {
     public native static char getVerticeColor(int abscisse, int ordonnee);
     public native static void modifyVertice(char color, int abscisse, int ordonnee);
     public native static int isModifyVertice(char color, int abscisse, int ordonnee);
+    public native static int hasWinner();
+    public native static char getWinner();
 }

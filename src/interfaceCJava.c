@@ -72,3 +72,25 @@ JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_isModifyVertice
     extern Deck global_deck;
     return deck_vertice_modify_is_possible(global_deck, color, abscisse, ordonnee);
 }
+
+/*
+ * Class:     pkginterface_InterfaceJavaC
+ * Method:    hasWinner
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_hasWinner
+  (JNIEnv *env, jclass class)
+{
+    return 0;
+}
+
+/*
+ * Class:     pkginterface_InterfaceJavaC
+ * Method:    getWinner
+ * Signature: ()C
+ */
+JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getWinner
+  (JNIEnv *env, jclass class)
+{
+    return 't';
+}
