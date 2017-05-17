@@ -13,8 +13,8 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * 
-     * @param size 
+     * @brief Constructeur par défaut.
+     * @param size : Taille du plateau de jeu.
      */
     public Deck(int size)
     {
@@ -28,7 +28,8 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Fonction qui demande à la classe InterfaceJavaC de crée un
+     * nouveau plateau de jeu en fonction de sa taille.
      */
     public void createDeckC()
     {
@@ -36,7 +37,8 @@ public class Deck {
     }
     
     /**
-     * 
+     * @brief Fonction qui demande à la classe InterfaceJavaC de supprimer
+     * le plateau de jeu.
      */
     public void deleteDeckC()
     {
@@ -50,8 +52,9 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @biref Fonction qui demande à l'utilisateur la taille du tablier.
+     * et met à jour le tablier de jeu.
+     * @return Retourne la taille saisi par l'utilisateur.
      */
     public int askSize()
     {
@@ -67,7 +70,7 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Focntion qui affiche le plateau de jeu.
      */
     public void print()
     {
@@ -81,9 +84,9 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * 
-     * @param size
-     * @return 
+     * @brief Fonction qui vérifie si la taille du plateau est valide ou non.
+     * @param size : Taille du plateau à tester.
+     * @return Retourne si la valeur est bien conforme.
      */
     public static boolean sizeValid(int size)
     {
@@ -97,8 +100,8 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Getter constant min_size.
+     * @return Retourne la valeur minimale d'un tableau.
      */
     public static int getMinSize()
     {
@@ -106,8 +109,8 @@ public class Deck {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter constant max_size.
+     * @return Retourne la valeur maximal d'un plateau.
      */
     public static int getMaxSize()
     {
@@ -115,16 +118,16 @@ public class Deck {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter size.
+     * @return Retourne la taille du plateau.
      */
     public int getSize(){
         return this.size;
     }
     
     /**
-     * 
-     * @param size 
+     * @brief Setter size.
+     * @param size : Taille du plateau.
      */
     public void setSize(int size)
     {
@@ -138,8 +141,10 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui demande à la classe InterfaceJavaC les couleurs
+     * de chaque case du tablier.
+     * @return Retourne la chaine de caractère qui correspond au plateau
+     * actuelle.
      */
     @Override
     public String toString()

@@ -18,6 +18,8 @@ Vertice vertice_create(char color, int abscisse,
     vertice->color = color;
     vertice->abscisse = abscisse;
     vertice->ordonnee = ordonnee;
+    
+    return vertice;
 }
 
 void vertice_modify_color(Vertice vertice, char color)

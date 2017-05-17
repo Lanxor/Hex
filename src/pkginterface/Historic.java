@@ -14,7 +14,7 @@ public class Historic {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Constructeur par défaut.
      */
     public Historic()
     {
@@ -29,8 +29,8 @@ public class Historic {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Getter liste de coups.
+     * @return Retourne la liste des coups de l'historique.
      */
     public ArrayList getMoves()
     {
@@ -38,8 +38,8 @@ public class Historic {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter nombre de coups
+     * @return Retourne le nombre de coups
      */
     public int getNumberOfMove()
     {
@@ -47,8 +47,8 @@ public class Historic {
     }
     
     /**
-     * 
-     * @param numberOfMove 
+     * @brief Setter nombre de coups.
+     * @param numberOfMove : Nombre de coups de l'historique.
      */
     public void setNumberOfMove(int numberOfMove)
     {
@@ -56,8 +56,8 @@ public class Historic {
     }
     
     /**
-     * 
-     * @param moves 
+     * @brief Setter liste de coups
+     * @param moves : Liste de coups de l'historique.
      */
     public void setMoves(ArrayList<Move> moves)
     {
@@ -71,9 +71,9 @@ public class Historic {
      **************************************************************************/
     
     /**
-     * 
-     * @param move
-     * @param number 
+     * @brief Fonction qui modifie un coup particulier dans l'historique.
+     * @param move : Move à remplacer.
+     * @param number : numéro du coup à modifier.
      */
     public void setMove(Move move, int number)
     {
@@ -81,9 +81,9 @@ public class Historic {
     }
     
     /**
-     * 
-     * @param number
-     * @return 
+     * @brief Fonction qui récupère le coups à une place donnée.
+     * @param number : Numéro du coup à modifier.
+     * @return Retourne le coup demander.
      */
     public Move getMove(int number)
     {
@@ -91,8 +91,8 @@ public class Historic {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui retourne le dernier coup de l'historique.
+     * @return Retourne le dernier coup de l'historique.
      */
     public Move getLastMove()
     {
@@ -106,8 +106,8 @@ public class Historic {
      **************************************************************************/
     
     /**
-     * 
-     * @param move 
+     * @brief Fonction qui ajoute un coup à la fin de l'historique.
+     * @param move : Coup à ajouter.
      */
     public void addMove(Move move)
     {
@@ -115,8 +115,8 @@ public class Historic {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui supprime le dernier coup de l'historique.
+     * @return Retourne le dernier coup supprimé.
      */
     public Move deleteLastMove()
     {
@@ -129,16 +129,18 @@ public class Historic {
     }
     
     /**
-     * 
+     * @brief Fonction qui supprime tout l'historique.
      */
     public void clean()
     {
         this.moves.clear();
+        this.numberOfMove = 0;
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui donne tout les coups de l'historique, selon le
+     * format du fichier de sauvegarde demander.
+     * @return Retourne une chaine de caractère composé des coups de l'historique.
      */
     @Override
     public String toString()
@@ -161,8 +163,8 @@ public class Historic {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui vérifie si l'historique est vide ou non.
+     * @return Retourne si la liste est vide ou non.
      */
     public boolean isEmpty()
     {

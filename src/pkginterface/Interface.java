@@ -10,6 +10,10 @@ public class Interface {
      *                                                                         *
      **************************************************************************/
     
+    /**
+     * @brief Fonction principale du programme de jeu HEX
+     * @param args 
+     */
     public static void main(String[] args)
     {
         boolean leave;
@@ -57,8 +61,9 @@ public class Interface {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui affiche le menu principale et demande à l'utilisateur
+     * un choix parmis la liste.
+     * @return Retourne le choix de l'utilisateur.
      */
     public static int menu()
     {
@@ -85,8 +90,8 @@ public class Interface {
      **************************************************************************/
     
     /**
-     * 
-     * @param menu 
+     * @brief Fonction qui affiche un menu.
+     * @param menu : Tableau de chaine de caractère à afficher.
      */
     public static void printMenu(String[] menu)
     {
@@ -101,8 +106,8 @@ public class Interface {
     }
     
     /**
-     * 
-     * @param str 
+     * @brief Fonction qui affiche une chaine de caractère.
+     * @param str : La chaine de caractère à afficher.
      */
     public static void showMessage(String str)
     {
@@ -115,9 +120,9 @@ public class Interface {
      *                                                                         *
      **************************************************************************/
     /**
-     * 
-     * @param coord
-     * @return 
+     * @brief Fonction qui vérifie si une chaine de carctère est un nombre.
+     * @param coord : Chaine de carctère à vérifier.
+     * @return Retourne si la chaine de caractère est bien un nombre ou non.
      */
     public static boolean isInteger(String coord) {
        try
@@ -130,10 +135,11 @@ public class Interface {
     }
     
     /**
-     * 
-     * @param valMin
-     * @param valMax
-     * @return 
+     * @brief Fonction qui demande à l'utilisateur une valeur entre deux
+     * valeurs
+     * @param valMin : Valeur minimale à saisir.
+     * @param valMax : Valeur maximale à saisir.
+     * @return Retourne la valeur saisi par l'utilisateur.
      */
     public static int getInt(int valMin, int valMax)
     {
@@ -155,22 +161,9 @@ public class Interface {
     }
     
     /**
-     * 
-     * @return 
-     */
-    public static char getChar()
-    {
-        String str;
-        Scanner keybord;
-        
-        keybord = new Scanner(System.in);
-        str = keybord.nextLine();
-        return str.charAt(0);
-    }
-    
-    /**
-     * 
-     * @return 
+     * @brief Fonction qui demande à l'utilisateur de saisir une chaine
+     * de caratcère.
+     * @return Retourne la chaine de caractère saisie par l'utilisateur.
      */
     public static String getString()
     {
