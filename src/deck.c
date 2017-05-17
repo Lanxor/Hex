@@ -9,6 +9,8 @@ typedef struct s_deck
   Vertice       black_2;
   Vertice       *set_vertices;
   Edge          *set_edges;
+  Group         *set_groups;
+  int           number_groups;
 } t_deck;
 
 Deck deck_create(int size)
@@ -29,7 +31,8 @@ Deck deck_create(int size)
 
   deck->set_vertices = (Vertice*) malloc(size * size * sizeof(Vertice));
   number_edges = deck_get_number_edge(size);
-  deck->set_edges = (Edge*) malloc( (number_edges) * sizeof(Edge) );
+  deck->set_edges = (Edge*) malloc((number_edges) * sizeof(Edge));
+  deck->set_groups = (Group*) malloc(size * size * sizeof(Group));
 
   for (abscisse = 0; abscisse < size; ++abscisse)
   {
@@ -224,4 +227,13 @@ int deck_vertice_modify_is_possible(Deck deck, char color, int abscisse, int ord
 void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
 {
   vertice_set_color(deck_get_vertice(deck, abscisse, ordonnee), color);
+}
+
+int deck_winner(Deck deck)
+{
+  for (int cpt = 0; cpt < deck->number_groups; ++cpt)
+  {
+    NULL;//if ()
+  }
+  return(1);
 }

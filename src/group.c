@@ -57,7 +57,52 @@ Group group_fusion(Group firstGroup, Group secondGroup)
   return (firstGroup);
 }
 
+char group_who_win(Group initialGroup, Deck deck)
+{
+  Vertice   firstBorder;
+  Vertice   secondBorder;
+  int       isWinner;
+  
+  firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+  secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+  isWinner = 0;
+  
+  if (firstBorder != NULL && secondBorder != NULL)
+  {
+    for (int cpt = 0; cpt < initialGroup->number_vertice; ++cpt)
+      if (initialGroup->list_vertice[cpt] == firstBorder || initialGroup->list_vertice[cpt] == secondBorder )
+        ++isWinner;
+  } 
+  if (isWinner == 2)
+    return(group_color(initialGroup));
+  else
+    return(TRANSPARENT);
+}
+
+int group_winner(Group initialGroup, Deck deck)
+{
+  Vertice   firstBorder;
+  Vertice   secondBorder;
+  int       isWinner;
+  
+  firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+  secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+  isWinner = 0;
+  
+  if (firstBorder != NULL && secondBorder != NULL)
+  {
+    for (int cpt = 0; cpt < initialGroup->number_vertice; ++cpt)
+      if (initialGroup->list_vertice[cpt] == firstBorder || initialGroup->list_vertice[cpt] == secondBorder )
+        ++isWinner;
+  } 
+  if (isWinner == 2)
+    return(1);
+  else
+    return(0);
+}
+
+
 /*
  * A faire :
- * Créer une fonction de recherche/vérification de gagnant
+ * Créer une fonction de création de group a partir d'un deck
  */

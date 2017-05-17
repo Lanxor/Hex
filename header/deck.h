@@ -14,6 +14,7 @@
 
 #include "vertice.h"
 #include "edge.h"
+#include "group.h"
 
 
 /**
