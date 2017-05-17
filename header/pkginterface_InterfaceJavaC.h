@@ -47,6 +47,22 @@ JNIEXPORT void JNICALL Java_pkginterface_InterfaceJavaC_modifyVertice
 JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_isModifyVertice
   (JNIEnv *, jclass, jchar, jint, jint);
 
+/*
+ * Class:     pkginterface_InterfaceJavaC
+ * Method:    hasWinner
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_hasWinner
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pkginterface_InterfaceJavaC
+ * Method:    getWinner
+ * Signature: ()C
+ */
+JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getWinner
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

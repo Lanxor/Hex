@@ -102,6 +102,7 @@ int group_winner(Group initialGroup, Deck deck)
 }
 
 
+
 /*
  * A faire :
  * Créer une fonction de création de group a partir d'un deck

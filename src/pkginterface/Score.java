@@ -16,7 +16,7 @@ public class Score implements Serializable {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Constructeur par défaut.
      */
     public Score()
     {
@@ -26,10 +26,10 @@ public class Score implements Serializable {
     }
     
     /**
-     * 
-     * @param gamePlayed
-     * @param gameWin
-     * @param gameLoose 
+     * @brief Constructeur
+     * @param gamePlayed : Nombre de partie jouer.
+     * @param gameWin : Nombre de partie gagnée.
+     * @param gameLoose : Nombre de partie perdu.
      */
     public Score(int gamePlayed, int gameWin, int gameLoose)
     {
@@ -45,7 +45,7 @@ public class Score implements Serializable {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Fonctionq principale.
      */
     public static void index()
     {
@@ -58,6 +58,9 @@ public class Score implements Serializable {
      *                                                                         *
      **************************************************************************/
     
+    /**
+     * @brief Fonction qui affiche les cores des joueurs enregistrer.
+     */
     public static void showScoreOfPlayers()
     {
         Player[] listPlayers;
@@ -75,17 +78,26 @@ public class Score implements Serializable {
      *                                                                         *
      **************************************************************************/
     
+    /**
+     * @brief Fonction qui ajoute une game jouer.
+     */
     public void addGamePlayed()
     {
         ++this.gamePlayed;
     }
     
+    /**
+     * @brief Fonction qui ajoute une partie gagnée.
+     */
     public void addGameWin()
     {
         ++this.gamePlayed;
         ++this.gameWin;
     }
     
+    /**
+     * @brief Fonction qui ajoute une partie perdu.
+     */
     public void addGameLoose()
     {
         ++this.gamePlayed;
@@ -100,8 +112,8 @@ public class Score implements Serializable {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Getter partie jouée.
+     * @return Retourne le nombre de partie jouer.
      */
     public int getGamePlayed()
     {
@@ -109,8 +121,8 @@ public class Score implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter partie gagnée
+     * @return Retourne le nombre de partie gagnée.
      */
     public int getGameWin()
     {
@@ -118,22 +130,26 @@ public class Score implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter partie perdu.
+     * @return Retourne le nombre de partie perdu.
      */
     public int getGameLoose()
     {
         return this.gameLoose;
     }
     
+    /**
+     * @brief Setter partie jouée.
+     * @param gamePlayed : Nouveau nombre de partie jouée.
+     */
     public void setGamePlayed(int gamePlayed)
     {
         this.gamePlayed = gamePlayed;
     }
     
     /**
-     * 
-     * @param gameWin 
+     * @brief Setter partie gagnée.
+     * @param gameWin : Nouveau nombre de partie gagnée.
      */
     public void setGameWin(int gameWin)
     {
@@ -141,8 +157,8 @@ public class Score implements Serializable {
     }
     
     /**
-     * 
-     * @param gameLoose 
+     * @brief Setter partie perdu.
+     * @param gameLoose : Nouveau nombre de partie perdu.
      */
     public void setGameLoose(int gameLoose)
     {
@@ -156,8 +172,19 @@ public class Score implements Serializable {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui copie le score à partir d'un autre score.
+     * @param score : Score à copié.
+     */
+    public void copy(Score score)
+    {
+        this.gamePlayed = score.getGamePlayed();
+        this.gameWin = score.getGameWin();
+        this.gameLoose = score.getGameLoose();
+    }
+    
+    /**
+     * @brief Fonction qui définit un score.
+     * @return Retourne une chaine de caractère définissant un score.
      */
     @Override
     public String toString()

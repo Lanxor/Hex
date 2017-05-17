@@ -13,7 +13,9 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
     
+    // DO NOT EDIT THIS LINE PEASE
     private static final String FOLDER_PLAYER = "../player/";
+    
     private char color;
     private String pseudo;
     private String mail;
@@ -26,14 +28,17 @@ public class Player implements Serializable {
      *                                                                         *
      **************************************************************************/
     
+    /**
+     * @brief Constructeur par défaut.
+     */
     public Player()
     {
         
     }
     
     /**
-     * 
-     * @param color 
+     * @brief Constructeur.
+     * @param color : Couleur du joueur.
      */
     public Player(char color)
     {
@@ -41,9 +46,9 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param color
-     * @param pseudo 
+     * @brief Constructeur.
+     * @param color : Couleur du joueur.
+     * @param pseudo : Pseudo du joueur.
      */
     public Player(char color, String pseudo)
     {
@@ -53,10 +58,10 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param color
-     * @param pseudo
-     * @param mail 
+     * @brief Constructeur.
+     * @param color : Couleur du joueur.
+     * @param pseudo : Pseudo du joueur.
+     * @param mail : Email du Joueur
      */
     public Player(char color, String pseudo, String mail)
     {
@@ -67,11 +72,11 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param color
-     * @param pseudo
-     * @param mail
-     * @param yearOfBirth 
+     * @brief Constructeur.
+     * @param color : Couleur du joueur.
+     * @param pseudo : Pseudo du joueur.
+     * @param mail : Email du joueur.
+     * @param yearOfBirth : Année de naissance du joueur.
      */
     public Player(char color, String pseudo, String mail, int yearOfBirth)
     {
@@ -89,8 +94,9 @@ public class Player implements Serializable {
      **************************************************************************/
     
     /**
-     * @brief
-     * @return 
+     * @brief Fonction qui affiche le menu du Joueur. Et demande à
+     * l'utilisateur de faire un choix.
+     * @return Retourne le choix de l'utilisateur.
      */
     public static int menuPlayer()
     {
@@ -118,8 +124,8 @@ public class Player implements Serializable {
      **************************************************************************/
     
     /**
-     * 
-     * @param game 
+     * @brief Fonction principale du joueur.
+     * @param game : La jeu où le joueur est.
      */
     public static void index(Game game)
     {
@@ -165,8 +171,8 @@ public class Player implements Serializable {
      **************************************************************************/
     
     /**
-     * 
-     * @param game 
+     * @brief Fonction qui affiche le profil du joueur.
+     * @param game : Le jeux où le joueur est.
      */
     public static void showProfilPlayer(Game game)
     {
@@ -195,8 +201,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * @brief Change de joueur parmis la liste proposé
-     * @param game 
+     * @brief Change de joueur parmis la liste proposé.
+     * @param game : Le jeux où le joueur est.
      */
     public static void changePlayer(Game game)
     {
@@ -212,8 +218,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Focntion qui demande à l'utilisateur l'ajout d'un nouveau joueur.
+     * @return Retourne le nouveau joueur ajouté.
      */
     public static Player addPlayer()
     {
@@ -226,7 +232,7 @@ public class Player implements Serializable {
     
     /**
      * @brief Fonction qui demande à l'utilisateur qu'elle joueur supprimer
-     * @param game
+     * @param game : Le jeux où le joueur est.
      */
     public static void deletePlayer(Game game)
     {
@@ -249,7 +255,7 @@ public class Player implements Serializable {
     
     /**
      * @brief Demande à l'utilisateur les données d'un joueur.
-     * @return 
+     * @return Retourne un nouveau joueur.
      */
     public static Player askNew()
     {
@@ -287,8 +293,9 @@ public class Player implements Serializable {
 
     
     /**
-     * @brief Affiche la liste des joueurs enregistrer.
-     * @return 
+     * @brief Fonction qui crée une chaine de la liste des joueurs existant.
+     * @return Retourne une chaine de caractère de la liste des joueurs
+     * existant.
      */
     public static String listPlayer()
     {
@@ -328,8 +335,8 @@ public class Player implements Serializable {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Getter couleur du joueur.
+     * @return Retourne la couleur du joueur.
      */
     public char getColor()
     {
@@ -337,8 +344,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter pseudo du joueur.
+     * @return Retourne le pseudo du joueur.
      */
     public String getPseudo()
     {
@@ -346,8 +353,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter mail du joueur.
+     * @return Retourne le mail du joueur.
      */
     public String getMail()
     {
@@ -355,8 +362,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter année de naissance du joueur.
+     * @return Retourne l'année de naissance du joueur.
      */
     public int getYearOfBirth()
     {
@@ -364,8 +371,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter score du joueur.
+     * @return Retourn le score du joueur.
      */
     public Score getScore()
     {
@@ -373,8 +380,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param color 
+     * @brief Setter couleur du joueur.
+     * @param color : Nouvelle couleur du joueur.
      */
     public void setColor(char color)
     {
@@ -382,8 +389,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param pseudo 
+     * @brief Setter pseudo du joueur.
+     * @param pseudo : Nouveau pseudo du joueur.
      */
     public void setPseudo(String pseudo)
     {
@@ -391,8 +398,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param mail 
+     * @brief Setter mail du joueur.
+     * @param mail : Nouveau mail du joueur.
      */
     public void setMail(String mail)
     {
@@ -400,8 +407,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param yearOfBirth 
+     * @brief Setter année de naissance du joueur.
+     * @param yearOfBirth : Nouvelle année de naissance du joueur.
      */
     public void setYearOfBirth(int yearOfBirth)
     {
@@ -409,8 +416,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param score 
+     * @brief Setter score du joueur.
+     * @param score : Nouveau score du joueur.
      */
     public void setScore(Score score)
     {
@@ -424,8 +431,8 @@ public class Player implements Serializable {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui renvoie le joueur ordinateur.
+     * @return : Retourne un nouveau joueur ordianteur.
      */
     public static Player getPlayerComputer()
     {
@@ -433,8 +440,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * @brief Compte le nombre de joueurs enregistrer.
-     * @return 
+     * @brief Fonction qui compte le nombre de joueurs enregistrer.
+     * @return Retourne le nombre total de joueur enregistré.
      */
     public static int getNumberOfPlayers()
     {
@@ -445,8 +452,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * @brief Indique si la liste des joueurs enregistrer est vide.
-     * @return 
+     * @brief Fonction qui ndique si la liste des joueurs enregistrer est vide.
+     * @return Retourne si la liste des joueurs enregistrer est vide ou non.
      */
     public static boolean emptyPlayer()
     {
@@ -454,9 +461,9 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param color
-     * @return 
+     * @brief Fonction qui renvoie la couleur opposé.
+     * @param color : Couleur initialie.
+     * @return Retourne la couleur opposé à la couleur initiale.
      */
     public static char getOppositeColor(char color)
     {
@@ -468,8 +475,9 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui renvoie un tableau de nom de fichier des joueurs
+     * enregistrer.
+     * @return Retourne la liste des fichiers des joueurs enregistrer.
      */
     public static String[] getNameFilePlayers()
     {
@@ -489,8 +497,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui récupère tout les joueurs enregistrer.
+     * @return Retourne un tableau de joueurs enregistrer.
      */
     public static Player[] getAllPlayers()
     {
@@ -508,9 +516,10 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
-     * @param namePlayer
-     * @return 
+     * @brief Fonction qui renvoie le chemin d'accés au fichier du joueur
+     * enregistrer
+     * @param namePlayer : Nom du fichier ciblé.
+     * @return Retourne une chaine de caractère du chemin d'accés du fichier.
      */
     public static String getPathFilePlayer(String namePlayer)
     {
@@ -524,7 +533,8 @@ public class Player implements Serializable {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Fonction qui met à jour les scores d'un joueur quand une partie
+     * est fini.
      */
     public void noWinner()
     {
@@ -532,7 +542,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
+     * @brief Fonction qui met à jour les scores d'un joueur quand il gagne
+     * une partie
      */
     public void win()
     {
@@ -540,7 +551,8 @@ public class Player implements Serializable {
     }
     
     /**
-     * 
+     * @brief Fontion qui met à jour les scores d'un joueur quand il perd
+     * une partie
      */
     public void loose()
     {
@@ -549,8 +561,8 @@ public class Player implements Serializable {
     
     
     /**
-     * 
-     * @param player 
+     * @brief Fonction qui copie un joueur en fonction d'un autre.
+     * @param player : Joueur à qui copier les données.
      */
     public void copy(Player player)
     {
@@ -558,12 +570,13 @@ public class Player implements Serializable {
         this.pseudo = player.getPseudo();
         this.mail = player.getMail();
         this.yearOfBirth = player.getYearOfBirth();
+        this.score.copy(player.getScore());
     }
     
     /**
-     * 
-     * @param player
-     * @return 
+     * @brief Fonction qui indique si deux joueurs sont identique.
+     * @param player : Joueur avec qui comparer.
+     * @return Retourne si le joueur est identique ou non.
      */
     public boolean equals(Player player)
     {
@@ -571,8 +584,8 @@ public class Player implements Serializable {
     }
     
     /**
-     *
-     * @return
+     * @brief Fonction qui définit un joueur.
+     * @return Retourne une chaine de caractère définissant un joueur.
      */
     @Override
     public String toString()
@@ -589,8 +602,8 @@ public class Player implements Serializable {
      **************************************************************************/
     
     /**
-     * 
-     * @param game 
+     * @brief Fonction qui change la couleur du joueur actuelle dans une partie.
+     * @param game : Le jeu où le joueur est modifier.
      */
     public static void changeColorPlayer(Game game)
     {
@@ -606,9 +619,9 @@ public class Player implements Serializable {
     }
     
     /**
-     * @brief Charge un joueur au lancement du jeu.
-     * @param game
-     * @return 
+     * @brief Fonction qui charge un joueur au lancement du jeu.
+     * @param game : Jeu auquel il faut charger les joueurs.
+     * @return  Retourne le jeux intialiser.
      */
     public static Game loadStartPlayer(Game game)
     {
@@ -624,9 +637,9 @@ public class Player implements Serializable {
     }
     
     /**
-     * @brief Crée un fichier binaire de joueur
-     * @param player
-     * @return 
+     * @brief Fonction qui crée un fichier binaire de joueur.
+     * @param player : Joueur à enregistrer;
+     * @return Retourne si le joueur à bien été enregistré.
      */
     public static boolean add(Player player)
     {
@@ -653,9 +666,9 @@ public class Player implements Serializable {
     }
     
     /**
-     * @brief Supprime un fichier bianire de joueur.
-     * @param number
-     * @return 
+     * @brief Fonction qui supprime un fichier bianire de joueur.
+     * @param number : numéro du fichier à supprimer.
+     * @return Retourne si le fichier à bien été supprimer.
      */
     public static boolean delete(int number)
     {
@@ -679,9 +692,9 @@ public class Player implements Serializable {
     }
     
     /**
-     * @brief Charge le n ieme joueurs de la liste.
-     * @param number
-     * @return 
+     * @brief Fonction qui charge le n ieme joueurs de la liste.
+     * @param number : numéro du fichier à charger.
+     * @return Retourne le joueur chargé.
      */
     public static Player load(int number)
     {
@@ -717,9 +730,9 @@ public class Player implements Serializable {
     }
     
     /**
-     * @param pathFilePlayer
-     * @brief Charge le n ieme joueurs de la liste.
-     * @return 
+     * @brief Fonction qui charge un fichier 
+     * @param pathFilePlayer : Chaine de caractère du fichier à chager.
+     * @return Retourne le joueur chargé.
      */
     public static Player load(String pathFilePlayer)
     {
@@ -735,11 +748,10 @@ public class Player implements Serializable {
                             new FileInputStream(file)));
             try {
                 player = (Player)ois.readObject();
-            } catch (ClassNotFoundException e) {}
+            } catch (ClassNotFoundException e) { return null; }
             ois.close();
-        } catch (FileNotFoundException e) {}
-        catch (IOException e) {}
-        
+        } catch (FileNotFoundException e) {return null; }
+        catch (IOException e) {return null; }
         
         return player;
     }

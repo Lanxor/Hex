@@ -45,3 +45,4 @@ void edge_free(Edge edge)
 {
     free(edge);
 }
+

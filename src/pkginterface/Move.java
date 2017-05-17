@@ -12,9 +12,9 @@ public class Move {
      **************************************************************************/
     
     /**
-     * 
-     * @param player
-     * @param coordinates 
+     * @brief Constructeur par défaut.
+     * @param player : Joueur associé au coup.
+     * @param coordinates : Coordonnée associé au coup.
      */
     public Move(Player player, Coordinates coordinates)
     {
@@ -29,30 +29,30 @@ public class Move {
      **************************************************************************/
     
     /**
-     * 
-     * @param game
-     * @return 
+     * @brief Focntion qui demande à l'utilisateur de saisire un coup,
+     * en fonction du joueur à qui est le tour de jouer.
+     * @param game : Partie a laquel on demande de saisir un coup.
+     * @return Retourne un nouveau coup initialiser.
      */
     public static Move askMove(Game game)
     {
         Player playerCurrent;
         Coordinates coordinates;
-        Move move;
         
-        if ( game.getwhoPlay() )
+        if ( game.getWhoPlay() )
             playerCurrent = game.getPlayerCurrent();
         else
             playerCurrent = game.getPlayer2();
-        coordinates = Coordinates.askCoordinates(game);
-        move = new Move(playerCurrent, coordinates);
+        coordinates = Coordinates.askCoordinates(game.getDeck().getSize());
         
-        return move;
+        return new Move(playerCurrent, coordinates);
     }
     
     /**
-     * 
-     * @param color
-     * @param coordinates 
+     * @brief Fonction qui joue un coup sans vérification préalable. Est 
+     * utiliser pour l'annulation d'un coup.
+     * @param color : Couleur du coup jouer.
+     * @param coordinates : Coordonnée à manipuler.
      */
     public static void play(char color, Coordinates coordinates)
     {
@@ -68,8 +68,8 @@ public class Move {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Getter joueur du coup.
+     * @return Retourne le joueur du coup.
      */
     public Player getPlayer()
     {
@@ -77,8 +77,8 @@ public class Move {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter coordonnées du coup.
+     * @return Retourne les coordonnées d'un coup.
      */
     public Coordinates getCoordinates()
     {
@@ -86,8 +86,8 @@ public class Move {
     }
     
     /**
-     * 
-     * @param player 
+     * @brief Setter joueur du coup.
+     * @param player : Nouveau joueur du coup.
      */
     public void setPlayer(Player player)
     {
@@ -95,8 +95,8 @@ public class Move {
     }
     
     /**
-     * 
-     * @param coordinates 
+     * @brief Setter coordonnées du coup.
+     * @param coordinates : Nouvelle coordonnées du coup.
      */
     public void setCoordinates(Coordinates coordinates)
     {
@@ -110,8 +110,8 @@ public class Move {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui joue un coup.
+     * @return Retourne si le coup à bien été jouer ou non.
      */
     public boolean play()
     {
@@ -126,8 +126,8 @@ public class Move {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui définit un coup.
+     * @return Retourne une chaine de caractère définissant un coup.
      */
     @Override
     public String toString()
@@ -144,8 +144,8 @@ public class Move {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui vérifie si un coup est valide.
+     * @return Retourne si le coup est valide ou non.
      */
     public boolean isValid()
     {
@@ -156,14 +156,5 @@ public class Move {
                                     this.coordinates.getAbscisse() - 1,
                                     this.coordinates.getOrdonnee() - 1);
         return coordinatesValid == 1;
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-    public boolean isNull()
-    {
-        return this.coordinates.isZero();
     }
 }

@@ -19,8 +19,10 @@ Vertice vertice_create(char color, int abscisse,
     vertice->color = color;
     vertice->abscisse = abscisse;
     vertice->ordonnee = ordonnee;
+    
     vertice->group = group_create();
     vertice->group = group_insert(vertice_group, vertice);
+
     return vertice;
 }
 

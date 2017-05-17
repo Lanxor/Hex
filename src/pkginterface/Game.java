@@ -17,7 +17,7 @@ public class Game {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Constructeur par défaut.
      */
     public Game()
     {
@@ -31,9 +31,9 @@ public class Game {
     }
     
     /**
-     * 
-     * @param playerCurrent
-     * @param player2 
+     * @brief Constructeur
+     * @param playerCurrent : Joueur courant qui lance le jeu.
+     * @param player2  : Joueur secondaire avec qui le joueur courant joue.
      */
     public Game(Player playerCurrent, Player player2)
     {
@@ -49,10 +49,10 @@ public class Game {
     }
     
     /**
-     * 
-     * @param size
-     * @param playerCurrent
-     * @param player2 
+     * @brief Constructeur
+     * @param size : Taille du tablier de jeu.
+     * @param playerCurrent : Joueur courant qui lance le jeu.
+     * @param player2  : Joueur secondaire avec qui le joueur courant joue.
      */
     public Game(int size, Player playerCurrent, Player player2)
     {
@@ -74,10 +74,13 @@ public class Game {
      **************************************************************************/
     
     /**
-     * 
-     * @param numberOfRound
-     * @param historicBis
-     * @return 
+     * @brief Fonction qui affiche le menu et demande à l'utilisateur
+     * quel choix il souhaite.
+     * @param numberOfRound : Numéro du tour, pour connaitre si le joueur
+     * à le droit de revenir en arrière ou changer de couleur.
+     * @param historicBis : Savoir si une demande de coup antérieur à été
+     * effectuer.
+     * @return Retourne le choix de l'utilsateur.
      */
     public static int menu(int numberOfRound, boolean historicBis)
     {
@@ -171,8 +174,9 @@ public class Game {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Affiche le menu secondaire pour savoir quel type de partie
+     * il souhaite effectuer.
+     * @return Retourne le choix de l'utilisateur. 
      */
     public static int menuOpponent()
     {
@@ -198,7 +202,8 @@ public class Game {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Fonction principale de la partie, qui permet de gérer la création
+     * de partie. 
      */
     public void index()
     {
@@ -248,7 +253,8 @@ public class Game {
     }
     
     /**
-     * 
+     * @brief Focntionprincipale de la partie, qui permet de charger une partie
+     * sauvegarder.
      */
     public void indexLoad()
     {
@@ -257,7 +263,7 @@ public class Game {
         
         oldPlayer = this.playerCurrent;
         Interface.showMessage("Voici la liste des sauvegarde.\n");
-        Interface.showMessage(Saveguard.getListSaveguard());
+        Interface.printMenu(Saveguard.getListSaveguard());
         numberMaxSaveguards = Saveguard.getNumberOfSaveguard();
         Interface.showMessage("0 : Retour\n");
         Interface.showMessage("Choix : ");
@@ -280,11 +286,10 @@ public class Game {
     }
     
     /**
-     * 
+     * @brief Fonction qui permet de jouer à un jeu intialiser.
      */
     public void play()
     {
-        Move move;
         boolean leave, winner;
         
         leave = false;
@@ -367,8 +372,8 @@ public class Game {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui demande à l'utilisateur de jouer un coup.
+     * @return Retourne si le coup est correcte ou non.
      */
     public boolean playMove() // Case 1
     {
@@ -381,8 +386,9 @@ public class Game {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui demande à la partie de se sauvegarder dans un
+     * fichier.
+     * @return Retourne si la partie à bien été enregistrer.
      */
     public boolean save()
     {
@@ -390,8 +396,9 @@ public class Game {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui demande à l'utilisateur de combien de coup il veux
+     * revenir en arrière et reviens en arrière du nombre de coup demander.
+     * @return Retourne si le retour en arrière à bien été effectué.
      */
     public boolean goBack()
     {
@@ -410,8 +417,9 @@ public class Game {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Fonction qui demande à l'utilisateur de combien de coup il veux
+     * revenir en avant et reviens en avant du nombre de coup demander.
+     * @return Retourne si le retour en avant à bien été effectué.
      */
     public boolean goFront()
     {
@@ -430,7 +438,8 @@ public class Game {
     }
     
     /**
-     * 
+     * @brief Fonction qui met à jour les scores des joueurs en fonctions
+     * du résulatat de la partie.
      */
     public void endGame()
     {
@@ -461,7 +470,7 @@ public class Game {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Fonction qui affiche quel utilisateur doit jouer.
      */
     public void showWhoPlay()
     {
@@ -476,7 +485,7 @@ public class Game {
     }
     
     /**
-     * 
+     * @brief Fonction qui affiche le tablier de jeu.
      */
     public void showDeck()
     {
@@ -491,8 +500,8 @@ public class Game {
      **************************************************************************/
     
     /**
-     * 
-     * @return 
+     * @brief Getter historique.
+     * @return Retourne l'historique de la partie.
      */
     public Historic getHistoric()
     {
@@ -500,8 +509,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter tablier.
+     * @return Retourne le tablier de jeu de la partie.
      */
     public Deck getDeck()
     {
@@ -509,8 +518,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter joueur courant(principale).
+     * @return Retourne le joueur courant de la partie.
      */
     public Player getPlayerCurrent()
     {
@@ -518,8 +527,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter joueur secondaire.
+     * @return Retourne le joueur secondaire.
      */
     public Player getPlayer2()
     {
@@ -527,17 +536,17 @@ public class Game {
     }
     
     /**
-     * 
-     * @return 
+     * @biref Getter quel joueur doit jouer.
+     * @return Retourne quel joueur c'est au tour de jouer.
      */
-    public boolean getwhoPlay()
+    public boolean getWhoPlay()
     {
         return this.whoPlay;
     }
     
     /**
-     * 
-     * @return 
+     * @brief Getter nombre de tour de la partie.
+     * @return Retourne le nombre de tour de la partie.
      */
     public int getNumberOfRound()
     {
@@ -545,8 +554,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @param historic 
+     * @brief Setter historique de la partie.
+     * @param historic : Historique de la partie.
      */
     public void setHistoric(Historic historic)
     {
@@ -554,8 +563,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @param deck 
+     * @brief Setter tablier.
+     * @param deck : Tablier de la partie.
      */
     public void setDeck(Deck deck)
     {
@@ -563,8 +572,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @param player 
+     * @brief Setter joueur courant.
+     * @param player : Joueur de la partie.
      */
     public void setPlayerCurrent(Player player)
     {
@@ -572,8 +581,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @param player 
+     * @brief Setter joueur secondaire
+     * @param player : Joueur secondaire de la partie.
      */
     public void setPlayer2(Player player)
     {
@@ -581,8 +590,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @param whoPlay 
+     * @brief Setter quel joueur doit jouer.
+     * @param whoPlay : Quel joueur doit jouer
      */
     public void setwhoPlay(boolean whoPlay)
     {
@@ -590,8 +599,8 @@ public class Game {
     }
     
     /**
-     * 
-     * @param numberOfRound 
+     * @brief Setter nombre de tour.
+     * @param numberOfRound : Nombre de tour de la partie.
      */
     public void setNumberOfRound(int numberOfRound)
     {
@@ -605,7 +614,7 @@ public class Game {
      **************************************************************************/
     
     /**
-     * 
+     * @brief Focntion qui inverse le joueur à qui de jouer.
      */
     public void switchPlayer()
     {
@@ -613,9 +622,9 @@ public class Game {
     }
     
     /**
-     * 
-     * @param move
-     * @return 
+     * @brief Fonction qui joue un coup.
+     * @param move : Coup à jouer.
+     * @return Retourne si le coup à bien été jouer ou non.
      */
     public boolean playMove(Move move)
     {
@@ -628,9 +637,9 @@ public class Game {
     }
     
     /**
-     * 
-     * @param number
-     * @return 
+     * @brief Fonction qui reviens en arrière en annulant des coups.
+     * @param number : Nombre de coup à annuler.
+     * @return Retourne si les coups on bien été annulés.
      */
     private boolean goBackN(int number)
     {
@@ -648,9 +657,9 @@ public class Game {
     }
     
     /**
-     * 
-     * @param number
-     * @return 
+     * @brief Fonction qui reviens en avant en rejouant des coups joué.
+     * @param number : Nombre de coup à rejouer.
+     * @return Retourne si les coups on bien été rejoués.
      */
     private boolean goFrontN(int number)
     {
@@ -670,7 +679,8 @@ public class Game {
     }
     
     /**
-     * 
+     * @brief Fonction qui inverse la couleur des deux joueurs. La modification
+     * ne s'applique que sur la partie en cours.
      */
     public void changeColor()
     {

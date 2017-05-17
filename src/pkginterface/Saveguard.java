@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 
 public class Saveguard {
     
+    // DO NOT EDIT THIS LINE PLEASE
     private static final String FOLDER_SAVEGUARDS = "../save/";
     
     /***************************************************************************
@@ -21,8 +22,8 @@ public class Saveguard {
      **************************************************************************/
 
     /**
-     * 
-     * @return 
+     * @brief Fonction qui génère le nom d'un fichier de sauvegarde de partie.
+     * @return Retourne la chaine de caractère du fichier de sauvegarde.
      */
     public static String getNameFileSaveguard()
     {
@@ -40,9 +41,9 @@ public class Saveguard {
     }
     
     /**
-     * 
-     * @param number
-     * @return 
+     * @brief Fonction qui récupère un fichier de sauvegarde.
+     * @param number : Numéro du fichier à récuppérer.
+     * @return Retourne le fichier demandé.
      */
     public static File getFileSaveguard(int number)
     {
@@ -67,9 +68,10 @@ public class Saveguard {
     }
     
     /**
-     * 
-     * @param game
-     * @return 
+     * @brief Fonction qui génère la chaine de caractère d'une partie de jeu.
+     * @param game : Jeu auquel on joue.
+     * @return Retourne la chaine de caractère de la sauvegarde au format
+     * demandé.
      */
     public static String getFormatSaveguard(Game game)
     {
@@ -85,30 +87,30 @@ public class Saveguard {
     }
     
     /**
-     * 
-     * @return 
+     * @brief Focntion qui récupère la liste des fichiers de sauvegarde. 
+     * @return Retourne la list des fichiers de sauvegarde.
      */
-    public static String getListSaveguard()
+    public static String[] getListSaveguard()
     {
         File folder;
-        String str;
-        int numberOfSaveguards;
+        String list[];
+        int count;
         
-        str = "";
-        numberOfSaveguards = 1;
+        list = new String[Saveguard.getNumberOfSaveguard()];
+        count = 0;
         folder = new File(FOLDER_SAVEGUARDS);
         for ( File file : folder.listFiles())
         {
             try {
-                str +=  numberOfSaveguards++ + " : " + file.getName() + "\n";
+                list[count++] = file.getName() + "\n";
             } catch (NullPointerException e) { return null; }
         }
-        return str;
+        return list;
     }
     
     /**
-     * @brief Compte le nombre de sauvegarde enregistrer.
-     * @return 
+     * @brief Fonction qui compte le nombre de sauvegarde enregistrer.
+     * @return Retourne le nombre de fichier de sauvegarde.
      */
     public static int getNumberOfSaveguard()
     {
@@ -119,8 +121,8 @@ public class Saveguard {
     }
     
     /**
-     * @brief Indique si la liste des sauvegardes enregistrer est vide.
-     * @return 
+     * @brief Fonction qui indique si la liste des sauvegardes enregistrer est vide.
+     * @return Retourne si la liste de sauvegarde est vide ou non.
      */
     public static boolean emptySaveguard()
     {
@@ -134,9 +136,9 @@ public class Saveguard {
      **************************************************************************/
     
     /**
-     * 
-     * @param game
-     * @return 
+     * @brief Fonction qui ajoute une sauvegarde.
+     * @param game : Le jeu à sauvegarder.
+     * @return Retourne si la partie à bien été sauvegarder ou non.
      */
     public static boolean addSaveguard(Game game)
     {
@@ -167,10 +169,10 @@ public class Saveguard {
     }
     
     /**
-     * 
-     * @param game
-     * @param number
-     * @return 
+     * @brief Fonction qui charge une sauvegarde.
+     * @param game : Partie à charger.
+     * @param number : Numéro de la partie à charger.
+     * @return Retourne si la partie à été charger ou non.
      */
     public static boolean loadSaveguard(Game game, int number)
     {
@@ -200,10 +202,10 @@ public class Saveguard {
     }
     
     /**
-     * 
-     * @param file
-     * @param game
-     * @return 
+     * @brief Fonction qui charge la taille d'un tablier.
+     * @param file : Fichier à charger.
+     * @param game : Game à charger.
+     * @return Retourne si la taille à bien été charger.
      */
     private static boolean loadSizeFile(File file, Game game)
     {
@@ -252,10 +254,10 @@ public class Saveguard {
     }
     
     /**
-     * 
-     * @param fileSaveguard
-     * @param game
-     * @return 
+     * @brief Fonction qui charge les joueurs du partie.
+     * @param fileSaveguard : Fichier à charger.
+     * @param game : Partie à charger.
+     * @return Retourne si la partie à bien été charger ou non.
      */
     private static boolean loadPlayersSaveguard(File fileSaveguard, Game game)
     {
@@ -342,10 +344,10 @@ public class Saveguard {
     }
     
     /**
-     * 
-     * @param fileSaveguard
-     * @param game
-     * @return 
+     * @brief Fonction qui charge tout les coups d'une partie.
+     * @param fileSaveguard : Fichier à charger.
+     * @param game : Partie à charger.
+     * @return Retourne si tout les coups on été charger.
      */
     private static boolean loadMovesSaveguard(File fileSaveguard, Game game)
     {
@@ -421,22 +423,6 @@ public class Saveguard {
         }
         
         return isValid;
-    }    
-    
-    /***************************************************************************
-     *                                                                         *
-     *                                             Functions Static validation *
-     *                                                                         *
-     **************************************************************************/
-    
-    /**
-     * 
-     * @param fileSaveguard
-     * @return 
-     */
-    public static boolean isValid(File fileSaveguard)
-    {
-        return true;
     }
     
 }
