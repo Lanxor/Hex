@@ -8,13 +8,15 @@
 optionC="-fPIC"
 optionJava=""
 pathLocal=`pwd`
+pathSaveguards="save"
+pathPlayer="player"
+pathSource="src"
+pathClass="class"
+pathObject="obj"
+pathLibrary="lib"
 namePakage="pkginterface"
 nameFileLib="libInterfaceC.so"
 nameFileConfig="config.conf"
-nameFolderClass="class"
-nameFolderObject="obj"
-nameFolderLib="lib"
-
 
 if [ -d "/usr/lib/jvm/java-8-openjdk-amd64" ]; then
   pathJni="/usr/lib/jvm/java-8-openjdk-amd64"
@@ -52,87 +54,97 @@ exist_folder()
 delete_file()
 {
   if [ -f "$1" ]; then
+    echo "Suppression du fichier : $1"
     rm "$1"
   fi
 }
 
 compile_c_file()
 {
-  gcc "${optionC}" -I"${pathJni}/include" -I"${pathJni}/include/linux" -c "$1"
+  if [ -f "$1" ]; then
+    echo -e "\tFile $1"
+    gcc "${optionC}" -I"${pathJni}/include" -I"${pathJni}/include/linux" -c "$1"
+  fi
 }
 
 compile_c()
 {
-  echo -e "\tFile vertice.c"
-  compile_c_file "src/vertice.c"
-
-  echo -e "\tFile edge.c"
-  compile_c_file "src/edge.c"
-
-  echo -e "\tFile deck.c"
-  compile_c_file "src/deck.c"
-
-  echo -e "\tFile group.c"
-  compile_c_file "src/group.c"
-
-  echo -e "\tMove it to ${nameFolderObject}/"
-  exist_folder "${nameFolderObject}"
-  mv *.o "${nameFolderObject}"
+  for file in "${pathSource}/"*; do
+    if [ -f "${file}" -a "${file}" != "${pathSource}/Makefile" ]; then
+      compile_c_file "${file}"
+    fi
+  done
+  echo -e "\tMove it to ${pathObject}/"
+  exist_folder "${pathObject}"
+  mv *.o "${pathObject}"
 }
 
 compile_java()
 {
-  javac "src/${namePakage}/"*".java"
-  for file in "src/${namePakage}/"*".java"; do
+  javac "${pathSource}/${namePakage}/"*".java"
+  for file in "${pathSource}/${namePakage}/"*".java"; do
     echo -e "\tFile $file"
   done
-  exist_folder "${nameFolderClass}"
-  exist_folder "${nameFolderClass}/${namePakage}"
-  mv "src/${namePakage}/"*".class" "${nameFolderClass}/${namePakage}/"
+  exist_folder "${pathClass}"
+  exist_folder "${pathClass}/${namePakage}"
+  mv "${pathSource}/${namePakage}/"*".class" "${pathClass}/${namePakage}/"
 }
 
 compile_interface()
 {
-  cd "src"
+  cd "${pathSource}"
   echo -e "\tCreate header file"
   javah "${namePakage}.InterfaceJavaC"
   cd ".."
   echo -e "\tMove it to header/"
-  mv "src/${namePakage}_InterfaceJavaC.h" "header/"
+  mv "${pathSource}/${namePakage}_InterfaceJavaC.h" "header/"
 
-  echo -e "\tFile interfaceCJava.c"
-  compile_c_file "src/interfaceCJava.c"
-  exist_folder "${nameFolderObject}"
-  mv *.o "${nameFolderObject}"
+  compile_c_file "${pathSource}/interfaceCJava.c"
+  exist_folder "${pathObject}"
+  mv *.o "${pathObject}"
 }
 
 compile_lib()
 {
   sed -i -e "/^\tSystem.load/d" "src/${namePakage}/InterfaceJavaC.java"
-  sed -i "/\/\/ DO NOT EDIT THIS LINE PLEASE/a\\\tSystem.load(\"${pathLocal}/${nameFolderLib}/${nameFileLib}\");" "src/${namePakage}/InterfaceJavaC.java"
+  sed -i "/\/\/ DO NOT EDIT THIS LINE PLEASE/a\\\tSystem.load(\"${pathLocal}/${pathLibrary}/${nameFileLib}\");" "src/${namePakage}/InterfaceJavaC.java"
   echo -e "\tFile ${nameFileLib}"
-  gcc -shared -o "${nameFileLib}" "${nameFolderObject}/"*
-  echo -e "\tMove it to ${nameFolderLib}/"
-  mv "${nameFileLib}" "${nameFolderLib}/"
+  gcc -shared -o "${nameFileLib}" "${pathObject}/"*
+  echo -e "\tMove it to ${pathLibrary}/"
+  mv "${nameFileLib}" "${pathLibrary}/"
 }
 
 clean_c()
 {
-  for file in "${nameFolderObject}/"*".o"; do
+  for file in "${pathObject}/"*".o"; do
     delete_file "$file"
   done
 }
 
 clean_java()
 {
-  for file in "${nameFolderClass}/${namePakage}/"*".class"; do
+  for file in "${pathClass}/${namePakage}/"*".class"; do
     delete_file "$file"
   done
 }
 
 clean_lib()
 {
-  delete_file "${nameFolderLib}/${nameFileLib}"
+  delete_file "${pathLibrary}/${nameFileLib}"
+}
+
+clean_player()
+{
+  for file in "${pathPlayer}/"*; do
+    delete_file "${file}"
+  done
+}
+
+clean_saveguards()
+{
+  for file in "${pathSaveguards}/"*; do
+    delete_file "${file}"
+  done
 }
 
 ################################################################################
@@ -195,8 +207,8 @@ if [ "$1" == "play" ]; then
 fi
 
 if [ "$1" == "remove" ]; then
-  rm save/*
-  rm player/*
+  clean_player
+  clean_saveguards
 fi
 
 exit 0
