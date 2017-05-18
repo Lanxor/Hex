@@ -60,11 +60,25 @@ int vertice_get_ordonnee(Vertice vertice);
 char vertice_get_color(Vertice vertice);
 
 /**
+ * @brief Fonction qui retourne le groupe du sommet.
+ * @param vertice : Le sommet où il faut chercher.
+ * @return Retourne le groupe du sommet.
+ */
+Group vertice_get_group(Vertice vertice);
+
+/**
  * @brief Fonction qui modifie la couleur d'un sommet.
  * @param vertice : Le sommet à modifier.
  * @param color : La couleur à modifier.
  */
 void vertice_set_color(Vertice vertice , char color);
+
+/**
+ * @brief Fonction qui modifie le groupe d'un sommet.
+ * @param vertice : Le sommet à modifier.
+ * @param group : Le groupe a inclure.
+ */
+void vertice_set_group(Vertice vertice, Group group);
 
 /**
  * @brief Fonction qui affiche les coordonées d'un sommet.
@@ -89,6 +103,14 @@ void vertice_delete(Vertice vertice);
  * @param vertice : Le sommet à libérer.
  */
 void vertice_free(Vertice vertice);
+
+/**
+ * @brief Fonction mettant à jour le groupe d'un sommet en fonction de ses voisins
+ * @param vertice : Le sommet a mettre à jour.
+ * @param deck : Le tablier du jeu en cour.
+ * @return Retourne le sommet mis à jour.
+ */
+Vertice vertice_update_group(Vertice vertice, Deck deck);
 
 #endif
 
