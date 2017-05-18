@@ -697,18 +697,9 @@ public class Game {
         
         this.playerCurrent.changeColor();
         this.player2.changeColor();
-        
-        Interface.showMessage(this.historic.toString());
-        Interface.showMessage("On supprime le dernier Move...\n");
         move = this.historic.deleteLastMove();
-        Interface.showMessage(this.historic.toString());
-        Interface.showMessage("On modifie le move...\n");
         move.setPlayer(player2);
-        Interface.showMessage(this.historic.toString());
-        Interface.showMessage("On rajoute le move modifier...\n");
         this.historic.addMove(move);
-        Interface.showMessage(this.historic.toString());
-        
         this.whoPlay = !this.whoPlay;
     }
 }
