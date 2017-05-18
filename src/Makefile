@@ -1,18 +1,8 @@
 all:
 
-<<<<<<< HEAD
-testc: test_compile test_deck clean_c
-
 testjava: test_java_coordinates test_java_player clean_java
 
-test_compile:
-	gcc -c deck.c vertice.c edge.c group.c
-
-test_deck:
-	gcc test_deck.c -o test_deck.exe
-=======
 testjava: compile_java tj_coordinates tj_historic tj_score tj_deck tj_move clean
->>>>>>> a91731a86ac61e2e841f87fbb5a14c933271295f
 
 compile_java:
 	javac pkginterface/*.java
