@@ -1,10 +1,20 @@
 package pkginterface;
 
-public class Deck {
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+public class Deck extends JPanel {
     
     private static final int MIN_SIZE = 2;
     private static final int MAX_SIZE = 19;
     private int size;
+    private int xstart;
+    private int ystart;
     
     /***************************************************************************
      *                                                                         *
@@ -19,6 +29,8 @@ public class Deck {
     public Deck(int size)
     {
         this.size = size;
+        this.xstart = 400 - 18 * size;
+        this.ystart = 120;
     }
     
     /***************************************************************************
@@ -33,7 +45,7 @@ public class Deck {
      */
     public void createDeckC()
     {
-        InterfaceJavaC.createDeck(this.getSize());
+        InterfaceJavaC.createDeck(this.getSizeDeck());
     }
     
     /**
@@ -70,11 +82,61 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * @brief Focntion qui affiche le plateau de jeu.
+     * @brief Fonntion qui affiche le plateau de jeu en console.
      */
     public void print()
     {
         System.out.println(this.toString());
+    }
+    
+    /**
+     * @brief Fonction qui affiche le plateau de jeu sur la fenêtre
+     */
+    public void paintComponent(Graphics g){
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 800, 600);
+        int x = xstart;
+        int y = ystart;
+        char color;
+        try {
+            Image title = ImageIO.read(new File("title.png"));
+            g.drawImage(title, 0, 0, this);
+            Image hv = ImageIO.read(new File("hv.png"));
+            Image hvtop = ImageIO.read(new File("hvtop.png"));
+            Image hvbottom = ImageIO.read(new File("hvbottom.png"));
+            Image hvright = ImageIO.read(new File("hvright.png"));
+            Image hvleft = ImageIO.read(new File("hvleft.png"));
+            Image hb = ImageIO.read(new File("hb.png"));
+            Image hw = ImageIO.read(new File("hw.png"));
+            for (int abs = 1; abs <= this.size; ++abs){
+                for (int ord = 0; ord < this.size; ++ord){
+                    /* rajouter if pour savoir couleur */
+                    color = InterfaceJavaC.getVerticeColor(abs-1, ord);
+                    switch (color) {
+                        case 'b':
+                            g.drawImage(hb, x, y, this);
+                            break;
+                        case 'w':
+                            g.drawImage(hw, x, y, this);
+                            break;
+                        default :
+                            if (abs == 1){
+                                g.drawImage(hvtop, x, y, this);
+                            }else if (ord == 0){
+                                g.drawImage(hvleft, x, y, this);
+                            }else{
+                                g.drawImage(hv, x, y, this);
+                            }
+                            break;
+                    }
+                    x = x + 25;
+                }
+                x = xstart + 13 * abs;
+                y = y + 21;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     /***************************************************************************
@@ -121,7 +183,7 @@ public class Deck {
      * @brief Getter size.
      * @return Retourne la taille du plateau.
      */
-    public int getSize(){
+    public int getSizeDeck(){
         return this.size;
     }
     
