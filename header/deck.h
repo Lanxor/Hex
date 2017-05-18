@@ -15,6 +15,7 @@
 #include "vertice.h"
 #include "edge.h"
 #include "group.h"
+#include "listGroup.h"
 
 
 /**
@@ -122,5 +123,29 @@ int deck_vertice_modify_is_possible(Deck deck, char color, int abscisse, int ord
  * @param ordonnee : Ordonnée du sommet à modifier.
  */
 void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee);
+
+/**
+ * @brief Fonction mettant à jour le groupe d'un sommet en fonction de ses voisins
+ * @param vertice : Le sommet a mettre à jour.
+ * @param deck : Le tablier du jeu en cour.
+ * @return Retourne le sommet mis à jour.
+ */
+Vertice vertice_update_group(Vertice vertice, Deck deck);
+
+/**
+ * @brief Donne la couleur du gagnant dans le groupe (si il y en a un)
+ * @param initialGroup : Groupe a inspecter
+ * @param deck : tablier du jeu en cour
+ * @return Retourne la couleur du gagnant (TRANSPARENT si aucun gagnant)
+ */
+char group_who_win(Group initialGroup, Deck deck);
+
+/**
+ * @brief Indique si il y a un gagnant dans le groupe
+ * @param initialGroup : Groupe a inspecter
+ * @param deck : tablier du jeu en cour
+ * @return Retourne 1 si il y a un gagnant, 0 sinon
+ */
+int group_winner(Group initialGroup, Deck deck);
 
 #endif

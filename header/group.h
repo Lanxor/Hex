@@ -13,7 +13,6 @@
 #include <assert.h>
 
 #include "vertice.h"
-#include "deck.h"
 
 /**
  * @brief Structure des groupes de jeu.
@@ -61,21 +60,7 @@ char group_color(Group initialGroup);
  */
 Group group_fusion(Group firstGroup, Group secondGroup);
 
-/**
- * @brief Donne la couleur du gagnant dans le groupe (si il y en a un)
- * @param initialGroup : Groupe a inspecter
- * @param deck : tablier du jeu en cour
- * @return Retourne la couleur du gagnant (TRANSPARENT si aucun gagnant)
- */
-char group_who_win(Group initialGroup, Deck deck);
 
-/**
- * @brief Indique si il y a un gagnant dans le groupe
- * @param initialGroup : Groupe a inspecter
- * @param deck : tablier du jeu en cour
- * @return Retourne 1 si il y a un gagnant, 0 sinon
- */
-int group_winner(Group initialGroup, Deck deck);
 
 
 

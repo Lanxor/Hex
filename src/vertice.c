@@ -5,7 +5,6 @@ typedef struct    s_vertice
     char          color;
     int           abscisse;
     int           ordonnee;
-    Group         group;
 } t_vertice;
 
 Vertice vertice_create(char color, int abscisse,
@@ -19,10 +18,6 @@ Vertice vertice_create(char color, int abscisse,
     vertice->color = color;
     vertice->abscisse = abscisse;
     vertice->ordonnee = ordonnee;
-    
-    vertice->group = group_create();
-    vertice->group = group_insert(vertice->group, vertice);
-
     return vertice;
 }
 
@@ -49,20 +44,12 @@ char vertice_get_color(Vertice vertice)
   return (vertice->color);
 }
 
-Group vertice_get_group(Vertice vertice)
-{
-  return (vertice->group);
-}
 
 void vertice_set_color(Vertice vertice , char color)
 {
   vertice->color = color;
 }
 
-void vertice_set_group(Vertice vertice, Group group)
-{
-  vertice->group = group;
-}
 
 void vertice_print_coordinates(Vertice vertice)
 {
@@ -85,39 +72,3 @@ void vertice_free(Vertice vertice)
     free(vertice);
 }
 
-Vertice vertice_update_group(Vertice vertice, Deck deck)
-{
-  int     numberOfEdges;
-  Vertice firstVertice;
-  Vertice secondVertice;
-  
-  numberOfEdges = deck_get_number_edge(deck->size);
-  for (int cpt = 0; cpt < numberOfEdges; ++cpt)
-  {
-    firstVertice = edge_get_vertice_first(deck->set_edges[cpt]);
-    secondVertice = edge_get_vertice_second(deck->set_edges[cpt])
-    if ( firstVertice == vertice)
-    {
-      if (vertice_get_color(secondVertice)
-              == vertice_get_color(vertice) 
-              && vertice_get_color(vertice) != TRANSPARENT)
-      {
-        if (vertice_get_group(secondVertice) != vertice_get_group(vertice))
-          vertice_set_group(vertice, 
-                            group_fusion(vertice_get_group(secondVertice), vertice->group));
-      }
-    }
-    else if (secondVertice == vertice)
-    {
-      if (vertice_get_color(firstVertice)
-              == vertice_get_color(vertice) 
-              && vertice_get_color(vertice) != TRANSPARENT)
-      {
-        if (vertice_get_group(firstVertice) != vertice_get_group(vertice))
-          vertice_set_group(vertice, 
-                           group_fusion(vertice_get_group(firstVertice), vertice->group));
-      }
-    }
-  }
-  return (vertice);
-}

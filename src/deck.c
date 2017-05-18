@@ -9,6 +9,7 @@ typedef struct s_deck
   Vertice       black_2;
   Vertice       *set_vertices;
   Edge          *set_edges;
+  LDG           set_groups;
 } t_deck;
 
 Deck deck_create(int size)
@@ -193,6 +194,11 @@ int deck_get_number_edge( int size)
   return ((4 * size) + ((3 * size) * (size - 2)) + (size * 2 + 1));
 }
 
+int deck_get_size(Deck deck)
+{
+  return (deck->size);
+}
+
 void deck_delete(Deck deck)
 {
   vertice_delete(deck->white_1);
@@ -225,12 +231,84 @@ void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
 {
   vertice_set_color(deck_get_vertice(deck, abscisse, ordonnee), color);
 }
-
-int deck_winner(Deck deck)
+/*
+Vertice vertice_update_group(Vertice vertice, Deck deck)
 {
-  for (int cpt = 0; cpt < deck->number_groups; ++cpt)
+  int     numberOfEdges;
+  Vertice firstVertice;
+  Vertice secondVertice;
+  
+  numberOfEdges = deck_get_number_edge(deck_get_size(deck));
+  for (int cpt = 0; cpt < numberOfEdges; ++cpt)
   {
-    NULL;//if ()
+    firstVertice = edge_get_vertice_first(deck->set_edges[cpt]);
+    secondVertice = edge_get_vertice_second(deck->set_edges[cpt]);
+    if ( firstVertice == vertice)
+    {
+      if (vertice_get_color(secondVertice)
+              == vertice_get_color(vertice) 
+              && vertice_get_color(vertice) != TRANSPARENT)
+      {
+        if (vertice_get_group(secondVertice) != vertice_get_group(vertice))
+          vertice_set_group(vertice, group_fusion(vertice_get_group(secondVertice), vertice->group));
+      }
+    }
+    else if (secondVertice == vertice)
+    {
+      if (vertice_get_color(firstVertice)
+              == vertice_get_color(vertice) 
+              && vertice_get_color(vertice) != TRANSPARENT)
+      {
+        if (vertice_get_group(firstVertice) != vertice_get_group(vertice))
+          vertice_set_group(vertice, group_fusion(vertice_get_group(firstVertice), vertice->group));
+      }
+    }
   }
-  return(1);
+  return (vertice);
 }
+*/
+/*
+char group_who_win(Group initialGroup, Deck deck)
+{
+  Vertice   firstBorder;
+  Vertice   secondBorder;
+  int       isWinner;
+  
+  firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+  secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+  isWinner = 0;
+  
+  if (firstBorder != NULL && secondBorder != NULL)
+  {
+    for (int cpt = 0; cpt < group_get_number(initialGroup); ++cpt)
+      if (initialGroup->list_vertice[cpt] == firstBorder || initialGroup->list_vertice[cpt] == secondBorder )
+        ++isWinner;
+  } 
+  if (isWinner == 2)
+    return(group_color(initialGroup));
+  else
+    return(TRANSPARENT);
+}
+
+int group_winner(Group initialGroup, Deck deck)
+{
+  Vertice   firstBorder;
+  Vertice   secondBorder;
+  int       isWinner;
+  
+  firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+  secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+  isWinner = 0;
+  
+  if (firstBorder != NULL && secondBorder != NULL)
+  {
+    for (int cpt = 0; cpt < initialGroup->number_vertice; ++cpt)
+      if (initialGroup->list_vertice[cpt] == firstBorder || initialGroup->list_vertice[cpt] == secondBorder )
+        ++isWinner;
+  } 
+  if (isWinner == 2)
+    return(1);
+  else
+    return(0);
+}
+*/

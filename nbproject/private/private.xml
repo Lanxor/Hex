@@ -5,19 +5,18 @@
         <group>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/tests/test_group.c</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/header/group.h</file>
-            <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/tests/test_edge.c</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/group.c</file>
+            <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/tests/test_edge.c</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/tests/test_create.c</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/tests/test_deck.c</file>
-            <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/main.c</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/header/edge.h</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/deck.c</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/tests/Makefile</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/edge.c</file>
+            <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/vertice.c</file>
+            <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/tests/test_vertice.c</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/header/deck.h</file>
             <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/header/vertice.h</file>
-            <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/tests/test_vertice.c</file>
-            <file>file:/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/src/vertice.c</file>
         </group>
     </open-files>
 </project-private>
