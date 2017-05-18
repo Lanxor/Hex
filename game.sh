@@ -233,7 +233,7 @@ fi
 
 if [ "$1" == "play" ]; then
 
-  if [ ! -f "class/${namePakage}/Interface.class" ]; then
+  if [ executable == 0 ]; then
     echo "Can't play..."
     echo "Please compile the project before to start it"
     echo "Thank you"
