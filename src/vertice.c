@@ -21,7 +21,7 @@ Vertice vertice_create(char color, int abscisse,
     vertice->ordonnee = ordonnee;
     
     vertice->group = group_create();
-    vertice->group = group_insert(vertice_group, vertice);
+    vertice->group = group_insert(vertice->group, vertice);
 
     return vertice;
 }
@@ -87,28 +87,35 @@ void vertice_free(Vertice vertice)
 
 Vertice vertice_update_group(Vertice vertice, Deck deck)
 {
-  for (int cpt = 0; cpt < deck_get_number_edge(deck->size); ++cpt)
+  int     numberOfEdges;
+  Vertice firstVertice;
+  Vertice secondVertice;
+  
+  numberOfEdges = deck_get_number_edge(deck->size);
+  for (int cpt = 0; cpt < numberOfEdges; ++cpt)
   {
-    if (edge_get_vertice_first(deck->set_edges[cpt]) == vertice)
+    firstVertice = edge_get_vertice_first(deck->set_edges[cpt]);
+    secondVertice = edge_get_vertice_second(deck->set_edges[cpt])
+    if ( firstVertice == vertice)
     {
-      if (vertice_get_color(edge_get_vertice_second(deck->set_edges[cpt]))
+      if (vertice_get_color(secondVertice)
               == vertice_get_color(vertice) 
               && vertice_get_color(vertice) != TRANSPARENT)
       {
-        vertice_set_group(vertice, 
-                          group_fusion(vertice_get_group(edge_get_vertice_second(deck->set_edges[cpt])), 
-                                                                                 vertice->group));
+        if (vertice_get_group(secondVertice) != vertice_get_group(vertice))
+          vertice_set_group(vertice, 
+                            group_fusion(vertice_get_group(secondVertice), vertice->group));
       }
     }
-    else if (edge_get_vertice_second(deck->set_edges[cpt]) == vertice)
+    else if (secondVertice == vertice)
     {
-      if (vertice_get_color(edge_get_vertice_first(deck->set_edges[cpt]))
+      if (vertice_get_color(firstVertice)
               == vertice_get_color(vertice) 
               && vertice_get_color(vertice) != TRANSPARENT)
       {
-        vertice_set_group(vertice, 
-                          group_fusion(vertice_get_group(edge_get_vertice_first(deck->set_edges[cpt])), 
-                                                                                 vertice->group));
+        if (vertice_get_group(firstVertice) != vertice_get_group(vertice))
+          vertice_set_group(vertice, 
+                           group_fusion(vertice_get_group(firstVertice), vertice->group));
       }
     }
   }
