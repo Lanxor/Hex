@@ -18,7 +18,10 @@ public class Deck {
      */
     public Deck(int size)
     {
-        this.size = size;
+        if ( Deck.sizeValid(size) )
+            this.size = size;
+        else
+            this.size = 0;
     }
     
     /***************************************************************************
@@ -33,7 +36,8 @@ public class Deck {
      */
     public void createDeckC()
     {
-        InterfaceJavaC.createDeck(this.getSize());
+        if ( Deck.sizeValid(this.size) )
+            InterfaceJavaC.createDeck(this.getSize());
     }
     
     /**
@@ -42,7 +46,8 @@ public class Deck {
      */
     public void deleteDeckC()
     {
-        InterfaceJavaC.deleteDeck();
+        if ( Deck.sizeValid(this.size) )
+            InterfaceJavaC.deleteDeck();
     }
     
     /***************************************************************************
@@ -74,7 +79,18 @@ public class Deck {
      */
     public void print()
     {
-        System.out.println(this.toString());
+        for (int bordureTop = 0; bordureTop < this.size; ++bordureTop )
+            Interface.showMessage("*");
+        Interface.showMessage("\n");
+        
+        for (int line = 0; line < this.size; ++line)
+            Interface.showMessage("o " + this.getStringLine(line) + "o\n");
+        
+        for (int bordureTop = 0; bordureTop < this.size; ++bordureTop )
+            Interface.showMessage("*");
+        Interface.showMessage("\n");
+        
+        
     }
     
     /***************************************************************************
@@ -132,6 +148,38 @@ public class Deck {
     public void setSize(int size)
     {
         this.size = size;
+    }
+    
+    /**
+     * @brief Fonction qui retourne la ligne voulu du tablier
+     * @param numberOfLine : Numéro de la ligne voulu.
+     * @return Retourne une chaine de caractère décrivant la ligne du tablier.
+     */
+    public String getStringLine(int numberOfLine)
+    {
+        String str;
+        char color, symbol;
+        
+        str = "";
+        for ( int orderly = 0; orderly < this.size; ++orderly)
+        {
+            color = InterfaceJavaC.getVerticeColor(numberOfLine, orderly);
+            switch (color)
+            {
+                case 'b':
+                    symbol = '*';
+                    break;
+                case 'w':
+                    symbol = 'o';
+                    break;
+                default:
+                    symbol = '.';
+                    break;
+            }
+            str += symbol + " ";
+        }
+        
+        return str;
     }
     
     /***************************************************************************
