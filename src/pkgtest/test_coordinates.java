@@ -4,7 +4,7 @@ import pkginterface.Coordinates;
 
 public class test_coordinates {
     
-    public static void print(String str)
+    private static void print(String str)
     {
         System.out.println(str);
     }
@@ -17,7 +17,7 @@ public class test_coordinates {
         print("Fin test unitaire");
     }
     
-    public static void test_print()
+    private static void test_print()
     {
         Coordinates c;
         
@@ -34,7 +34,7 @@ public class test_coordinates {
         print("Fin test print");
     }
     
-    public static void test_valid()
+    private static void test_valid()
     {
         Coordinates c;
         

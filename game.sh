@@ -17,6 +17,7 @@ pathLibrary="lib"
 namePakage="pkginterface"
 nameFileLib="libInterfaceC.so"
 nameFileConfig="config.conf"
+nameFileError="erreur.log"
 
 if [ -d "/usr/lib/jvm/java-8-openjdk-amd64" ]; then
   pathJni="/usr/lib/jvm/java-8-openjdk-amd64"
@@ -51,19 +52,37 @@ exist_folder()
   fi
 }
 
+move_it()
+{
+  if [ -f "$1" -a -d "$2" ]; then
+    mv "$1" "$2"
+  fi
+}
+
 delete_file()
 {
   if [ -f "$1" ]; then
-    echo "Suppression du fichier : $1"
+    echo -n "Fichier : $1 "
     rm "$1"
+  fi
+  if [ ! -f "$1" ]; then
+    echo -e "\033[32m[SUPPRIMER]\033[0m"
+  else
+    echo -e "\033[33m[ERREUR]\033[0m"
   fi
 }
 
 compile_c_file()
 {
   if [ -f "$1" ]; then
-    echo -e "\tFile $1"
-    gcc "${optionC}" -I"${pathJni}/include" -I"${pathJni}/include/linux" -c "$1"
+    echo -n "Fichier : $1 "
+    gcc "${optionC}" -I"${pathJni}/include" -I"${pathJni}/include/linux" -c "$1" 2>> "${nameFileError}"
+  fi
+  fileObject=`echo "$1" |cut -f 1 -d '.'`".o"
+  if [ -f "${fileObject}" ]; then
+    echo -e "\033[32m[COMPILER]\033[0m"
+  else
+    echo -e "\033[31m[ERREUR]\033[0m"
   fi
 }
 
@@ -74,76 +93,107 @@ compile_c()
       compile_c_file "${file}"
     fi
   done
-  echo -e "\tMove it to ${pathObject}/"
   exist_folder "${pathObject}"
-  mv *.o "${pathObject}"
+  for file in *".o"; do
+    move_it "${file}" "${pathObject}"
+  done
 }
 
 compile_java()
 {
   javac "${pathSource}/${namePakage}/"*".java"
   for file in "${pathSource}/${namePakage}/"*".java"; do
-    echo -e "\tFile $file"
+    echo -n "Fichier : ${file} "
+    if [ -f "${file}" ]; then
+      echo -e "\033[32m[COMPILER]\033[0m"
+    else
+      echo -e "\033[31m[ERREUR]\033[0m"
+    fi
   done
   exist_folder "${pathClass}"
   exist_folder "${pathClass}/${namePakage}"
-  mv "${pathSource}/${namePakage}/"*".class" "${pathClass}/${namePakage}/"
+  for file in "${pathSource}/${namePakage}/"*".class"; do
+      move_it "${file}" "${pathClass}/${namePakage}"
+  done
 }
 
 compile_interface()
 {
   cd "${pathSource}"
-  echo -e "\tCreate header file"
   javah "${namePakage}.InterfaceJavaC"
-  cd ".."
-  echo -e "\tMove it to header/"
-  mv "${pathSource}/${namePakage}_InterfaceJavaC.h" "header/"
+  cd "../"
+  move_it "${pathSource}/${namePakage}_InterfaceJavaC.h" "header/"
 
   compile_c_file "${pathSource}/interfaceCJava.c"
   exist_folder "${pathObject}"
-  mv *.o "${pathObject}"
+  for file in "${pathSource}/${namePakage}/"*".class"; do
+      move_it "${file}" "${pathClass}/${namePakage}"
+  done
 }
 
 compile_lib()
 {
   sed -i -e "/^\tSystem.load/d" "src/${namePakage}/InterfaceJavaC.java"
   sed -i "/\/\/ DO NOT EDIT THIS LINE PLEASE/a\\\tSystem.load(\"${pathLocal}/${pathLibrary}/${nameFileLib}\");" "src/${namePakage}/InterfaceJavaC.java"
-  echo -e "\tFile ${nameFileLib}"
-  gcc -shared -o "${nameFileLib}" "${pathObject}/"*
-  echo -e "\tMove it to ${pathLibrary}/"
-  mv "${nameFileLib}" "${pathLibrary}/"
+  echo -n "Fichier : ${nameFileLib} "
+  gcc -shared -o "${nameFileLib}" "${pathObject}/"* 2>> "${nameFileError}"
+  if [ -f "${nameFileLib}" ]; then
+    echo -e "\033[32m[COMPILER]\033[0m"
+  else
+    echo -e "\033[31m[ERREUR]\033[0m"
+  fi
+  move_it "${nameFileLib}" "${pathLibrary}/"
 }
 
 clean_c()
 {
   for file in "${pathObject}/"*".o"; do
-    delete_file "$file"
+    if [ -f "${file}" ]; then
+      delete_file "${file}"
+    fi
   done
 }
 
 clean_java()
 {
   for file in "${pathClass}/${namePakage}/"*".class"; do
-    delete_file "$file"
+    if [ -f "${file}" ]; then
+      delete_file "${file}"
+    fi
   done
+}
+
+clean_log()
+{
+  file="${nameFileError}"
+  if [ -f "${file}" ]; then
+    delete_file "${file}"
+  fi
 }
 
 clean_lib()
 {
-  delete_file "${pathLibrary}/${nameFileLib}"
+  file="${pathLibrary}/${nameFileLib}"
+  if [ -f "${file}" ]; then
+    delete_file "${file}"
+  fi
 }
 
 clean_player()
 {
   for file in "${pathPlayer}/"*; do
-    delete_file "${file}"
+    if [ -f "${file}" ]; then
+      delete_file "${file}"
+    fi
   done
 }
 
 clean_saveguards()
 {
   for file in "${pathSaveguards}/"*; do
-    delete_file "${file}"
+    if [ -f "${file}" ]; then
+      delete_file "${file}"
+    fi
   done
 }
 
@@ -169,33 +219,21 @@ fi
 if [ "$1" == "compile" ]; then
   exist_folder "player"
   exist_folder "save"
-  echo "Compilation des fichiers C"
   compile_c
-
-  echo "Compilation des fichier interfaceJavaC"
   compile_interface
-
-  echo "Compilation des fichier JAVA"
   compile_java
-
-  echo "Création de la librairie"
   compile_lib
 fi
 
 if [ "$1" == "clean" ]; then
-  echo "Nettoyage de C"
   clean_c
-
-  echo "Nettoyage de Java"
   clean_java
-
-  echo "Nettoyage de la librairies"
   clean_lib
 fi
 
 if [ "$1" == "play" ]; then
 
-  if [ ! -f "class/${namePakage}/Interface.class" ]; then
+  if [ executable == 0 ]; then
     echo "Can't play..."
     echo "Please compile the project before to start it"
     echo "Thank you"

@@ -22,6 +22,45 @@ public class Deck extends JPanel {
      *                                                                         *
      **************************************************************************/
     
+    public void paintComponent(Graphics g){
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 800, 600);
+        int x = xdeb;
+        int y = ydeb;
+        try {
+            Image title = ImageIO.read(new File("title.png"));
+            g.drawImage(title, 0, 0, this);
+            Image hv = ImageIO.read(new File("hv.png"));
+            Image hvtop = ImageIO.read(new File("hvtop.png"));
+            Image hvbottom = ImageIO.read(new File("hvbottom.png"));
+            Image hvright = ImageIO.read(new File("hvright.png"));
+            Image hvleft = ImageIO.read(new File("hvleft.png"));
+            Image hb = ImageIO.read(new File("hb.png"));
+            Image hw = ImageIO.read(new File("hw.png"));
+            for (int i = 1; i <= this.size; ++i){
+                for (int j = 0; j < this.size; ++j){
+                    /* rajouter if pour savoir couleur */
+                    if (i == 1){
+                        g.drawImage(hvtop, x, y, this);
+                    }else if (i == this.size){
+                        g.drawImage(hvbottom, x, y, this);
+                    }else if (j == 0){
+                        g.drawImage(hvleft, x, y, this);
+                    }else if (j == this.size-1){
+                        g.drawImage(hvright, x, y, this);
+                    }else{
+                        g.drawImage(hv, x, y, this);
+                    }
+                    x = x + 25;
+                }
+                x = xdeb + 13 * i;
+                y = y + 21;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @brief Constructeur par défaut.
      * @param size : Taille du plateau de jeu.
@@ -45,7 +84,8 @@ public class Deck extends JPanel {
      */
     public void createDeckC()
     {
-        InterfaceJavaC.createDeck(this.getSizeDeck());
+        if ( Deck.sizeValid(this.size) )
+            InterfaceJavaC.createDeck(this.getSize());
     }
     
     /**
@@ -54,7 +94,8 @@ public class Deck extends JPanel {
      */
     public void deleteDeckC()
     {
-        InterfaceJavaC.deleteDeck();
+        if ( Deck.sizeValid(this.size) )
+            InterfaceJavaC.deleteDeck();
     }
     
     /***************************************************************************
@@ -86,58 +127,21 @@ public class Deck extends JPanel {
      */
     public void print()
     {
-        System.out.println(this.toString());
+        for (int bordureTop = 0; bordureTop < this.size; ++bordureTop )
+            Interface.showMessage("*");
+        Interface.showMessage("\n");
+        
+        for (int line = 0; line < this.size; ++line)
+            Interface.showMessage("o " + this.getStringLine(line) + "o\n");
+        
+        for (int bordureTop = 0; bordureTop < this.size; ++bordureTop )
+            Interface.showMessage("*");
+        Interface.showMessage("\n");
+        
+        
     }
     
-    /**
-     * @brief Fonction qui affiche le plateau de jeu sur la fenêtre
-     */
-    public void paintComponent(Graphics g){
-        g.setColor(Color.white);
-        g.fillRect(0, 0, 800, 600);
-        int x = xstart;
-        int y = ystart;
-        char color;
-        try {
-            Image title = ImageIO.read(new File("title.png"));
-            g.drawImage(title, 0, 0, this);
-            Image hv = ImageIO.read(new File("hv.png"));
-            Image hvtop = ImageIO.read(new File("hvtop.png"));
-            Image hvbottom = ImageIO.read(new File("hvbottom.png"));
-            Image hvright = ImageIO.read(new File("hvright.png"));
-            Image hvleft = ImageIO.read(new File("hvleft.png"));
-            Image hb = ImageIO.read(new File("hb.png"));
-            Image hw = ImageIO.read(new File("hw.png"));
-            for (int abs = 1; abs <= this.size; ++abs){
-                for (int ord = 0; ord < this.size; ++ord){
-                    /* rajouter if pour savoir couleur */
-                    color = InterfaceJavaC.getVerticeColor(abs-1, ord);
-                    switch (color) {
-                        case 'b':
-                            g.drawImage(hb, x, y, this);
-                            break;
-                        case 'w':
-                            g.drawImage(hw, x, y, this);
-                            break;
-                        default :
-                            if (abs == 1){
-                                g.drawImage(hvtop, x, y, this);
-                            }else if (ord == 0){
-                                g.drawImage(hvleft, x, y, this);
-                            }else{
-                                g.drawImage(hv, x, y, this);
-                            }
-                            break;
-                    }
-                    x = x + 25;
-                }
-                x = xstart + 13 * abs;
-                y = y + 21;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
     
     /***************************************************************************
      *                                                                         *
@@ -194,6 +198,38 @@ public class Deck extends JPanel {
     public void setSize(int size)
     {
         this.size = size;
+    }
+    
+    /**
+     * @brief Fonction qui retourne la ligne voulu du tablier
+     * @param numberOfLine : Numéro de la ligne voulu.
+     * @return Retourne une chaine de caractère décrivant la ligne du tablier.
+     */
+    public String getStringLine(int numberOfLine)
+    {
+        String str;
+        char color, symbol;
+        
+        str = "";
+        for ( int orderly = 0; orderly < this.size; ++orderly)
+        {
+            color = InterfaceJavaC.getVerticeColor(numberOfLine, orderly);
+            switch (color)
+            {
+                case 'b':
+                    symbol = '*';
+                    break;
+                case 'w':
+                    symbol = 'o';
+                    break;
+                default:
+                    symbol = '.';
+                    break;
+            }
+            str += symbol + " ";
+        }
+        
+        return str;
     }
     
     /***************************************************************************

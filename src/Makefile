@@ -1,13 +1,28 @@
 
-testjava: test_java_coordinates test_java_player
+testjava: compile_java tj_coordinates tj_historic tj_score tj_deck tj_move clean
 
-test_java_coordinates:
-	javac pkginterface/Coordinates.java pkgtest/test_coordinates.java
+compile_java:
+	javac pkginterface/*.java
+
+tj_coordinates:
+	javac pkgtest/test_coordinates.java
 	java pkgtest.test_coordinates
 
-test_java_player:
-	javac pkginterface/Player.java pkgtest/test_player.java
-	java pkgtest.test_player
+tj_historic:
+	javac pkgtest/test_historic.java
+	java pkgtest.test_historic
+
+tj_score:
+	javac pkgtest/test_score.java
+	java pkgtest.test_score
+
+tj_deck:
+	javac pkgtest/test_deck.java
+	java pkgtest.test_deck
+
+tj_move:
+	javac pkgtest/test_move.java
+	java pkgtest.test_move
 
 clean:
 	rm -f pkginterface/*.class
