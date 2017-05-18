@@ -4,7 +4,7 @@ import pkginterface.Coordinates;
 
 public class test_coordinates {
     
-    public static void print(String str)
+    private static void print(String str)
     {
         System.out.println(str);
     }
@@ -17,35 +17,35 @@ public class test_coordinates {
         print("Fin test unitaire");
     }
     
-    public static void test_print()
+    private static void test_print()
     {
         Coordinates c;
         
         print("Test print : ");
-        for (int abscisse = 0; abscisse < 4; ++abscisse)
+        for (int abscissa = 0; abscissa < 4; ++abscissa)
         {
-            for (int ordonnee = 0; ordonnee < 4; ++ordonnee)
+            for (int orderly = 0; orderly < 4; ++orderly)
             {
-                print("\tCréation d'une coordonnée ("+ abscisse +","+ ordonnee +")");
-                c = new Coordinates(abscisse, ordonnee);
-                print("\tAffichage de la coordonnée : ("+ c.getAbscisse() +","+ c.getOrdonnee() +")");
+                print("\tCréation d'une coordonnée ("+ abscissa +","+ orderly +")");
+                c = new Coordinates(abscissa, orderly);
+                print("\tAffichage de la coordonnée : ("+ c.getAbscissa() +","+ c.getOrderly() +")");
             }
         }
         print("Fin test print");
     }
     
-    public static void test_valid()
+    private static void test_valid()
     {
         Coordinates c;
         
         print("Test valid : ");
-        for (int abscisse = 0; abscisse < 4; ++abscisse)
+        for (int abscissa = 0; abscissa < 4; ++abscissa)
         {
-            for (int ordonnee = 0; ordonnee < 4; ++ordonnee)
+            for (int orderly = 0; orderly < 4; ++orderly)
             {
-                print("\tCréation d'une coordonnée ("+ abscisse +","+ ordonnee +")");
-                c = new Coordinates(abscisse, ordonnee);
-                print("\tAffichage de la coordonnée : ("+ c.getAbscisse() +","+ c.getOrdonnee() +")");
+                print("\tCréation d'une coordonnée ("+ abscissa +","+ orderly +")");
+                c = new Coordinates(abscissa, orderly);
+                print("\tAffichage de la coordonnée : ("+ c.getAbscissa() +","+ c.getOrderly() +")");
                 for (int size = 0; size < 5; ++size)
                 {
                     print("\tVérification pour une taille " + size + " : " + c.isValid(size));

@@ -57,8 +57,8 @@ public class Move {
     public static void play(char color, Coordinates coordinates)
     {
         InterfaceJavaC.modifyVertice(color,
-                                coordinates.getAbscisse() - 1,
-                                coordinates.getOrdonnee() - 1);
+                                coordinates.getAbscissa() - 1,
+                                coordinates.getOrderly() - 1);
     }
     
     /***************************************************************************
@@ -118,8 +118,8 @@ public class Move {
         if ( this.isValid() || this.coordinates.isZero() )
         {
             InterfaceJavaC.modifyVertice(this.player.getColor(),
-                                    this.coordinates.getAbscisse() - 1,
-                                    this.coordinates.getOrdonnee() - 1);
+                                    this.coordinates.getAbscissa() - 1,
+                                    this.coordinates.getOrderly() - 1);
             return true;
         }
         return false;
@@ -153,8 +153,13 @@ public class Move {
         
         coordinatesValid = InterfaceJavaC.isModifyVertice(
                                     this.player.getColor(),
-                                    this.coordinates.getAbscisse() - 1,
-                                    this.coordinates.getOrdonnee() - 1);
+                                    this.coordinates.getAbscissa() - 1,
+                                    this.coordinates.getOrderly() - 1);
         return coordinatesValid == 1;
+    }
+    
+    public boolean isNull()
+    {
+        return this.coordinates.isZero();
     }
 }

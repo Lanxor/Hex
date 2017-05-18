@@ -583,6 +583,17 @@ public class Player implements Serializable {
     }
     
     /**
+     * @brief Fonction qui modifie la couleur du joueur.
+     */
+    public void changeColor()
+    {
+        if ( this.color == 'w' )
+            this.color = 'b';
+        else if ( this.color == 'b' )
+            this.color = 'w';
+    }
+    
+    /**
      * @brief Fonction qui définit un joueur.
      * @return Retourne une chaine de caractère définissant un joueur.
      */
@@ -606,15 +617,7 @@ public class Player implements Serializable {
      */
     public static void changeColorPlayer(Game game)
     {
-        char color;
-        
-        color = game.getPlayerCurrent().getColor();
-        
-        if ( color == 'b' )
-            color = 'w';
-        else if ( color == 'w' )
-            color = 'b';
-        game.getPlayerCurrent().setColor(color);
+        game.getPlayerCurrent().changeColor();
     }
     
     /**

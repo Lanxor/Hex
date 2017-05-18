@@ -6,3 +6,5 @@
 /build/
 /dist/
 /src/pkginterface/InterfaceJavaC.java
+/nbproject/
+/nbproject/private/
