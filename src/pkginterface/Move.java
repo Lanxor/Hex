@@ -43,7 +43,7 @@ public class Move {
             playerCurrent = game.getPlayerCurrent();
         else
             playerCurrent = game.getPlayer2();
-        coordinates = Coordinates.askCoordinates(game.getDeck().getSize());
+        coordinates = Coordinates.askCoordinates(game.getDeck().getSizeDeck());
         
         return new Move(playerCurrent, coordinates);
     }
