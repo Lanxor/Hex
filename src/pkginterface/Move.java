@@ -157,4 +157,9 @@ public class Move {
                                     this.coordinates.getOrdonnee() - 1);
         return coordinatesValid == 1;
     }
+    
+    public boolean isNull()
+    {
+        return this.coordinates.isZero();
+    }
 }

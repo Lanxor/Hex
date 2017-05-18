@@ -212,6 +212,7 @@ public class Game {
         
         choice = Game.menuOpponent();
         
+        player = null;
         if ( choice != 4 )
         {
             switch (choice) {
@@ -222,12 +223,15 @@ public class Game {
                         Interface.showMessage(Player.listPlayer());
                         numberPlayers = Player.getNumberOfPlayers();
                         Interface.showMessage("Choix : ");
-                        choice = Interface.getInt(1, numberPlayers);
-                        player = Player.load(choice);
-                        this.player2 = player;
-                        if ( this.playerCurrent.equals(player) )
-                            Interface.showMessage("\nVous ne pouvez vous selectionner.\n");
-                    } while ( this.playerCurrent.equals(player));
+                        choice = Interface.getInt(0, numberPlayers);
+                        if ( choice != 0 )
+                        {
+                            player = Player.load(choice);
+                            this.player2 = player;
+                            if ( this.playerCurrent.equals(player) )
+                                Interface.showMessage("\nVous ne pouvez vous selectionner.\n");
+                        }
+                    } while ( this.playerCurrent.equals(player) && choice != 0 );
                     break;
             // Jouer contre un nouveau joueur
                 case 2:
@@ -244,11 +248,14 @@ public class Game {
             else
                 this.player2.setColor('w');
             
-            this.numberOfRound = 1;
-            this.deck.askSize();
-            this.deck.createDeckC();
-            this.play();
-            this.deck.deleteDeckC();
+            if ( choice != 0 )
+            {
+                this.numberOfRound = 1;
+                this.deck.askSize();
+                this.deck.createDeckC();
+                this.play();
+                this.deck.deleteDeckC();
+            }
         }
     }
     
@@ -634,6 +641,7 @@ public class Game {
         this.historic.addMove(move);
         this.switchPlayer();
         this.historicBack.clean();
+        ++this.numberOfRound;
         return true;
     }
     
@@ -685,14 +693,22 @@ public class Game {
      */
     public void changeColor()
     {
-        if ( this.playerCurrent.getColor() == 'b' )
-            this.playerCurrent.setColor('w');
-        else
-            this.playerCurrent.setColor('b');
+        Move move;
         
-        if ( this.player2.getColor() == 'b' )
-            this.player2.setColor('w');
-        else
-            this.player2.setColor('b');
+        this.playerCurrent.changeColor();
+        this.player2.changeColor();
+        
+        Interface.showMessage(this.historic.toString());
+        Interface.showMessage("On supprime le dernier Move...\n");
+        move = this.historic.deleteLastMove();
+        Interface.showMessage(this.historic.toString());
+        Interface.showMessage("On modifie le move...\n");
+        move.setPlayer(player2);
+        Interface.showMessage(this.historic.toString());
+        Interface.showMessage("On rajoute le move modifier...\n");
+        this.historic.addMove(move);
+        Interface.showMessage(this.historic.toString());
+        
+        this.whoPlay = !this.whoPlay;
     }
 }
