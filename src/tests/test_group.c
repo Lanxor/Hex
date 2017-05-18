@@ -3,6 +3,7 @@
 
 #include "../../header/group.h"
 #include "../../header/deck.h"
+#include "../../header/vertice.h"
 
 void test1_create()
 {
@@ -71,35 +72,14 @@ void test5_fusion()
   
 }
 
-void test6_winner()
+void test6_update()
 {
-  Group   initialGroup;
-  Group   otherGroup;
-  Vertice first;
-  Vertice second;
-  Vertice third;
+  Deck    deck;
   
   printf("test_group test 6\n");
-  first = vertice_create(TRANSPARENT, 0, 0);
-  second = vertice_create(TRANSPARENT, 1, 1);
-  third = vertice_create(TRANSPARENT, 2, 2);
-  initialGroup = group_create();
-  otherGroup = group_create();
+  deck = deck_create();
+  group_print(vertice_get_group(deck_get_vertice(deck, 1, 1)));
 
-  initialGroup = group_insert(initialGroup, first);
-  initialGroup = group_insert(initialGroup, second);
-  otherGroup = group_insert(otherGroup, third);
-  group_print(initialGroup);
-  group_print(otherGroup);
-
-  group_fusion(initialGroup, otherGroup);
-  printf("After Fusion :\n");
-  group_print(initialGroup);
-
-  group_delete(initialGroup);
-  vertice_delete(first);
-  vertice_delete(second);
-  vertice_delete(third);
 }
 
 int main() 
@@ -110,6 +90,7 @@ int main()
   test3_insert();
   test4_color();
   test5_fusion();
+  test6_update();
 
   return (EXIT_SUCCESS);
 }
