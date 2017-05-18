@@ -25,8 +25,8 @@ public class Deck extends JPanel {
     public void paintComponent(Graphics g){
         g.setColor(Color.white);
         g.fillRect(0, 0, 800, 600);
-        int x = xdeb;
-        int y = ydeb;
+        int x = xstart;
+        int y = ystart;
         try {
             Image title = ImageIO.read(new File("title.png"));
             g.drawImage(title, 0, 0, this);
@@ -53,7 +53,7 @@ public class Deck extends JPanel {
                     }
                     x = x + 25;
                 }
-                x = xdeb + 13 * i;
+                x = xstart + 13 * i;
                 y = y + 21;
             }
         } catch (IOException e) {
@@ -85,7 +85,7 @@ public class Deck extends JPanel {
     public void createDeckC()
     {
         if ( Deck.sizeValid(this.size) )
-            InterfaceJavaC.createDeck(this.getSize());
+            InterfaceJavaC.createDeck(this.getSizeDeck());
     }
     
     /**
