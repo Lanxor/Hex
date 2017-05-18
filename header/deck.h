@@ -126,11 +126,11 @@ void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee);
 
 /**
  * @brief Fonction mettant à jour le groupe d'un sommet en fonction de ses voisins
- * @param vertice : Le sommet a mettre à jour.
  * @param deck : Le tablier du jeu en cour.
- * @return Retourne le sommet mis à jour.
+ * @return Retourne le deck mis à jour.
  */
-Vertice vertice_update_group(Vertice vertice, Deck deck);
+Deck deck_update_ldg(Deck deck);
+
 
 /**
  * @brief Donne la couleur du gagnant dans le groupe (si il y en a un)

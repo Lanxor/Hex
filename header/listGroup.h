@@ -10,6 +10,7 @@
 #include <assert.h>
 #include "group.h"
 
+typedef struct s_node *Node;
 typedef struct s_ldg* LDG;
 
 /**
@@ -40,4 +41,11 @@ LDG listGroup_remove(LDG ldg, Group groupToRemove);
  */
 void listGroup_delete(LDG ldg);
 
+Node ldg_get_sentinel(LDG ldg);
+
+Node ldg_get_next(Node currentNode);
+
+Group ldg_get_group(Node currentNode);
+
+int ldg_get_number(LDG ldg);
 #endif

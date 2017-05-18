@@ -53,12 +53,18 @@ LDG listGroup_append(LDG ldg, Group groupToInsert)
 LDG listGroup_remove(LDG ldg, Group groupToRemove)
 {
   assert(ldg != NULL);
+  int     cpt;
   t_node  *currentNode;
+  cpt = 0;
   currentNode = ldg->sentinel;
   while (cpt < ldg->numberOfNode || currentNode->group != groupToRemove)
+  {
     currentNode = currentNode->next;
+    ++cpt;
+  }
   currentNode->previous->next = currentNode->next;
   currentNode->next->previous = currentNode->previous;
+  free(currentNode->group);
   free(currentNode);
   --ldg->numberOfNode;
   return (ldg);
@@ -75,4 +81,24 @@ void listGroup_delete(LDG ldg)
     free(currentNode->previous);
   }
   free(ldg);
+}
+
+Node ldg_get_sentinel(LDG ldg)
+{
+  return (ldg->sentinel);
+}
+
+Node ldg_get_next(Node currentNode)
+{
+  return (currentNode->next);
+}
+
+Group ldg_get_group(Node currentNode)
+{
+  return (currentNode->group);
+}
+
+int ldg_get_number(LDG ldg)
+{
+  return (ldg->numberOfNode);
 }

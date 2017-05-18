@@ -53,13 +53,29 @@ Group group_fusion(Group firstGroup, Group secondGroup)
 {
   for (int cpt = 0; cpt < secondGroup->number_vertice; ++cpt)
     firstGroup = group_insert(firstGroup, secondGroup->list_vertice[cpt]);
-  group_delete(secondGroup);
+  //group_delete(secondGroup);
   return (firstGroup);
 }
 
 int group_get_number(Group initialGroup)
 {
   return (initialGroup->number_vertice);
+}
+
+Vertice group_get_vertice(Group initialGroup, int numberOfTheVertice)
+{
+  return (initialGroup->list_vertice[numberOfTheVertice]);
+}
+
+int group_search_vertice(Group initialGroup, Vertice verticeToSearch)
+{
+  int isFind;
+  
+  isFind = 0;
+  for (int cpt = 0; cpt < initialGroup->number_vertice; ++cpt)
+    if (verticeToSearch == initialGroup->list_vertice[cpt])
+      ++isFind;
+  return (isFind);
 }
 /*
  * A faire :
