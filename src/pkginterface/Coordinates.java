@@ -2,8 +2,8 @@ package pkginterface;
 
 public class Coordinates {
     
-    private int abscisse;
-    private int ordonnee;
+    private int abscissa;
+    private int orderly;
     
     /***************************************************************************
      *                                                                         *
@@ -13,12 +13,12 @@ public class Coordinates {
     
     /**
      * @brief Constructeur par défault.
-     * @param abscisse : Abscisse de la coordonnée.
-     * @param ordonnee : Ordonnée de la coordonnée.
+     * @param abscissa : Abscissa de la coordonnée.
+     * @param orderly : Ordonnée de la coordonnée.
      */
-    public Coordinates(int abscisse, int ordonnee){
-        this.abscisse = abscisse;
-        this.ordonnee = ordonnee;
+    public Coordinates(int abscissa, int orderly){
+        this.abscissa = abscissa;
+        this.orderly = orderly;
     }
     
     /***************************************************************************
@@ -34,15 +34,15 @@ public class Coordinates {
      */
     public static Coordinates askCoordinates(int size)
     {
-        int abscisse, ordonnee;
+        int abscissa, orderly;
         
         System.out.println("Veuillez entrer des coordonnées.");
-        System.out.print("Abscisse : ");
-        abscisse = Interface.getInt(0, size);
-        System.out.print("Ordonnee : ");
-        ordonnee = Interface.getInt(0, size);
+        System.out.print("Abscissa : ");
+        abscissa = Interface.getInt(0, size);
+        System.out.print("Orderly : ");
+        orderly = Interface.getInt(0, size);
         
-        return new Coordinates(abscisse, ordonnee);
+        return new Coordinates(abscissa, orderly);
     }
     
     /***************************************************************************
@@ -52,39 +52,39 @@ public class Coordinates {
      **************************************************************************/
     
     /**
-     * @brief Getter abscisse.
-     * @return Retourne l'abscisse de la coordonnée.
+     * @brief Getter abscissa.
+     * @return Retourne l'abscissa de la coordonnée.
      */
-    public int getAbscisse()
+    public int getAbscissa()
     {
-        return this.abscisse;
+        return this.abscissa;
     }
     
     /**
-     * @biref Getter ordonnee.
+     * @biref Getter orderly.
      * @return Retourne l'ordonnée de la coordonnée.
      */
-    public int getOrdonnee()
+    public int getOrderly()
     {
-        return this.ordonnee;
+        return this.orderly;
     }
     
     /**
-     * @brief Setter abscisse.
-     * @param abscisse : Abscisse de la coordonnée.
+     * @brief Setter abscissa.
+     * @param abscissa : Abscissa de la coordonnée.
      */
-    public void setAbscisse(int abscisse)
+    public void setAbscissa(int abscissa)
     {
-        this.abscisse = abscisse;
+        this.abscissa = abscissa;
     }
     
     /**
      * @brief Setter ordonnée.
-     * @param ordonnee : Ordonnée de la coordonnée.
+     * @param orderly : Ordonnée de la coordonnée.
      */
-    public void setOrdonnee(int ordonnee)
+    public void setOrderly(int orderly)
     {
-        this.ordonnee = ordonnee;
+        this.orderly = orderly;
     }
     
     /***************************************************************************
@@ -100,7 +100,7 @@ public class Coordinates {
     @Override
     public String toString()
     {
-        return this.getAbscisse() + " " + this.getOrdonnee();
+        return this.getAbscissa() + " " + this.getOrderly();
     }
     
     /***************************************************************************
@@ -116,12 +116,12 @@ public class Coordinates {
      */
     public boolean isValid(int size)
     {
-        if ( (this.abscisse == 0 && this.ordonnee != 0)
-                || (this.abscisse != 0 && this.ordonnee == 0) )
+        if ( (this.abscissa == 0 && this.orderly != 0)
+                || (this.abscissa != 0 && this.orderly == 0) )
             return false;
         
-        return !(this.abscisse > size
-                || this.ordonnee > size);
+        return !(this.abscissa > size
+                || this.orderly > size);
     }
     /**
      * @brief Fonction qui définit si une coordonnée est égale à zero ou pas.
@@ -130,6 +130,6 @@ public class Coordinates {
      */
     public boolean isZero()
     {
-        return this.abscisse == 0 && this.ordonnee == 0;
+        return this.abscissa == 0 && this.orderly == 0;
     }
 }

@@ -354,7 +354,7 @@ public class Saveguard {
         Coordinates coordinates;
         Move move;
         Player player;
-        int caracter, abscisse, ordonnee;
+        int caracter, abscissa, orderly;
         char color;
         boolean isValid;
         FileReader fr;
@@ -362,8 +362,8 @@ public class Saveguard {
         
         fr = null;
         str = "";
-        abscisse = 0;
-        ordonnee = 0;
+        abscissa = 0;
+        orderly = 0;
         isValid = true;
         try {
             fr = new FileReader(fileSaveguard);
@@ -384,15 +384,15 @@ public class Saveguard {
                     {
                         str += (char)caracter;
                     }
-                    abscisse = Integer.parseInt(str);
+                    abscissa = Integer.parseInt(str);
                     
                     str = "";
                     while ( (caracter = fr.read()) != '\n' )
                     {
                         str += (char)caracter;
                     }
-                    ordonnee = Integer.parseInt(str);
-                    coordinates = new Coordinates(abscisse, ordonnee);
+                    orderly = Integer.parseInt(str);
+                    coordinates = new Coordinates(abscissa, orderly);
                     
                     if ( game.getPlayerCurrent().getColor() == color )
                     {

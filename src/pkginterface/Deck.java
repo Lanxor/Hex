@@ -151,11 +151,11 @@ public class Deck {
     {
         String str = "\n";
         char color, symbol;
-        for ( int abscisse = 0; abscisse < this.size; ++abscisse )
+        for ( int abscissa = 0; abscissa < this.size; ++abscissa )
         {
-            for (int ordonnee = 0; ordonnee < this.size; ++ordonnee )
+            for (int orderly = 0; orderly < this.size; ++orderly )
             {   
-                color = InterfaceJavaC.getVerticeColor(abscisse, ordonnee);
+                color = InterfaceJavaC.getVerticeColor(abscissa, orderly);
                 switch (color) {
                     case 'b':
                         symbol = '*';

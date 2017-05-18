@@ -1,6 +1,5 @@
 package pkginterface;
 
-import java.io.File;
 import java.io.Serializable;
 
 public class Score implements Serializable {
