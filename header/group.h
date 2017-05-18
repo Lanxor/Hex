@@ -13,6 +13,7 @@
 #include <assert.h>
 
 #include "vertice.h"
+#include "deck.h"
 
 /**
  * @brief Structure des groupes de jeu.
