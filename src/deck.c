@@ -237,54 +237,48 @@ void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
     initialGroup = group_create();
     initialGroup = group_insert(initialGroup, deck_get_vertice(deck, abscisse, ordonnee));
     deck->set_groups = listGroup_append(deck->set_groups, initialGroup);
+    deck = deck_update_ldg(deck, initialGroup);
   }
 }
 
 
-Deck deck_update_ldg(Deck deck)
+Deck deck_update_ldg(Deck deck, Group currentGroup)
 {
   int     groupSize, numberOfEdge, cptOtherGroup, isFind;
-  Node    currentNode, otherNode;
-  Group   currentGroup;
+  Node    otherNode;
   Vertice currentVertice, verticeToSearch;
   Edge    currentEdge;
   LDG     ldg;
   
   ldg = deck->set_groups;
-  currentNode = ldg_get_sentinel(ldg);
   numberOfEdge = deck_get_number_edge(deck->size);
-  for (int cptGroup = 0; cptGroup < ldg_get_number(ldg); ++cptGroup) // remplacer la première boucle par un groupe passé en paramètre : verifier la couleur etc 
+  groupSize = group_get_number(currentGroup);
+  for (int cptVertice = 0; cptVertice < groupSize; ++cptVertice)
   {
-    currentNode = ldg_get_next(currentNode);
-    currentGroup = ldg_get_group(currentNode);
-    groupSize = group_get_number(currentGroup);
-    for (int cptVertice = 0; cptVertice < groupSize; ++cptVertice)
+    currentVertice = group_get_vertice(currentGroup, cptVertice);
+    for (int cptEdge = 0; cptEdge < numberOfEdge; ++cptEdge)
     {
-      currentVertice = group_get_vertice(currentGroup, cptVertice);
-      for (int cptEdge = 0; cptEdge < numberOfEdge; ++cptEdge)
+      currentEdge = deck->set_edges[cptEdge];
+      if (currentVertice == edge_get_vertice_first(currentEdge)
+          || currentVertice == edge_get_vertice_second(currentEdge))
       {
-        currentEdge = deck->set_edges[cptEdge];
-        if (currentVertice == edge_get_vertice_first(currentEdge)
-            || currentVertice == edge_get_vertice_second(currentEdge))
+        if (currentVertice == edge_get_vertice_first(currentEdge))
+          verticeToSearch = edge_get_vertice_first(currentEdge);
+        else
+          verticeToSearch = edge_get_vertice_second(currentEdge);
+        isFind = 0;
+        cptOtherGroup = 0;
+        otherNode = ldg_get_sentinel(ldg);
+        while (!isFind && cptOtherGroup < ldg_get_number(ldg))
         {
-          if (currentVertice == edge_get_vertice_first(currentEdge))
-            verticeToSearch = edge_get_vertice_first(currentEdge);
-          else
-            verticeToSearch = edge_get_vertice_second(currentEdge);
-          isFind = 0;
-          cptOtherGroup = 0;
-          otherNode = ldg_get_sentinel(ldg);
-          while (!isFind && cptOtherGroup < ldg_get_number(ldg))
-          {
-            otherNode = ldg_get_next(otherNode);
-            isFind = group_search_vertice(ldg_get_group(otherNode), verticeToSearch);
-            ++cptOtherGroup;
-          }
-          if (isFind && group_color(currentGroup) == group_color(ldg_get_group(otherNode)))
-          {
-            currentGroup = group_fusion(currentGroup, ldg_get_group(otherNode));
-            ldg = listGroup_remove(ldg, ldg_get_group(otherNode));
-          }
+          otherNode = ldg_get_next(otherNode);
+          isFind = group_search_vertice(ldg_get_group(otherNode), verticeToSearch);
+          ++cptOtherGroup;
+        }
+        if (isFind && group_color(currentGroup) == group_color(ldg_get_group(otherNode)))
+        {
+          currentGroup = group_fusion(currentGroup, ldg_get_group(otherNode));
+          ldg = listGroup_remove(ldg, ldg_get_group(otherNode));
         }
       }
     }
