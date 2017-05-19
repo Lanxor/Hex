@@ -15,15 +15,21 @@ import javax.swing.AbstractAction;
 public class backAction extends AbstractAction{
     
     private Fenetre fenetre;
+    private Game game;
     
-    public backAction (Fenetre fenetre)
+    public backAction (Fenetre fenetre, Game game)
     {
         super("Revenir en arrière");
         this.fenetre = fenetre;
+        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
     {
-        
+        this.game.goBackN(1);
+        this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
+        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
+        this.fenetre.setContentPane(this.fenetre.panel);
+        this.fenetre.setVisible(true);
     }
 }
