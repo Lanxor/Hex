@@ -129,7 +129,7 @@ void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee);
  * @param deck : Le tablier du jeu en cour.
  * @return Retourne le deck mis à jour.
  */
-Deck deck_update_ldg(Deck deck);
+Deck deck_update_ldg(Deck deck, Group currentGroup);
 
 
 /**
