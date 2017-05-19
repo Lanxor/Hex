@@ -49,8 +49,8 @@ public class Buttons extends JPanel{
         JButton button_stat = new JButton(new statAction(this.fenetre));
         JButton button_players = new JButton(new playersAction(this.fenetre, "Joueurs Enregistrés"));
         JButton button_quit = new JButton(new quitAction(this.fenetre));
-        JButton button_save = new JButton(new saveAction());
-        JButton button_saveq = new JButton(new saveqAction(this.fenetre));
+        JButton button_save = new JButton(new saveAction(this.game));
+        JButton button_saveq = new JButton(new saveqAction(this.fenetre, this.game));
         JButton button_play = new JButton(new playAction(this.fenetre, this.game));
         JButton button_acceuil = new JButton(new acceuilAction(this.fenetre, "Acceuil"));
         JButton button_quitH = new JButton(new acceuilAction(this.fenetre, "Quitter"));
@@ -58,7 +58,7 @@ public class Buttons extends JPanel{
         JButton button_validH = new JButton(new validHAction(this.fenetre, this.game));
         JButton button_okP1 = new JButton(new newHAction(this.fenetre, "Valider"));
         JButton button_okP2 = new JButton(new playersAction(this.fenetre, "Valider"));
-        JButton button_back = new JButton(new backAction(this.fenetre));
+        JButton button_back = new JButton(new backAction(this.fenetre, this.game));
         JButton button_newP = new JButton(new newPAction(this.fenetre, 2));
         JButton button_deleteP = new JButton(new deletePAction(this.fenetre));
         

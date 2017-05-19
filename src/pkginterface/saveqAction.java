@@ -15,16 +15,19 @@ import javax.swing.JOptionPane;
  */
 public class saveqAction extends AbstractAction{
     
+    private Game game;
     private Fenetre fenetre;
     
-    public saveqAction (Fenetre fenetre)
+    public saveqAction (Fenetre fenetre, Game game)
     {
         super("Sauvegarder et Quitter");
         this.fenetre = fenetre;
+        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
     {
+        this.game.save();
         JOptionPane.showMessageDialog(null, "Sauvegarde Effectuée");
         this.fenetre.panel = new Deck(0);
         this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));

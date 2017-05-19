@@ -125,9 +125,9 @@ public class Game {
                 }
                 break;
         }
-        Interface.printMenu(menu);
-        Interface.showMessage("Choix : ");
-        choice = Interface.getInt(1, menu.length);
+        InterfaceConsole.printMenu(menu);
+        InterfaceConsole.showMessage("Choix : ");
+        choice = InterfaceConsole.getInt(1, menu.length);
         
         switch ( numberOfRound )
         {
@@ -188,9 +188,9 @@ public class Game {
         menu[1] = "Jouer contre un nouveau joueur\n";
         menu[2] = "Jouer contre l'ordinateur\n";
         menu[3] = "Retour\n";
-        Interface.printMenu(menu);
-        Interface.showMessage("Choix : ");
-        choice = Interface.getInt(1, menu.length);
+        InterfaceConsole.printMenu(menu);
+        InterfaceConsole.showMessage("Choix : ");
+        choice = InterfaceConsole.getInt(1, menu.length);
         
         return choice;
     }
@@ -220,16 +220,16 @@ public class Game {
                 case 1:
                     do
                     {
-                        Interface.showMessage(Player.listPlayer());
+                        InterfaceConsole.showMessage(Player.listPlayer());
                         numberPlayers = Player.getNumberOfPlayers();
-                        Interface.showMessage("Choix : ");
-                        choice = Interface.getInt(0, numberPlayers);
+                        InterfaceConsole.showMessage("Choix : ");
+                        choice = InterfaceConsole.getInt(0, numberPlayers);
                         if ( choice != 0 )
                         {
                             player = Player.load(choice);
                             this.player2 = player;
                             if ( this.playerCurrent.equals(player) )
-                                Interface.showMessage("\nVous ne pouvez vous selectionner.\n");
+                                InterfaceConsole.showMessage("\nVous ne pouvez vous selectionner.\n");
                         }
                     } while ( this.playerCurrent.equals(player) && choice != 0 );
                     break;
@@ -269,15 +269,15 @@ public class Game {
         int numberMaxSaveguards, choice;
         
         oldPlayer = this.playerCurrent;
-        Interface.showMessage("Voici la liste des sauvegarde.\n");
-        Interface.printMenu(Saveguard.getListSaveguard());
+        InterfaceConsole.showMessage("Voici la liste des sauvegarde.\n");
+        InterfaceConsole.printMenu(Saveguard.getListSaveguard());
         numberMaxSaveguards = Saveguard.getNumberOfSaveguard();
-        Interface.showMessage("0 : Retour\n");
-        Interface.showMessage("Choix : ");
-        choice = Interface.getInt(0, numberMaxSaveguards);
+        InterfaceConsole.showMessage("0 : Retour\n");
+        InterfaceConsole.showMessage("Choix : ");
+        choice = InterfaceConsole.getInt(0, numberMaxSaveguards);
         if ( choice != 0 )
         {
-            Interface.showMessage("Nous allons charger la partie "
+            InterfaceConsole.showMessage("Nous allons charger la partie "
                 + choice + ".\n");
             if ( Saveguard.loadSaveguard(this, choice) )
             {
@@ -286,7 +286,7 @@ public class Game {
             }
             else
             {
-                Interface.showMessage("Fichier incorrect.\n");
+                InterfaceConsole.showMessage("Fichier incorrect.\n");
             }
         }
         this.playerCurrent = oldPlayer;
@@ -312,29 +312,29 @@ public class Game {
                     break;
                     
                 case 3: // Sauvegarder
-                    Interface.showMessage("Je sauvegarder la partie.\n");
+                    InterfaceConsole.showMessage("Je sauvegarder la partie.\n");
                     if ( this.save() )
-                        Interface.showMessage("Partie enregistrer.\n");
+                        InterfaceConsole.showMessage("Partie enregistrer.\n");
                     else
-                        Interface.showMessage("Partie non enregistrer.\n");
+                        InterfaceConsole.showMessage("Partie non enregistrer.\n");
                     break;
                     
                 case 4: // Sauvegarder et Quitter
                     if ( this.save() )
                     {
-                        Interface.showMessage("Partie enregistrer.\n");
-                        Interface.showMessage("Vous quitter votre partie.\n");
+                        InterfaceConsole.showMessage("Partie enregistrer.\n");
+                        InterfaceConsole.showMessage("Vous quitter votre partie.\n");
                         leave = true;
                     }
                     else
                     {
-                        Interface.showMessage("Partie non enregistrer.\n");
-                        Interface.showMessage("Vous ne quittez pas la partie.\n");
+                        InterfaceConsole.showMessage("Partie non enregistrer.\n");
+                        InterfaceConsole.showMessage("Vous ne quittez pas la partie.\n");
                     }
                     break;
                     
                 case 5: // Quitter sans sauvegarder
-                    Interface.showMessage("Vous Quitter votre partie sans enregistrer.\n");
+                    InterfaceConsole.showMessage("Vous Quitter votre partie sans enregistrer.\n");
                     leave = true;
                     break;
                     
@@ -344,22 +344,22 @@ public class Game {
                 case 7: // Revenir au coup précédent
                     if ( this.goBack() )
                     {
-                        Interface.showMessage("Vous êtes revenue en arrière.\n");
+                        InterfaceConsole.showMessage("Vous êtes revenue en arrière.\n");
                     }
                     else
                     {
-                        Interface.showMessage("Erreur aucun changement effectuer.\n");
+                        InterfaceConsole.showMessage("Erreur aucun changement effectuer.\n");
                     }
                     break;
                 case 8: // Revenir en avant
-                    Interface.showMessage("On revient en avant.\n");
+                    InterfaceConsole.showMessage("On revient en avant.\n");
                     if ( this.goFront() )
                     {
-                        Interface.showMessage("Vous êtes revenue en arrière.\n");
+                        InterfaceConsole.showMessage("Vous êtes revenue en arrière.\n");
                     }
                     else
                     {
-                        Interface.showMessage("Erreur aucun changement effectuer.\n");
+                        InterfaceConsole.showMessage("Erreur aucun changement effectuer.\n");
                     }
                     break;
             }
@@ -411,9 +411,9 @@ public class Game {
     {
         int nbMoveBack;
         
-        Interface.showMessage("Tapez 0 pour annuler\n");
-        Interface.showMessage("De combien voulez-vous revenir de coup en arrière ? ");
-        nbMoveBack = Interface.getInt(0, this.historic.getNumberOfMove());
+        InterfaceConsole.showMessage("Tapez 0 pour annuler\n");
+        InterfaceConsole.showMessage("De combien voulez-vous revenir de coup en arrière ? ");
+        nbMoveBack = InterfaceConsole.getInt(0, this.historic.getNumberOfMove());
         
         if ( nbMoveBack != 0 )
         {
@@ -432,9 +432,9 @@ public class Game {
     {
         int nbMoveFront;
         
-        Interface.showMessage("Tapez 0 pour annuler\n");
-        Interface.showMessage("De combien voulez-vous revenir de coup en avant ? ");
-        nbMoveFront = Interface.getInt(0, this.historic.getNumberOfMove());
+        InterfaceConsole.showMessage("Tapez 0 pour annuler\n");
+        InterfaceConsole.showMessage("De combien voulez-vous revenir de coup en avant ? ");
+        nbMoveFront = InterfaceConsole.getInt(0, this.historic.getNumberOfMove());
         
         if ( nbMoveFront != 0 )
         {
@@ -488,7 +488,7 @@ public class Game {
         else
             name = this.player2.getPseudo();
         str = "C'est au tour de " + name + " de jouer.\n"; 
-        Interface.showMessage(str);
+        InterfaceConsole.showMessage(str);
     }
     
     /**
@@ -496,7 +496,7 @@ public class Game {
      */
     public void showDeck()
     {
-        Interface.showMessage("Affichage du tablier : \n");
+        InterfaceConsole.showMessage("Affichage du tablier : \n");
         this.deck.print();
     }
     
@@ -650,7 +650,7 @@ public class Game {
      * @param number : Nombre de coup à annuler.
      * @return Retourne si les coups on bien été annulés.
      */
-    private boolean goBackN(int number)
+    public boolean goBackN(int number)
     {
         Move move;
         int count;

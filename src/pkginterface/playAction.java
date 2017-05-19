@@ -46,16 +46,19 @@ public class playAction extends AbstractAction{
                 || Integer.parseInt(abs) > this.game.getDeck().getSizeDeck()
                 || !isInteger(ord)
                 || Integer.parseInt(ord) < 1 
-                || Integer.parseInt(ord) > this.game.getDeck().getSizeDeck()){
+                || Integer.parseInt(ord) > this.game.getDeck().getSizeDeck())
+        {
             JOptionPane.showMessageDialog(this.fenetre.panel, "Coordonnées invalides, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
             this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
             this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
-        }else{
+        }else
+        {
             Coordinates coordPlayed = new Coordinates (Integer.parseInt(abs), Integer.parseInt(ord));
             Move move = new Move(this.game.getPlayerCurrent(), coordPlayed);
-            if (!move.isValid()){
+            if (!move.isValid())
+            {
                 JOptionPane.showMessageDialog(this.fenetre.panel, "Coordonnées invalide, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
                 this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
@@ -66,6 +69,28 @@ public class playAction extends AbstractAction{
                 Player temp = this.game.getPlayer2();
                 this.game.setPlayer2(this.game.getPlayerCurrent());
                 this.game.setPlayerCurrent(temp);
+                if (InterfaceJavaC.hasWinner() == 1)
+                {
+                    char colorWinner = InterfaceJavaC.getWinner();
+                    Player winner;
+                    if (this.game.getPlayerCurrent().getColor() == colorWinner){
+                        winner = this.game.getPlayerCurrent();
+                    }else{
+                        winner = this.game.getPlayer2();
+                    }
+                    JOptionPane.showMessageDialog(null, winner.getPseudo() + " a gagné !");
+                    this.game.endGame();
+                    this.fenetre.panel = new Deck(0);
+                    this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
+                    this.fenetre.setContentPane(this.fenetre.panel);
+                    this.fenetre.setVisible(true);
+                }else
+                {
+                    this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
+                    this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
+                    this.fenetre.setContentPane(this.fenetre.panel);
+                    this.fenetre.setVisible(true);
+                }
             }
         }
     }

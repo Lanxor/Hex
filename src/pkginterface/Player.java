@@ -110,9 +110,9 @@ public class Player implements Serializable {
         menu[3] = "Ajouter un personnage\n";
         menu[4] = "Supprimer un personnage\n";
         menu[5] = "Retour\n";
-        Interface.printMenu(menu);
-        Interface.showMessage("Choix : ");
-        choice = Interface.getInt(1, menu.length);
+        InterfaceConsole.printMenu(menu);
+        InterfaceConsole.showMessage("Choix : ");
+        choice = InterfaceConsole.getInt(1, menu.length);
         
         return choice;
     }
@@ -137,24 +137,24 @@ public class Player implements Serializable {
             switch ( Player.menuPlayer() )
             {
                 case 1: // Profile
-                    Interface.showMessage("\nVoici votre profil : \n");
+                    InterfaceConsole.showMessage("\nVoici votre profil : \n");
                     Player.showProfilPlayer(game);
                     break;
                 case 2: // Changer de couleur de joueur
                     Player.changeColorPlayer(game);
-                    Interface.showMessage("\nVous venez de changer de couleur.\n");
+                    InterfaceConsole.showMessage("\nVous venez de changer de couleur.\n");
                     break;
                 case 3: // Changer de joueur
                     Player.changePlayer(game);
-                    Interface.showMessage("\nVous venez de changer de joueur.\n");
+                    InterfaceConsole.showMessage("\nVous venez de changer de joueur.\n");
                     break;
                 case 4: // Ajouter un joueur
                     Player.addPlayer();
-                    Interface.showMessage("\nVous venez d'ajouter un joueur.\n");
+                    InterfaceConsole.showMessage("\nVous venez d'ajouter un joueur.\n");
                     break;
                 case 5: // Supprimer un joueur
                     Player.deletePlayer(game);
-                    Interface.showMessage("\nVous venez de supprimer un joueur.\n");
+                    InterfaceConsole.showMessage("\nVous venez de supprimer un joueur.\n");
                     break;
                 case 6: // Retour
                     leave = true;
@@ -197,7 +197,7 @@ public class Player implements Serializable {
         str += "-----------------------------\n";
         str += "-----------------------------\n";
         
-        Interface.showMessage(str);
+        InterfaceConsole.showMessage(str);
     }
     
     /**
@@ -209,10 +209,10 @@ public class Player implements Serializable {
         Player player;
         int numberPlayer, choice;
         
-        Interface.showMessage(Player.listPlayer());
-        Interface.showMessage("Choississez un joueur : ");
+        InterfaceConsole.showMessage(Player.listPlayer());
+        InterfaceConsole.showMessage("Choississez un joueur : ");
         numberPlayer = Player.getNumberOfPlayers();
-        choice = Interface.getInt(1, numberPlayer);
+        choice = InterfaceConsole.getInt(1, numberPlayer);
         player = Player.load(choice);
         game.setPlayerCurrent(player);
     }
@@ -240,17 +240,17 @@ public class Player implements Serializable {
         int numberPlayer, choice;
         
         do {
-            Interface.showMessage(Player.listPlayer());
-            Interface.showMessage("Tapez 0 pour quitter.\n");
-            Interface.showMessage("Choississez un joueur : ");
+            InterfaceConsole.showMessage(Player.listPlayer());
+            InterfaceConsole.showMessage("Tapez 0 pour quitter.\n");
+            InterfaceConsole.showMessage("Choississez un joueur : ");
             numberPlayer = Player.getNumberOfPlayers();
-            choice = Interface.getInt(1, numberPlayer);
+            choice = InterfaceConsole.getInt(1, numberPlayer);
             player = Player.load(choice);
             if ( game.getPlayerCurrent().equals(player) )
-                Interface.showMessage("Vous ne pouvez vous selectionner.\n");
+                InterfaceConsole.showMessage("Vous ne pouvez vous selectionner.\n");
         } while ( game.getPlayerCurrent().equals(player) );
         Player.delete(choice);
-        Interface.showMessage("Joueur supprimé.\n");
+        InterfaceConsole.showMessage("Joueur supprimé.\n");
     }
     
     /**
@@ -265,17 +265,17 @@ public class Player implements Serializable {
         String mail;
         int yearOfBirth;
         
-        Interface.showMessage("Nouveau joueur.\n");
-        Interface.showMessage("Saississez un pseudonyme : ");
-        pseudo = Interface.getString();
-        Interface.showMessage("Saississez votre email : ");
-        mail = Interface.getString();
-        Interface.showMessage("Saississez votre année de naissance : ");
-        yearOfBirth = Interface.getInt(1950, 2017);
+        InterfaceConsole.showMessage("Nouveau joueur.\n");
+        InterfaceConsole.showMessage("Saississez un pseudonyme : ");
+        pseudo = InterfaceConsole.getString();
+        InterfaceConsole.showMessage("Saississez votre email : ");
+        mail = InterfaceConsole.getString();
+        InterfaceConsole.showMessage("Saississez votre année de naissance : ");
+        yearOfBirth = InterfaceConsole.getInt(1950, 2017);
         color = 'w';
         do {
-            Interface.showMessage("Quel couleur souhaitez vous ? (Blanc/Noir) : ");
-            colorStr = Interface.getString();
+            InterfaceConsole.showMessage("Quel couleur souhaitez vous ? (Blanc/Noir) : ");
+            colorStr = InterfaceConsole.getString();
         } while ( !"Blanc".equals(colorStr) && !"Noir".equals(colorStr) );
         
         switch ( colorStr )

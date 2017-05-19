@@ -67,7 +67,7 @@ public class Score implements Serializable {
         listPlayers = Player.getAllPlayers();
         for ( Player player : listPlayers )
         {
-            Interface.showMessage(player.getPseudo() + " :\n" + player.getScore().toString());
+            InterfaceConsole.showMessage(player.getPseudo() + " :\n" + player.getScore().toString());
         }
     }
     
