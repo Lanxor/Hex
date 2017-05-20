@@ -17,7 +17,12 @@ Compile before to start to play.
 Let's go !
 
 ```
-> ./game.sh play
+> ./game.sh play console
+```
+or
+
+```
+> ./game.sh play gui
 ```
 
 ## Cleaning
