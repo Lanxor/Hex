@@ -1,6 +1,7 @@
 erreur.log
 nbbuild.xml
 manifest.mf
+build.xml
 /save/
 /player/
 /obj/
