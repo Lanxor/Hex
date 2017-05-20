@@ -56,16 +56,16 @@ public class validHAction extends AbstractAction{
         }else{
             if (player1.equals("Nouveau Joueur") || player2.equals("Nouveau Joueur")){
                 this.fenetre.panel = new Deck(0);
-                this.fenetre.panel.add(this.fenetre.buttons.menu("crea joueur"));
+                this.fenetre.panel.add(this.fenetre.buttons.menu("crea joueur 1"));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);
             }else{
-                this.game.getDeck().setSize(Integer.parseInt(size));
-                this.fenetre.panel = new Deck(Integer.parseInt(size));
-                this.game.setPlayerCurrent(Player.load(Player.getPathFilePlayer(player1)));
-                this.game.setPlayer2(Player.load(Player.getPathFilePlayer(player2)));
+                this.game = new Game(Integer.parseInt(size), 
+                        Player.load(Player.getPathFilePlayer(player1)), 
+                        Player.load(Player.getPathFilePlayer(player2)));
                 this.game.getPlayerCurrent().setColor('b');
                 this.game.getPlayer2().setColor('w');
+                this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
                 this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);

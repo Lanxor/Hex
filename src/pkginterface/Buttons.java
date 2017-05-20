@@ -26,6 +26,7 @@ public class Buttons extends JPanel{
     private JComboBox playersList1;
     private JComboBox playersList2;
     private JComboBox numPlayersList;
+    private JComboBox numSaveguardsList;
     private JTextField size;
     private JTextField pseudo;
     private JTextField mail;
@@ -47,7 +48,7 @@ public class Buttons extends JPanel{
         JButton button_newH = new JButton(new newHAction(this.fenetre));
         JButton button_load = new JButton(new loadAction(this.fenetre));
         JButton button_stat = new JButton(new statAction(this.fenetre));
-        JButton button_players = new JButton(new playersAction(this.fenetre, "Joueurs Enregistrés"));
+        JButton button_players = new JButton(new playersAction(this.fenetre));
         JButton button_quit = new JButton(new quitAction(this.fenetre));
         JButton button_save = new JButton(new saveAction(this.game));
         JButton button_saveq = new JButton(new saveqAction(this.fenetre, this.game));
@@ -59,6 +60,7 @@ public class Buttons extends JPanel{
         JButton button_back = new JButton(new backAction(this.fenetre, this.game));
         JButton button_newP = new JButton(new newPAction(this.fenetre, 2));
         JButton button_deleteP = new JButton(new deletePAction(this.fenetre));
+        JButton button_loadS = new JButton(new loadSAction(this.fenetre, this.game));
         
         JTextArea rules = new JTextArea("\nRègles : Les joueurs jouent chacun leur tour. "
                 + "À chaque tour, le joueur place un pion \nde sa couleur sur une"
@@ -83,25 +85,27 @@ public class Buttons extends JPanel{
                 return bouton;
             case "crea partie" :
                 bouton = Box.createVerticalBox();
-                String[] players1 = new String[]{"Joueur 1"};
-                String[] players2 = new String[]{"Joueur 2"};
+                String[] players1 = new String[Player.getNumberOfPlayers()+2];
+                players1[0] = "Joueur 1";
+                String[] players2 = new String[Player.getNumberOfPlayers()+2];
+                players2[0] = "Joueur 2";
                 if (Player.getNumberOfPlayers() != 0){
                     Player[] players = Player.getAllPlayers();
                     for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer){
                         players1[numPlayer+1] = players[numPlayer].getPseudo();
-                        players1[numPlayer+1] = players[numPlayer].getPseudo();
+                        players2[numPlayer+1] = players[numPlayer].getPseudo();
                     }
                 }
-                players1[players1.length] = "Nouveau Joueur";
+                players1[Player.getNumberOfPlayers()+1] = "Nouveau Joueur";
                 playersList1 = new JComboBox(players1);
-                players1[players2.length] = "Nouveau Joueur";
+                players2[Player.getNumberOfPlayers()+1] = "Nouveau Joueur";
                 playersList2 = new JComboBox(players2);
                 bouton.add(playersList1);
                 bouton.add(playersList2);
                 bouton.add(new JLabel("Taille du Tablier [" 
-                        + this.game.getDeck().getMinimumSize()
+                        + Deck.getMinSize()
                         + "-"
-                        + this.game.getDeck().getMaximumSize()
+                        + Deck.getMaxSize()
                         +"] :"));
                 size = new JTextField();
                 bouton.add(size);
@@ -138,7 +142,8 @@ public class Buttons extends JPanel{
                 bouton.add(mail);
                 bouton.add(new JLabel("Année de Naissance :"));
                 years = new String[100];
-                for (int i=0; i<100; ++i){
+                for (int i=0; i<100; ++i)
+                {
                     years[i]=Integer.toString(i+1917);
                 }
                 yearOfBirth = new JComboBox(years);
@@ -149,14 +154,20 @@ public class Buttons extends JPanel{
             case "joueurs" :
                 bouton = Box.createVerticalBox();
                 bouton.add(button_newP);
-                String[] numPlayers = new String[]{""};
-                for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer){
-                    
-                    numPlayers[numPlayer] = Integer.toString(numPlayer + 1);
+                if (Player.getNumberOfPlayers() != 0)
+                {
+                    String[] numPlayers = new String[Player.getNumberOfPlayers()];
+                    for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
+                    {
+
+                        numPlayers[numPlayer] = Integer.toString(numPlayer + 1);
+                    }
+                    numPlayersList = new JComboBox(numPlayers);
                 }
-                numPlayersList = new JComboBox(numPlayers);
+                bouton.add(numPlayersList);
                 bouton.add(button_deleteP);
                 bouton.add(button_acceuil);
+                return bouton;
             case "crea joueur 2" :
                 bouton = Box.createVerticalBox();
                 bouton.add(new JLabel("Pseudo :"));
@@ -173,6 +184,22 @@ public class Buttons extends JPanel{
                 yearOfBirth = new JComboBox(years);
                 bouton.add(yearOfBirth);
                 bouton.add(new JButton(new validPAction(this.fenetre, this.game, "players")));
+                bouton.add(button_acceuil);
+                return bouton;
+            case "saveguard" :
+                bouton = Box.createVerticalBox();
+                if (Saveguard.getNumberOfSaveguard() != 0)
+                {
+                    String[] numSaveguards = new String[Saveguard.getNumberOfSaveguard()];
+                    for (int numSG = 0; numSG < Saveguard.getNumberOfSaveguard(); ++numSG){
+                        numSaveguards[numSG] = Integer.toString(numSG);
+                    }
+                    numSaveguardsList = new JComboBox(numSaveguards);
+                    bouton.add(numSaveguardsList);
+                    bouton.add(button_loadS);
+                }else{
+                    bouton.add(new JLabel("aucune partie enregistrée"));
+                }
                 bouton.add(button_acceuil);
                 return bouton;
             default :
@@ -195,6 +222,11 @@ public class Buttons extends JPanel{
     public JComboBox getNumPlayersList()
     {
         return numPlayersList;
+    }
+    
+    public JComboBox getNumSaveguardList()
+    {
+        return numSaveguardsList;
     }
     
     public JTextField getSizeD()

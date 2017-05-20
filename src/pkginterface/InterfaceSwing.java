@@ -22,7 +22,8 @@ public class InterfaceSwing {
      */
     public static void main(String[] args)
     {
-        Fenetre fenetre = new Fenetre();
+        Game game = new Game();
+        Fenetre fenetre = new Fenetre(game);
     }
     
 }

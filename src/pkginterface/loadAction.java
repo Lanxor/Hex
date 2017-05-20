@@ -7,6 +7,10 @@ package pkginterface;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -25,7 +29,18 @@ public class loadAction extends AbstractAction{
     public void actionPerformed(ActionEvent e)
     {
         this.fenetre.panel = new Deck(0);
-        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
+        Box saveguard = Box.createVerticalBox();
+        saveguard.add(new JLabel("Sauvegardes"));
+        if (Saveguard.getNumberOfSaveguard() != 0){
+            String[] saveguards = Saveguard.getListSaveguard();
+            for (int numSG = 0; numSG < Saveguard.getNumberOfSaveguard(); ++numSG){
+                saveguard.add(new JTextArea(Integer.toString(numSG)
+                        + saveguards[numSG]
+                        + "\n"));
+            }
+        }
+        this.fenetre.panel.add(saveguard);
+        this.fenetre.panel.add(this.fenetre.buttons.menu("saveguard"));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }
