@@ -29,13 +29,15 @@ public class playersAction extends AbstractAction{
         this.fenetre.panel = new Deck(0);
         this.fenetre.panel.add(new JLabel("Joueurs Enregistrés"));
         JTextArea playersInfo = new JTextArea("");
-        Player[] players = Player.getAllPlayers();
-        for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
-        {
-            playersInfo = new JTextArea(playersInfo + "\n"
-                + Integer.toString(numPlayer +  1)
-                + " : pseudo : " + players[numPlayer].getPseudo()
-                + "mail : " + players[numPlayer].getMail());
+        if (Player.getNumberOfPlayers() != 0){
+            Player[] players = Player.getAllPlayers();
+            for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
+            {
+                playersInfo = new JTextArea(playersInfo + "\n"
+                    + Integer.toString(numPlayer +  1)
+                    + " : pseudo : " + players[numPlayer].getPseudo()
+                    + "mail : " + players[numPlayer].getMail());
+            }
         }
         this.fenetre.panel.add(playersInfo);
         this.fenetre.panel.add(this.fenetre.buttons.menu(""));
