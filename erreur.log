@@ -1,0 +1,762 @@
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/deck.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/vertice.h:16,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/vertice.h:16:0,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+src/group.c: In function ‘group_who_win’:
+src/group.c:66:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:67:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+src/group.c: In function ‘group_winner’:
+src/group.c:88:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:89:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/group.h:16,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/vertice.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+src/vertice.c: In function ‘vertice_create’:
+src/vertice.c:24:22: warning: implicit declaration of function ‘group_insert’ [-Wimplicit-function-declaration]
+     vertice->group = group_insert(vertice_group, vertice);
+                      ^
+src/vertice.c:24:35: error: ‘vertice_group’ undeclared (first use in this function)
+     vertice->group = group_insert(vertice_group, vertice);
+                                   ^
+src/vertice.c:24:35: note: each undeclared identifier is reported only once for each function it appears in
+src/vertice.c: In function ‘vertice_update_group’:
+src/vertice.c:90:52: error: dereferencing pointer to incomplete type ‘struct s_deck’
+   for (int cpt = 0; cpt < deck_get_number_edge(deck->size); ++cpt)
+                                                    ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+gcc: error: obj/*: Aucun fichier ou dossier de ce type
+gcc: fatal error: no input files
+compilation terminated.
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/deck.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/vertice.h:16,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/vertice.h:16:0,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+src/group.c: In function ‘group_who_win’:
+src/group.c:66:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:67:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+src/group.c: In function ‘group_winner’:
+src/group.c:88:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:89:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/group.h:16,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/vertice.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+src/vertice.c: In function ‘vertice_create’:
+src/vertice.c:24:22: warning: implicit declaration of function ‘group_insert’ [-Wimplicit-function-declaration]
+     vertice->group = group_insert(vertice_group, vertice);
+                      ^
+src/vertice.c:24:35: error: ‘vertice_group’ undeclared (first use in this function)
+     vertice->group = group_insert(vertice_group, vertice);
+                                   ^
+src/vertice.c:24:35: note: each undeclared identifier is reported only once for each function it appears in
+src/vertice.c: In function ‘vertice_update_group’:
+src/vertice.c:90:52: error: dereferencing pointer to incomplete type ‘struct s_deck’
+   for (int cpt = 0; cpt < deck_get_number_edge(deck->size); ++cpt)
+                                                    ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+gcc: error: obj/*: Aucun fichier ou dossier de ce type
+gcc: fatal error: no input files
+compilation terminated.
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/deck.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/vertice.h:16,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/vertice.h:16:0,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+src/group.c: In function ‘group_who_win’:
+src/group.c:66:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:67:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+src/group.c: In function ‘group_winner’:
+src/group.c:88:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:89:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/group.h:16,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/vertice.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+src/vertice.c: In function ‘vertice_create’:
+src/vertice.c:24:22: warning: implicit declaration of function ‘group_insert’ [-Wimplicit-function-declaration]
+     vertice->group = group_insert(vertice_group, vertice);
+                      ^
+src/vertice.c:24:35: error: ‘vertice_group’ undeclared (first use in this function)
+     vertice->group = group_insert(vertice_group, vertice);
+                                   ^
+src/vertice.c:24:35: note: each undeclared identifier is reported only once for each function it appears in
+src/vertice.c: In function ‘vertice_update_group’:
+src/vertice.c:90:52: error: dereferencing pointer to incomplete type ‘struct s_deck’
+   for (int cpt = 0; cpt < deck_get_number_edge(deck->size); ++cpt)
+                                                    ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+gcc: error: obj/*: Aucun fichier ou dossier de ce type
+gcc: fatal error: no input files
+compilation terminated.
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/deck.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/vertice.h:16,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/vertice.h:16:0,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+src/group.c: In function ‘group_who_win’:
+src/group.c:66:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:67:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+src/group.c: In function ‘group_winner’:
+src/group.c:88:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:89:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/group.h:16,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/vertice.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+src/vertice.c: In function ‘vertice_create’:
+src/vertice.c:24:22: warning: implicit declaration of function ‘group_insert’ [-Wimplicit-function-declaration]
+     vertice->group = group_insert(vertice_group, vertice);
+                      ^
+src/vertice.c:24:35: error: ‘vertice_group’ undeclared (first use in this function)
+     vertice->group = group_insert(vertice_group, vertice);
+                                   ^
+src/vertice.c:24:35: note: each undeclared identifier is reported only once for each function it appears in
+src/vertice.c: In function ‘vertice_update_group’:
+src/vertice.c:90:52: error: dereferencing pointer to incomplete type ‘struct s_deck’
+   for (int cpt = 0; cpt < deck_get_number_edge(deck->size); ++cpt)
+                                                    ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+gcc: error: obj/*: Aucun fichier ou dossier de ce type
+gcc: fatal error: no input files
+compilation terminated.
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/deck.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/vertice.h:16,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/vertice.h:16:0,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+src/group.c: In function ‘group_who_win’:
+src/group.c:66:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:67:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+src/group.c: In function ‘group_winner’:
+src/group.c:88:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:89:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/group.h:16,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/vertice.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+src/vertice.c: In function ‘vertice_create’:
+src/vertice.c:24:22: warning: implicit declaration of function ‘group_insert’ [-Wimplicit-function-declaration]
+     vertice->group = group_insert(vertice_group, vertice);
+                      ^
+src/vertice.c:24:35: error: ‘vertice_group’ undeclared (first use in this function)
+     vertice->group = group_insert(vertice_group, vertice);
+                                   ^
+src/vertice.c:24:35: note: each undeclared identifier is reported only once for each function it appears in
+src/vertice.c: In function ‘vertice_update_group’:
+src/vertice.c:90:52: error: dereferencing pointer to incomplete type ‘struct s_deck’
+   for (int cpt = 0; cpt < deck_get_number_edge(deck->size); ++cpt)
+                                                    ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+gcc: error: obj/*: Aucun fichier ou dossier de ce type
+gcc: fatal error: no input files
+compilation terminated.
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/deck.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/edge.h:15,
+                 from src/edge.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/vertice.h:16,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/vertice.h:16:0,
+                 from src/../header/group.h:15,
+                 from src/group.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+src/group.c: In function ‘group_who_win’:
+src/group.c:66:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:67:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+src/group.c: In function ‘group_winner’:
+src/group.c:88:15: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
+               ^
+src/group.c:89:16: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
+                ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+In file included from src/../header/deck.h:16:0,
+                 from src/../header/group.h:16,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/edge.h:28:18: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                  ^
+src/../header/edge.h:28:33: error: unknown type name ‘Vertice’
+ Edge edge_create(Vertice first, Vertice second);
+                                 ^
+src/../header/edge.h:41:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_first(Edge edge);
+ ^
+src/../header/edge.h:48:1: error: unknown type name ‘Vertice’
+ Vertice edge_get_vertice_second(Edge edge);
+ ^
+In file included from src/../header/group.h:16:0,
+                 from src/../header/vertice.h:15,
+                 from src/vertice.c:1:
+src/../header/deck.h:40:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_vertice(Deck deck, int abscisse,
+ ^
+src/../header/deck.h:51:39: error: unknown type name ‘Vertice’
+ int deck_vertice_is_border(Deck deck, Vertice vertice);
+                                       ^
+src/../header/deck.h:84:1: error: unknown type name ‘Vertice’
+ Vertice deck_get_border(Deck deck, char color, int number);
+ ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/vertice.c:1:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+src/vertice.c: In function ‘vertice_create’:
+src/vertice.c:24:22: warning: implicit declaration of function ‘group_insert’ [-Wimplicit-function-declaration]
+     vertice->group = group_insert(vertice_group, vertice);
+                      ^
+src/vertice.c:24:35: error: ‘vertice_group’ undeclared (first use in this function)
+     vertice->group = group_insert(vertice_group, vertice);
+                                   ^
+src/vertice.c:24:35: note: each undeclared identifier is reported only once for each function it appears in
+src/vertice.c: In function ‘vertice_update_group’:
+src/vertice.c:90:52: error: dereferencing pointer to incomplete type ‘struct s_deck’
+   for (int cpt = 0; cpt < deck_get_number_edge(deck->size); ++cpt)
+                                                    ^
+In file included from src/../header/vertice.h:15:0,
+                 from src/../header/deck.h:15,
+                 from src/interfaceCJava.c:6:
+src/../header/group.h:36:40: error: unknown type name ‘Vertice’
+ Group group_insert(Group initialGroup, Vertice verticeToInsert);
+                                        ^
+gcc: error: obj/*: Aucun fichier ou dossier de ce type
+gcc: fatal error: no input files
+compilation terminated.

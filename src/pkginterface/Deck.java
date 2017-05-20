@@ -1,10 +1,20 @@
 package pkginterface;
 
-public class Deck {
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+public class Deck extends JPanel {
     
     private static final int MIN_SIZE = 2;
     private static final int MAX_SIZE = 19;
     private int size;
+    private int xstart;
+    private int ystart;
     
     /***************************************************************************
      *                                                                         *
@@ -12,16 +22,63 @@ public class Deck {
      *                                                                         *
      **************************************************************************/
     
+    public void paintComponent(Graphics g){
+        g.setColor(Color.white);
+        g.fillRect(0, 0, 800, 600);
+        int x = xstart;
+        int y = ystart;
+        char color;
+        try {
+            Image title = ImageIO.read(new File("images/title.png"));
+            g.drawImage(title, 0, 0, this);
+            Image hv = ImageIO.read(new File("images/hv.png"));
+            Image hvtop = ImageIO.read(new File("images/hvtop.png"));
+            Image hvbottom = ImageIO.read(new File("images/hvbottom.png"));
+            Image hvright = ImageIO.read(new File("images/hvright.png"));
+            Image hvleft = ImageIO.read(new File("images/hvleft.png"));
+            Image hb = ImageIO.read(new File("images/hb.png"));
+            Image hw = ImageIO.read(new File("images/hw.png"));
+            for (int abs = 1; abs <= this.size; ++abs){
+                for (int ord = 0; ord < this.size; ++ord){
+                    color = InterfaceJavaC.getVerticeColor(abs-1, ord);
+                    switch (color)
+                    {
+                        case 'b' :
+                            g.drawImage(hb, x, y, this);
+                        case 'w' :
+                            g.drawImage(hw, x, y, this);
+                        default :
+                            if (abs == 1){
+                                g.drawImage(hvtop, x, y, this);
+                            }else if (abs == this.size){
+                                g.drawImage(hvbottom, x, y, this);
+                            }else if (ord == 0){
+                                g.drawImage(hvleft, x, y, this);
+                            }else if (ord == this.size-1){
+                                g.drawImage(hvright, x, y, this);
+                            }else{
+                                g.drawImage(hv, x, y, this);
+                            }
+                    }
+                    x = x + 25;
+                }
+                x = xstart + 13 * abs;
+                y = y + 21;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @brief Constructeur par défaut.
      * @param size : Taille du plateau de jeu.
      */
     public Deck(int size)
     {
-        if ( Deck.sizeValid(size) )
-            this.size = size;
-        else
-            this.size = 0;
+        this.size = size;
+        this.xstart = 400 - 18 * size;
+        this.ystart = 120;
     }
     
     /***************************************************************************
@@ -37,7 +94,7 @@ public class Deck {
     public void createDeckC()
     {
         if ( Deck.sizeValid(this.size) )
-            InterfaceJavaC.createDeck(this.getSize());
+            InterfaceJavaC.createDeck(this.getSizeDeck());
     }
     
     /**
@@ -64,7 +121,7 @@ public class Deck {
     public int askSize()
     {
         System.out.print("De quelle taille voulez-vous votre tablier ? ");
-        this.size = Interface.getInt(MIN_SIZE, MAX_SIZE);
+        this.size = InterfaceConsole.getInt(MIN_SIZE, MAX_SIZE);
         return this.size;
     }
     
@@ -75,23 +132,25 @@ public class Deck {
      **************************************************************************/
     
     /**
-     * @brief Focntion qui affiche le plateau de jeu.
+     * @brief Fonntion qui affiche le plateau de jeu en console.
      */
     public void print()
     {
         for (int bordureTop = 0; bordureTop < this.size; ++bordureTop )
-            Interface.showMessage("*");
-        Interface.showMessage("\n");
+            InterfaceConsole.showMessage("*");
+        InterfaceConsole.showMessage("\n");
         
         for (int line = 0; line < this.size; ++line)
-            Interface.showMessage("o " + this.getStringLine(line) + "o\n");
+            InterfaceConsole.showMessage("o " + this.getStringLine(line) + "o\n");
         
         for (int bordureTop = 0; bordureTop < this.size; ++bordureTop )
-            Interface.showMessage("*");
-        Interface.showMessage("\n");
+            InterfaceConsole.showMessage("*");
+        InterfaceConsole.showMessage("\n");
         
         
     }
+    
+    
     
     /***************************************************************************
      *                                                                         *
@@ -137,7 +196,7 @@ public class Deck {
      * @brief Getter size.
      * @return Retourne la taille du plateau.
      */
-    public int getSize(){
+    public int getSizeDeck(){
         return this.size;
     }
     

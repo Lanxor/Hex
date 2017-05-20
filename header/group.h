@@ -13,7 +13,6 @@
 #include <assert.h>
 
 #include "vertice.h"
-#include "deck.h"
 
 /**
  * @brief Structure des groupes de jeu.
@@ -53,7 +52,17 @@ void group_print(Group initialGroup);
  */
 char group_color(Group initialGroup);
 
+/**
+ * @brief Intègre le second groupe dans le premier
+ * @param firstGroup : Groupe qui recevra les éléments
+ * @param secondGroup : Groupe qui donnera et sera supprimé
+ * @return Retourne le groupe le premier groupe possédant les éléments des deux
+ */
 Group group_fusion(Group firstGroup, Group secondGroup);
+
+
+
+
 
 #endif
 

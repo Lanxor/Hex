@@ -12,8 +12,6 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "group.h"
-#include "deck.h"
 
 #define TRANSPARENT 't'
 #define BLACK 'b'
@@ -59,12 +57,14 @@ int vertice_get_ordonnee(Vertice vertice);
  */
 char vertice_get_color(Vertice vertice);
 
+
 /**
  * @brief Fonction qui modifie la couleur d'un sommet.
  * @param vertice : Le sommet à modifier.
  * @param color : La couleur à modifier.
  */
 void vertice_set_color(Vertice vertice , char color);
+
 
 /**
  * @brief Fonction qui affiche les coordonées d'un sommet.
@@ -89,6 +89,8 @@ void vertice_delete(Vertice vertice);
  * @param vertice : Le sommet à libérer.
  */
 void vertice_free(Vertice vertice);
+
+
 
 #endif
 

@@ -53,56 +53,30 @@ Group group_fusion(Group firstGroup, Group secondGroup)
 {
   for (int cpt = 0; cpt < secondGroup->number_vertice; ++cpt)
     firstGroup = group_insert(firstGroup, secondGroup->list_vertice[cpt]);
-  group_delete(secondGroup);
+  //group_delete(secondGroup);
   return (firstGroup);
 }
 
-char group_who_win(Group initialGroup, Deck deck)
+int group_get_number(Group initialGroup)
 {
-  Vertice   firstBorder;
-  Vertice   secondBorder;
-  int       isWinner;
-  
-  firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
-  secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
-  isWinner = 0;
-  
-  if (firstBorder != NULL && secondBorder != NULL)
-  {
-    for (int cpt = 0; cpt < initialGroup->number_vertice; ++cpt)
-      if (initialGroup->list_vertice[cpt] == firstBorder || initialGroup->list_vertice[cpt] == secondBorder )
-        ++isWinner;
-  } 
-  if (isWinner == 2)
-    return(group_color(initialGroup));
-  else
-    return(TRANSPARENT);
+  return (initialGroup->number_vertice);
 }
 
-int group_winner(Group initialGroup, Deck deck)
+Vertice group_get_vertice(Group initialGroup, int numberOfTheVertice)
 {
-  Vertice   firstBorder;
-  Vertice   secondBorder;
-  int       isWinner;
-  
-  firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
-  secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
-  isWinner = 0;
-  
-  if (firstBorder != NULL && secondBorder != NULL)
-  {
-    for (int cpt = 0; cpt < initialGroup->number_vertice; ++cpt)
-      if (initialGroup->list_vertice[cpt] == firstBorder || initialGroup->list_vertice[cpt] == secondBorder )
-        ++isWinner;
-  } 
-  if (isWinner == 2)
-    return(1);
-  else
-    return(0);
+  return (initialGroup->list_vertice[numberOfTheVertice]);
 }
 
-
-
+int group_search_vertice(Group initialGroup, Vertice verticeToSearch)
+{
+  int isFind;
+  
+  isFind = 0;
+  for (int cpt = 0; cpt < initialGroup->number_vertice; ++cpt)
+    if (verticeToSearch == initialGroup->list_vertice[cpt])
+      ++isFind;
+  return (isFind);
+}
 /*
  * A faire :
  * Créer une fonction de création de group a partir d'un deck
