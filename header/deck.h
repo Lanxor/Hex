@@ -148,4 +148,8 @@ char group_who_win(Group initialGroup, Deck deck);
  */
 int group_winner(Group initialGroup, Deck deck);
 
+LDG deck_get_ldg(Deck deck);
+
+char deck_know_winner(Deck deck);
+
 #endif

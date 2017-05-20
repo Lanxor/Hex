@@ -13,11 +13,14 @@
 typedef struct s_node *Node;
 typedef struct s_ldg* LDG;
 
+
 /**
  * @brief Créer une liste chainée LDG de groupe
  * @return La liste LDG créée
  */
 LDG listGroup_create();
+
+Node linkThreeNode(Node leftNode, Node midNode, Node rightNode);
 
 /**
  * @brief Ajoute un groupe à la liste LDG
@@ -48,4 +51,6 @@ Node ldg_get_next(Node currentNode);
 Group ldg_get_group(Node currentNode);
 
 int ldg_get_number(LDG ldg);
+
+
 #endif

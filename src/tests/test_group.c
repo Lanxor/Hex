@@ -72,15 +72,6 @@ void test5_fusion()
   
 }
 
-void test6_update()
-{
-  Deck    deck;
-  
-  printf("test_group test 6\n");
-  deck = deck_create();
-  group_print(vertice_get_group(deck_get_vertice(deck, 1, 1)));
-
-}
 
 int main() 
 {
@@ -90,7 +81,6 @@ int main()
   test3_insert();
   test4_color();
   test5_fusion();
-  test6_update();
 
   return (EXIT_SUCCESS);
 }

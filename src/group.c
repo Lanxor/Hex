@@ -33,7 +33,7 @@ void group_delete(Group initialGroup)
 void group_print(Group initialGroup)
 {
   printf("Inside the Group :\n");
-  printf("Number of Vertice : %d\n", initialGroup->number_vertice);
+  printf("Number of Vertice : %d\n", (int) initialGroup->number_vertice);
   for (int i = 0; i < initialGroup->number_vertice; ++i)
     printf("| %d,%d %c ", vertice_get_abscisse(initialGroup->list_vertice[i]),
                           vertice_get_ordonnee(initialGroup->list_vertice[i]),
@@ -53,7 +53,6 @@ Group group_fusion(Group firstGroup, Group secondGroup)
 {
   for (int cpt = 0; cpt < secondGroup->number_vertice; ++cpt)
     firstGroup = group_insert(firstGroup, secondGroup->list_vertice[cpt]);
-  //group_delete(secondGroup);
   return (firstGroup);
 }
 
@@ -77,7 +76,3 @@ int group_search_vertice(Group initialGroup, Vertice verticeToSearch)
       ++isFind;
   return (isFind);
 }
-/*
- * A faire :
- * Créer une fonction de création de group a partir d'un deck
- */

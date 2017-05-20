@@ -60,7 +60,11 @@ char group_color(Group initialGroup);
  */
 Group group_fusion(Group firstGroup, Group secondGroup);
 
+int group_get_number(Group initialGroup);
 
+Vertice group_get_vertice(Group initialGroup, int numberOfTheVertice);
+
+int group_search_vertice(Group initialGroup, Vertice verticeToSearch);
 
 
 
