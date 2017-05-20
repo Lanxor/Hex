@@ -16,7 +16,8 @@ public class Coordinates {
      * @param abscissa : Abscissa de la coordonnée.
      * @param orderly : Ordonnée de la coordonnée.
      */
-    public Coordinates(int abscissa, int orderly){
+    public Coordinates(int abscissa, int orderly)
+    {
         this.abscissa = abscissa;
         this.orderly = orderly;
     }

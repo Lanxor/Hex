@@ -89,9 +89,11 @@ public class Buttons extends JPanel{
                 players1[0] = "Joueur 1";
                 String[] players2 = new String[Player.getNumberOfPlayers()+2];
                 players2[0] = "Joueur 2";
-                if (Player.getNumberOfPlayers() != 0){
+                if (Player.getNumberOfPlayers() != 0)
+                {
                     Player[] players = Player.getAllPlayers();
-                    for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer){
+                    for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
+                    {
                         players1[numPlayer+1] = players[numPlayer].getPseudo();
                         players2[numPlayer+1] = players[numPlayer].getPseudo();
                     }
@@ -178,7 +180,8 @@ public class Buttons extends JPanel{
                 bouton.add(mail);
                 bouton.add(new JLabel("Année de Naissance :"));
                 years = new String[100];
-                for (int i=0; i<100; ++i){
+                for (int i=0; i<100; ++i)
+                {
                     years[i]=Integer.toString(i+1917);
                 }
                 yearOfBirth = new JComboBox(years);
@@ -191,13 +194,16 @@ public class Buttons extends JPanel{
                 if (Saveguard.getNumberOfSaveguard() != 0)
                 {
                     String[] numSaveguards = new String[Saveguard.getNumberOfSaveguard()];
-                    for (int numSG = 0; numSG < Saveguard.getNumberOfSaveguard(); ++numSG){
+                    for (int numSG = 0; numSG < Saveguard.getNumberOfSaveguard(); ++numSG)
+                    {
                         numSaveguards[numSG] = Integer.toString(numSG);
                     }
                     numSaveguardsList = new JComboBox(numSaveguards);
                     bouton.add(numSaveguardsList);
                     bouton.add(button_loadS);
-                }else{
+                }
+                else
+                {
                     bouton.add(new JLabel("aucune partie enregistrée"));
                 }
                 bouton.add(button_acceuil);

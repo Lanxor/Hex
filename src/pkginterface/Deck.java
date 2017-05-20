@@ -22,7 +22,8 @@ public class Deck extends JPanel {
      *                                                                         *
      **************************************************************************/
     
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g)
+    {
         g.setColor(Color.white);
         g.fillRect(0, 0, 800, 600);
         int x = xstart;
@@ -38,8 +39,10 @@ public class Deck extends JPanel {
             Image hvleft = ImageIO.read(new File("images/hvleft.png"));
             Image hb = ImageIO.read(new File("images/hb.png"));
             Image hw = ImageIO.read(new File("images/hw.png"));
-            for (int abs = 1; abs <= this.size; ++abs){
-                for (int ord = 0; ord < this.size; ++ord){
+            for (int abs = 1; abs <= this.size; ++abs)
+            {
+                for (int ord = 0; ord < this.size; ++ord)
+                {
                     color = InterfaceJavaC.getVerticeColor(abs-1, ord);
                     switch (color)
                     {
@@ -48,24 +51,25 @@ public class Deck extends JPanel {
                         case 'w' :
                             g.drawImage(hw, x, y, this);
                         default :
-                            if (abs == 1){
+                            if (abs == 1)
                                 g.drawImage(hvtop, x, y, this);
-                            }else if (abs == this.size){
+                            else if (abs == this.size)
                                 g.drawImage(hvbottom, x, y, this);
-                            }else if (ord == 0){
+                            else if (ord == 0)
                                 g.drawImage(hvleft, x, y, this);
-                            }else if (ord == this.size-1){
+                            else if (ord == this.size-1)
                                 g.drawImage(hvright, x, y, this);
-                            }else{
+                            else
                                 g.drawImage(hv, x, y, this);
-                            }
                     }
                     x = x + 25;
                 }
                 x = xstart + 13 * abs;
                 y = y + 21;
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }

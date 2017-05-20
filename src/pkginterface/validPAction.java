@@ -36,31 +36,32 @@ public class validPAction extends AbstractAction{
         String yearOfBirth = (String)this.fenetre.buttons.getYear().getSelectedItem();
         Player newPlayer = new Player('b', pseudo, mail, Integer.parseInt(yearOfBirth));
         Player.add(newPlayer);
-        if (source.equals("newH")){
+        if (source.equals("newH"))
+        {
             this.fenetre.panel = new Deck(0);
             this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie"));
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
         }
-        if (source.equals("players")){
+        if (source.equals("players"))
+        {
             this.fenetre.panel = new Deck(0);
-        Box playersList = Box.createVerticalBox();
-        playersList.add(new JLabel("Joueurs Enregistrés"));
-        if (Player.getNumberOfPlayers() != 0){
-            Player[] players = Player.getAllPlayers();
-            for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
+            Box playersList = Box.createVerticalBox();
+            playersList.add(new JLabel("Joueurs Enregistrés"));
+            if (Player.getNumberOfPlayers() != 0)
             {
-                playersList.add(new JTextArea(Integer.toString(numPlayer +  1)
-                        + " : pseudo : " + players[numPlayer].getPseudo()
-                        + "\n"
-                        + "mail : " + players[numPlayer].getMail()
-                        + "\n"));
+                Player[] players = Player.getAllPlayers();
+                for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
+                    playersList.add(new JTextArea(Integer.toString(numPlayer +  1)
+                            + " : pseudo : " + players[numPlayer].getPseudo()
+                            + "\n"
+                            + "mail : " + players[numPlayer].getMail()
+                            + "\n"));
             }
-        }
-        playersList.add(this.fenetre.buttons.menu("joueurs"));
-        this.fenetre.panel.add(playersList);
-        this.fenetre.setContentPane(this.fenetre.panel);
-        this.fenetre.setVisible(true);
+            playersList.add(this.fenetre.buttons.menu("joueurs"));
+            this.fenetre.panel.add(playersList);
+            this.fenetre.setContentPane(this.fenetre.panel);
+            this.fenetre.setVisible(true);
         }
     }
     

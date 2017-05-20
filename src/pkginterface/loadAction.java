@@ -31,9 +31,11 @@ public class loadAction extends AbstractAction{
         this.fenetre.panel = new Deck(0);
         Box saveguard = Box.createVerticalBox();
         saveguard.add(new JLabel("Sauvegardes"));
-        if (Saveguard.getNumberOfSaveguard() != 0){
+        if (Saveguard.getNumberOfSaveguard() != 0)
+        {
             String[] saveguards = Saveguard.getListSaveguard();
-            for (int numSG = 0; numSG < Saveguard.getNumberOfSaveguard(); ++numSG){
+            for (int numSG = 0; numSG < Saveguard.getNumberOfSaveguard(); ++numSG)
+            {
                 saveguard.add(new JTextArea(Integer.toString(numSG)
                         + saveguards[numSG]
                         + "\n"));

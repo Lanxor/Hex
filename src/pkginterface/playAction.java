@@ -7,7 +7,6 @@ package pkginterface;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -53,7 +52,8 @@ public class playAction extends AbstractAction{
             this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
-        }else
+        }
+        else
         {
             Coordinates coordPlayed = new Coordinates (Integer.parseInt(abs), Integer.parseInt(ord));
             Move move = new Move(this.game.getPlayerCurrent(), coordPlayed);
@@ -64,7 +64,9 @@ public class playAction extends AbstractAction{
                 this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);
-            }else{
+            }
+            else
+            {
                 move.play();
                 Player temp = this.game.getPlayer2();
                 this.game.setPlayer2(this.game.getPlayerCurrent());
@@ -73,18 +75,18 @@ public class playAction extends AbstractAction{
                 {
                     char colorWinner = InterfaceJavaC.getWinner();
                     Player winner;
-                    if (this.game.getPlayerCurrent().getColor() == colorWinner){
+                    if (this.game.getPlayerCurrent().getColor() == colorWinner)
                         winner = this.game.getPlayerCurrent();
-                    }else{
+                    else
                         winner = this.game.getPlayer2();
-                    }
                     JOptionPane.showMessageDialog(null, winner.getPseudo() + " a gagné !");
                     this.game.endGame();
                     this.fenetre.panel = new Deck(0);
                     this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
                     this.fenetre.setContentPane(this.fenetre.panel);
                     this.fenetre.setVisible(true);
-                }else
+                }
+                else
                 {
                     this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
                     this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));

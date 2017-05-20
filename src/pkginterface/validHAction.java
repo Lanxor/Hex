@@ -47,19 +47,25 @@ public class validHAction extends AbstractAction{
                 || Integer.parseInt(size) > 19
                 || player1.equals("Joueur 1")
                 || player2.equals("Joueur 2")
-                || (!player1.equals("Nouveau Joueur") && player1.equals(player2))){
+                || (!player1.equals("Nouveau Joueur") && player1.equals(player2)))
+        {
             JOptionPane.showMessageDialog(this.fenetre.panel, "Erreur, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
             this.fenetre.panel = new Deck(0);
             this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie"));
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
-        }else{
-            if (player1.equals("Nouveau Joueur") || player2.equals("Nouveau Joueur")){
+        }
+        else
+        {
+            if (player1.equals("Nouveau Joueur") || player2.equals("Nouveau Joueur"))
+            {
                 this.fenetre.panel = new Deck(0);
                 this.fenetre.panel.add(this.fenetre.buttons.menu("crea joueur 1"));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);
-            }else{
+            }
+            else
+            {
                 this.game = new Game(Integer.parseInt(size), 
                         Player.load(Player.getPathFilePlayer(player1)), 
                         Player.load(Player.getPathFilePlayer(player2)));

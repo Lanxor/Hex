@@ -30,16 +30,15 @@ public class playersAction extends AbstractAction{
         this.fenetre.panel = new Deck(0);
         Box playersList = Box.createVerticalBox();
         playersList.add(new JLabel("Joueurs Enregistrés"));
-        if (Player.getNumberOfPlayers() != 0){
+        if (Player.getNumberOfPlayers() != 0)
+        {
             Player[] players = Player.getAllPlayers();
             for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
-            {
                 playersList.add(new JTextArea(Integer.toString(numPlayer +  1)
                         + " : pseudo : " + players[numPlayer].getPseudo()
                         + "\n"
                         + "mail : " + players[numPlayer].getMail()
                         + "\n"));
-            }
         }
         playersList.add(this.fenetre.buttons.menu("joueurs"));
         this.fenetre.panel.add(playersList);

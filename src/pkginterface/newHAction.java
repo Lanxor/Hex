@@ -19,17 +19,20 @@ public class newHAction extends AbstractAction{
     
     private Fenetre fenetre;
     
-    public newHAction (Fenetre fenetre){
+    public newHAction (Fenetre fenetre)
+    {
         super("Nouvelle Partie");
         this.fenetre = fenetre;
     }
     
-    public newHAction (Fenetre fenetre, String name){
+    public newHAction (Fenetre fenetre, String name)
+    {
         super(name);
         this.fenetre = fenetre;
     }
     
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e)
+    {
         this.fenetre.panel = new Deck(0);
         this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie"));
         this.fenetre.setContentPane(this.fenetre.panel);

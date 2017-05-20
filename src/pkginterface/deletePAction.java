@@ -34,7 +34,8 @@ public class deletePAction extends AbstractAction{
         this.fenetre.panel = new Deck(0);
         Box playersList = Box.createVerticalBox();
         playersList.add(new JLabel("Joueurs Enregistrés"));
-        if (Player.getNumberOfPlayers() != 0){
+        if (Player.getNumberOfPlayers() != 0)
+        {
             Player[] players = Player.getAllPlayers();
             for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
             {
