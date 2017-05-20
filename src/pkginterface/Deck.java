@@ -136,15 +136,15 @@ public class Deck extends JPanel {
      */
     public void print()
     {
-        for (int bordureTop = 0; bordureTop < this.size; ++bordureTop )
-            InterfaceConsole.showMessage("*");
+        for (int bordureTop = 0; bordureTop < this.size + 2; ++bordureTop )
+            InterfaceConsole.showMessage("* ");
         InterfaceConsole.showMessage("\n");
         
         for (int line = 0; line < this.size; ++line)
             InterfaceConsole.showMessage("o " + this.getStringLine(line) + "o\n");
         
-        for (int bordureTop = 0; bordureTop < this.size; ++bordureTop )
-            InterfaceConsole.showMessage("*");
+        for (int bordureTop = 0; bordureTop < this.size + 2; ++bordureTop )
+            InterfaceConsole.showMessage("* ");
         InterfaceConsole.showMessage("\n");
         
         

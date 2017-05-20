@@ -124,7 +124,6 @@ compile_interface()
   cd "../"
   move_it "${pathSource}/${namePakage}_InterfaceJavaC.h" "header/"
 
-  compile_c_file "${pathSource}/interfaceCJava.c"
   exist_folder "${pathObject}"
   for file in "${pathSource}/${namePakage}/"*".class"; do
       move_it "${file}" "${pathClass}/${namePakage}"
@@ -202,17 +201,21 @@ clean_saveguards()
 ## Fonctionnalitées        #####################################################
 ################################################################################
 
-if [ $# -ne 1 ]; then
+if [ "$1" != 'play' -a $# -ne 1 ]; then
   echo -e "\nErreur : nombre d'argument."
   echo "Usage : $0 arg1"
-  usage
+  exit -1
+fi
+
+if [ "$1" == 'play' -a $# -ne 2 ]; then
+  echo -e "\nErreur : nombre d'argument."
+  echo "Usage : $0 play arg1 (console/gui)"
   exit -1
 fi
 
 if [ "$1" != "compile" -a "$1" != "compilelib" -a "$1" != "clean" -a "$1" != "play" -a "$1" != "remove" ]; then
   echo -e "\nErreur : argument incorrect."
   echo "Veuillez utiliser les mots : compile, clean, play, remove"
-  usage
   exit -2
 fi
 
@@ -229,6 +232,7 @@ if [ "$1" == "clean" ]; then
   clean_c
   clean_java
   clean_lib
+  clean_log
 fi
 
 if [ "$1" == "play" ]; then
@@ -241,7 +245,12 @@ if [ "$1" == "play" ]; then
   fi
 
   cd class
-  java "${namePakage}.Interface"
+  if [ "$2" == 'console' ]; then
+    application="${namePakage}.InterfaceConsole"
+  else if [ "$2" == 'gui' ]; then
+    application="${namePakage}.InterfaceSwing"
+  fi;fi
+  java "$application"
 fi
 
 if [ "$1" == "remove" ]; then
