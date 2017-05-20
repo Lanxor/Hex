@@ -56,8 +56,6 @@ public class Buttons extends JPanel{
         JButton button_quitH = new JButton(new acceuilAction(this.fenetre, "Quitter"));
         JButton button_ok = new JButton(new validHAction(this.fenetre, this.game));
         JButton button_validH = new JButton(new validHAction(this.fenetre, this.game));
-        JButton button_okP1 = new JButton(new newHAction(this.fenetre, "Valider"));
-        JButton button_okP2 = new JButton(new playersAction(this.fenetre, "Valider"));
         JButton button_back = new JButton(new backAction(this.fenetre, this.game));
         JButton button_newP = new JButton(new newPAction(this.fenetre, 2));
         JButton button_deleteP = new JButton(new deletePAction(this.fenetre));
@@ -85,12 +83,14 @@ public class Buttons extends JPanel{
                 return bouton;
             case "crea partie" :
                 bouton = Box.createVerticalBox();
-                Player[] players = Player.getAllPlayers();
                 String[] players1 = new String[]{"Joueur 1"};
                 String[] players2 = new String[]{"Joueur 2"};
-                for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer){
-                    players1[numPlayer+1] = players[numPlayer].getPseudo();
-                    players1[numPlayer+1] = players[numPlayer].getPseudo();
+                if (Player.getNumberOfPlayers() != 0){
+                    Player[] players = Player.getAllPlayers();
+                    for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer){
+                        players1[numPlayer+1] = players[numPlayer].getPseudo();
+                        players1[numPlayer+1] = players[numPlayer].getPseudo();
+                    }
                 }
                 players1[players1.length] = "Nouveau Joueur";
                 playersList1 = new JComboBox(players1);
@@ -143,7 +143,7 @@ public class Buttons extends JPanel{
                 }
                 yearOfBirth = new JComboBox(years);
                 bouton.add(yearOfBirth);
-                bouton.add(button_okP1);
+                bouton.add(new JButton(new validPAction(this.fenetre, this.game, "newH")));
                 bouton.add(button_acceuil);
                 return bouton;
             case "joueurs" :
@@ -172,7 +172,7 @@ public class Buttons extends JPanel{
                 }
                 yearOfBirth = new JComboBox(years);
                 bouton.add(yearOfBirth);
-                bouton.add(button_okP2);
+                bouton.add(new JButton(new validPAction(this.fenetre, this.game, "players")));
                 bouton.add(button_acceuil);
                 return bouton;
             default :
@@ -210,5 +210,19 @@ public class Buttons extends JPanel{
     public JTextField getOrd()
     {
         return ord;
+    }
+    
+    public JTextField getPseudo()
+    {
+        return pseudo;
+    }
+    
+    public JTextField getMail()
+    {
+        return mail;
+    }
+    
+    public JComboBox getYear(){
+        return yearOfBirth;
     }
 }

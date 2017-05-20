@@ -29,10 +29,12 @@ public class statAction extends AbstractAction{
         this.fenetre.panel = new Deck(0);
         this.fenetre.panel.add(new JLabel("Statistiques"));
         JTextArea stat = new JTextArea("");
-        Player[] players = Player.getAllPlayers();
-        for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
-        {
-            stat = new JTextArea(stat + players[numPlayer].getScore().toString() + "\n");
+        if (Player.getNumberOfPlayers() != 0){
+            Player[] players = Player.getAllPlayers();
+            for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
+            {
+                stat = new JTextArea(stat + players[numPlayer].getScore().toString() + "\n");
+            }
         }
         this.fenetre.panel.add(stat);
         this.fenetre.panel.add(this.fenetre.buttons.menu(""));
