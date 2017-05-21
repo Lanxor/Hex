@@ -82,7 +82,7 @@ JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_hasWinner
   (JNIEnv *env, jclass class)
 {
   extern Deck global_deck;
-  return deck_has_winner(Deck deck);
+  return deck_has_winner(deck);
 }
 
 /*
