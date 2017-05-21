@@ -364,6 +364,14 @@ char deck_know_winner(Deck deck)
   return (colorWin);
 }
 
+int deck_has_winner(Deck deck)
+{
+  if (deck_know_winner(deck) != TRANSPARENT)
+    return (1);
+  else
+    return(0);
+}
+
 LDG deck_get_ldg(Deck deck)
 {
   return ((LDG) deck->set_groups);
