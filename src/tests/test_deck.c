@@ -50,15 +50,39 @@ void test4_modify()
   
   deck = deck_create(3);
   deck_print_color(deck);
-  printf("\n");
   printDeckGroup(deck);
+
+  printf("\nOn insert BLACK 0, 0\n");
   deck_vertice_modify(deck, BLACK, 0, 0);
   deck_print_color(deck);
   printDeckGroup(deck);
-  deck_vertice_modify(deck, BLACK, 0, 1);
-  deck_vertice_modify(deck, BLACK, 0, 2);
+  printf("\nOn insert BLACK 1, 1\n");
+  deck_vertice_modify(deck, BLACK, 1, 1);
+  deck_print_color(deck);
   printDeckGroup(deck);
+  printf("\nOn insert BLACK 1, 0\n");
+  deck_vertice_modify(deck, BLACK, 1, 0);
+  printf("\nOn insert BLACK 1, 2\n");
+  deck_vertice_modify(deck, BLACK, 1, 2);
+  deck_print_color(deck);
+  printDeckGroup(deck);
+  printf("\nOn insert BLACK 2, 2\n");
+  deck_vertice_modify(deck, BLACK, 2, 2);
+  deck_print_color(deck);
+  printDeckGroup(deck);
+  
+  printf("\nOn insert WHITE 0, 1\n");
+  deck_vertice_modify(deck, WHITE, 0, 1);
+  deck_print_color(deck);
+  printDeckGroup(deck);
+  printf("\nOn insert WHITE 0, 2\n");
+  deck_vertice_modify(deck, WHITE, 0, 2);
+  deck_print_color(deck);
+  printDeckGroup(deck);
+  
+  printf("\n");
   printf("Is winner ? : %c\n", deck_know_winner(deck));
+  
   
 }
 

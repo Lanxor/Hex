@@ -47,7 +47,6 @@ LDG listGroup_append(LDG ldg, Group groupToInsert)
     currentNode = currentNode->next;
   linkThreeNode(currentNode, nodeToInsert, currentNode->next);
   ++ldg->numberOfNode;
-  printf("number : %d\n", ldg->numberOfNode);
   return (ldg);
 }
 
