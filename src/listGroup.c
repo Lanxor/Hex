@@ -67,7 +67,6 @@ LDG listGroup_remove(LDG ldg, Group groupToRemove)
   free(currentNode->group);
   free(currentNode);
   --ldg->numberOfNode;
-  printf("number : %d\n", ldg->numberOfNode);
   return (ldg);
 }
 
