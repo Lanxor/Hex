@@ -82,7 +82,7 @@ JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_hasWinner
   (JNIEnv *env, jclass class)
 {
   extern Deck global_deck;
-  return deck_has_winner(deck);
+  return deck_has_winner(global_deck);
 }
 
 /*
@@ -94,5 +94,5 @@ JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getWinner
   (JNIEnv *env, jclass class)
 {
   extern Deck global_deck;
-  return deck_know_winner(deck);
+  return deck_know_winner(global_deck);
 }
