@@ -51,8 +51,9 @@ char group_color(Group initialGroup)
 
 Group group_fusion(Group firstGroup, Group secondGroup)
 {
-  for (int cpt = 0; cpt < secondGroup->number_vertice; ++cpt)
-    firstGroup = group_insert(firstGroup, secondGroup->list_vertice[cpt]);
+  if (firstGroup != secondGroup)
+    for (int cpt = 0; cpt < secondGroup->number_vertice; ++cpt)
+      firstGroup = group_insert(firstGroup, secondGroup->list_vertice[cpt]);
   return (firstGroup);
 }
 

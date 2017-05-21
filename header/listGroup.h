@@ -44,12 +44,32 @@ LDG listGroup_remove(LDG ldg, Group groupToRemove);
  */
 void listGroup_delete(LDG ldg);
 
+/**
+ * @brief Fonction donnant la sentinelle d'une LDG
+ * @param ldg : la liste ldg à inspecter
+ * @return la node sentinelle
+ */
 Node ldg_get_sentinel(LDG ldg);
 
+/**
+ * @brief Fonction donnant le noeud suivant de celui en cour
+ * @param currentNode : le noeud de la liste courante
+ * @return la node suivante
+ */
 Node ldg_get_next(Node currentNode);
 
+/**
+ * @brief Fonction donnant le groupe du noeud donné
+ * @param currentNode : le noeud de la liste courante
+ * @return le groupe de la node
+ */
 Group ldg_get_group(Node currentNode);
 
+/**
+ * @brief Fonction donnant le nombre de noeud d'une LDG
+ * @param ldg : la liste ldg à inspecter
+ * @return le nombre de noeud
+ */
 int ldg_get_number(LDG ldg);
 
 

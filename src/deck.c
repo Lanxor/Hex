@@ -2,7 +2,7 @@
 
 typedef struct s_deck
 {
-  int  size;
+  int           size;
   Vertice       white_1;
   Vertice       white_2;
   Vertice       black_1;
@@ -29,7 +29,11 @@ Deck deck_create(int size)
   deck->black_1 = vertice_create(BLACK, -3, -3);
   deck->black_2 = vertice_create(BLACK, -4, -4);
   
+  deck->set_vertices = (Vertice*) malloc((size * size) * sizeof(Vertice));
+  number_edges = deck_get_number_edge(size);
+  deck->set_edges = (Edge*) malloc((number_edges) * sizeof(Edge));
   deck->set_groups = listGroup_create();
+
   
   initialGroup = group_create();
   initialGroup = group_insert(initialGroup, deck->white_1);
@@ -47,11 +51,7 @@ Deck deck_create(int size)
   initialGroup = group_insert(initialGroup, deck->black_2);
   deck->set_groups = listGroup_append(deck->set_groups, initialGroup);
   
-  deck->set_vertices = (Vertice*) malloc(size * size * sizeof(Vertice));
-  number_edges = deck_get_number_edge(size);
-  deck->set_edges = (Edge*) malloc((number_edges) * sizeof(Edge));
   
-
   for (abscisse = 0; abscisse < size; ++abscisse)
   {
     for (ordonnee = 0; ordonnee < size; ++ordonnee)
@@ -109,7 +109,7 @@ Deck deck_create(int size)
       }
     }
   }
-  assert( (counter_edges) == number_edges );
+  assert( (counter_edges) == number_edges );  
   return (deck);
 }
 
@@ -185,7 +185,7 @@ void deck_print_edge(Deck deck)
 
 Vertice deck_get_border(Deck deck, char color, int number)
 {
-  if ( color == BLACK )
+  if ( color == WHITE )
   {
     if ( number == 1 )
       return deck->white_1;
@@ -194,7 +194,7 @@ Vertice deck_get_border(Deck deck, char color, int number)
     else
       return (NULL);
   }
-  else if ( color == WHITE )
+  else if ( color == BLACK )
   {
     if ( number == 1 )
       return deck->black_1;
@@ -296,7 +296,6 @@ Deck deck_update_ldg(Deck deck, Group currentGroup)
         if (isFind && group_color(currentGroup) == group_color(ldg_get_group(otherNode)))
         {
           currentGroup = group_fusion(currentGroup, ldg_get_group(otherNode));
-          printf("Hey\n");
           ldg = listGroup_remove(ldg, ldg_get_group(otherNode));
         }
       }
@@ -337,14 +336,10 @@ int group_winner(Group initialGroup, Deck deck)
   firstBorder = deck_get_border(deck, group_color(initialGroup), 1);
   secondBorder = deck_get_border(deck, group_color(initialGroup), 2);
   isWinner = 0;
-  
-  if (firstBorder != NULL && secondBorder != NULL)
-  {
-    for (int cpt = 0; cpt < group_get_number(initialGroup); ++cpt)
-      if (group_get_vertice(initialGroup, cpt) == firstBorder 
-              || group_get_vertice(initialGroup, cpt) == secondBorder )
-        ++isWinner;
-  } 
+  for (int cpt = 0; cpt < group_get_number(initialGroup); ++cpt)
+    if (group_get_vertice(initialGroup, cpt) == firstBorder 
+            || group_get_vertice(initialGroup, cpt) == secondBorder )
+      ++isWinner;
   if (isWinner == 2)
     return(1);
   else
@@ -353,18 +348,20 @@ int group_winner(Group initialGroup, Deck deck)
 
 char deck_know_winner(Deck deck)
 {
-  Node otherNode;
-  int  cptOtherGroup = 0;
+  Node  otherNode;
+  int   cptOtherGroup = 0;
+  char  colorWin;
   
+  colorWin = TRANSPARENT;
   otherNode = ldg_get_sentinel(deck->set_groups);
   while (cptOtherGroup < ldg_get_number(deck->set_groups))
   {
     otherNode = ldg_get_next(otherNode);
     if (group_winner(ldg_get_group(otherNode), deck))
-      return (group_who_win(ldg_get_group(otherNode), deck));
+      colorWin = group_who_win(ldg_get_group(otherNode), deck);
     ++cptOtherGroup;
   }
-  return (TRANSPARENT);
+  return (colorWin);
 }
 
 LDG deck_get_ldg(Deck deck)

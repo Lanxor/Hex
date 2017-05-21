@@ -78,7 +78,7 @@ compile_c_file()
     echo -n "Fichier : $1 "
     gcc "${optionC}" -I"${pathJni}/include" -I"${pathJni}/include/linux" -c "$1" 2>> "${nameFileError}"
   fi
-  fileObject=`echo "$1" |cut -f 1 -d '.'`".o"
+  fileObject=`echo "$1" | cut -f 1 -d '.'`".o"
   if [ -f "${fileObject}" ]; then
     echo -e "\033[32m[COMPILER]\033[0m"
   else
