@@ -40,7 +40,7 @@ public class Fenetre extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         this.panel = new Deck(0);
-        this.panel.add(this.buttons.menu("acceuil", this.game));
+        this.panel.add(this.buttons.menu("acceuil"));
         
         setContentPane(this.panel);
         this.setVisible(true);
