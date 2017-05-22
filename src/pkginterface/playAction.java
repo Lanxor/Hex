@@ -67,17 +67,13 @@ public class playAction extends AbstractAction{
             {
                 if (InterfaceJavaC.hasWinner() == 1)
                 {
-                    char colorWinner = InterfaceJavaC.getWinner();
                     InterfaceSwing.getGame().getPlayerCurrent().win();
                     InterfaceSwing.getGame().getPlayer2().loose();
-                    InterfaceSwing.getGame().getDeck().deleteDeckC();
                     this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
                     this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                     this.fenetre.setContentPane(this.fenetre.panel);
                     this.fenetre.setVisible(true);
                     JOptionPane.showMessageDialog(null, InterfaceSwing.getGame().getPlayerCurrent().getPseudo() + " a gagné !");
-                    InterfaceSwing.getGame().getPlayerCurrent().loose();
-                    InterfaceSwing.getGame().getPlayer2().loose();
                     InterfaceSwing.getGame().getDeck().deleteDeckC();
                     this.fenetre.panel = new Deck(0);
                     this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
