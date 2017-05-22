@@ -58,10 +58,10 @@ LDG listGroup_remove(LDG ldg, Group groupToRemove)
   cpt = 0;
   currentNode = ldg->sentinel;
   while (cpt < ldg->numberOfNode || currentNode->group != groupToRemove)
-  {
-    currentNode = currentNode->next;
-    ++cpt;
-  }
+    {
+      currentNode = currentNode->next;
+      ++cpt;
+    }
   currentNode->previous->next = currentNode->next;
   currentNode->next->previous = currentNode->previous;
   free(currentNode->group);
@@ -76,10 +76,10 @@ void listGroup_delete(LDG ldg)
   Node   currentNode;
   currentNode = ldg->sentinel;
   for (int cpt = 0; cpt < ldg->numberOfNode; ++cpt)
-  {
-    currentNode = currentNode->next;
-    free(currentNode->previous);
-  }
+    {
+      currentNode = currentNode->next;
+      free(currentNode->previous);
+    }
   free(ldg);
 }
 

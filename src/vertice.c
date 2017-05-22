@@ -2,23 +2,23 @@
 
 typedef struct    s_vertice
 {
-    char          color;
-    int           abscisse;
-    int           ordonnee;
+  char          color;
+  int           abscisse;
+  int           ordonnee;
 } t_vertice;
 
 Vertice vertice_create(char color, int abscisse,
-                                   int ordonnee)
+		       int ordonnee)
 {
-    Vertice vertice;
+  Vertice vertice;
     
-    vertice = (Vertice) malloc(sizeof(t_vertice));
-    assert( vertice != NULL );
+  vertice = (Vertice) malloc(sizeof(t_vertice));
+  assert( vertice != NULL );
     
-    vertice->color = color;
-    vertice->abscisse = abscisse;
-    vertice->ordonnee = ordonnee;
-    return vertice;
+  vertice->color = color;
+  vertice->abscisse = abscisse;
+  vertice->ordonnee = ordonnee;
+  return vertice;
 }
 
 void vertice_modify_color(Vertice vertice, char color)
@@ -31,12 +31,12 @@ void vertice_modify_color(Vertice vertice, char color)
 
 int vertice_get_abscisse(Vertice vertice)
 {
-    return vertice->abscisse;
+  return vertice->abscisse;
 }
 
 int vertice_get_ordonnee(Vertice vertice)
 {
-    return vertice->ordonnee;
+  return vertice->ordonnee;
 }
 
 char vertice_get_color(Vertice vertice)
@@ -53,22 +53,21 @@ void vertice_set_color(Vertice vertice , char color)
 
 void vertice_print_coordinates(Vertice vertice)
 {
-    // printf - %u int
-    printf("%d,%d", vertice->abscisse, vertice->ordonnee);
+  printf("%d,%d", vertice->abscisse, vertice->ordonnee);
 }
 
 void vertice_print_color(Vertice vertice)
 {
-    printf("%c", vertice->color);
+  printf("%c", vertice->color);
 }
 
 void vertice_delete(Vertice vertice)
 {
-    vertice_free(vertice);
+  vertice_free(vertice);
 }
 
 void vertice_free(Vertice vertice)
 {
-    free(vertice);
+  free(vertice);
 }
 
