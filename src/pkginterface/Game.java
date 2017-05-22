@@ -455,16 +455,19 @@ public class Game {
         colorOfWinner = InterfaceJavaC.getWinner();
         if ( this.playerCurrent.getColor() == colorOfWinner )
         {
+            InterfaceConsole.showMessage("Félicitation " + this.playerCurrent.getPseudo() + " tu viens de gagner.\n");
             this.playerCurrent.win();
             this.player2.loose();
         }
         else if ( this.player2.getColor() == colorOfWinner )
         {
+            InterfaceConsole.showMessage("Félicitation " + this.player2.getPseudo() + " tu viens de gagner.\n");
             this.player2.win();
             this.playerCurrent.loose();
         }
         else
         {
+            InterfaceConsole.showMessage("Partie nulle, il n'y a aucun gagnant !\n");
             this.playerCurrent.noWinner();
             this.playerCurrent.noWinner();
         }

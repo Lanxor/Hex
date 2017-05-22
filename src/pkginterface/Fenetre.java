@@ -18,12 +18,18 @@ public class Fenetre extends JFrame
     private Game game;
     public Buttons buttons = new Buttons(this, game);
     
+    /**
+     * @brief Constructeur.
+     */
     public Fenetre(Game game)
     {        
         build();
         this.game = game;
     }
 
+    /**
+     * @brief Fonction qui construit la fenêtre du jeu.
+     */
     private void build()
     {
         this.setTitle("Hex");

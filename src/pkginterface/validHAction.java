@@ -67,8 +67,8 @@ public class validHAction extends AbstractAction{
             else
             {
                 this.game = new Game(Integer.parseInt(size), 
-                        Player.load(Player.getPathFilePlayer(player1)), 
-                        Player.load(Player.getPathFilePlayer(player2)));
+                        Player.load(Player.getPathFilePlayer(player1)+".player"), 
+                        Player.load(Player.getPathFilePlayer(player2)+".player"));
                 this.game.getPlayerCurrent().setColor('b');
                 this.game.getPlayer2().setColor('w');
                 this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());

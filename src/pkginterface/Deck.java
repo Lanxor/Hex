@@ -22,6 +22,9 @@ public class Deck extends JPanel {
      *                                                                         *
      **************************************************************************/
     
+    /**
+     * @brief Fonction qui affiche le tablier dans la fenêtre.
+     */
     public void paintComponent(Graphics g)
     {
         g.setColor(Color.white);
@@ -30,15 +33,13 @@ public class Deck extends JPanel {
         int y = ystart;
         char color;
         try {
-            Image title = ImageIO.read(new File("images/title.png"));
+            Image title = ImageIO.read(new File("../images/title.png"));
             g.drawImage(title, 0, 0, this);
-            Image hv = ImageIO.read(new File("images/hv.png"));
-            Image hvtop = ImageIO.read(new File("images/hvtop.png"));
-            Image hvbottom = ImageIO.read(new File("images/hvbottom.png"));
-            Image hvright = ImageIO.read(new File("images/hvright.png"));
-            Image hvleft = ImageIO.read(new File("images/hvleft.png"));
-            Image hb = ImageIO.read(new File("images/hb.png"));
-            Image hw = ImageIO.read(new File("images/hw.png"));
+            Image hv = ImageIO.read(new File("../images/hv.png"));
+            Image hvtop = ImageIO.read(new File("../images/hvtop.png"));
+            Image hvleft = ImageIO.read(new File("../images/hvleft.png"));
+            Image hb = ImageIO.read(new File("../images/hb.png"));
+            Image hw = ImageIO.read(new File("../images/hw.png"));
             for (int abs = 1; abs <= this.size; ++abs)
             {
                 for (int ord = 0; ord < this.size; ++ord)
@@ -52,13 +53,15 @@ public class Deck extends JPanel {
                             g.drawImage(hw, x, y, this);
                         default :
                             if (abs == 1)
+                            {
+                                g.drawString(Integer.toString(ord+1), x, y-5);
                                 g.drawImage(hvtop, x, y, this);
-                            else if (abs == this.size)
-                                g.drawImage(hvbottom, x, y, this);
+                            }
                             else if (ord == 0)
+                            {
+                                g.drawString(Integer.toString(abs), x-5, y);
                                 g.drawImage(hvleft, x, y, this);
-                            else if (ord == this.size-1)
-                                g.drawImage(hvright, x, y, this);
+                            }
                             else
                                 g.drawImage(hv, x, y, this);
                     }
@@ -141,14 +144,14 @@ public class Deck extends JPanel {
     public void print()
     {
         for (int bordureTop = 0; bordureTop < this.size + 2; ++bordureTop )
-            InterfaceConsole.showMessage("* ");
+            InterfaceConsole.showMessage("x ");
         InterfaceConsole.showMessage("\n");
         
         for (int line = 0; line < this.size; ++line)
             InterfaceConsole.showMessage("o " + this.getStringLine(line) + "o\n");
         
         for (int bordureTop = 0; bordureTop < this.size + 2; ++bordureTop )
-            InterfaceConsole.showMessage("* ");
+            InterfaceConsole.showMessage("x ");
         InterfaceConsole.showMessage("\n");
         
         
@@ -230,7 +233,7 @@ public class Deck extends JPanel {
             switch (color)
             {
                 case 'b':
-                    symbol = '*';
+                    symbol = 'x';
                     break;
                 case 'w':
                     symbol = 'o';
@@ -269,7 +272,7 @@ public class Deck extends JPanel {
                 color = InterfaceJavaC.getVerticeColor(abscissa, orderly);
                 switch (color) {
                     case 'b':
-                        symbol = '*';
+                        symbol = 'x';
                         break;
                     case 'w':
                         symbol = 'o';
