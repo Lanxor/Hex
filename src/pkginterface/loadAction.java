@@ -36,9 +36,9 @@ public class loadAction extends AbstractAction{
             String[] saveguards = Saveguard.getListSaveguard();
             for (int numSG = 1; numSG <= Saveguard.getNumberOfSaveguard(); ++numSG)
             {
-                saveguard.add(new JTextArea(Integer.toString(numSG-1)
+                saveguard.add(new JTextArea(Integer.toString(numSG)
                         + " : "
-                        + saveguards[numSG]
+                        + saveguards[numSG-1]
                         + "\n"));
             }
         }
