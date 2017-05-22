@@ -148,4 +148,25 @@ char group_who_win(Group initialGroup, Deck deck);
  */
 int group_winner(Group initialGroup, Deck deck);
 
+/**
+ * @brief Fonction donnant le LDG du deck
+ * @param deck : tablier du jeu en cour
+ * @return le LDG du deck
+ */
+LDG deck_get_ldg(Deck deck);
+
+/**
+ * @brief Fonction donnant le gagnant de la partie s'il y en a un
+ * @param deck : tablier du jeu en cour
+ * @return la couleur du gagnant, TRANSPARENT sinon
+ */
+char deck_know_winner(Deck deck);
+
+/**
+ * @brief Fonction indiquant s'il y en a un gagnant
+ * @param deck : tablier du jeu en cour
+ * @return 1 si gagnant, 0 sinon
+ */
+int deck_has_winner(Deck deck);
+
 #endif

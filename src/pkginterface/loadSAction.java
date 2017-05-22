@@ -7,34 +7,33 @@ package pkginterface;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.Box;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author Eléana
  */
-public class newHAction extends AbstractAction{
+public class loadSAction extends AbstractAction{
     
     private Fenetre fenetre;
+    private Game game;
     
-    public newHAction (Fenetre fenetre)
+    public loadSAction (Fenetre fenetre, Game game)
     {
-        super("Nouvelle Partie");
+        super("Chargement");
         this.fenetre = fenetre;
-    }
-    
-    public newHAction (Fenetre fenetre, String name)
-    {
-        super(name);
-        this.fenetre = fenetre;
+        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
     {
-        this.fenetre.panel = new Deck(0);
-        this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie"));
+        String gameL = (String)this.fenetre.buttons.getNumSaveguardList().getSelectedItem();
+        Saveguard.loadSaveguard(this.game, Integer.parseInt(gameL));
+        this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
+        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

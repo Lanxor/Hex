@@ -9,7 +9,7 @@ typedef struct s_node
 
 typedef struct s_ldg
 {
-  t_node  *sentinel;
+  Node    sentinel;
   int     numberOfNode;
 } t_ldg;
 
@@ -19,14 +19,14 @@ LDG listGroup_create()
   ldg = (LDG) malloc(sizeof(t_ldg));
   assert(ldg != NULL);
   ldg->numberOfNode = 0;
-  ldg->sentinel = (t_node*) malloc(sizeof(t_node));
+  ldg->sentinel = (Node) malloc(sizeof(t_node));
   ldg->sentinel->next = ldg->sentinel;
   ldg->sentinel->previous = ldg->sentinel;
   ldg->sentinel->group = NULL;
   return (ldg);
 }
 
-t_node* linkThreeNode(t_node *leftNode, t_node *midNode, t_node *rightNode)
+Node linkThreeNode(Node leftNode, Node midNode, Node rightNode)
 {
   leftNode->next = midNode;
   midNode->previous = leftNode;
@@ -38,14 +38,14 @@ t_node* linkThreeNode(t_node *leftNode, t_node *midNode, t_node *rightNode)
 LDG listGroup_append(LDG ldg, Group groupToInsert)
 {
   assert(ldg != NULL);
-  t_node  *nodeToInsert;
-  t_node  *currentNode;
-  nodeToInsert = (t_node*) malloc(sizeof(t_node));
+  Node    nodeToInsert;
+  Node    currentNode;
+  nodeToInsert = (Node) malloc(sizeof(t_node));
   nodeToInsert->group = groupToInsert;
   currentNode = ldg->sentinel;
   for (int cpt = 0; cpt < ldg->numberOfNode; ++cpt)
     currentNode = currentNode->next;
-  linkTheeNode(currentNode, nodeToInsert, currentNode->next);
+  linkThreeNode(currentNode, nodeToInsert, currentNode->next);
   ++ldg->numberOfNode;
   return (ldg);
 }
@@ -54,7 +54,7 @@ LDG listGroup_remove(LDG ldg, Group groupToRemove)
 {
   assert(ldg != NULL);
   int     cpt;
-  t_node  *currentNode;
+  Node    currentNode;
   cpt = 0;
   currentNode = ldg->sentinel;
   while (cpt < ldg->numberOfNode || currentNode->group != groupToRemove)
@@ -73,7 +73,7 @@ LDG listGroup_remove(LDG ldg, Group groupToRemove)
 void listGroup_delete(LDG ldg)
 {
   assert(ldg != NULL);
-  t_node  *currentNode;
+  Node   currentNode;
   currentNode = ldg->sentinel;
   for (int cpt = 0; cpt < ldg->numberOfNode; ++cpt)
   {

@@ -7,6 +7,7 @@ package pkginterface;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -31,17 +32,22 @@ public class deletePAction extends AbstractAction{
         Player.delete(Integer.parseInt(player));
         JOptionPane.showMessageDialog(null, "Joueur Supprimé.");
         this.fenetre.panel = new Deck(0);
-        this.fenetre.panel.add(new JLabel("Joueurs Enregistrés"));
-        JTextArea playersInfo = new JTextArea("");
-        Player[] players = Player.getAllPlayers();
-        for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
+        Box playersList = Box.createVerticalBox();
+        playersList.add(new JLabel("Joueurs Enregistrés"));
+        if (Player.getNumberOfPlayers() != 0)
         {
-            playersInfo = new JTextArea(playersInfo + "\n"
-                + "pseudo : " + players[numPlayer].getPseudo()
-                + "mail : " + players[numPlayer].getMail());
+            Player[] players = Player.getAllPlayers();
+            for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
+            {
+                playersList.add(new JTextArea(Integer.toString(numPlayer +  1)
+                        + " : pseudo : " + players[numPlayer].getPseudo()
+                        + "\n"
+                        + "mail : " + players[numPlayer].getMail()
+                        + "\n"));
+            }
         }
-        this.fenetre.panel.add(playersInfo);
-        this.fenetre.panel.add(this.fenetre.buttons.menu(""));
+        playersList.add(this.fenetre.buttons.menu("joueurs"));
+        this.fenetre.panel.add(playersList);
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

@@ -60,7 +60,27 @@ char group_color(Group initialGroup);
  */
 Group group_fusion(Group firstGroup, Group secondGroup);
 
+/**
+ * @brief Fonction donnant le nombre de vertice d'un groupe
+ * @param initialGroup : le groupe à inspecter
+ * @return le nombre de vertice
+ */
+int group_get_number(Group initialGroup);
 
+/**
+ * @brief Fonction donnant la vertice numéro numberOfTheVertice dans le groupe
+ * @param initialGroup : le groupe à inspecter
+ * @param numberOfTheVertice : la numero de la vertice
+ * @return la vertice
+ */
+Vertice group_get_vertice(Group initialGroup, int numberOfTheVertice);
+
+/**
+ * @brief Fonction cherchant si une vertice fait partie d'un groupe
+ * @param initialGroup : le groupe à inspecter
+ * @return 1 si oui, 0 sinon
+ */
+int group_search_vertice(Group initialGroup, Vertice verticeToSearch);
 
 
 

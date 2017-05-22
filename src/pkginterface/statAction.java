@@ -7,6 +7,8 @@ package pkginterface;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
@@ -27,17 +29,18 @@ public class statAction extends AbstractAction{
     public void actionPerformed(ActionEvent e)
     {
         this.fenetre.panel = new Deck(0);
-        this.fenetre.panel.add(new JLabel("Statistiques"));
-        JTextArea stat = new JTextArea("");
-        if (Player.getNumberOfPlayers() != 0){
+        Box scores = Box.createVerticalBox();
+        scores.add(new JLabel("Statistiques"));
+        if (Player.getNumberOfPlayers() != 0)
+        {
             Player[] players = Player.getAllPlayers();
             for (int numPlayer = 0; numPlayer < Player.getNumberOfPlayers(); ++numPlayer)
-            {
-                stat = new JTextArea(stat + players[numPlayer].getScore().toString() + "\n");
-            }
+                scores.add(new JTextArea(players[numPlayer].getPseudo() 
+                        + players[numPlayer].getScore().toString() 
+                        + "\n"));
         }
-        this.fenetre.panel.add(stat);
-        this.fenetre.panel.add(this.fenetre.buttons.menu(""));
+        scores.add(this.fenetre.buttons.menu(""));
+        this.fenetre.panel.add(scores);
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

@@ -18,9 +18,10 @@ public class Fenetre extends JFrame
     private Game game;
     public Buttons buttons = new Buttons(this, game);
     
-    public Fenetre()
+    public Fenetre(Game game)
     {        
-        build();        
+        build();
+        this.game = game;
     }
 
     private void build()

@@ -81,7 +81,8 @@ JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_isModifyVertice
 JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_hasWinner
   (JNIEnv *env, jclass class)
 {
-    return 0;
+  extern Deck global_deck;
+  return deck_has_winner(global_deck);
 }
 
 /*
@@ -92,5 +93,6 @@ JNIEXPORT jint JNICALL Java_pkginterface_InterfaceJavaC_hasWinner
 JNIEXPORT jchar JNICALL Java_pkginterface_InterfaceJavaC_getWinner
   (JNIEnv *env, jclass class)
 {
-    return 't';
+  extern Deck global_deck;
+  return deck_know_winner(global_deck);
 }
