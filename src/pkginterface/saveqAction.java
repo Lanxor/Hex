@@ -30,7 +30,7 @@ public class saveqAction extends AbstractAction{
         this.game.save();
         JOptionPane.showMessageDialog(null, "Sauvegarde Effectuée");
         this.fenetre.panel = new Deck(0);
-        this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
+        this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil", this.game));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

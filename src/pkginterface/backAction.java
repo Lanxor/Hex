@@ -28,7 +28,7 @@ public class backAction extends AbstractAction{
     {
         this.game.goBackN(1);
         this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
+        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

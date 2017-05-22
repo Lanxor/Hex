@@ -17,16 +17,16 @@ import javax.swing.JTextArea;
  */
 public class validPAction extends AbstractAction{
     
-    private Game game;
     private Fenetre fenetre;
     private String source;
+    private Game game;
     
     public validPAction (Fenetre fenetre, Game game, String source)
     {
         super("Valider");
         this.fenetre = fenetre;
-        this.game = game;
         this.source = source;
+        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
@@ -39,7 +39,7 @@ public class validPAction extends AbstractAction{
         if (source.equals("newH"))
         {
             this.fenetre.panel = new Deck(0);
-            this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie"));
+            this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie", this.game));
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
         }
@@ -58,7 +58,7 @@ public class validPAction extends AbstractAction{
                             + "mail : " + players[numPlayer].getMail()
                             + "\n"));
             }
-            playersList.add(this.fenetre.buttons.menu("joueurs"));
+            playersList.add(this.fenetre.buttons.menu("joueurs", this.game));
             this.fenetre.panel.add(playersList);
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
