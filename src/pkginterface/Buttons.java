@@ -133,7 +133,7 @@ public class Buttons extends JPanel{
                 inGame = Box.createHorizontalBox();
                 inGame.add(bouton);
                 inGame.add(new JLabel(InterfaceSwing.getGame().getPlayerCurrent().getPseudo()
-                        + ", c'est à toi !"));
+                        + ", c'est à toi ! "));
                 inGame.add(move);
                 inGame.add(button_back);
                 return inGame;
