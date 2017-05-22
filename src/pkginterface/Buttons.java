@@ -199,7 +199,7 @@ public class Buttons extends JPanel{
                     String[] numSaveguards = new String[Saveguard.getNumberOfSaveguard()];
                     for (int numSG = 1; numSG <= Saveguard.getNumberOfSaveguard(); ++numSG)
                     {
-                        numSaveguards[numSG] = Integer.toString(numSG);
+                        numSaveguards[numSG-1] = Integer.toString(numSG);
                     }
                     numSaveguardsList = new JComboBox(numSaveguards);
                     bouton.add(numSaveguardsList);
