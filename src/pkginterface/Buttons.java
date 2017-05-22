@@ -45,25 +45,25 @@ public class Buttons extends JPanel{
      * @param choice : fenêtre affichée.
      * @return Retourne une boite avec les boutons correspondants.
      */
-    public Box menu(String choice, Game game)
+    public Box menu(String choice)
     {
         
-        JButton button_newH = new JButton(new newHAction(this.fenetre, game));
-        JButton button_load = new JButton(new loadAction(this.fenetre, game));
-        JButton button_stat = new JButton(new statAction(this.fenetre, game));
-        JButton button_players = new JButton(new playersAction(this.fenetre, game));
+        JButton button_newH = new JButton(new newHAction(this.fenetre));
+        JButton button_load = new JButton(new loadAction(this.fenetre));
+        JButton button_stat = new JButton(new statAction(this.fenetre));
+        JButton button_players = new JButton(new playersAction(this.fenetre));
         JButton button_quit = new JButton(new quitAction(this.fenetre));
-        JButton button_save = new JButton(new saveAction(game));
-        JButton button_saveq = new JButton(new saveqAction(this.fenetre, game));
-        JButton button_play = new JButton(new playAction(this.fenetre, game));
-        JButton button_acceuil = new JButton(new acceuilAction(this.fenetre, "Acceuil", game));
-        JButton button_quitH = new JButton(new acceuilAction(this.fenetre, "Quitter", game));
-        JButton button_ok = new JButton(new validHAction(this.fenetre, game));
-        JButton button_validH = new JButton(new validHAction(this.fenetre, game));
-        JButton button_back = new JButton(new backAction(this.fenetre, game));
-        JButton button_newP = new JButton(new newPAction(this.fenetre, 2, game));
-        JButton button_deleteP = new JButton(new deletePAction(this.fenetre, game));
-        JButton button_loadS = new JButton(new loadSAction(this.fenetre, game));
+        JButton button_save = new JButton(new saveAction());
+        JButton button_saveq = new JButton(new saveqAction(this.fenetre));
+        JButton button_play = new JButton(new playAction(this.fenetre));
+        JButton button_acceuil = new JButton(new acceuilAction(this.fenetre, "Acceuil"));
+        JButton button_quitH = new JButton(new acceuilAction(this.fenetre, "Quitter"));
+        JButton button_ok = new JButton(new validHAction(this.fenetre));
+        JButton button_validH = new JButton(new validHAction(this.fenetre));
+        JButton button_back = new JButton(new backAction(this.fenetre));
+        JButton button_newP = new JButton(new newPAction(this.fenetre, 2));
+        JButton button_deleteP = new JButton(new deletePAction(this.fenetre));
+        JButton button_loadS = new JButton(new loadSAction(this.fenetre));
         
         JTextArea rules = new JTextArea("\nRègles : Les joueurs jouent chacun leur tour. "
                 + "À chaque tour, le joueur place un pion \nde sa couleur sur une"
@@ -132,8 +132,8 @@ public class Buttons extends JPanel{
                 move.add(button_play);
                 inGame = Box.createHorizontalBox();
                 inGame.add(bouton);
-                inGame.add(new JLabel(game.getPlayerCurrent().getColor()
-                        + ", c'est à toi !"));
+                inGame.add(new JLabel(InterfaceSwing.getGame().getPlayerCurrent().getPseudo()
+                        + ", c'est à toi ! "));
                 inGame.add(move);
                 inGame.add(button_back);
                 return inGame;
@@ -153,7 +153,7 @@ public class Buttons extends JPanel{
                 }
                 yearOfBirth = new JComboBox(years);
                 bouton.add(yearOfBirth);
-                bouton.add(new JButton(new validPAction(this.fenetre, game, "newH")));
+                bouton.add(new JButton(new validPAction(this.fenetre, "newH")));
                 bouton.add(button_acceuil);
                 return bouton;
             case "joueurs" :
@@ -189,7 +189,7 @@ public class Buttons extends JPanel{
                 }
                 yearOfBirth = new JComboBox(years);
                 bouton.add(yearOfBirth);
-                bouton.add(new JButton(new validPAction(this.fenetre, game, "players")));
+                bouton.add(new JButton(new validPAction(this.fenetre, "players")));
                 bouton.add(button_acceuil);
                 return bouton;
             case "saveguard" :
@@ -197,9 +197,9 @@ public class Buttons extends JPanel{
                 if (Saveguard.getNumberOfSaveguard() != 0)
                 {
                     String[] numSaveguards = new String[Saveguard.getNumberOfSaveguard()];
-                    for (int numSG = 0; numSG < Saveguard.getNumberOfSaveguard(); ++numSG)
+                    for (int numSG = 1; numSG <= Saveguard.getNumberOfSaveguard(); ++numSG)
                     {
-                        numSaveguards[numSG] = Integer.toString(numSG);
+                        numSaveguards[numSG-1] = Integer.toString(numSG);
                     }
                     numSaveguardsList = new JComboBox(numSaveguards);
                     bouton.add(numSaveguardsList);

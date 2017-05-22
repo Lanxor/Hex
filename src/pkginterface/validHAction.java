@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  */
 public class validHAction extends AbstractAction{
     
-    private Game game;
     private Fenetre fenetre;
     
     public static boolean isInteger(String input)
@@ -30,11 +29,10 @@ public class validHAction extends AbstractAction{
        return true;
     }
     
-    public validHAction (Fenetre fenetre, Game game)
+    public validHAction (Fenetre fenetre)
     {
         super("Valider");
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
@@ -51,7 +49,7 @@ public class validHAction extends AbstractAction{
         {
             JOptionPane.showMessageDialog(this.fenetre.panel, "Erreur, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
             this.fenetre.panel = new Deck(0);
-            this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie", this.game));
+            this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie"));
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
         }
@@ -60,7 +58,7 @@ public class validHAction extends AbstractAction{
             if (player1.equals("Nouveau Joueur") || player2.equals("Nouveau Joueur"))
             {
                 this.fenetre.panel = new Deck(0);
-                this.fenetre.panel.add(this.fenetre.buttons.menu("crea joueur 1", this.game));
+                this.fenetre.panel.add(this.fenetre.buttons.menu("crea joueur 1"));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);
             }
@@ -68,13 +66,14 @@ public class validHAction extends AbstractAction{
             {
                 Player p1 = Player.load(Player.getPathFilePlayer(player1)+".player");
                 Player p2 = Player.load(Player.getPathFilePlayer(player2)+".player");
-                this.game.getDeck().setSize(Integer.parseInt(size));
-                this.game.setPlayerCurrent(p1);
-                this.game.setPlayer2(p2);
-                this.game.getPlayerCurrent().setColor('b');
-                this.game.getPlayer2().setColor('w');
-                this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-                this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
+                InterfaceSwing.getGame().getDeck().setSize(Integer.parseInt(size));
+                InterfaceSwing.getGame().setPlayerCurrent(p1);
+                InterfaceSwing.getGame().setPlayer2(p2);
+                InterfaceSwing.getGame().getPlayerCurrent().setColor('b');
+                InterfaceSwing.getGame().getPlayer2().setColor('w');
+                InterfaceSwing.getGame().getDeck().createDeckC();
+                this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
+                this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);
             }

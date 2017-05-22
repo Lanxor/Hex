@@ -16,13 +16,11 @@ import javax.swing.JOptionPane;
 public class playAction extends AbstractAction{
     
     private Fenetre fenetre;
-    private Game game;
     
-    public playAction (Fenetre fenetre, Game game)
+    public playAction (Fenetre fenetre)
     {
         super("Jouer");
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public static boolean isInteger(String input)
@@ -42,54 +40,54 @@ public class playAction extends AbstractAction{
         String ord = this.fenetre.buttons.getOrd().getText();
         if (!isInteger(abs) 
                 || Integer.parseInt(abs) < 1 
-                || Integer.parseInt(abs) > this.game.getDeck().getSizeDeck()
+                || Integer.parseInt(abs) > InterfaceSwing.getGame().getDeck().getSizeDeck()
                 || !isInteger(ord)
                 || Integer.parseInt(ord) < 1 
-                || Integer.parseInt(ord) > this.game.getDeck().getSizeDeck())
+                || Integer.parseInt(ord) > InterfaceSwing.getGame().getDeck().getSizeDeck())
         {
             JOptionPane.showMessageDialog(this.fenetre.panel, "Coordonnées invalides, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-            this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
+            this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
+            this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
         }
         else
         {
             Coordinates coordPlayed = new Coordinates (Integer.parseInt(abs), Integer.parseInt(ord));
-            Move move = new Move(this.game.getPlayerCurrent(), coordPlayed);
-            if (!move.isValid())
+            Move move = new Move(InterfaceSwing.getGame().getPlayerCurrent(), coordPlayed);
+            if (!InterfaceSwing.getGame().playMove(move))
             {
                 JOptionPane.showMessageDialog(this.fenetre.panel, "Coordonnées invalide, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
-                this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-                this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
+                this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
+                this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);
             }
             else
             {
-                move.play();
-                Player temp = this.game.getPlayer2();
-                this.game.setPlayer2(this.game.getPlayerCurrent());
-                this.game.setPlayerCurrent(temp);
+                Player temp = InterfaceSwing.getGame().getPlayer2();
+                InterfaceSwing.getGame().setPlayer2(InterfaceSwing.getGame().getPlayerCurrent());
+                InterfaceSwing.getGame().setPlayerCurrent(temp);
                 if (InterfaceJavaC.hasWinner() == 1)
                 {
                     char colorWinner = InterfaceJavaC.getWinner();
                     Player winner;
-                    if (this.game.getPlayerCurrent().getColor() == colorWinner)
-                        winner = this.game.getPlayerCurrent();
+                    if (InterfaceSwing.getGame().getPlayerCurrent().getColor() == colorWinner)
+                        winner = InterfaceSwing.getGame().getPlayerCurrent();
                     else
-                        winner = this.game.getPlayer2();
+                        winner = InterfaceSwing.getGame().getPlayer2();
+                    InterfaceSwing.getGame().getDeck().deleteDeckC();
                     JOptionPane.showMessageDialog(null, winner.getPseudo() + " a gagné !");
-                    this.game.endGame();
+                    InterfaceSwing.getGame().endGame();
                     this.fenetre.panel = new Deck(0);
-                    this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil", this.game));
+                    this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
                     this.fenetre.setContentPane(this.fenetre.panel);
                     this.fenetre.setVisible(true);
                 }
                 else
                 {
-                    this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-                    this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
+                    this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
+                    this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                     this.fenetre.setContentPane(this.fenetre.panel);
                     this.fenetre.setVisible(true);
                 }

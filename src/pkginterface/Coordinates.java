@@ -38,9 +38,9 @@ public class Coordinates {
         int abscissa, orderly;
         
         System.out.println("Veuillez entrer des coordonnées.");
-        System.out.print("Abscissa : ");
+        System.out.print("Abscisse : ");
         abscissa = InterfaceConsole.getInt(0, size);
-        System.out.print("Orderly : ");
+        System.out.print("Ordonnée : ");
         orderly = InterfaceConsole.getInt(0, size);
         
         return new Coordinates(abscissa, orderly);

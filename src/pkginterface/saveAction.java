@@ -15,17 +15,16 @@ import javax.swing.JOptionPane;
  */
 public class saveAction extends AbstractAction{
     
-    private Game game;
     
-    public saveAction (Game game)
+    public saveAction ()
     {
         super("Sauvegarder");
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
     {
-        this.game.save();
+        InterfaceSwing.getGame().save();
+        System.out.println(Integer.toString(InterfaceSwing.getGame().getDeck().getSizeDeck()));
         JOptionPane.showMessageDialog(null, "Sauvegarde Effectuée");
     }
 }

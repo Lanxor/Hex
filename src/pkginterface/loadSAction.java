@@ -19,21 +19,19 @@ import javax.swing.JTextArea;
 public class loadSAction extends AbstractAction{
     
     private Fenetre fenetre;
-    private Game game;
     
-    public loadSAction (Fenetre fenetre, Game game)
+    public loadSAction (Fenetre fenetre)
     {
         super("Chargement");
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
     {
         String gameL = (String)this.fenetre.buttons.getNumSaveguardList().getSelectedItem();
-        Saveguard.loadSaveguard(this.game, Integer.parseInt(gameL));
-        this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
+        Saveguard.loadSaveguard(InterfaceSwing.getGame(), Integer.parseInt(gameL));
+        this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
+        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

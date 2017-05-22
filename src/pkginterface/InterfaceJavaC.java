@@ -5,7 +5,7 @@ public class InterfaceJavaC {
     static
     {
         // DO NOT EDIT THIS LINE PLEASE
-	System.load("/home/xiodi/Document/cours_save/Univ/L2/s4/projetHex/Hex/lib/libInterfaceC.so");
+	System.load("/home/lanx/Documents/Projet_S4/Hex/lib/libInterfaceC.so");
     }
 
     public native static void createDeck(int size);

@@ -49,21 +49,24 @@ public class Deck extends JPanel {
                     {
                         case 'b' :
                             g.drawImage(hb, x, y, this);
+                            break;
                         case 'w' :
                             g.drawImage(hw, x, y, this);
+                            break;
                         default :
                             if (abs == 1)
                             {
-                                g.drawString(Integer.toString(ord+1), x, y-5);
+                                g.drawString(Integer.toString(ord+1), x, y-10);
                                 g.drawImage(hvtop, x, y, this);
                             }
                             else if (ord == 0)
                             {
-                                g.drawString(Integer.toString(abs), x-5, y);
+                                g.drawString(Integer.toString(abs), x-10, y);
                                 g.drawImage(hvleft, x, y, this);
                             }
                             else
                                 g.drawImage(hv, x, y, this);
+                            break;
                     }
                     x = x + 25;
                 }
@@ -265,9 +268,10 @@ public class Deck extends JPanel {
     {
         String str = "\n";
         char color, symbol;
-        for ( int abscissa = 0; abscissa < this.size; ++abscissa )
+
+        for ( int orderly = 0; orderly < this.size; ++orderly )
         {
-            for (int orderly = 0; orderly < this.size; ++orderly )
+            for ( int abscissa = 0; abscissa < this.size; ++abscissa )
             {   
                 color = InterfaceJavaC.getVerticeColor(abscissa, orderly);
                 switch (color) {
