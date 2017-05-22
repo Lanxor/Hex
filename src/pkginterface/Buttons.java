@@ -197,7 +197,7 @@ public class Buttons extends JPanel{
                 if (Saveguard.getNumberOfSaveguard() != 0)
                 {
                     String[] numSaveguards = new String[Saveguard.getNumberOfSaveguard()];
-                    for (int numSG = 0; numSG < Saveguard.getNumberOfSaveguard(); ++numSG)
+                    for (int numSG = 1; numSG <= Saveguard.getNumberOfSaveguard(); ++numSG)
                     {
                         numSaveguards[numSG] = Integer.toString(numSG);
                     }
