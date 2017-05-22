@@ -41,7 +41,11 @@ Deck deck_initialize_border(Deck deck)
   deck->white_2 = vertice_create(WHITE, -2, -2);
   deck->black_1 = vertice_create(BLACK, -3, -3);
   deck->black_2 = vertice_create(BLACK, -4, -4);
+  return (deck);
+}
 
+Deck deck_border_insert(Deck deck)
+{
   deck_insert_group(deck, deck->white_1);
   deck_insert_group(deck, deck->white_2);
   deck_insert_group(deck, deck->black_1);
@@ -132,6 +136,7 @@ Deck deck_create(int size)
   deck->size = size;
   deck = deck_initialize_set(deck);
   deck = deck_initialize_border(deck);
+  deck = deck_border_insert(deck);
   deck = deck_create_vertice(deck);
   deck = deck_create_edge(deck);
 
@@ -270,6 +275,25 @@ int deck_vertice_modify_is_possible(Deck deck, char color, int abscisse, int ord
     return (0);
 }
 
+Deck deck_group_reevaluation(Deck deck)
+{
+  Vertice vertice;
+  char    color;
+  
+  listGroup_delete(deck->set_groups);
+  deck->set_groups = listGroup_create();
+  deck = deck_border_insert(deck);
+  for(int abscisse = 0; abscisse < deck->size; ++abscisse)
+    for(int ordonnee = 0; ordonnee < deck->size; ++ordonnee)
+      {
+        vertice = deck_get_vertice(deck, abscisse, ordonnee);
+        color = vertice_get_color(vertice);
+        if (color != TRANSPARENT)
+          deck_vertice_modify(deck, color, abscisse, ordonnee);
+      }
+  return (deck);
+}
+
 void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
 {
   Group initialGroup;
@@ -281,6 +305,9 @@ void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
       deck->set_groups = listGroup_append(deck->set_groups, initialGroup);
       deck = deck_update_ldg(deck, initialGroup);
     }
+  else
+    deck = deck_group_reevaluation(deck);
+
 }
 
 
@@ -319,8 +346,11 @@ Deck deck_update_ldg(Deck deck, Group currentGroup)
                 }
               if (isFind && group_color(currentGroup) == group_color(ldg_get_group(otherNode)))
                 {
-                  currentGroup = group_fusion(currentGroup, ldg_get_group(otherNode));
-                  ldg = listGroup_remove(ldg, ldg_get_group(otherNode));
+                  if (ldg_get_group(otherNode) != currentGroup)
+                    {
+                      currentGroup = group_fusion(currentGroup, ldg_get_group(otherNode));
+                      ldg = listGroup_remove(ldg, ldg_get_group(otherNode));
+                    }
                 }
             }
         }
@@ -400,3 +430,4 @@ LDG deck_get_ldg(Deck deck)
 {
   return ((LDG) deck->set_groups);
 }
+
