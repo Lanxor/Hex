@@ -293,20 +293,6 @@ Deck deck_group_reevaluation(Deck deck)
   return (deck);
 }
 
-void printDeckGroup(Deck deck)
-{
-  Node otherNode;
-  int  cptOtherGroup = 0;
-  
-  otherNode = ldg_get_sentinel(deck_get_ldg(deck));
-  while (cptOtherGroup < ldg_get_number(deck_get_ldg(deck)))
-    {
-      otherNode = ldg_get_next(otherNode);
-      group_print(ldg_get_group(otherNode));
-      ++cptOtherGroup;
-    }
-}
-
 void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
 {
   Group initialGroup;
@@ -320,7 +306,6 @@ void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
     }
   else
     deck = deck_group_reevaluation(deck);
-  printDeckGroup(deck);
 }
 
 
