@@ -213,6 +213,7 @@ public class Game {
         choice = Game.menuOpponent();
         
         player = null;
+        this.historic.clean();
         if ( choice != 4 )
         {
             switch (choice) {
@@ -256,6 +257,7 @@ public class Game {
                 this.play();
                 this.deck.deleteDeckC();
             }
+            this.historic.clean();
         }
     }
     
@@ -309,6 +311,7 @@ public class Game {
             {
                 case 1: // On joue
                     this.playMove();
+                    winner = InterfaceJavaC.hasWinner() == 1;
                     break;
                     
                 case 3: // Sauvegarder
@@ -367,6 +370,7 @@ public class Game {
         
         if ( winner )
         {
+            this.showDeck();
             this.endGame();
         }
     }

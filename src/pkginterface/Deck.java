@@ -55,15 +55,9 @@ public class Deck extends JPanel {
                             break;
                         default :
                             if (abs == 1)
-                            {
-                                g.drawString(Integer.toString(ord+1), x, y-10);
                                 g.drawImage(hvtop, x, y, this);
-                            }
                             else if (ord == 0)
-                            {
-                                g.drawString(Integer.toString(abs), x-10, y);
                                 g.drawImage(hvleft, x, y, this);
-                            }
                             else
                                 g.drawImage(hv, x, y, this);
                             break;
