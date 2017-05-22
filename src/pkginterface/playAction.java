@@ -75,6 +75,7 @@ public class playAction extends AbstractAction{
                     this.fenetre.setVisible(true);
                     JOptionPane.showMessageDialog(null, InterfaceSwing.getGame().getPlayerCurrent().getPseudo() + " a gagné !");
                     InterfaceSwing.getGame().getDeck().deleteDeckC();
+                    InterfaceSwing.getGame().getHistoric().clean();
                     this.fenetre.panel = new Deck(0);
                     this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
                     this.fenetre.setContentPane(this.fenetre.panel);
