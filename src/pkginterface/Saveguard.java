@@ -77,7 +77,7 @@ public class Saveguard {
     {
         String str;
         
-        str = "\\hex\n\\dim " + game.getDeck().getSize() + "\n";
+        str = "\\hex\n\\dim " + game.getDeck().getSizeDeck() + "\n";
         str += "\\player1 " + game.getPlayerCurrent().toString()+ "\n";
         str += "\\player2 " + game.getPlayer2().toString()+ "\n";
         str += "\\board\n" + game.getDeck().toString() + "\n\\endboard\n";
