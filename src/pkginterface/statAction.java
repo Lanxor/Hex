@@ -19,13 +19,11 @@ import javax.swing.JTextArea;
 public class statAction extends AbstractAction{
     
     private Fenetre fenetre;
-    private Game game;
     
-    public statAction (Fenetre fenetre, Game game)
+    public statAction (Fenetre fenetre)
     {
         super("Statistiques");
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
@@ -41,7 +39,7 @@ public class statAction extends AbstractAction{
                         + players[numPlayer].getScore().toString() 
                         + "\n"));
         }
-        scores.add(this.fenetre.buttons.menu("", this.game));
+        scores.add(this.fenetre.buttons.menu(""));
         this.fenetre.panel.add(scores);
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);

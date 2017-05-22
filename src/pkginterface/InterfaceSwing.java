@@ -10,6 +10,9 @@ package pkginterface;
  * @author Eléana
  */
 public class InterfaceSwing {
+    
+    private static Game game;
+    
     /***************************************************************************
      *                                                                         *
      *                                                           Function Main *
@@ -22,8 +25,18 @@ public class InterfaceSwing {
      */
     public static void main(String[] args)
     {
-        Game game = new Game();
+        game = new Game();
         Fenetre fenetre = new Fenetre(game);
+    }
+    
+    public static Game getGame()
+    {
+        return game;
+    }
+    
+    public static void setGame(Game newGame)
+    {
+        game = newGame;
     }
     
 }

@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  */
 public class validHAction extends AbstractAction{
     
-    private Game game;
     private Fenetre fenetre;
     
     public static boolean isInteger(String input)
@@ -30,11 +29,10 @@ public class validHAction extends AbstractAction{
        return true;
     }
     
-    public validHAction (Fenetre fenetre, Game game)
+    public validHAction (Fenetre fenetre)
     {
         super("Valider");
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
@@ -66,12 +64,14 @@ public class validHAction extends AbstractAction{
             }
             else
             {
-                this.game = new Game(Integer.parseInt(size), 
-                        Player.load(Player.getPathFilePlayer(player1)+".player"), 
-                        Player.load(Player.getPathFilePlayer(player2)+".player"));
-                this.game.getPlayerCurrent().setColor('b');
-                this.game.getPlayer2().setColor('w');
-                this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
+                Player p1 = Player.load(Player.getPathFilePlayer(player1)+".player");
+                Player p2 = Player.load(Player.getPathFilePlayer(player2)+".player");
+                InterfaceSwing.getGame().getDeck().setSize(Integer.parseInt(size));
+                InterfaceSwing.getGame().setPlayerCurrent(p1);
+                InterfaceSwing.getGame().setPlayer2(p2);
+                InterfaceSwing.getGame().getPlayerCurrent().setColor('b');
+                InterfaceSwing.getGame().getPlayer2().setColor('w');
+                this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
                 this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);

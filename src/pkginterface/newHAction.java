@@ -18,26 +18,23 @@ import javax.swing.JLabel;
 public class newHAction extends AbstractAction{
     
     private Fenetre fenetre;
-    private Game game;
     
-    public newHAction (Fenetre fenetre, Game game)
+    public newHAction (Fenetre fenetre)
     {
         super("Nouvelle Partie");
         this.fenetre = fenetre;
-        this.game = game;
     }
     
-    public newHAction (Fenetre fenetre, String name, Game game)
+    public newHAction (Fenetre fenetre, String name)
     {
         super(name);
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
     {
         this.fenetre.panel = new Deck(0);
-        this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie", this.game));
+        this.fenetre.panel.add(this.fenetre.buttons.menu("crea partie"));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }
