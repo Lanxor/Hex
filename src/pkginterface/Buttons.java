@@ -42,6 +42,11 @@ public class Buttons extends JPanel{
         this.game = game;
     }
     
+    /**
+     * @brief Fonction qui crée les boutons pour chaque fenêtre.
+     * @param choice : fenêtre affichée.
+     * @return Retourne une boite avec les boutons correspondants.
+     */
     public Box menu(String choice)
     {
         
@@ -215,51 +220,88 @@ public class Buttons extends JPanel{
         }
     }
     
+    /**
+     * @brief Getter de la liste des joueurs 1.
+     * @return Retourne la liste des joueurs.
+     */
     public JComboBox getPlayersList1()
     {
         return playersList1;
     }
+    
     
     public JComboBox getPlayersList2()
     {
         return playersList2;
     }
     
+    /**
+     * @brief Getter de la liste des numéros des joueurs.
+     * @return Retourne la liste des numéros des joueurs.
+     */
     public JComboBox getNumPlayersList()
     {
         return numPlayersList;
     }
     
+    /**
+     * @brief Getter de la liste des numéros des sauvegardes.
+     * @return Retourne la liste des numéros des sauvegardes.
+     */
     public JComboBox getNumSaveguardList()
     {
         return numSaveguardsList;
     }
     
+    /**
+     * @brief Getter de la taille du tablier.
+     * @return Retourne la taille du tablier.
+     */
     public JTextField getSizeD()
     {
         return size;
     }
     
+    /**
+     * @brief Getter de l'abscice choisie par l'utilisateur.
+     * @return Retourne l'abscice jouée.
+     */
     public JTextField getAbs()
     {
         return abs;
     }
     
+    /**
+     * @brief Getter de l'ordonnée choisie par l'utilisateur.
+     * @return Retourne l'ordonnée jouée.
+     */
     public JTextField getOrd()
     {
         return ord;
     }
     
+    /**
+     * @brief Getter du pseudo du joueur.
+     * @return Retourne le pseudo du joueur en création.
+     */
     public JTextField getPseudo()
     {
         return pseudo;
     }
     
+    /**
+     * @brief Getter du mail du joueur.
+     * @return Retourne le mail du joueur en création.
+     */
     public JTextField getMail()
     {
         return mail;
     }
     
+    /**
+     * @brief Getter de l'année de naissance du joueur.
+     * @return Retourne l'année de naissance du joueur en création.
+     */
     public JComboBox getYear(){
         return yearOfBirth;
     }
