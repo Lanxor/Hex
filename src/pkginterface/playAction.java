@@ -49,7 +49,7 @@ public class playAction extends AbstractAction{
         {
             JOptionPane.showMessageDialog(this.fenetre.panel, "Coordonnées invalides, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
             this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-            this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
+            this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
             this.fenetre.setContentPane(this.fenetre.panel);
             this.fenetre.setVisible(true);
         }
@@ -61,7 +61,7 @@ public class playAction extends AbstractAction{
             {
                 JOptionPane.showMessageDialog(this.fenetre.panel, "Coordonnées invalide, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-                this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
+                this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
                 this.fenetre.setContentPane(this.fenetre.panel);
                 this.fenetre.setVisible(true);
             }
@@ -82,14 +82,14 @@ public class playAction extends AbstractAction{
                     JOptionPane.showMessageDialog(null, winner.getPseudo() + " a gagné !");
                     this.game.endGame();
                     this.fenetre.panel = new Deck(0);
-                    this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
+                    this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil", this.game));
                     this.fenetre.setContentPane(this.fenetre.panel);
                     this.fenetre.setVisible(true);
                 }
                 else
                 {
                     this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-                    this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
+                    this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
                     this.fenetre.setContentPane(this.fenetre.panel);
                     this.fenetre.setVisible(true);
                 }

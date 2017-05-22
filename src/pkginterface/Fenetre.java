@@ -16,7 +16,7 @@ public class Fenetre extends JFrame
 {
     public JPanel panel;
     private Game game;
-    public Buttons buttons = new Buttons(this, game);
+    public Buttons buttons = new Buttons(this);
     
     /**
      * @brief Constructeur.
@@ -40,7 +40,7 @@ public class Fenetre extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         this.panel = new Deck(0);
-        this.panel.add(this.buttons.menu("acceuil"));
+        this.panel.add(this.buttons.menu("acceuil", this.game));
         
         setContentPane(this.panel);
         this.setVisible(true);

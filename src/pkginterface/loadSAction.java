@@ -33,7 +33,7 @@ public class loadSAction extends AbstractAction{
         String gameL = (String)this.fenetre.buttons.getNumSaveguardList().getSelectedItem();
         Saveguard.loadSaveguard(this.game, Integer.parseInt(gameL));
         this.fenetre.panel = new Deck(this.game.getDeck().getSizeDeck());
-        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
+        this.fenetre.panel.add(this.fenetre.buttons.menu("jeu", this.game));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

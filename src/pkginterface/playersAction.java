@@ -18,11 +18,13 @@ import javax.swing.JTextArea;
 public class playersAction extends AbstractAction{
     
     private Fenetre fenetre;
+    private Game game;
     
-    public playersAction (Fenetre fenetre)
+    public playersAction (Fenetre fenetre, Game game)
     {
         super("Joueurs Enregistrés");
         this.fenetre = fenetre;
+        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
@@ -40,7 +42,7 @@ public class playersAction extends AbstractAction{
                         + "mail : " + players[numPlayer].getMail()
                         + "\n"));
         }
-        playersList.add(this.fenetre.buttons.menu("joueurs"));
+        playersList.add(this.fenetre.buttons.menu("joueurs", this.game));
         this.fenetre.panel.add(playersList);
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
