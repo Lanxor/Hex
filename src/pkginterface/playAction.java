@@ -65,24 +65,19 @@ public class playAction extends AbstractAction{
             }
             else
             {
-                Player temp = InterfaceSwing.getGame().getPlayer2();
-                InterfaceSwing.getGame().setPlayer2(InterfaceSwing.getGame().getPlayerCurrent());
-                InterfaceSwing.getGame().setPlayerCurrent(temp);
                 if (InterfaceJavaC.hasWinner() == 1)
                 {
                     char colorWinner = InterfaceJavaC.getWinner();
-                    Player winner;
-                    if (InterfaceSwing.getGame().getPlayerCurrent().getColor() == colorWinner)
-                        winner = InterfaceSwing.getGame().getPlayerCurrent();
-                    else
-                        winner = InterfaceSwing.getGame().getPlayer2();
+                    InterfaceSwing.getGame().getPlayerCurrent().win();
+                    InterfaceSwing.getGame().getPlayer2().loose();
                     InterfaceSwing.getGame().getDeck().deleteDeckC();
                     this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
                     this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                     this.fenetre.setContentPane(this.fenetre.panel);
                     this.fenetre.setVisible(true);
-                    JOptionPane.showMessageDialog(null, winner.getPseudo() + " a gagné !");
-                    InterfaceSwing.getGame().endGame();
+                    JOptionPane.showMessageDialog(null, InterfaceSwing.getGame().getPlayerCurrent().getPseudo() + " a gagné !");
+                    InterfaceSwing.getGame().getPlayerCurrent().loose();
+                    InterfaceSwing.getGame().getPlayer2().loose();
                     InterfaceSwing.getGame().getDeck().deleteDeckC();
                     this.fenetre.panel = new Deck(0);
                     this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
@@ -91,6 +86,9 @@ public class playAction extends AbstractAction{
                 }
                 else
                 {
+                    Player temp = InterfaceSwing.getGame().getPlayer2();
+                    InterfaceSwing.getGame().setPlayer2(InterfaceSwing.getGame().getPlayerCurrent());
+                    InterfaceSwing.getGame().setPlayerCurrent(temp);
                     this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
                     this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                     this.fenetre.setContentPane(this.fenetre.panel);
