@@ -55,7 +55,7 @@ public class playAction extends AbstractAction{
         {
             Coordinates coordPlayed = new Coordinates (Integer.parseInt(abs), Integer.parseInt(ord));
             Move move = new Move(InterfaceSwing.getGame().getPlayerCurrent(), coordPlayed);
-            if (!move.isValid())
+            if (!InterfaceSwing.getGame().playMove(move))
             {
                 JOptionPane.showMessageDialog(this.fenetre.panel, "Coordonnées invalide, veuillez recommencer.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
@@ -65,7 +65,6 @@ public class playAction extends AbstractAction{
             }
             else
             {
-                move.play();
                 Player temp = InterfaceSwing.getGame().getPlayer2();
                 InterfaceSwing.getGame().setPlayer2(InterfaceSwing.getGame().getPlayerCurrent());
                 InterfaceSwing.getGame().setPlayerCurrent(temp);

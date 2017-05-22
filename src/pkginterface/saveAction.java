@@ -24,6 +24,7 @@ public class saveAction extends AbstractAction{
     public void actionPerformed(ActionEvent e)
     {
         InterfaceSwing.getGame().save();
+        System.out.println(Integer.toString(InterfaceSwing.getGame().getDeck().getSizeDeck()));
         JOptionPane.showMessageDialog(null, "Sauvegarde Effectuée");
     }
 }
