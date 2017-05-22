@@ -33,13 +33,13 @@ public class Deck extends JPanel {
         int y = ystart;
         char color;
         try {
-            Image title = ImageIO.read(new File("images/title.png"));
+            Image title = ImageIO.read(new File("../images/title.png"));
             g.drawImage(title, 0, 0, this);
-            Image hv = ImageIO.read(new File("images/hv.png"));
-            Image hvtop = ImageIO.read(new File("images/hvtop.png"));
-            Image hvleft = ImageIO.read(new File("images/hvleft.png"));
-            Image hb = ImageIO.read(new File("images/hb.png"));
-            Image hw = ImageIO.read(new File("images/hw.png"));
+            Image hv = ImageIO.read(new File("../images/hv.png"));
+            Image hvtop = ImageIO.read(new File("../images/hvtop.png"));
+            Image hvleft = ImageIO.read(new File("../images/hvleft.png"));
+            Image hb = ImageIO.read(new File("../images/hb.png"));
+            Image hw = ImageIO.read(new File("../images/hw.png"));
             for (int abs = 1; abs <= this.size; ++abs)
             {
                 for (int ord = 0; ord < this.size; ++ord)
