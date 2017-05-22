@@ -50,7 +50,6 @@ Deck deck_border_insert(Deck deck)
   deck_insert_group(deck, deck->white_2);
   deck_insert_group(deck, deck->black_1);
   deck_insert_group(deck, deck->black_2);
-  
   return (deck);
 }
 
@@ -307,7 +306,7 @@ void deck_vertice_modify(Deck deck, char color, int abscisse, int ordonnee)
     }
   else
     deck = deck_group_reevaluation(deck);
-
+  printDeckGroup(deck);
 }
 
 
