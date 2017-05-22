@@ -265,11 +265,12 @@ public class Deck extends JPanel {
     {
         String str = "\n";
         char color, symbol;
-        for ( int abscissa = 0; abscissa < this.size; ++abscissa )
+
+        for ( int orderly = 0; orderly < this.size; ++orderly )
         {
-            for (int orderly = 0; orderly < this.size; ++orderly )
+            for ( int abscissa = 0; abscissa < this.size; ++abscissa )
             {   
-                color = InterfaceJavaC.getVerticeColor(abscissa, orderly);
+                color = InterfaceJavaC.getVerticeColor(abscisse, orderly);
                 switch (color) {
                     case 'b':
                         symbol = 'x';
