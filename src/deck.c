@@ -262,6 +262,7 @@ void deck_free(Deck deck)
 {
   free(deck->set_vertices);
   free(deck->set_edges);
+  listGroup_delete(deck->set_groups);
   free(deck);
 }
 
