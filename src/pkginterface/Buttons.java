@@ -134,7 +134,7 @@ public class Buttons extends JPanel{
                 move.add(button_play);
                 inGame = Box.createHorizontalBox();
                 inGame.add(bouton);
-                inGame.add(new JLabel(this.game.getPlayerCurrent().getPseudo()
+                inGame.add(new JLabel(this.game.getPlayerCurrent().getColor()
                         + ", c'est à toi !"));
                 inGame.add(move);
                 inGame.add(button_back);
