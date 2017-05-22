@@ -57,7 +57,7 @@ LDG listGroup_remove(LDG ldg, Group groupToRemove)
   Node    currentNode;
   cpt = 0;
   currentNode = ldg->sentinel;
-  while (cpt < ldg->numberOfNode || currentNode->group != groupToRemove)
+  while (currentNode->group != groupToRemove && cpt < ldg->numberOfNode )
     {
       currentNode = currentNode->next;
       ++cpt;

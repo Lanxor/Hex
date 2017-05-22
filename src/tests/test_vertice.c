@@ -57,7 +57,7 @@ void test5_getters()
     
   vertice = vertice_create(TRANSPARENT, 3, 5);
   printf("Voici les coordonnées du sommet %d, %d",
-	 vertice_get_abscisse(vertice),
+   vertice_get_abscisse(vertice),
 	 vertice_get_ordonnee(vertice));
   printf("\n");
 }
