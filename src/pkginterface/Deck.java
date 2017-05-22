@@ -49,8 +49,10 @@ public class Deck extends JPanel {
                     {
                         case 'b' :
                             g.drawImage(hb, x, y, this);
+                            break;
                         case 'w' :
                             g.drawImage(hw, x, y, this);
+                            break;
                         default :
                             if (abs == 1)
                             {
@@ -64,6 +66,7 @@ public class Deck extends JPanel {
                             }
                             else
                                 g.drawImage(hv, x, y, this);
+                            break;
                     }
                     x = x + 25;
                 }
