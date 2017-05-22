@@ -15,19 +15,17 @@ import javax.swing.AbstractAction;
 public class acceuilAction extends AbstractAction{
     
     private Fenetre fenetre;
-    private Game game;
     
-    public acceuilAction (Fenetre fenetre, String name, Game game)
+    public acceuilAction (Fenetre fenetre, String name)
     {
         super(name);
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
     {
         this.fenetre.panel = new Deck(0);
-        this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil", this.game));
+        this.fenetre.panel.add(this.fenetre.buttons.menu("acceuil"));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

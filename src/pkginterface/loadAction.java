@@ -19,13 +19,11 @@ import javax.swing.JTextArea;
 public class loadAction extends AbstractAction{
     
     private Fenetre fenetre;
-    private Game game;
     
-    public loadAction (Fenetre fenetre, Game game)
+    public loadAction (Fenetre fenetre)
     {
         super("Charger une Partie");
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
@@ -44,7 +42,7 @@ public class loadAction extends AbstractAction{
             }
         }
         this.fenetre.panel.add(saveguard);
-        this.fenetre.panel.add(this.fenetre.buttons.menu("saveguard", this.game));
+        this.fenetre.panel.add(this.fenetre.buttons.menu("saveguard"));
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
     }

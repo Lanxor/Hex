@@ -19,13 +19,11 @@ import javax.swing.JTextArea;
 public class deletePAction extends AbstractAction{
     
     private Fenetre fenetre;
-    private Game game;
     
-    public deletePAction (Fenetre fenetre, Game game)
+    public deletePAction (Fenetre fenetre)
     {
         super("Supprimer");
         this.fenetre = fenetre;
-        this.game = game;
     }
     
     public void actionPerformed(ActionEvent e)
@@ -48,7 +46,7 @@ public class deletePAction extends AbstractAction{
                         + "\n"));
             }
         }
-        playersList.add(this.fenetre.buttons.menu("joueurs", this.game));
+        playersList.add(this.fenetre.buttons.menu("joueurs"));
         this.fenetre.panel.add(playersList);
         this.fenetre.setContentPane(this.fenetre.panel);
         this.fenetre.setVisible(true);
