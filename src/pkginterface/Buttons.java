@@ -123,10 +123,10 @@ public class Buttons extends JPanel{
                 bouton.add(button_saveq);
                 bouton.add(button_quitH);
                 move = Box.createVerticalBox();
-                move.add(new JLabel("ordonnée :"));
+                move.add(new JLabel("abscisse :"));
                 ord = new JTextField();
                 move.add(ord);
-                move.add(new JLabel("abscisse :"));
+                move.add(new JLabel("ordonnée :"));
                 abs = new JTextField();
                 move.add(abs);
                 move.add(button_play);
