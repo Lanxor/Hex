@@ -71,6 +71,7 @@ public class validHAction extends AbstractAction{
                 InterfaceSwing.getGame().setPlayer2(p2);
                 InterfaceSwing.getGame().getPlayerCurrent().setColor('b');
                 InterfaceSwing.getGame().getPlayer2().setColor('w');
+                InterfaceSwing.getGame().getDeck().createDeckC();
                 this.fenetre.panel = new Deck(InterfaceSwing.getGame().getDeck().getSizeDeck());
                 this.fenetre.panel.add(this.fenetre.buttons.menu("jeu"));
                 this.fenetre.setContentPane(this.fenetre.panel);
